@@ -8,7 +8,9 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -52,15 +54,21 @@ public final class Quest {
     private final List<Action> onCompleteActions;
     private final List<Action> onTurnInActions;
     private final List<Task> tasks;
+
     private final List<ItemStack> itemPrizes;
     private final List<ItemStack> itemPrizesSelectOneOf;
     private final WeaponReferenceData weaponPrizesSelectOneOf;
+    private final ArmorReferenceData armorPrizesSelectOneOf;
+    private final List<WeaponReferenceData> weaponPrizeForPlayer;
+    private final List<ArmorReferenceData> armorPrizeForPlayer;
 
     public Quest(
             final int questID, final String name, final List<String> story, final String startMsg, final String objectiveText, final String turnInMsg,
             final List<Task> tasks, final List<ItemStack> itemPrizes, final int moneyPrize, final int expPrize,
             final int requiredLevel, final List<Integer> requiredQuests, Material advancementMaterial, List<Action> onAcceptActions,
-            List<Action> onCompleteActions, List<Action> onTurnInActions, List<ItemStack> itemPrizesSelectOneOf, WeaponReferenceData weaponPrizesSelectOneOf) {
+            List<Action> onCompleteActions, List<Action> onTurnInActions, List<ItemStack> itemPrizesSelectOneOf,
+            WeaponReferenceData weaponPrizesSelectOneOf, ArmorReferenceData armorPrizesSelectOneOf,
+            List<WeaponReferenceData> weaponPrizeForPlayer, List<ArmorReferenceData> armorPrizeForPlayer) {
         this.questID = questID;
         this.name = name;
         this.story = story;
@@ -78,6 +86,9 @@ public final class Quest {
         this.onTurnInActions = onTurnInActions;
         this.itemPrizesSelectOneOf = itemPrizesSelectOneOf;
         this.weaponPrizesSelectOneOf = weaponPrizesSelectOneOf;
+        this.armorPrizesSelectOneOf = armorPrizesSelectOneOf;
+        this.weaponPrizeForPlayer = weaponPrizeForPlayer;
+        this.armorPrizeForPlayer = armorPrizeForPlayer;
 
         List<Task> copyTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -93,7 +104,9 @@ public final class Quest {
         this(questToCopy.getQuestID(), questToCopy.getName(), questToCopy.getStory(), questToCopy.getStartMsg(), questToCopy.getObjectiveText(), questToCopy.getTurnInMsg(),
                 questToCopy.getTasks(), questToCopy.getItemPrizes(), questToCopy.getMoneyPrize(), questToCopy.getExpPrize(),
                 questToCopy.getRequiredLevel(), questToCopy.getRequiredQuests(), questToCopy.getAdvancementMaterial(), questToCopy.getOnAcceptActions(),
-                questToCopy.getOnCompleteActions(), questToCopy.getOnTurnInActions(), questToCopy.getItemPrizesSelectOneOf(), questToCopy.getWeaponPrizesSelectOneOf());
+                questToCopy.getOnCompleteActions(), questToCopy.getOnTurnInActions(), questToCopy.getItemPrizesSelectOneOf(),
+                questToCopy.getWeaponPrizesSelectOneOf(), questToCopy.getArmorPrizesSelectOneOf(),
+                questToCopy.getWeaponPrizeForPlayer(), questToCopy.getArmorPrizeForPlayer());
     }
 
     public boolean isAvailable(RPGCharacter rpgCharacter, int playerLevel) {
@@ -163,7 +176,7 @@ public final class Quest {
                 lore.add(ChatPalette.YELLOW + "Money: " + EconomyUtils.priceToString(moneyPrize));
             }
             if (!itemPrizes.isEmpty()) {
-                lore.add(ChatPalette.YELLOW + "Item Prizes: ");
+                lore.add(ChatPalette.YELLOW + "Item(s): ");
                 for (ItemStack it : itemPrizes) {
                     lore.add(it.getItemMeta().getDisplayName());
                 }
@@ -177,10 +190,42 @@ public final class Quest {
             if (weaponPrizesSelectOneOf != null) {
                 GearLevel gearLevel = weaponPrizesSelectOneOf.getGearLevel();
                 ItemTier itemTier = weaponPrizesSelectOneOf.getItemTier();
-                lore.add(ChatPalette.YELLOW + "Select One Prize Weapon: ");
+                lore.add(ChatPalette.YELLOW + "Select One Weapon: ");
                 int minLevel = gearLevel.getMinLevel();
                 int maxLevel = gearLevel.getMaxLevel();
                 lore.add(ChatPalette.GRAY + "Level: " + minLevel + "~" + maxLevel + ChatPalette.GRAY + ", Tier: " + itemTier.getTierString());
+            }
+            if (armorPrizesSelectOneOf != null) {
+                ArmorSlot armorSlot = armorPrizesSelectOneOf.getArmorSlot();
+                GearLevel gearLevel = armorPrizesSelectOneOf.getGearLevel();
+                ItemTier itemTier = armorPrizesSelectOneOf.getItemTier();
+                lore.add(ChatPalette.YELLOW + "Select One Armor: ");
+                int minLevel = gearLevel.getMinLevel();
+                int maxLevel = gearLevel.getMaxLevel();
+                lore.add(ChatPalette.GRAY + armorSlot.toString() + " Level: " + minLevel + "~" + maxLevel + ChatPalette.GRAY + ", Tier: " + itemTier.getTierString());
+            }
+            if (!weaponPrizeForPlayer.isEmpty()) {
+                lore.add(ChatPalette.YELLOW + "Class Main Weapon: ");
+
+                for (WeaponReferenceData weaponReferenceData : weaponPrizeForPlayer) {
+                    GearLevel gearLevel = weaponReferenceData.getGearLevel();
+                    ItemTier itemTier = weaponReferenceData.getItemTier();
+                    int minLevel = gearLevel.getMinLevel();
+                    int maxLevel = gearLevel.getMaxLevel();
+                    lore.add(ChatPalette.GRAY + "Level: " + minLevel + "~" + maxLevel + ChatPalette.GRAY + ", Tier: " + itemTier.getTierString());
+                }
+            }
+            if (!armorPrizeForPlayer.isEmpty()) {
+                lore.add(ChatPalette.YELLOW + "Class Main Armor: ");
+
+                for (ArmorReferenceData armorReferenceData : armorPrizeForPlayer) {
+                    ArmorSlot armorSlot = armorReferenceData.getArmorSlot();
+                    GearLevel gearLevel = armorReferenceData.getGearLevel();
+                    ItemTier itemTier = armorReferenceData.getItemTier();
+                    int minLevel = gearLevel.getMinLevel();
+                    int maxLevel = gearLevel.getMaxLevel();
+                    lore.add(ChatPalette.GRAY + armorSlot.toString() + " Level: " + minLevel + "~" + maxLevel + ChatPalette.GRAY + ", Tier: " + itemTier.getTierString());
+                }
             }
             if (InstantTeleportGuiManager.contains(questID)) {
                 InstantTeleportGuiItem teleport = InstantTeleportGuiManager.getTeleport(questID);
@@ -309,6 +354,18 @@ public final class Quest {
         return weaponPrizesSelectOneOf;
     }
 
+    public ArmorReferenceData getArmorPrizesSelectOneOf() {
+        return armorPrizesSelectOneOf;
+    }
+
+    public List<WeaponReferenceData> getWeaponPrizeForPlayer() {
+        return weaponPrizeForPlayer;
+    }
+
+    public List<ArmorReferenceData> getArmorPrizeForPlayer() {
+        return armorPrizeForPlayer;
+    }
+
     public boolean isCompleted() {
         for (Task t : this.tasks) {
             if (!t.isCompleted()) {
@@ -341,6 +398,36 @@ public final class Quest {
         if (!getItemPrizes().isEmpty()) {
             for (ItemStack itemStack : getItemPrizes()) {
                 InventoryUtils.giveItemToPlayer(player, itemStack);
+            }
+        }
+        if (this.weaponPrizeForPlayer != null) {
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+                    String rpgClassStr = rpgCharacter.getRpgClassStr();
+
+                    for (WeaponReferenceData data : weaponPrizeForPlayer) {
+                        ItemStack item = data.getItem(rpgClassStr);
+                        InventoryUtils.giveItemToPlayer(player, item);
+                    }
+                }
+            }
+        }
+        if (this.armorPrizeForPlayer != null) {
+            if (GuardianDataManager.hasGuardianData(player)) {
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+
+                if (guardianData.hasActiveCharacter()) {
+                    RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+                    String rpgClassStr = rpgCharacter.getRpgClassStr();
+
+                    for (ArmorReferenceData data : armorPrizeForPlayer) {
+                        ItemStack item = data.getItem(rpgClassStr);
+                        InventoryUtils.giveItemToPlayer(player, item);
+                    }
+                }
             }
         }
         if (getExpPrize() > 0) {

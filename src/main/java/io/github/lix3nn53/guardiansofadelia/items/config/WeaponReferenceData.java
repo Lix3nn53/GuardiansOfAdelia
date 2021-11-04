@@ -48,6 +48,13 @@ public class WeaponReferenceData {
         return items;
     }
 
+    public ItemStack getItem(String rpgClassStr) {
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+        WeaponGearType type = rpgClass.getWeaponGearTypes().get(0);
+
+        return WeaponManager.get(type, gearLevel, itemTier, true, gearSet).get(itemIndex);
+    }
+
     public GearLevel getGearLevel() {
         return gearLevel;
     }

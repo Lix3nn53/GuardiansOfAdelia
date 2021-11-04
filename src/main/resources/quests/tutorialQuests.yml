@@ -39,34 +39,26 @@ quest1:
     consumable: POTION_INSTANT_MANA
     skillLevel: 10
     uses: 10
-  itemPrize3:
-    itemType: Armor
+  itemPrizeForPlayerArmor1:
     armorSlot: HELMET
-    armorGearType: HEAVY_ARMOR
     itemTier: "LEGENDARY"
     gearLevel: 8
     itemIndex: 0
     gearSet: "Tutorial"
-  itemPrize4:
-    itemType: Armor
+  itemPrizeForPlayerArmor2:
     armorSlot: CHESTPLATE
-    armorGearType: HEAVY_ARMOR
     itemTier: "LEGENDARY"
     gearLevel: 8
     itemIndex: 0
     gearSet: "Tutorial"
-  itemPrize5:
-    itemType: Armor
+  itemPrizeForPlayerArmor3:
     armorSlot: LEGGINGS
-    armorGearType: HEAVY_ARMOR
     itemTier: "LEGENDARY"
     gearLevel: 8
     itemIndex: 0
     gearSet: "Tutorial"
-  itemPrize6:
-    itemType: Armor
+  itemPrizeForPlayerArmor4:
     armorSlot: BOOTS
-    armorGearType: HEAVY_ARMOR
     itemTier: "LEGENDARY"
     gearLevel: 8
     itemIndex: 0

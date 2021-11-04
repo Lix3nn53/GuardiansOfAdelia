@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
+import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.ItemReferenceLoader;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -138,11 +139,34 @@ public class QuestConfigurations {
                     weaponPrizesSelectOneOf = new WeaponReferenceData(itemPrizeSelectOneOfWeapon);
                 }
 
+                ArmorReferenceData armorPrizesSelectOneOf = null;
+                if (section.contains("itemPrizeSelectOneOfArmor")) {
+                    ConfigurationSection itemPrizeSelectOneOfWeapon = section.getConfigurationSection("itemPrizeSelectOneOfArmor");
+                    armorPrizesSelectOneOf = new ArmorReferenceData(itemPrizeSelectOneOfWeapon);
+                }
+
+                int itemPrizeForPlayerWeaponCount = ConfigurationUtils.getChildComponentCount(section, "itemPrizeForPlayerWeapon");
+                List<WeaponReferenceData> weaponForPlayer = new ArrayList<>();
+                for (int c = 1; c <= itemPrizeForPlayerWeaponCount; c++) {
+                    ConfigurationSection itemPrizeSelectOneOfWeapon = section.getConfigurationSection("itemPrizeForPlayerWeapon" + c);
+                    WeaponReferenceData data = new WeaponReferenceData(itemPrizeSelectOneOfWeapon);
+                    weaponForPlayer.add(data);
+                }
+
+                int itemPrizeForPlayerArmorCount = ConfigurationUtils.getChildComponentCount(section, "itemPrizeForPlayerArmor");
+                List<ArmorReferenceData> armorForPlayer = new ArrayList<>();
+                for (int c = 1; c <= itemPrizeForPlayerArmorCount; c++) {
+                    ConfigurationSection itemPrizeSelectOneOfWeapon = section.getConfigurationSection("itemPrizeForPlayerArmor" + c);
+                    ArmorReferenceData data = new ArmorReferenceData(itemPrizeSelectOneOfWeapon);
+                    armorForPlayer.add(data);
+                }
+
                 Quest quest = new Quest(questID, name, story,
                         startMsg, objectiveText.toString(),
                         turnInMsg,
                         tasks, itemPrizes, moneyPrize, expPrize, requiredLevel, requiredQuests, advancementMaterial, onAcceptActions,
-                        onCompleteActions, onTurnInActions, itemPrizesSelectOneOf, weaponPrizesSelectOneOf);
+                        onCompleteActions, onTurnInActions, itemPrizesSelectOneOf, weaponPrizesSelectOneOf, armorPrizesSelectOneOf,
+                        weaponForPlayer, armorForPlayer);
 
                 QuestNPCManager.addQuest(quest, npcToTakeFrom, npcToComplete);
             }

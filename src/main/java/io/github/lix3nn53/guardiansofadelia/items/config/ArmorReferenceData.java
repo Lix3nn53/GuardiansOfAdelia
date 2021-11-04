@@ -53,6 +53,13 @@ public class ArmorReferenceData {
         return items;
     }
 
+    public ItemStack getItem(String rpgClassStr) {
+        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+        ArmorGearType type = rpgClass.getArmorGearTypes().get(0);
+
+        return ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, gearSet).get(itemIndex);
+    }
+
     public GearLevel getGearLevel() {
         return gearLevel;
     }
@@ -63,5 +70,9 @@ public class ArmorReferenceData {
 
     public ItemTier getItemTier() {
         return itemTier;
+    }
+
+    public ArmorSlot getArmorSlot() {
+        return armorSlot;
     }
 }

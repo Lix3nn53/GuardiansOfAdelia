@@ -27,6 +27,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
@@ -501,7 +502,10 @@ public class MyInventoryClickEvent implements Listener {
                                 }
                                 List<ItemStack> itemPrizesSelectOneOf = quest.getItemPrizesSelectOneOf();
                                 WeaponReferenceData weaponPrizesSelectOneOf = quest.getWeaponPrizesSelectOneOf();
-                                if (itemPrizesSelectOneOf.isEmpty() && weaponPrizesSelectOneOf == null) {
+                                ArmorReferenceData armorPrizesSelectOneOf = quest.getArmorPrizesSelectOneOf();
+                                if (itemPrizesSelectOneOf.isEmpty() &&
+                                        weaponPrizesSelectOneOf == null &&
+                                        armorPrizesSelectOneOf == null) {
                                     //turnin quest
                                     boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player, false);
                                     if (didTurnIn) {
@@ -514,6 +518,9 @@ public class MyInventoryClickEvent implements Listener {
                                     // GUISIZE
                                     int guiSize = 18;
                                     if (weaponPrizesSelectOneOf != null) {
+                                        guiSize += 9;
+                                    }
+                                    if (armorPrizesSelectOneOf != null) {
                                         guiSize += 9;
                                     }
                                     int normalSelectOneOfSize = itemPrizesSelectOneOf.size();
@@ -561,6 +568,15 @@ public class MyInventoryClickEvent implements Listener {
 
                                     if (weaponPrizesSelectOneOf != null) {
                                         List<ItemStack> items = weaponPrizesSelectOneOf.getItems(rpgCharacter.getRpgClassStr());
+                                        for (ItemStack itemStack : items) {
+                                            Integer slotNo = slotsToUse.get(index);
+                                            guiGeneric.setItem(slotNo, itemStack);
+                                            index++;
+                                        }
+                                    }
+
+                                    if (armorPrizesSelectOneOf != null) {
+                                        List<ItemStack> items = armorPrizesSelectOneOf.getItems(rpgCharacter.getRpgClassStr());
                                         for (ItemStack itemStack : items) {
                                             Integer slotNo = slotsToUse.get(index);
                                             guiGeneric.setItem(slotNo, itemStack);
