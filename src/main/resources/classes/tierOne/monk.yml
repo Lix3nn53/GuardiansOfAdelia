@@ -7,10 +7,8 @@
 color: "YELLOW"
 mainElement: "WATER"
 description:
-  - "Monks have such a strong will that never"
-  - "falls into despair in any situation."
-  - "Due to their unique weapon Monks are"
-  - "feared opponents at any distance."
+  - "Due to their unique weapon, the spear,"
+  - "Monks are feared opponents at any distance."
 classIconCustomModelData: 17
 attributeElementDamage: 6
 attributeElementDefense: 4

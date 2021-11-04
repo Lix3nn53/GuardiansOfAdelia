@@ -7,9 +7,9 @@
 color: "PURPLE"
 mainElement: "LIGHTNING"
 description:
-  - "Necromancers are masters of"
-  - "Living Death magic. They control bone and flesh"
-  - "to protect themself and crush their enemies."
+  - "Necromancers are masters of Living Death."
+  - "They control bone and flesh to"
+  - "protect themself and crush their enemies."
 classIconCustomModelData: 18
 attributeElementDamage: 9
 attributeElementDefense: 4

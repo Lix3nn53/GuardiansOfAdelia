@@ -162,6 +162,9 @@ public class SkillDataManager {
         if (keyEntityToCastCounterToSavedEntities.containsKey(keyEntity)) {
             HashMap<Integer, List<LivingEntity>> castCounterToSavedEntities = keyEntityToCastCounterToSavedEntities.get(keyEntity);
             List<LivingEntity> entitiesToRemove = castCounterToSavedEntities.remove(castCounter);
+
+            if (entitiesToRemove == null) return false;
+
             for (LivingEntity toRemove : entitiesToRemove) {
                 toRemove.remove();
                 savedEntityToKeyEntity.remove(toRemove);

@@ -7,10 +7,10 @@ import org.bukkit.Material;
 
 public enum ArmorGearType {
     HEAVY_ARMOR, // NETHERITE // Tank // knockback resistance // 1
-    PLATE_ARMOR, // DIAMOND // Warrior // critical damage // 0.7
-    LIGHT_ARMOR, // IRON // Archer // jump boost // 0.5
-    FEATHER_ARMOR,  // CHAINMAIL // Assassin // movement speed // 0.5
-    CLOTH_ARMOR; // GOLD // Mage // ability haste // 0.4
+    PLATE_ARMOR, // DIAMOND // Warrior // critical damage // 0.85
+    LIGHT_ARMOR, // IRON // Archer // critical chance // 0.7
+    FEATHER_ARMOR,  // CHAINMAIL // Assassin // movement speed // 0.6
+    CLOTH_ARMOR; // GOLD // Mage // ability haste // 0.6
 
     public static ArmorGearType fromMaterial(Material material) {
         for (ArmorGearType armorGearType : ArmorGearType.values()) {
@@ -48,12 +48,11 @@ public enum ArmorGearType {
             case HEAVY_ARMOR:
                 return 1;
             case PLATE_ARMOR:
-                return 0.7;
+                return 0.85;
             case LIGHT_ARMOR:
             case FEATHER_ARMOR:
-                return 0.5;
             case CLOTH_ARMOR:
-                return 0.4;
+                return 0.7;
         }
 
         return 0;
@@ -64,12 +63,11 @@ public enum ArmorGearType {
             case HEAVY_ARMOR:
                 return 1;
             case PLATE_ARMOR:
-                return 0.7;
+                return 0.85;
             case LIGHT_ARMOR:
             case FEATHER_ARMOR:
-                return 0.5;
             case CLOTH_ARMOR:
-                return 0.4;
+                return 0.7;
         }
 
         return 0;

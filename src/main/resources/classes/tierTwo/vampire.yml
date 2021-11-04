@@ -7,9 +7,7 @@
 color: "RED_DARK"
 mainElement: "LIGHTNING"
 description:
-  - "Due to their incredible speed and agility,"
-  - "Rogues are an expert at dealing"
-  - "damage in a short amount of time!"
+  - "Todo"
 classIconCustomModelData: 33
 attributeElementDamage: 8
 attributeElementDefense: 4
@@ -109,15 +107,10 @@ skillOne:
       child6:
         componentType: "LandTrigger"
         child1:
-          componentType: "SoundMechanic"
-          sound: "SKILL.POWERFUL_LANDING"
-          volume: 1.0
-          pitch: 1.0
-        child2:
           componentType: "ImmunityRemoveMechanic"
           damageCause: FALL
           delay: 5
-        child3:
+        child2:
           componentType: "SingleTarget"
           allies: false
           enemy: true

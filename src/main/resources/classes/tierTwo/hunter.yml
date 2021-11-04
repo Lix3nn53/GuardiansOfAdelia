@@ -7,8 +7,8 @@
 color: "GREEN_DARK"
 mainElement: "EARTH"
 description:
-  - "Their hunting techniques"
-  - "makes anyone a prey for the deadly arrows."
+  - "Their hunting techniques makes"
+  - "anyone a prey to the deadly arrows."
 classIconCustomModelData: 14
 attributeElementDamage: 6
 attributeElementDefense: 4

@@ -11,10 +11,10 @@ import java.util.List;
 
 public class ActionBarInfo {
 
-    private final ActionBarInfoType actionBarInfoType;
-    private final String actionBarIcon;
+    private ActionBarInfoType actionBarInfoType;
+    private String actionBarIcon;
 
-    private final String key;
+    private String key;
 
     public ActionBarInfo(@Nullable ActionBarInfoType actionBarInfoType, String actionBarIcon, @Nullable String key) {
         this.actionBarInfoType = actionBarInfoType;
@@ -39,5 +39,11 @@ public class ActionBarInfo {
         }
 
         return "                    ";
+    }
+
+    public void onClassChange(@Nullable ActionBarInfoType actionBarInfoType, String actionBarIcon, @Nullable String key) {
+        this.actionBarInfoType = actionBarInfoType;
+        this.actionBarIcon = actionBarIcon != null ? ChatColor.translateAlternateColorCodes('&', actionBarIcon) : "";
+        this.key = key;
     }
 }

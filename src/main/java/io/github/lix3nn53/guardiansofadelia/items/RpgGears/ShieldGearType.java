@@ -20,10 +20,10 @@ public enum ShieldGearType {
     }
 
     public double getHealthReduction() {
-        return 1;
+        return 0.7;
     }
 
     public double getElementDefenseReduction() {
-        return 1;
+        return 0.7;
     }
 }
