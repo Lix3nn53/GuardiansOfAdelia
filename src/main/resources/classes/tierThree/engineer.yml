@@ -7,7 +7,7 @@
 color: "YELLOW"
 mainElement: "FIRE"
 description:
-  - "Engineer"
+  - "Todo"
 classIconCustomModelData: 12
 attributeElementDamage: 7
 attributeElementDefense: 5

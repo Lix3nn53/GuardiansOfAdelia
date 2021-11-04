@@ -5,11 +5,9 @@
 # ---------------------------------------------- #
 
 color: "BLUE_DARKER"
-mainElement: "LIGHTNING"
+mainElement: "WATER"
 description:
-  - "Due to their incredible speed and agility,"
-  - "Rogues are an expert at dealing"
-  - "damage in a short amount of time!"
+  - "Todo"
 classIconCustomModelData: 37
 attributeElementDamage: 7
 attributeElementDefense: 5
@@ -26,13 +24,13 @@ armorGearTypes:
   - "LIGHT_ARMOR"
 actionBarInfoType: "VARIABLE"
 actionBarIcon: "&b⏺"
-actionBarKey: "souls"
+actionBarKey: "potionpassive"
 skillOne:
-  name: "Life Drain"
-  customModelData: 12
+  name: "Poison Potion"
+  customModelData: 39
   description:
-    - "Deal damage to a single enemy and heal yourself."
-    - "Consumes souls to increase heal amount."
+    - "Throw a potion which explode on impact and create a cloud."
+    - "The cloud deals damage to enemies every second."
   manaCosts:
     - 5
     - 7
@@ -48,88 +46,12 @@ skillOne:
     child1:
       componentType: "CastTimeMechanic"
       delay: 12
-      text: "&bLife Drain!"
-      child1:
-        componentType: "SingleTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 1
-        tolerance: 4
-        ranges:
-          - 4
-          - 4
-          - 4
-          - 4
-        keepCurrent: true
-        addToBeginning: false
-        particle:
-          particleType: "SOUL_FIRE_FLAME"
-          gap: 0.2
-        child1:
-          componentType: "DamageMechanic"
-          damageType: "LIGHTNING"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
-        child2:
-          componentType: "SelfTarget"
-          child1:
-            componentType: "HealMechanic"
-            healPercentList:
-              - 0.06
-              - 0.08
-              - 0.10
-              - 0.12
-            multiplyWithValue: "souls"
-        child3:
-          componentType: "ValueSetMechanic"
-          key: "souls"
-          values:
-            - 0
-            - 0
-            - 0
-            - 0
-        child4:
-          componentType: "SoundMechanic"
-          sound: "SKILL.LIGHTNING_NORMAL"
-          volume: 0.5
-          pitch: 1.0
-skillTwo:
-  name: "Soul Spike"
-  customModelData: 55
-  description:
-    - "Shoot a projectile that damages and roots target on hit."
-    - "Gain 2 soul stacks per hit."
-    - "Consumes souls to increase amount of projectiles."
-  manaCosts:
-    - 5
-    - 7
-    - 9
-    - 11
-  cooldowns:
-    - 12
-    - 12
-    - 12
-    - 12
-  trigger:
-    componentType: "SelfTarget"
-    child1:
-      componentType: "CastTimeMechanic"
-      delay: 12
-      text: "&bSoul Spike!"
+      text: "&bPoison Potion!"
       child1:
         componentType: "ProjectileMechanic"
-        projectileClass: "Snowball"
+        projectileClass: "SplashPotion"
         spreadType: "CONE"
-        speed: 2.4
+        speed: 0.8
         amountList:
           - 1
           - 1
@@ -137,85 +59,77 @@ skillTwo:
           - 1
         angle: 360
         range: 200
-        mustHitToWork: true
+        mustHitToWork: false
         particle:
           arrangementType: "FillHemisphere"
-          particleType: "SOUL_FIRE_FLAME"
-          radius: 0.5
-          amount: 5
+          particleType: "REDSTONE"
+          dustColor: 10040319
+          dustSize: 1
+          radius: 0.2
+          amount: 2
         isProjectileInvisible: false
-        amountValueKey: "souls"
         child1:
-          componentType: "FilterCurrentTargets"
-          allies: false
-          enemy: true
-          self: false
-          max: 10
+          componentType: "RepeatMechanic"
+          period: 20
+          repetitions:
+            - 12
+            - 14
+            - 16
+            - 20
           child1:
-            componentType: "DamageMechanic"
-            damageType: "LIGHTNING"
-            damageList:
-              - 10
-              - 40
-              - 90
-              - 180
-            damageMultiplyList:
-              - 1.4
-              - 1.6
-              - 1.8
-              - 2.2
-          child2:
-            componentType: "StatusEffectMechanic"
-            statusEffectTypes:
-              - "ROOT"
-            durations:
-              - 30
-              - 40
-              - 50
-              - 70
-          child3:
-            componentType: "SelfTarget"
+            componentType: "AreaTarget"
+            allies: false
+            enemy: true
+            self: false
+            max: 30
+            radiusList:
+              - 4.0
+              - 4.25
+              - 4.5
+              - 5
+            amountList:
+              - 18
+              - 20
+              - 22
+              - 24
+            particle:
+              particleType: "REDSTONE"
+              dustColor: 10040319
+              dustSize: 2
             child1:
-              componentType: "ChangeSkillLevelMechanic"
-              index: 3
-              child1:
-                componentType: "ValueCondition"
-                key: "souls"
-                minValue: 0
-                maxValueList:
-                  - 3
-                  - 4
-                  - 5
-                  - 6
-                checkCasterOnly: true
-                child1:
-                  componentType: "ValueAddMechanic"
-                  key: "souls"
-                  valueToAdd:
-                    - 2
-                    - 2
-                    - 2
-                    - 2
-      child2:
-        componentType: "ValueSetMechanic"
-        key: "souls"
-        values:
-          - 0
-          - 0
-          - 0
-          - 0
-      child3:
-        componentType: "SoundMechanic"
-        sound: "SKILL.FIRE_SLASH"
-        volume: 0.5
-        pitch: 1.0
-skillThree:
-  name: "Realm of Darkness"
-  customModelData: 40
+              componentType: "DamageMechanic"
+              damageType: "LIGHTNING"
+              damageList:
+                - 5
+                - 10
+                - 15
+                - 20
+              damageMultiplyList:
+                - 0.15
+                - 0.2
+                - 0.25
+                - 0.3
+          child2:
+            componentType: "ParticleMechanic"
+            particle:
+              arrangementType: "FillCircle"
+              particleType: "REDSTONE"
+              dustColor: 10040319
+              dustSize: 2
+              radius: 2.5
+              amount: 18
+              direction: "XZ"
+            data1:
+              - 4.0
+              - 4.25
+              - 4.5
+              - 5
+skillTwo:
+  name: "Heal Potion"
+  customModelData: 33
   description:
-    - "Become invincible and gain movement speed bonus."
-    - "Effect is canceled if you cast spell or attack an enemy."
-    - "Consumes souls to increase effect duration."
+    - "Throw a potion which explode on impact and create a cloud."
+    - "The cloud heals allies and gives life steal to allies every second."
   manaCosts:
     - 5
     - 7
@@ -230,140 +144,214 @@ skillThree:
     componentType: "SelfTarget"
     child1:
       componentType: "CastTimeMechanic"
-      delay: 1
-      text: "&bRealm of Darkness!"
+      delay: 12
+      text: "&bPoison Potion!"
       child1:
-        componentType: "FlagSetMechanic"
-        key: "reaper3active"
-        isUnique: false
-        ticks:
-          - 20
-          - 25
-          - 30
-          - 40
-        multiplyDurationValue: "souls"
-      child2:
-        componentType: "PotionEffectMechanic"
-        potionEffectType:
-          - "GLOWING"
-          - "INVISIBILITY"
-          - "JUMP"
-        tickList:
-          - 20
-          - 25
-          - 30
-          - 40
-        amplifierList:
+        componentType: "ProjectileMechanic"
+        projectileClass: "SplashPotion"
+        spreadType: "CONE"
+        speed: 0.8
+        amountList:
           - 1
           - 1
           - 1
           - 1
-        multiplyDurationValue: "souls"
-      child3:
-        componentType: "PotionEffectMechanic"
-        potionEffectType:
-          - "SPEED"
-        tickList:
-          - 20
-          - 25
-          - 30
-          - 40
-        amplifierList:
-          - 2
-          - 2.5
-          - 3
-          - 4
-        multiplyDurationValue: "souls"
-      child4:
-        componentType: "InvincibleMechanic"
-        ticks:
-          - 20
-          - 25
-          - 30
-          - 40
-        multiplyDurationValue: "souls"
-      child5:
-        componentType: "ParticleAnimationMechanic"
+        angle: 360
+        range: 200
+        mustHitToWork: false
         particle:
-          arrangementType: "DrawCylinder"
+          arrangementType: "FillHemisphere"
+          particleType: "HEART"
+          radius: 0.2
+          amount: 1
+        isProjectileInvisible: false
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: false
+          self: true
+          max: 30
+          radiusList:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+          amountList:
+            - 18
+            - 20
+            - 22
+            - 24
+          particle:
+            particleType: "HEART"
+          child1:
+            componentType: "HealMechanic"
+            healPercentList:
+              - 0.2
+              - 0.25
+              - 0.3
+              - 0.35
+          child2:
+            componentType: "BuffMechanic"
+            buffType: "LIFE_STEAL"
+            multipliers:
+              - 0.1
+              - 0.15
+              - 0.2
+              - 0.25
+            ticks:
+              - 200
+              - 250
+              - 300
+              - 350
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillSphere"
+            particleType: "HEART"
+            radius: 2.5
+            amount: 12
+            amounty: 7
+          data1:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+skillThree:
+  name: "Buff Potion"
+  customModelData: 47
+  description:
+    - "Become invincible and gain movement speed bonus."
+    - "Effect is canceled if you cast spell or attack an enemy."
+  manaCosts:
+    - 5
+    - 7
+    - 9
+    - 11
+  cooldowns:
+    - 16
+    - 16
+    - 16
+    - 16
+  trigger:
+    componentType: "SelfTarget"
+    child1:
+      componentType: "CastTimeMechanic"
+      delay: 12
+      text: "&bPoison Potion!"
+      child1:
+        componentType: "ProjectileMechanic"
+        projectileClass: "SplashPotion"
+        spreadType: "CONE"
+        speed: 0.8
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 360
+        range: 200
+        mustHitToWork: false
+        particle:
+          arrangementType: "FillHemisphere"
           particleType: "REDSTONE"
-          dustColor: 10040319
+          dustColor: 5636095
           dustSize: 2
-          radius: 1.6
-          amount: 4
-        frequency: 2
-        data1:
-          - 1
-          - 1
-          - 1
-          - 1
-        repeatAmount:
-          - 5
-          - 6
-          - 7
-          - 10
-        upwardIncrease: 0.1
-        resetY: true
-        rotation: true
-        yawIncrease: 30
-        pitchIncrease: 10
-        playback: true
-        multiplyDurationValue: "souls"
-        flagConditionKey: "reaper3active"
-        flagIsSet: true
-      child6:
-        componentType: "SoundMechanic"
-        sound: "SKILL.BUFF"
-        volume: 0.5
-        pitch: 1.0
-      child7:
-        componentType: "ValueSetMechanic"
-        key: "souls"
-        values:
-          - 0
-          - 0
-          - 0
-          - 0
-      child8:
-        componentType: "FlagSetMechanic"
-        key: "flagForSkillCast"
-        isUnique: false
-        ticks:
-          - 1
-          - 1
-          - 1
-          - 1
-  trigger1:
+          radius: 0.2
+          amount: 1
+        isProjectileInvisible: false
+        child1:
+          componentType: "AreaTarget"
+          allies: true
+          enemy: true
+          self: true
+          max: 30
+          radiusList:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+          amountList:
+            - 9
+            - 10
+            - 11
+            - 12
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 5636095
+            dustSize: 2
+          child1:
+            componentType: "FilterCurrentTargets"
+            allies: true
+            enemy: false
+            self: true
+            max: 29
+            child2:
+              componentType: "BuffMechanic"
+              buffType: "ELEMENT_DEFENSE"
+              multipliers:
+                - 0.1
+                - 0.15
+                - 0.2
+                - 0.25
+              ticks:
+                - 200
+                - 250
+                - 300
+                - 350
+          child2:
+            componentType: "FilterCurrentTargets"
+            allies: false
+            enemy: true
+            self: false
+            max: 29
+            child2:
+              componentType: "BuffMechanic"
+              buffType: "ELEMENT_DEFENSE"
+              multipliers:
+                - -0.1
+                - -0.15
+                - -0.2
+                - -0.25
+              ticks:
+                - 200
+                - 250
+                - 300
+                - 350
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillSphere"
+            particleType: "REDSTONE"
+            dustColor: 5636095
+            dustSize: 2
+            radius: 2.5
+            amount: 12
+            amounty: 7
+          data1:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+skillPassive:
+  name: "Drink Potion"
+  customModelData: 52
+  description:
+    - "Every time you cast a spell gain a stack."
+    - "If you have 4 stacks drink a potion after casting"
+    - "your next skill and gain movement speed."
+  manaCosts:
+    - 0
+    - 0
+    - 0
+    - 0
+  cooldowns:
+    - 4
+    - 4
+    - 4
+    - 4
+  trigger:
     componentType: "InitializeTrigger"
     child1:
-      componentType: "NormalAttackTrigger"
-      melee: true
-      projectile: true
-      cooldowns:
-        - 1
-        - 1
-        - 1
-        - 1
-      child1:
-        componentType: "SelfTarget"
-        child1:
-          componentType: "FlagCondition"
-          key: "reaper3active"
-          isSet: true
-          isUnique: false
-          child1:
-            componentType: "FlagRemoveMechanic"
-            key: "reaper3active"
-          child2:
-            componentType: "PotionEffectRemoveMechanic"
-            potionEffectType:
-              - "GLOWING"
-              - "INVISIBILITY"
-              - "JUMP"
-              - "SPEED"
-          child3:
-            componentType: "InvincibleRemoveMechanic"
-    child2:
       componentType: "SkillCastTrigger"
       cooldowns:
         - 1
@@ -371,217 +359,140 @@ skillThree:
         - 1
         - 1
       child1:
-        componentType: "SelfTarget"
-        child1:
-          componentType: "FlagCondition"
-          key: "flagForSkillCast"
-          isSet: false
-          isUnique: false
-          child1:
-            componentType: "FlagCondition"
-            key: "reaper3active"
-            isSet: true
-            isUnique: false
-            child1:
-              componentType: "FlagRemoveMechanic"
-              key: "reaper3active"
-            child2:
-              componentType: "PotionEffectRemoveMechanic"
-              potionEffectType:
-                - "GLOWING"
-                - "INVISIBILITY"
-                - "JUMP"
-                - "SPEED"
-            child3:
-              componentType: "InvincibleRemoveMechanic"
-skillPassive:
-  name: "Soul Collector"
-  customModelData: 38
-  description:
-    - "Gain soul stack on normal attack to enemies."
-    - "Your active skills consumes souls for bonus effects."
-    - ""
-    - "Level 1: Max 4 souls"
-    - "Level 2: Max 5 souls"
-    - "Level 3: Max 6 souls"
-    - "Level 4: Max 7 souls"
-  manaCosts:
-    - 0
-    - 0
-    - 0
-    - 0
-  cooldowns:
-    - 4
-    - 4
-    - 4
-    - 4
-  trigger:
-    componentType: "InitializeTrigger"
-    child1:
-      componentType: "NormalAttackTrigger"
-      melee: true
-      projectile: true
-      cooldowns:
-        - 1
-        - 1
-        - 1
-        - 1
-      child1:
         componentType: "ValueCondition"
-        key: "souls"
+        key: "potionpassive"
+        minValue: 3
+        maxValue: 3
+        checkCasterOnly: true
+        child1:
+          componentType: "PotionEffectMechanic"
+          potionEffectType:
+            - "SPEED"
+          tickList:
+            - 80
+            - 100
+            - 120
+            - 150
+          amplifierList:
+            - 3
+            - 3
+            - 3
+            - 3
+        child2:
+          componentType: "ParticleAnimationMechanic"
+          particle:
+            arrangementType: "FillCircle"
+            particleType: "SPELL_WITCH"
+            radius: 0.2
+            amount: 6
+            direction: "XZ"
+          frequency: 3
+          repeatAmount:
+            - 12
+            - 14
+            - 16
+            - 18
+            - 20
+            - 24
+          data1:
+            - 0.2
+            - 0.2
+            - 0.2
+            - 0.2
+        child3:
+          componentType: "SoundMechanic"
+          sound: "SKILL.SONIC_BOOM"
+          volume: 1.0
+          pitch: 1.0
+        child4:
+          componentType: "ValueSetMechanic"
+          key: "potionpassive"
+          values:
+            - 0
+            - 0
+            - 0
+            - 0
+      child2:
+        componentType: "ValueCondition"
+        key: "potionpassive"
         minValue: 0
-        maxValueList:
-          - 3
-          - 4
-          - 5
-          - 6
+        maxValue: 3
         checkCasterOnly: true
         child1:
           componentType: "SelfTarget"
           child1:
             componentType: "ValueAddMechanic"
-            key: "souls"
+            key: "potionpassive"
             valueToAdd:
               - 1
               - 1
               - 1
               - 1
 skillUltimate:
-  name: "Assassin's Execution"
-  customModelData: 58
+  name: "Explosive Potion"
+  customModelData: 62
   description:
     - "Stun yourself and a single enemy."
     - "After the duration of stun end, deal damage to enemy."
-    - "Consumes souls to increase damage."
+    - "Consumes potionpassive to increase damage."
   manaCosts:
     - 5
     - 5
     - 5
     - 5
   cooldowns:
-    - 24
-    - 24
-    - 24
-    - 24
+    - 8
+    - 8
+    - 8
+    - 8
   trigger:
     componentType: "SelfTarget"
     child1:
       componentType: "CastTimeMechanic"
       delay: 12
-      text: "&bAssassin's Execution!"
+      text: "&bExplosive Potion!"
       child1:
-        componentType: "SingleTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 1
-        tolerance: 4
-        ranges:
-          - 4
-          - 4
-          - 4
-          - 4
+        componentType: "ProjectileMechanic"
+        projectileClass: "SplashPotion"
+        spreadType: "CONE"
+        speed: 0.8
+        amountList:
+          - 1
+          - 1
+          - 1
+          - 1
+        angle: 360
+        range: 200
+        mustHitToWork: false
         particle:
-          particleType: "SOUL_FIRE_FLAME"
-          gap: 0.2
+          arrangementType: "FillHemisphere"
+          particleType: "FLAME"
+          dustSize: 1
+          radius: 0.2
+          amount: 2
+        isProjectileInvisible: false
         child1:
-          componentType: "SelfTarget"
-          child1:
-            componentType: "StatusEffectMechanic"
-            statusEffectTypes:
-              - "STUN"
-            durations:
-              - 60
-              - 60
-              - 60
-              - 60
-          child2:
-            componentType: "ParticleAnimationMechanic"
-            particle:
-              arrangementType: "DrawCylinder"
-              particleType: "SOUL_FIRE_FLAME"
-              radius: 1.6
-              amount: 12
-            frequency: 4
-            data1:
-              - 1
-              - 1
-              - 1
-              - 1
-            repeatAmount:
-              - 15
-              - 15
-              - 15
-              - 15
-            upwardIncrease: 0.1
-            resetY: true
-            rotation: true
-            yawIncrease: 30
-            pitchIncrease: 10
-        child2:
-          componentType: "HologramMechanic"
-          helmetType: "NETHERITE_PICKAXE"
-          customModelData: 3
-          durations:
-            - 55
-            - 55
-            - 55
-            - 55
-          upward: 2.5
-          forward: 1.5
-          anglex: 0.53
-          anglez: 0.78
-        child3:
-          componentType: "HologramMechanic"
-          helmetType: "NETHERITE_PICKAXE"
-          customModelData: 3
-          durations:
-            - 55
-            - 55
-            - 55
-            - 55
-          upward: 2.5
-          forward: -1.5
-          anglex: -0.53
-          anglez: -0.78
-        child4:
-          componentType: "StatusEffectMechanic"
-          statusEffectTypes:
-            - "STUN"
-          durations:
-            - 60
-            - 60
-            - 60
-            - 60
-        child5:
-          componentType: "ParticleAnimationMechanic"
+          componentType: "AreaTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 30
+          keepCurrent: true
+          radiusList:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5
+          amountList:
+            - 24
+            - 24
+            - 24
+            - 24
           particle:
-            arrangementType: "DrawCylinder"
-            particleType: "SOUL_FIRE_FLAME"
-            radius: 1.6
-            amount: 12
-          frequency: 4
-          data1:
-            - 1
-            - 1
-            - 1
-            - 1
-          repeatAmount:
-            - 15
-            - 15
-            - 15
-            - 15
-          upwardIncrease: 0.1
-          resetY: true
-          rotation: true
-          yawIncrease: 30
-          pitchIncrease: 10
-        child6:
-          componentType: "DelayMechanic"
-          ticks: 60
+            particleType: "FLAME"
           child1:
             componentType: "DamageMechanic"
-            damageType: "LIGHTNING"
+            damageType: "FIRE"
             damageList:
               - 10
               - 40
@@ -592,39 +503,26 @@ skillUltimate:
               - 1.6
               - 1.8
               - 2.2
-            multiplyWithValue: "souls"
           child2:
-            componentType: "HologramMechanic"
-            helmetType: "NETHERITE_PICKAXE"
-            customModelData: 3
-            durations:
-              - 20
-              - 20
-              - 20
-              - 20
-            anglex: 0.53
-            anglez: 0.78
-          child3:
-            componentType: "HologramMechanic"
-            helmetType: "NETHERITE_PICKAXE"
-            customModelData: 3
-            durations:
-              - 20
-              - 20
-              - 20
-              - 20
-            anglex: -0.53
-            anglez: -0.78
-          child4:
-            componentType: "ValueSetMechanic"
-            key: "souls"
-            values:
-              - 0
-              - 0
-              - 0
-              - 0
-          child5:
-            componentType: "SoundMechanic"
-            sound: "SKILL.LIGHTNING_NORMAL"
-            volume: 0.5
-            pitch: 1.0
+            componentType: "PushMechanic"
+            pushType: "FIXED"
+            speedList:
+              - 1.2
+              - 1.4
+              - 1.6
+              - 1.8
+            centerSelf: false
+            offsetY: -2
+        child2:
+          componentType: "ParticleMechanic"
+          particle:
+            arrangementType: "FillSphere"
+            particleType: "FLAME"
+            radius: 2.5
+            amount: 12
+            amounty: 7
+          data1:
+            - 4.0
+            - 4.25
+            - 4.5
+            - 5

@@ -7,7 +7,7 @@
 color: "GREEN"
 mainElement: "AIR"
 description:
-  - "The Archer has lots of movement and"
+  - "The Ranger has lots of movement and"
   - "dexterity, allowing you to kite your target"
   - "and deal damage from long distances."
 classIconCustomModelData: 11
@@ -136,33 +136,16 @@ skillTwo:
         potionEffectType:
           - "SPEED"
         tickList:
-          - 60
-          - 70
           - 80
-          - 90
           - 100
           - 120
+          - 150
         amplifierList:
-          - 1
-          - 2
-          - 2
           - 3
           - 3
-          - 4
+          - 3
+          - 3
       child2:
-        componentType: "ParticleMechanic"
-        particle:
-          arrangementType: "FillCircle"
-          particleType: "EXPLOSION_HUGE"
-          radius: 3
-          amount: 2
-          direction: "XZ"
-        data1:
-          - 3
-          - 3.5
-          - 3
-          - 3.25
-      child3:
         componentType: "ParticleAnimationMechanic"
         particle:
           arrangementType: "FillCircle"
@@ -187,7 +170,7 @@ skillTwo:
           - 3.25
           - 3.5
           - 4
-      child4:
+      child3:
         componentType: "SoundMechanic"
         sound: "SKILL.SONIC_BOOM"
         volume: 1.0

@@ -715,6 +715,9 @@ public class RPGCharacterStats {
             if (shieldGearType != null) {
                 if (StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
                     onOffhandEquip(itemInOffHand, false);
+                } else {
+                    InventoryUtils.giveItemToPlayer(player, itemInOffHand);
+                    itemInOffHand.setAmount(0);
                 }
             } else {
                 WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);

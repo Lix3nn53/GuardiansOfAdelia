@@ -9,12 +9,12 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
-import io.github.lix3nn53.guardiansofadelia.guardian.character.*;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
-import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
-import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
-import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
@@ -239,34 +239,14 @@ public class MenuList {
 
                 String rpgClassStr = rpgCharacter.getRpgClassStr();
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
-                int tier = rpgClass.getTier();
-                int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
-                RPGClassStats rpgClassStats = rpgCharacter.getCurrentRPGClassStats();
-                int totalExperience = rpgClassStats.getTotalExperience();
-                int rpgClassLevel = RPGClassExperienceManager.getLevel(totalExperience);
-                int exp = RPGClassExperienceManager.getCurrentExperience(totalExperience, rpgClassLevel);
-                int expReq = RPGClassExperienceManager.getRequiredExperience(rpgClassLevel);
 
-                ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
-                ItemMeta itemMeta = itemStack.getItemMeta();
-                itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS);
-                itemMeta.setDisplayName(ChatPalette.YELLOW + "Your Class Info");
-                List<String> lore = new ArrayList<>();
-                lore.add("");
-                lore.add("Class: " + rpgClass.getClassString());
-                lore.add("Class Tier: " + tier);
-                lore.add("");
-                lore.add("Class Level: " + rpgClassLevel);
-                lore.add(ChatPalette.YELLOW + "Class Experience: " + ChatPalette.GRAY + exp + "/" + expReq);
-                itemMeta.setLore(lore);
-                itemMeta.setCustomModelData(classIconCustomModelData);
-                itemStack.setItemMeta(itemMeta);
+                ItemStack itemStack = RPGClassManager.getPersonalIcon(rpgClass, 99, rpgCharacter);
                 guiGeneric.setItem(4, itemStack);
 
                 itemStack = new ItemStack(Material.IRON_BLOCK);
-                itemMeta = itemStack.getItemMeta();
+                ItemMeta itemMeta = itemStack.getItemMeta();
                 itemMeta.setDisplayName(ChatPalette.GOLD + "Change Class Tier #1");
-                lore.clear();
+                List<String> lore = new ArrayList<>();
                 lore.add("");
                 lore.add("Change to a tier 1 class you have unlocked");
                 itemMeta.setLore(lore);
@@ -307,82 +287,15 @@ public class MenuList {
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
-                int unlockedClassTier = rpgCharacter.getHighestUnlockedClassTier(player);
+                int highestUnlockedClassTier = rpgCharacter.getHighestUnlockedClassTier(player);
 
                 List<RPGClass> values = RPGClassManager.getClassesAtTier(classTier);
 
                 int[] slots = {0, 2, 4, 6, 8, 18, 20, 22, 24, 26};
                 for (int i = 0; i < values.size(); i++) {
                     RPGClass value = values.get(i);
-                    ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
-                    ItemMeta itemMeta = itemStack.getItemMeta();
-                    itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-                    itemMeta.setCustomModelData(value.getClassIconCustomModelData());
-                    String classString = value.getClassString();
-                    itemMeta.setDisplayName(classString.toUpperCase());
 
-                    List<String> description = value.getDescription();
-                    List<WeaponGearType> weaponGearTypes = value.getWeaponGearTypes();
-                    List<ArmorGearType> armorGearTypes = value.getArmorGearTypes();
-                    List<ShieldGearType> shieldGearTypes = value.getShieldGearTypes();
-                    HashMap<AttributeType, Integer> attributeTiers = value.getAttributeTiers();
-
-                    List<String> lore = new ArrayList<>(description);
-                    lore.add(ChatPalette.RED + "Tier: " + ChatPalette.GRAY + classTier);
-                    lore.add("");
-
-                    lore.add(ChatPalette.GREEN_DARK + "Attributes");
-                    StringBuilder bonusAttributes = new StringBuilder(" ");
-                    for (AttributeType attributeType : AttributeType.values()) {
-                        int bonus = attributeTiers.get(attributeType);
-                        String shortName = attributeType.getShortName();
-                        bonusAttributes.append(shortName).append("=").append(bonus).append(" ");
-                    }
-                    lore.add(bonusAttributes.toString());
-
-                    lore.add(ChatPalette.RED + "Weapons");
-                    for (WeaponGearType type : weaponGearTypes) {
-                        lore.add("  - " + type.getDisplayName());
-                    }
-                    lore.add(ChatPalette.BLUE_LIGHT + "Armors");
-                    for (ArmorGearType type : armorGearTypes) {
-                        lore.add("  - " + type.getDisplayName());
-                    }
-                    if (!shieldGearTypes.isEmpty()) {
-                        lore.add(ChatPalette.BLUE + "Shields");
-                        for (ShieldGearType type : shieldGearTypes) {
-                            lore.add("  - " + type.getDisplayName());
-                        }
-                    }
-
-                    lore.add("");
-
-                    String valueStr = value.getClassStringNoColor();
-
-                    if (classTier <= unlockedClassTier) {
-                        String rpgClassStr = rpgCharacter.getRpgClassStr();
-                        if (valueStr.equalsIgnoreCase(rpgClassStr)) {
-                            lore.add(ChatPalette.PURPLE_LIGHT + "This is your current class");
-                        } else {
-                            lore.add(ChatPalette.GREEN_DARK + "Click to change to this class!");
-                        }
-
-                        RPGClassStats rpgClassStats = rpgCharacter.getRPGClassStats(valueStr);
-                        int totalExperience = rpgClassStats.getTotalExperience();
-                        int level = RPGClassExperienceManager.getLevel(totalExperience);
-                        lore.add(ChatPalette.GOLD + "Class Level: " + ChatPalette.WHITE + level);
-                        int exp = RPGClassExperienceManager.getCurrentExperience(totalExperience, level);
-                        int expReq = RPGClassExperienceManager.getRequiredExperience(level);
-                        lore.add(ChatPalette.YELLOW + "Class Experience: " + ChatPalette.GRAY + exp + "/" + expReq);
-                    } else {
-                        lore.add(ChatPalette.RED + "You haven't unlocked classes at this tier yet.");
-                        lore.add(ChatPalette.RED + "");
-                        int reqLevel = RPGClassManager.getRequiredLevelForClassTier(classTier);
-                        lore.add(ChatPalette.RED + "Required level: " + ChatPalette.GRAY + reqLevel);
-                    }
-
-                    itemMeta.setLore(lore);
-                    itemStack.setItemMeta(itemMeta);
+                    ItemStack itemStack = RPGClassManager.getPersonalIcon(value, highestUnlockedClassTier, rpgCharacter);
 
                     guiGeneric.setItem(slots[i], itemStack);
                 }

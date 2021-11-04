@@ -7,9 +7,7 @@
 color: "BLUE_DARKER"
 mainElement: "LIGHTNING"
 description:
-  - "Due to their incredible speed and agility,"
-  - "Rogues are an expert at dealing"
-  - "damage in a short amount of time!"
+  - "Todo"
 classIconCustomModelData: 37
 attributeElementDamage: 8
 attributeElementDefense: 4
@@ -47,61 +45,117 @@ skillOne:
     componentType: "SelfTarget"
     child1:
       componentType: "CastTimeMechanic"
-      delay: 12
-      text: "&bLife Drain!"
+      delay: 1
+      text: "&4Bite!"
       child1:
-        componentType: "SingleTarget"
-        allies: false
-        enemy: true
-        self: false
-        max: 1
-        tolerance: 4
-        ranges:
-          - 4
-          - 4
-          - 4
-          - 4
-        keepCurrent: true
-        addToBeginning: false
+        componentType: "LaunchMechanic"
+        relative: "CASTER"
+        forwardSpeedList:
+          - 1.4
+          - 1.5
+          - 1.6
+          - 1.7
+        upwardSpeedList:
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+        rightSpeedList:
+          - 0
+          - 0
+          - 0
+          - 0
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.JUMP"
+        volume: 1.0
+        pitch: 1.0
+      child3:
+        componentType: "ImmunityMechanic"
+        damageCause: "FALL"
+      child4:
+        componentType: "ParticleAnimationMechanic"
         particle:
-          particleType: "SOUL_FIRE_FLAME"
-          gap: 0.2
+          arrangementType: "FillCircle"
+          particleType: "REDSTONE"
+          radius: 1
+          amount: 4
+          direction: "XZ"
+          dustColor: 16711680
+          dustSize: 2
+        frequency: 4
+        data1:
+          - 1
+          - 1
+          - 1
+          - 1
+        repeatAmount:
+          - 10
+          - 12
+          - 14
+          - 16
+      child5:
+        componentType: "LandTrigger"
         child1:
-          componentType: "DamageMechanic"
-          damageType: "LIGHTNING"
-          damageList:
-            - 10
-            - 40
-            - 90
-            - 180
-          damageMultiplyList:
-            - 1.4
-            - 1.6
-            - 1.8
-            - 2.2
+          componentType: "ImmunityRemoveMechanic"
+          damageCause: FALL
+          delay: 5
         child2:
-          componentType: "SelfTarget"
+          componentType: "SingleTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 1
+          tolerance: 12
+          ranges:
+            - 4
+            - 4
+            - 4
+            - 4
+          keepCurrent: true
+          addToBeginning: false
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 16711680
+            dustSize: 2
+            gap: 0.2
           child1:
-            componentType: "HealMechanic"
-            healPercentList:
-              - 0.06
-              - 0.08
-              - 0.10
-              - 0.12
-            multiplyWithValue: "souls"
-        child3:
-          componentType: "ValueSetMechanic"
-          key: "souls"
-          values:
-            - 0
-            - 0
-            - 0
-            - 0
-        child4:
-          componentType: "SoundMechanic"
-          sound: "SKILL.LIGHTNING_NORMAL"
-          volume: 0.5
-          pitch: 1.0
+            componentType: "DamageMechanic"
+            damageType: "LIGHTNING"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
+          child2:
+            componentType: "SoundMechanic"
+            sound: "SKILL.LIGHTNING_NORMAL"
+            volume: 0.5
+            pitch: 1.0
+          child3:
+            componentType: "SelfTarget"
+            child1:
+              componentType: "FlagCondition"
+              key: "ulti"
+              isSet: true
+              child1:
+                componentType: "BuffMechanic"
+                buffType: "LIFE_STEAL"
+                multipliers:
+                  - 0.1
+                  - 0.15
+                  - 0.2
+                  - 0.25
+                ticks:
+                  - 200
+                  - 200
+                  - 200
+                  - 200
 skillTwo:
   name: "Soul Spike"
   customModelData: 55
@@ -123,34 +177,80 @@ skillTwo:
     componentType: "SelfTarget"
     child1:
       componentType: "CastTimeMechanic"
-      delay: 12
-      text: "&bSoul Spike!"
+      delay: 1
+      text: "&4Bite!"
       child1:
-        componentType: "ProjectileMechanic"
-        projectileClass: "Snowball"
-        spreadType: "CONE"
-        speed: 2.4
-        amountList:
-          - 1
-          - 1
-          - 1
-          - 1
-        angle: 360
-        range: 200
-        mustHitToWork: true
+        componentType: "LaunchMechanic"
+        relative: "CASTER"
+        forwardSpeedList:
+          - 1.4
+          - 1.5
+          - 1.6
+          - 1.7
+        upwardSpeedList:
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+        rightSpeedList:
+          - 0
+          - 0
+          - 0
+          - 0
+      child2:
+        componentType: "SoundMechanic"
+        sound: "SKILL.JUMP"
+        volume: 1.0
+        pitch: 1.0
+      child3:
+        componentType: "ImmunityMechanic"
+        damageCause: "FALL"
+      child4:
+        componentType: "ParticleAnimationMechanic"
         particle:
-          arrangementType: "FillHemisphere"
-          particleType: "SOUL_FIRE_FLAME"
-          radius: 0.5
-          amount: 5
-        isProjectileInvisible: false
-        amountValueKey: "souls"
+          arrangementType: "FillCircle"
+          particleType: "REDSTONE"
+          radius: 1
+          amount: 4
+          direction: "XZ"
+          dustColor: 16711680
+          dustSize: 2
+        frequency: 4
+        data1:
+          - 1
+          - 1
+          - 1
+          - 1
+        repeatAmount:
+          - 10
+          - 12
+          - 14
+          - 16
+      child5:
+        componentType: "LandTrigger"
         child1:
-          componentType: "FilterCurrentTargets"
+          componentType: "ImmunityRemoveMechanic"
+          damageCause: FALL
+          delay: 5
+        child2:
+          componentType: "SingleTarget"
           allies: false
           enemy: true
           self: false
-          max: 10
+          max: 1
+          tolerance: 12
+          ranges:
+            - 4
+            - 4
+            - 4
+            - 4
+          keepCurrent: true
+          addToBeginning: false
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 16711680
+            dustSize: 2
+            gap: 0.2
           child1:
             componentType: "DamageMechanic"
             damageType: "LIGHTNING"
@@ -165,50 +265,29 @@ skillTwo:
               - 1.8
               - 2.2
           child2:
-            componentType: "StatusEffectMechanic"
-            statusEffectTypes:
-              - "ROOT"
-            durations:
-              - 30
-              - 40
-              - 50
-              - 70
+            componentType: "SoundMechanic"
+            sound: "SKILL.LIGHTNING_NORMAL"
+            volume: 0.5
+            pitch: 1.0
           child3:
             componentType: "SelfTarget"
             child1:
-              componentType: "ChangeSkillLevelMechanic"
-              index: 3
+              componentType: "FlagCondition"
+              key: "ulti"
+              isSet: true
               child1:
-                componentType: "ValueCondition"
-                key: "souls"
-                minValue: 0
-                maxValueList:
-                  - 3
-                  - 4
-                  - 5
-                  - 6
-                checkCasterOnly: true
-                child1:
-                  componentType: "ValueAddMechanic"
-                  key: "souls"
-                  valueToAdd:
-                    - 2
-                    - 2
-                    - 2
-                    - 2
-      child2:
-        componentType: "ValueSetMechanic"
-        key: "souls"
-        values:
-          - 0
-          - 0
-          - 0
-          - 0
-      child3:
-        componentType: "SoundMechanic"
-        sound: "SKILL.FIRE_SLASH"
-        volume: 0.5
-        pitch: 1.0
+                componentType: "BuffMechanic"
+                buffType: "LIFE_STEAL"
+                multipliers:
+                  - 0.1
+                  - 0.15
+                  - 0.2
+                  - 0.25
+                ticks:
+                  - 200
+                  - 200
+                  - 200
+                  - 200
 skillThree:
   name: "Realm of Darkness"
   customModelData: 40
@@ -231,169 +310,116 @@ skillThree:
     child1:
       componentType: "CastTimeMechanic"
       delay: 1
-      text: "&bRealm of Darkness!"
+      text: "&4Bite!"
       child1:
-        componentType: "FlagSetMechanic"
-        key: "reaper3active"
-        isUnique: false
-        ticks:
-          - 20
-          - 25
-          - 30
-          - 40
-        multiplyDurationValue: "souls"
+        componentType: "LaunchMechanic"
+        relative: "CASTER"
+        forwardSpeedList:
+          - 1.4
+          - 1.5
+          - 1.6
+          - 1.7
+        upwardSpeedList:
+          - 1.2
+          - 1.2
+          - 1.2
+          - 1.2
+        rightSpeedList:
+          - 0
+          - 0
+          - 0
+          - 0
       child2:
-        componentType: "PotionEffectMechanic"
-        potionEffectType:
-          - "GLOWING"
-          - "INVISIBILITY"
-          - "JUMP"
-        tickList:
-          - 20
-          - 25
-          - 30
-          - 40
-        amplifierList:
-          - 1
-          - 1
-          - 1
-          - 1
-        multiplyDurationValue: "souls"
+        componentType: "SoundMechanic"
+        sound: "SKILL.JUMP"
+        volume: 1.0
+        pitch: 1.0
       child3:
-        componentType: "PotionEffectMechanic"
-        potionEffectType:
-          - "SPEED"
-        tickList:
-          - 20
-          - 25
-          - 30
-          - 40
-        amplifierList:
-          - 2
-          - 2.5
-          - 3
-          - 4
-        multiplyDurationValue: "souls"
+        componentType: "ImmunityMechanic"
+        damageCause: "FALL"
       child4:
-        componentType: "InvincibleMechanic"
-        ticks:
-          - 20
-          - 25
-          - 30
-          - 40
-        multiplyDurationValue: "souls"
-      child5:
         componentType: "ParticleAnimationMechanic"
         particle:
-          arrangementType: "DrawCylinder"
+          arrangementType: "FillCircle"
           particleType: "REDSTONE"
-          dustColor: 10040319
-          dustSize: 2
-          radius: 1.6
+          radius: 1
           amount: 4
-        frequency: 2
+          direction: "XZ"
+          dustColor: 16711680
+          dustSize: 2
+        frequency: 4
         data1:
           - 1
           - 1
           - 1
           - 1
         repeatAmount:
-          - 5
-          - 6
-          - 7
           - 10
-        upwardIncrease: 0.1
-        resetY: true
-        rotation: true
-        yawIncrease: 30
-        pitchIncrease: 10
-        playback: true
-        multiplyDurationValue: "souls"
-        flagConditionKey: "reaper3active"
-        flagIsSet: true
-      child6:
-        componentType: "SoundMechanic"
-        sound: "SKILL.BUFF"
-        volume: 0.5
-        pitch: 1.0
-      child7:
-        componentType: "ValueSetMechanic"
-        key: "souls"
-        values:
-          - 0
-          - 0
-          - 0
-          - 0
-      child8:
-        componentType: "FlagSetMechanic"
-        key: "flagForSkillCast"
-        isUnique: false
-        ticks:
-          - 1
-          - 1
-          - 1
-          - 1
-  trigger1:
-    componentType: "InitializeTrigger"
-    child1:
-      componentType: "NormalAttackTrigger"
-      melee: true
-      projectile: true
-      cooldowns:
-        - 1
-        - 1
-        - 1
-        - 1
-      child1:
-        componentType: "SelfTarget"
+          - 12
+          - 14
+          - 16
+      child5:
+        componentType: "LandTrigger"
         child1:
-          componentType: "FlagCondition"
-          key: "reaper3active"
-          isSet: true
-          isUnique: false
+          componentType: "ImmunityRemoveMechanic"
+          damageCause: FALL
+          delay: 5
+        child2:
+          componentType: "SingleTarget"
+          allies: false
+          enemy: true
+          self: false
+          max: 1
+          tolerance: 12
+          ranges:
+            - 4
+            - 4
+            - 4
+            - 4
+          keepCurrent: true
+          addToBeginning: false
+          particle:
+            particleType: "REDSTONE"
+            dustColor: 16711680
+            dustSize: 2
+            gap: 0.2
           child1:
-            componentType: "FlagRemoveMechanic"
-            key: "reaper3active"
+            componentType: "DamageMechanic"
+            damageType: "LIGHTNING"
+            damageList:
+              - 10
+              - 40
+              - 90
+              - 180
+            damageMultiplyList:
+              - 1.4
+              - 1.6
+              - 1.8
+              - 2.2
           child2:
-            componentType: "PotionEffectRemoveMechanic"
-            potionEffectType:
-              - "GLOWING"
-              - "INVISIBILITY"
-              - "JUMP"
-              - "SPEED"
+            componentType: "SoundMechanic"
+            sound: "SKILL.LIGHTNING_NORMAL"
+            volume: 0.5
+            pitch: 1.0
           child3:
-            componentType: "InvincibleRemoveMechanic"
-    child2:
-      componentType: "SkillCastTrigger"
-      cooldowns:
-        - 1
-        - 1
-        - 1
-        - 1
-      child1:
-        componentType: "SelfTarget"
-        child1:
-          componentType: "FlagCondition"
-          key: "flagForSkillCast"
-          isSet: false
-          isUnique: false
-          child1:
-            componentType: "FlagCondition"
-            key: "reaper3active"
-            isSet: true
-            isUnique: false
+            componentType: "SelfTarget"
             child1:
-              componentType: "FlagRemoveMechanic"
-              key: "reaper3active"
-            child2:
-              componentType: "PotionEffectRemoveMechanic"
-              potionEffectType:
-                - "GLOWING"
-                - "INVISIBILITY"
-                - "JUMP"
-                - "SPEED"
-            child3:
-              componentType: "InvincibleRemoveMechanic"
+              componentType: "FlagCondition"
+              key: "ulti"
+              isSet: true
+              child1:
+                componentType: "BuffMechanic"
+                buffType: "LIFE_STEAL"
+                multipliers:
+                  - 0.1
+                  - 0.15
+                  - 0.2
+                  - 0.25
+                ticks:
+                  - 200
+                  - 200
+                  - 200
+                  - 200
 skillPassive:
   name: "Soul Collector"
   customModelData: 38

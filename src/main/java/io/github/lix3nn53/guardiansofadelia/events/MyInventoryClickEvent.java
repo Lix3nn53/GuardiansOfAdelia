@@ -173,7 +173,7 @@ public class MyInventoryClickEvent implements Listener {
             if (guardianData.hasActiveCharacter()) {
                 rpgCharacter = guardianData.getActiveCharacter();
 
-                if (event.getAction() != InventoryAction.NOTHING) {
+                /*if (event.getAction() != InventoryAction.NOTHING) {
                     if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.PLAYER)) {
                         RPGCharacter rpgCharacterForEquipment = guardianData.getActiveCharacter();
                         String rpgClassStr = rpgCharacter.getRpgClassStr();
@@ -185,7 +185,7 @@ public class MyInventoryClickEvent implements Listener {
                             }
                         }.runTaskLater(GuardiansOfAdelia.getInstance(), 1L);
                     }
-                }
+                }*/
                 /*
                 //manage armor and offhand attributes for player character
                 if (event.getAction() != InventoryAction.NOTHING) {

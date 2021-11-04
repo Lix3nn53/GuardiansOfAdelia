@@ -4,15 +4,22 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
 import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantStone;
 import io.github.lix3nn53.guardiansofadelia.items.list.Eggs;
 import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorManager;
 import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.items.list.passiveItems.PassiveManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
@@ -38,6 +45,7 @@ public class CommandAdminItem implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length < 1) {
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "---- ITEMS ----");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem best");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem coin <num>");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem weapon [type] <num> [gearSet]");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem armor [slot] [type] <num> [gearSet]");
@@ -47,6 +55,39 @@ public class CommandAdminItem implements CommandExecutor {
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem premium item-id<1-24>");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem ingredient id amount");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem helmet");
+            } else if (args[0].equals("best")) {
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+
+                        String rpgClassStr = activeCharacter.getRpgClassStr();
+
+                        RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
+                        ArmorGearType armorGearType = rpgClass.getDefaultArmorGearType();
+
+                        ItemTier tier = ItemTier.LEGENDARY;
+
+                        ItemStack helmet = ArmorManager.get(ArmorSlot.HELMET, armorGearType, GearLevel.EIGHT, tier, false, null).get(0);
+                        ItemStack chest = ArmorManager.get(ArmorSlot.CHESTPLATE, armorGearType, GearLevel.EIGHT, tier, false, null).get(0);
+                        ItemStack leggings = ArmorManager.get(ArmorSlot.LEGGINGS, armorGearType, GearLevel.EIGHT, tier, false, null).get(0);
+                        ItemStack boots = ArmorManager.get(ArmorSlot.BOOTS, armorGearType, GearLevel.EIGHT, tier, false, null).get(0);
+                        InventoryUtils.giveItemToPlayer(player, helmet);
+                        InventoryUtils.giveItemToPlayer(player, chest);
+                        InventoryUtils.giveItemToPlayer(player, leggings);
+                        InventoryUtils.giveItemToPlayer(player, boots);
+
+                        for (WeaponGearType gearType : WeaponGearType.values()) {
+                            ItemStack item = WeaponManager.get(gearType, GearLevel.NINE, tier, false, null).get(0);
+                            InventoryUtils.giveItemToPlayer(player, item);
+                        }
+
+                        for (ShieldGearType gearType : ShieldGearType.values()) {
+                            ItemStack item = ShieldManager.get(gearType, GearLevel.NINE, tier, false, null).get(0);
+                            InventoryUtils.giveItemToPlayer(player, item);
+                        }
+                    }
+                }
             } else if (args[0].equals("weapon")) {
                 if (args.length >= 3) {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);

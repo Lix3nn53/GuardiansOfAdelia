@@ -8,7 +8,7 @@ color: "RED"
 mainElement: "FIRE"
 description:
   - "Thanks to their strength, fearlessness and"
-  - "superior combat skills, warriors are"
+  - "superior combat skills, dragonslayers are"
   - "always ready to take on any enemy."
 classIconCustomModelData: 35
 attributeElementDamage: 9
