@@ -11,12 +11,12 @@ import java.util.HashMap;
 
 public class ProjectileListener {
 
-    private static final HashMap<Entity, ProjectileMechanic> projectileToCallback = new HashMap<>();
+    private static final HashMap<Entity, ProjectileCallback> projectileToCallback = new HashMap<>();
 
-    public static void onSkillProjectileShoot(ArrayList<Entity> projectiles, ProjectileMechanic projectileMechanic, int skillLevel, long delayTicks) {
+    public static void onSkillProjectileShoot(ArrayList<Entity> projectiles, ProjectileCallback projectileCallback, int skillLevel, long delayTicks) {
         for (Entity projectile : projectiles) {
             PersistentDataContainerUtil.putInteger("skillLevel", skillLevel, projectile);
-            projectileToCallback.put(projectile, projectileMechanic);
+            projectileToCallback.put(projectile, projectileCallback);
         }
 
         //how long can projectiles stay in air
@@ -36,8 +36,8 @@ public class ProjectileListener {
     public static void onSkillProjectileLand(Entity projectile, Entity hit) {
         if (projectile instanceof Projectile) {
             if (projectileToCallback.containsKey(projectile)) {
-                ProjectileMechanic projectileMechanic = projectileToCallback.get(projectile);
-                projectileMechanic.callback((Projectile) projectile, hit);
+                ProjectileCallback projectileCallback = projectileToCallback.get(projectile);
+                projectileCallback.callback((Projectile) projectile, hit);
 
                 projectileToCallback.remove(projectile);
             }

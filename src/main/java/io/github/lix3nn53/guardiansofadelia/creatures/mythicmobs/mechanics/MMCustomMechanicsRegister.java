@@ -9,7 +9,11 @@ public class MMCustomMechanicsRegister implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEvent(MythicMechanicLoadEvent event) {
-        if (event.getMechanicName().equalsIgnoreCase("GoaDisarm")) {
+        if (event.getMechanicName().equalsIgnoreCase("GoaElementType")) {
+            event.register(new MMMechanicElementType(event.getConfig()));
+        } else if (event.getMechanicName().equalsIgnoreCase("GoaElementResistance")) {
+            event.register(new MMMechanicElementResistance(event.getConfig()));
+        } else if (event.getMechanicName().equalsIgnoreCase("GoaDisarm")) {
             event.register(new MMMechanicDisarm(event.getConfig()));
         } else if (event.getMechanicName().equalsIgnoreCase("GoaRoot")) {
             event.register(new MMMechanicRoot(event.getConfig()));
@@ -21,6 +25,10 @@ public class MMCustomMechanicsRegister implements Listener {
             event.register(new MMMechanicHologram(event.getConfig()));
         } else if (event.getMechanicName().equalsIgnoreCase("GoaGlow")) {
             event.register(new MMMechanicGlow(event.getConfig()));
+        } else if (event.getMechanicName().equalsIgnoreCase("GoaDisguise")) {
+            event.register(new MMMechanicDisguise(event.getConfig()));
+        } else if (event.getMechanicName().equalsIgnoreCase("GoaProjectile")) {
+            event.register(new MMMechanicProjectile(event.getConfig()));
         }
     }
 }

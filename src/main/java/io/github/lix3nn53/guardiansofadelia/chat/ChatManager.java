@@ -4,8 +4,6 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.guild.Guild;
-import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.Location;
@@ -144,12 +142,6 @@ public class ChatManager {
             if (!premiumRank.equals(PremiumRank.NONE)) {
                 String s = premiumRank.toString();
                 prefix += ChatPalette.GRAY_DARK + "[" + premiumRank.getChatPalette() + s + ChatPalette.GRAY_DARK + "]";
-            }
-            if (GuildManager.inGuild(player)) {
-                Guild guild = GuildManager.getGuild(player);
-                String s = guild.getTag();
-                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-                prefix += ChatPalette.GRAY_DARK + "[" + ChatPalette.PURPLE + s + ChatPalette.GRAY_DARK + "]";
             }
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
