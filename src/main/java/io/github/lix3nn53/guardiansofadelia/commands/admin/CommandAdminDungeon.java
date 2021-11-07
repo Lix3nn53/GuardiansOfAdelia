@@ -30,12 +30,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CommandAdminDungeon implements CommandExecutor {
+
+    private static final Map<Player, String> selectedDungeon = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -46,19 +45,20 @@ public class CommandAdminDungeon implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length < 1) {
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon tp [theme] <instanceNo>");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon holo [theme] - remakes holograms");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon door [theme] - close/open doors");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon add room [theme] <roomNo>");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon add door [theme] <roomNo> <material>" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon add spawner [theme] <roomNo> <waveNo> <amount>" + ChatPalette.GOLD + " !!look at spawner location block!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] <roomNo>" + ChatPalette.GOLD + " !!look at location block!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill [theme] global" + ChatPalette.GOLD + " !!look at location block!!");
+                player.sendMessage(ChatPalette.YELLOW + "/admindungeon select [theme]");
+                player.sendMessage(ChatPalette.YELLOW + "/admindungeon tp <instanceNo>");
+                player.sendMessage(ChatPalette.YELLOW + "/admindungeon holo - remakes holograms");
+                player.sendMessage(ChatPalette.YELLOW + "/admindungeon door - close/open doors");
+                player.sendMessage(ChatPalette.YELLOW + "/admindungeon reload - DELETES NEW CHANGES");
+                player.sendMessage(ChatPalette.YELLOW + "/admindungeon save - SAVES NEW CHANGES");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add room <roomNo>");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add door <roomNo> <material>" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add spawner <roomNo> <waveNo> <amount>" + ChatPalette.GOLD + " !!look at spawner location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill <roomNo>" + ChatPalette.GOLD + " !!look at location block!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon add skill global" + ChatPalette.GOLD + " !!look at location block!!");
                 player.sendMessage(ChatPalette.GOLD + "/admindungeon add checkpoint" + ChatPalette.GOLD + " !!look at location block!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon set bossRoom [theme]" + ChatPalette.GOLD + " !!select WorldEdit region first!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon set prizeloc [theme]" + ChatPalette.GOLD + " !!look at block!!");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon reload - DELETES NEW CHANGES");
-                player.sendMessage(ChatPalette.GOLD + "/admindungeon save - SAVES NEW CHANGES");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon set bossRoom " + ChatPalette.GOLD + " !!select WorldEdit region first!!");
+                player.sendMessage(ChatPalette.GOLD + "/admindungeon set prizeloc" + ChatPalette.GOLD + " !!look at block!!");
             } else if (args[0].equals("reload")) {
                 SkillListForGround.clear();
                 MiniGameManager.clearDungeonData();
@@ -69,9 +69,24 @@ public class CommandAdminDungeon implements CommandExecutor {
                 DungeonConfiguration.loadConfigs();
             } else if (args[0].equals("save")) {
                 DungeonConfiguration.writeConfigs();
-            } else if (args[0].equals("tp")) {
+            } else if (args[0].equals("select")) {
                 String key = args[1].toUpperCase();
-                int instanceNo = Integer.parseInt(args[2]);
+
+                DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(key, 1);
+
+                if (dungeonInstance != null) {
+                    selectedDungeon.put(player, key);
+                    player.sendMessage(ChatPalette.GREEN_DARK + "SELECTED DUNGEON: " + key);
+                } else {
+                    player.sendMessage(ChatPalette.RED + "NO DUNGEON: " + key);
+                }
+            } else if (args[0].equals("tp")) {
+                if (!selectedDungeon.containsKey(player)) {
+                    player.sendMessage(ChatPalette.RED + "Select dungeon first");
+                }
+                String key = selectedDungeon.get(player);
+
+                int instanceNo = Integer.parseInt(args[1]);
 
                 DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(key, instanceNo);
 
@@ -79,11 +94,17 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                 player.teleport(startLocation);
             } else if (args[0].equals("holo")) {
-                String key = args[1].toUpperCase();
+                if (!selectedDungeon.containsKey(player)) {
+                    player.sendMessage(ChatPalette.RED + "Select dungeon first");
+                }
+                String key = selectedDungeon.get(player);
 
                 remakeHolograms(key);
             } else if (args[0].equals("door")) {
-                String key = args[1].toUpperCase();
+                if (!selectedDungeon.containsKey(player)) {
+                    player.sendMessage(ChatPalette.RED + "Select dungeon first");
+                }
+                String key = selectedDungeon.get(player);
 
                 DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(key, 1);
 
@@ -106,10 +127,14 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                 dungeonInstance.remakeDebugHolograms();
             } else if (args[0].equals("add")) {
+                if (!selectedDungeon.containsKey(player)) {
+                    player.sendMessage(ChatPalette.RED + "Select dungeon first");
+                }
+                String key = selectedDungeon.get(player);
+
                 switch (args[1]) {
                     case "room": {
-                        String key = args[2].toUpperCase();
-                        int roomNo = Integer.parseInt(args[3]);
+                        int roomNo = Integer.parseInt(args[2]);
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
@@ -126,9 +151,8 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "door": {
-                        String key = args[2].toUpperCase();
-                        int roomNo = Integer.parseInt(args[3]);
-                        Material material = Material.valueOf(args[4].toUpperCase());
+                        int roomNo = Integer.parseInt(args[2]);
+                        Material material = Material.valueOf(args[3].toUpperCase());
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
@@ -160,10 +184,9 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "spawner": {
-                        String key = args[2].toUpperCase();
-                        int roomNo = Integer.parseInt(args[3]);
-                        int waveNo = Integer.parseInt(args[4]);
-                        int amount = Integer.parseInt(args[5]);
+                        int roomNo = Integer.parseInt(args[2]);
+                        int waveNo = Integer.parseInt(args[3]);
+                        int amount = Integer.parseInt(args[4]);
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
@@ -183,8 +206,6 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "skill": {
-                        String key = args[2].toUpperCase();
-
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
 
@@ -205,7 +226,7 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                             player.sendMessage(ChatPalette.GREEN_DARK + "Added new skillOnGround to GLOBAL");
                         } else {
-                            int roomNo = Integer.parseInt(args[3]);
+                            int roomNo = Integer.parseInt(args[2]);
 
                             DungeonRoom dungeonRoom = dungeonTheme.getDungeonRoom(roomNo);
                             dungeonRoom.addSkillOnGround(skillOnGroundWithOffset);
@@ -217,8 +238,6 @@ public class CommandAdminDungeon implements CommandExecutor {
                         break;
                     }
                     case "checkpoint": {
-                        String key = args[2].toUpperCase();
-
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);
 
@@ -247,9 +266,12 @@ public class CommandAdminDungeon implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("set")) {
-                if (args[1].equals("prizeloc")) {
-                    String key = args[2].toUpperCase();
+                if (!selectedDungeon.containsKey(player)) {
+                    player.sendMessage(ChatPalette.RED + "Select dungeon first");
+                }
+                String key = selectedDungeon.get(player);
 
+                if (args[1].equals("prizeloc")) {
                     HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                     DungeonTheme dungeonTheme = dungeonThemes.get(key);
 
@@ -263,8 +285,6 @@ public class CommandAdminDungeon implements CommandExecutor {
 
                     player.sendMessage(ChatPalette.GREEN_DARK + "Set chest prize center location");
                 } else if (args[1].equals("bossRoom")) {
-                    String key = args[2].toUpperCase();
-
                     HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                     DungeonTheme dungeonTheme = dungeonThemes.get(key);
 
