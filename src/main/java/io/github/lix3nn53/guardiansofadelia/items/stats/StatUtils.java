@@ -83,6 +83,8 @@ public class StatUtils {
     }
 
     public static boolean hasStatType(Material mat) {
+        if (mat == null) return false;
+
         return WeaponGearType.fromMaterial(mat) != null ||
                 ArmorGearType.fromMaterial(mat) != null ||
                 ShieldGearType.fromMaterial(mat) != null ||
@@ -177,6 +179,14 @@ public class StatUtils {
             if (!weaponGearTypes.contains(weaponGearType)) {
                 player.sendMessage(ChatPalette.RED + "Your class can't use " + weaponGearType.getDisplayName());
                 return false;
+            }
+
+            if (weaponGearType.isTwoHanded()) {
+                ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
+                if (StatUtils.hasStatType(itemInOffHand.getType())) {
+                    player.sendMessage(ChatPalette.RED + "You can't dual wield " + weaponGearType);
+                    return false;
+                }
             }
         }
 

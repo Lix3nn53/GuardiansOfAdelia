@@ -9,11 +9,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 /**
- * Block projectiles fired from same skill-cast to work on multiple times on a target
+ * Block projectiles fired from same skill-cast to work multiple times on a target
  */
 public class ProjectileRepeatProtector {
 
-    private static HashMap<Entity, String> livingEntityToTookDamageProjectileSkillKey = new HashMap<Entity, String>();
+    private static final HashMap<Entity, String> livingEntityToTookDamageProjectileSkillKey = new HashMap<Entity, String>();
 
     public static boolean shouldSkillWorkOnProjectileHitToEntity(Entity target, Projectile projectile) {
         if (PersistentDataContainerUtil.hasString(projectile, "skillCastKey")) {

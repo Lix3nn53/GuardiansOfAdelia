@@ -48,7 +48,7 @@ public class DungeonRoomSpawner {
         // Start secure spawner runner
         spawnerState.startSecureSpawnerRunner(mobCode, mobLevel, dungeonStart, this, roomNo, spawnerIndex);
 
-        spawnerState.onSpawn(spawned);
+        spawnerState.onFirstSpawn(spawned);
 
         return spawned;
     }
@@ -60,26 +60,19 @@ public class DungeonRoomSpawner {
      * @return
      */
     public List<Entity> secureSpawn(String mobCode, int mobLevel, Location dungeonStart, int roomNo,
-                                    int spawnerIndex, List<Entity> currentMobs) {
+                                    int spawnerIndex, int mobsLeftToKill) {
         String spawnerKey = roomNo + "-" + spawnerIndex;
 
         List<Entity> spawned = new ArrayList<>();
 
-        int amountToSpawn = 0;
-        for (Entity entity : currentMobs) {
-            if (!entity.isValid()) {
-                amountToSpawn++;
-            }
-        }
-
-        if (amountToSpawn <= 0) return spawned;
+        if (mobsLeftToKill <= 0) return spawned;
 
         BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
 
         try {
             Location add = dungeonStart.clone().add(offset);
 
-            for (int i = 0; i < amountToSpawn; i++) {
+            for (int i = 0; i < mobsLeftToKill; i++) {
                 Entity entity = apiHelper.spawnMythicMob(mobCode, add, mobLevel);
                 PersistentDataContainerUtil.putString("spawnerKey", spawnerKey, entity);
                 spawned.add(entity);

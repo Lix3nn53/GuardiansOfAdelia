@@ -47,6 +47,7 @@ public class CommandAdmin implements CommandExecutor {
                 player.sendMessage(ChatPalette.BLUE_DARK + "/admin cexp <player> <amount>");
             } else if (args[0].equals("debug")) {
                 DEBUG_MODE = !DEBUG_MODE;
+                player.sendMessage("DEBUG MODE: " + DEBUG_MODE);
             } else if (args[0].equals("speed")) {
                 int val = Integer.parseInt(args[1]);
                 if (val > 10 || val < -1) {

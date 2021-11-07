@@ -47,6 +47,7 @@ public class PetManager {
     // Companions Only
     private static final HashMap<Player, List<LivingEntity>> ownerToCompanions = new HashMap<>();
     protected final static List<Player> companionLogicRunnerActive = new ArrayList<>();
+    private static final double COMPANION_ATTACK_RADIUS = 16;
 
     public static Player getOwner(LivingEntity entity) {
         return companionToOwner.get(entity);
@@ -415,7 +416,7 @@ public class PetManager {
 
                     if (mobsWithoutTarget.isEmpty()) return;
 
-                    List<LivingEntity> nearbySphere = TargetHelper.getNearbySphere(player.getLocation(), 8);
+                    List<LivingEntity> nearbySphere = TargetHelper.getNearbySphere(player.getLocation(), COMPANION_ATTACK_RADIUS);
 
                     for (LivingEntity nearby : nearbySphere) {
                         if (nearby.getType().equals(EntityType.ARMOR_STAND)) continue;

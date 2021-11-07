@@ -706,27 +706,29 @@ public class RPGCharacterStats {
             }
         }
 
+        ItemStack air = new ItemStack(Material.AIR);
+
         ItemStack itemInOffHand = inventory.getItemInOffHand();
         if (!InventoryUtils.isAirOrNull(itemInOffHand)) {
-            Material type = itemInOffHand.getType();
+            Material offHandType = itemInOffHand.getType();
 
-            ShieldGearType shieldGearType = ShieldGearType.fromMaterial(type);
+            ShieldGearType shieldGearType = ShieldGearType.fromMaterial(offHandType);
 
             if (shieldGearType != null) {
                 if (StatUtils.doesCharacterMeetRequirements(itemInOffHand, player, rpgClass)) {
                     onOffhandEquip(itemInOffHand, false);
                 } else {
                     InventoryUtils.giveItemToPlayer(player, itemInOffHand);
-                    itemInOffHand.setAmount(0);
+                    inventory.setItemInOffHand(air);
                 }
             } else {
-                WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
+                WeaponGearType weaponGearType = WeaponGearType.fromMaterial(offHandType);
 
                 if (weaponGearType != null && weaponGearType.canEquipToOffHand()) {
                     onOffhandEquip(itemInOffHand, false);
-                } else if (!type.equals(Material.ARROW)) {
+                } else if (!offHandType.equals(Material.ARROW)) {
                     InventoryUtils.giveItemToPlayer(player, itemInOffHand);
-                    itemInOffHand.setAmount(0);
+                    inventory.setItemInOffHand(air);
                 }
             }
         }
@@ -739,7 +741,7 @@ public class RPGCharacterStats {
                 helmetType = ArmorGearType.fromMaterial(inventoryHelmet.getType());
             } else {
                 InventoryUtils.giveItemToPlayer(player, inventoryHelmet);
-                inventoryHelmet.setAmount(0);
+                inventory.setHelmet(air);
             }
         }
 
@@ -751,7 +753,7 @@ public class RPGCharacterStats {
                 chestplateType = ArmorGearType.fromMaterial(inventoryChestplate.getType());
             } else {
                 InventoryUtils.giveItemToPlayer(player, inventoryChestplate);
-                inventoryChestplate.setAmount(0);
+                inventory.setChestplate(air);
             }
         }
 
@@ -763,7 +765,7 @@ public class RPGCharacterStats {
                 leggingsType = ArmorGearType.fromMaterial(inventoryLeggings.getType());
             } else {
                 InventoryUtils.giveItemToPlayer(player, inventoryLeggings);
-                inventoryLeggings.setAmount(0);
+                inventory.setLeggings(air);
             }
         }
 
@@ -775,7 +777,7 @@ public class RPGCharacterStats {
                 bootsType = ArmorGearType.fromMaterial(inventoryBoots.getType());
             } else {
                 InventoryUtils.giveItemToPlayer(player, inventoryBoots);
-                inventoryBoots.setAmount(0);
+                inventory.setBoots(air);
             }
         }
 

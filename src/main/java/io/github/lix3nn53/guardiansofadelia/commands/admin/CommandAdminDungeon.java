@@ -128,7 +128,7 @@ public class CommandAdminDungeon implements CommandExecutor {
                     case "door": {
                         String key = args[2].toUpperCase();
                         int roomNo = Integer.parseInt(args[3]);
-                        Material material = Material.valueOf(args[4]);
+                        Material material = Material.valueOf(args[4].toUpperCase());
 
                         HashMap<String, DungeonTheme> dungeonThemes = MiniGameManager.getDungeonThemes();
                         DungeonTheme dungeonTheme = dungeonThemes.get(key);

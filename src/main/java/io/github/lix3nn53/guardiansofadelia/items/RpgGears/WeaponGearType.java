@@ -235,4 +235,23 @@ public enum WeaponGearType {
 
         return list;
     }
+
+    public boolean isTwoHanded() {
+        switch (this) {
+            case SWORD:
+            case DAGGER:
+                return false;
+            case BATTLE_AXE:
+            case WAR_HAMMER:
+            case GREAT_SWORD:
+            case SPEAR:
+            case BOW:
+            case CROSSBOW:
+            case STAFF:
+            case WAND:
+                return true;
+        }
+
+        return true;
+    }
 }

@@ -1,5 +1,4 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
-import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,14 +7,67 @@ import java.util.List;
 
 public class Test {
 
+    public static String getRandomMonsterToSpawn(int darkness, List<String> monsterPool) {
+        if (darkness < 0) {
+            darkness = 1;
+        }
+
+        int size = monsterPool.size();
+        double darknessPercent = darkness / 100d;
+
+        int totalWeight = 0;
+        List<Integer> weights = new ArrayList<>();
+        for (int i = 1; i <= size; i++) { // start from 1 so first index has a percent and last one is 100
+            double indexPercent = i / (double) size;
+            double diff = Math.abs(indexPercent - darknessPercent);
+            double diffReverse = 1 - diff;
+
+            int weight = (int) (10 * diffReverse * diffReverse * diffReverse + 0.5); // to make differences between indexes larger
+            System.out.println("weight " + i + ": " + weight);
+            totalWeight += weight;
+            weights.add(weight);
+        }
+        System.out.println("totalWeight: " + totalWeight);
+
+        double randomWeight = Math.random() * totalWeight;
+        System.out.println("randomWeight: " + randomWeight);
+
+        int weightCounter = 0;
+        for (int i = 0; i <= size; i++) {
+            weightCounter += weights.get(i);
+            if (weightCounter >= randomWeight) {
+                System.out.println("result: " + (i + 1));
+                return monsterPool.get(i);
+            }
+        }
+
+        return monsterPool.get(1);
+    }
+
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        for (int levelD = 1; levelD <= 90; levelD++) {
+        int darkness = 40;
+
+        ArrayList<String> monsterPool = new ArrayList<>();
+        monsterPool.add("1");
+        monsterPool.add("2");
+        monsterPool.add("3");
+        monsterPool.add("4");
+        monsterPool.add("5");
+        monsterPool.add("6");
+        monsterPool.add("7");
+        monsterPool.add("8");
+        monsterPool.add("9");
+        monsterPool.add("10");
+
+        getRandomMonsterToSpawn(darkness, monsterPool);
+
+        /*for (int levelD = 1; levelD <= 90; levelD++) {
             // Use i as normal here
             int damageItem = StatUtils.getDamageItem(levelD);
             int healthItem = StatUtils.getHealthItem(levelD);
             System.out.println("level: " + levelD + " damage: " + damageItem + " hp: " + healthItem);
-        }
+        }*/
 
         /*int size = 5;
         int maxLevel = 10;

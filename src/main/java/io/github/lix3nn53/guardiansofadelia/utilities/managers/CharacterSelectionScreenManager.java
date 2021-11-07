@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -32,6 +33,8 @@ public class CharacterSelectionScreenManager {
     private static Location tutorialStart;
     private static Location characterSelectionCenter;
     private static final HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = new HashMap<>();
+
+    private static final List<Player> playersInLoading = new ArrayList<>(); // Player clicked something and waiting for result
 
     public static void setArmorStandLocationBases(List<Location> armorStandLocationBases) {
         CharacterSelectionScreenManager.armorStandLocationBases = armorStandLocationBases;
@@ -101,6 +104,10 @@ public class CharacterSelectionScreenManager {
     }
 
     public static void selectCharacter(Player player, int charNo, Location location) {
+        if (playersInLoading.contains(player)) return;
+        playersInLoading.add(player);
+        Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> playersInLoading.remove(player), 200L);
+
         player.sendMessage(ChatPalette.YELLOW + "Loading character-" + charNo);
         DatabaseManager.loadCharacter(player, charNo, location);
         clear(player);
@@ -133,6 +140,10 @@ public class CharacterSelectionScreenManager {
     }
 
     public static void createCharacter(Player player, int charNo) {
+        if (playersInLoading.contains(player)) return;
+        playersInLoading.add(player);
+        Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> playersInLoading.remove(player), 200L);
+
         player.sendMessage(ChatPalette.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start tutorial
@@ -140,6 +151,10 @@ public class CharacterSelectionScreenManager {
     }
 
     public static void createCharacterWithoutTutorial(Player player, int charNo) {
+        if (playersInLoading.contains(player)) return;
+        playersInLoading.add(player);
+        Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> playersInLoading.remove(player), 200L);
+
         player.sendMessage(ChatPalette.YELLOW + "Creating character-" + charNo);
         clear(player);
         //start character at first world quest

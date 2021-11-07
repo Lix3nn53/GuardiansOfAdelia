@@ -11,37 +11,48 @@ import java.util.List;
 
 public class DungeonRoomSpawnerState {
     // State
-    private final List<Entity> entityList = new ArrayList<>();
-    private BukkitTask secureSpawnRunner;
+    private List<Entity> currentMobs = new ArrayList<>(); // just to be able to remove them
+    private int mobsLeftToKill; // the actual count to determine if the spawner is completed
+    private BukkitTask secureSpawnRunner; // to respawn mobs when something went wrong with first spawned mobs
 
-    public void onSpawn(List<Entity> entity) {
-        entityList.addAll(entity);
+    public void onFirstSpawn(List<Entity> spawned) {
+        currentMobs.addAll(spawned);
+        mobsLeftToKill = spawned.size();
     }
 
     public void onMobKill(Entity entity) {
-        entityList.remove(entity);
+        currentMobs.remove(entity);
+        mobsLeftToKill--;
 
-        if (entityList.size() <= 0) {
+        if (mobsLeftToKill <= 0) {
             if (secureSpawnRunner != null) secureSpawnRunner.cancel();
         }
     }
 
     public boolean isClear() {
-        return entityList.size() == 0;
+        return mobsLeftToKill <= 0;
     }
 
     public void startSecureSpawnerRunner(String mobCode, int mobLevel, Location dungeonStart, DungeonRoomSpawner spawner, int roomNo, int spawnerIndex) {
         secureSpawnRunner = new BukkitRunnable() {
             @Override
             public void run() {
-                if (entityList.size() <= 0) {
+                if (mobsLeftToKill <= 0) {
                     cancel();
                     return;
                 }
 
-                List<Entity> entities = spawner.secureSpawn(mobCode, mobLevel, dungeonStart, roomNo, spawnerIndex, entityList);
+                List<Entity> validCurrent = new ArrayList<>();
+                for (Entity e : currentMobs) {
+                    if (e.isValid()) validCurrent.add(e);
+                }
+                currentMobs = validCurrent;
 
-                entityList.addAll(entities);
+                if (mobsLeftToKill - currentMobs.size() <= 0) return;
+
+                List<Entity> entities = spawner.secureSpawn(mobCode, mobLevel, dungeonStart, roomNo, spawnerIndex, mobsLeftToKill);
+
+                currentMobs.addAll(entities);
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 20 * 15L, 20 * 15L);
     }
@@ -51,10 +62,10 @@ public class DungeonRoomSpawnerState {
     }
 
     public void clearSpawned() {
-        for (Entity entity : entityList) {
+        for (Entity entity : currentMobs) {
             entity.remove();
         }
 
-        entityList.clear();
+        currentMobs.clear();
     }
 }

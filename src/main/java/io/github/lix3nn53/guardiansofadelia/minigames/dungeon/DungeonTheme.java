@@ -273,20 +273,34 @@ public class DungeonTheme {
     public String getRandomMonsterToSpawn(int darkness) {
         if (darkness < 0) {
             darkness = 1;
-        } else if (darkness > 100) {
-            darkness = 99;
         }
 
         int size = monsterPool.size();
+        double darknessPercent = darkness / 100d;
 
-        int bound = (int) ((darkness / 100d) * size) + 1;
+        int totalWeight = 0;
+        List<Integer> weights = new ArrayList<>();
+        for (int i = 1; i <= size; i++) { // start from 1 so first index has a percent and last one is 100
+            double indexPercent = i / (double) size;
+            double diff = Math.abs(indexPercent - darknessPercent);
+            double diffReverse = 1 - diff;
 
-        int i = 0;
-        if (bound > 1) {
-            i = new Random().nextInt(bound);
+            int weight = (int) (10 * diffReverse * diffReverse * diffReverse + 0.5); // to make differences between indexes larger
+            totalWeight += weight;
+            weights.add(weight);
         }
 
-        return monsterPool.get(i);
+        double randomWeight = Math.random() * totalWeight;
+
+        int weightCounter = 0;
+        for (int i = 0; i <= size; i++) {
+            weightCounter += weights.get(i);
+            if (weightCounter >= randomWeight) {
+                return monsterPool.get(i);
+            }
+        }
+
+        return monsterPool.get(0);
     }
 
     public int getMonsterLevel(int darkness) {

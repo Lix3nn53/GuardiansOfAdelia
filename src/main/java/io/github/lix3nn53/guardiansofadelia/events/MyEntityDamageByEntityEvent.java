@@ -281,11 +281,12 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             if (player.getInventory().getHeldItemSlot() != 4) {
                                 event.setCancelled(true);
                                 player.sendMessage(ChatPalette.RED + "You can only attack with weapon slot(5)");
-                                return false;
+                                return true;
                             }
                             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                             if (!StatUtils.doesCharacterMeetRequirements(itemInMainHand, player, rpgClassStr)) {
-                                return false;
+                                event.setCancelled(true);
+                                return true;
                             }
 
                             Material type = itemInMainHand.getType();

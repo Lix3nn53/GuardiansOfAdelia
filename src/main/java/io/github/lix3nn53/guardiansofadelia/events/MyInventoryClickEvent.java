@@ -198,11 +198,7 @@ public class MyInventoryClickEvent implements Listener {
         //Open RPG-Inventory
         if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.CRAFTING)) {
             event.setCancelled(true);
-            if (!cursorType.equals(Material.AIR)) {
-                InventoryUtils.giveItemToPlayer(player, cursor);
-                cursor.setAmount(0);
-            }
-            if (rpgCharacter != null) {
+            if (cursorType.equals(Material.AIR) && rpgCharacter != null) {
                 GuiGeneric guiGeneric = rpgCharacter.getRpgInventory().formRPGInventory(player);
                 guiGeneric.openInventory(player);
             }

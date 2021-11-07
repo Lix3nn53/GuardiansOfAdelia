@@ -22,6 +22,7 @@ import java.util.Optional;
 public class ProjectileMechanic extends MechanicComponent implements ProjectileCallback {
 
     private final ProjectileMechanicBase base;
+    private int castCounter;
 
     public ProjectileMechanic(ConfigurationSection configurationSection) throws ClassNotFoundException {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -97,7 +98,9 @@ public class ProjectileMechanic extends MechanicComponent implements ProjectileC
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
-        return this.base.execute(caster, skillLevel, targets, castCounter, skillIndex, this);
+        this.castCounter = castCounter;
+
+        return this.base.execute(caster, skillLevel, targets, skillIndex, this);
     }
 
     @Override
@@ -114,7 +117,6 @@ public class ProjectileMechanic extends MechanicComponent implements ProjectileC
                 skillLevel = PersistentDataContainerUtil.getInteger(projectile, "skillLevel");
             }
 
-            int castCounter = base.getCastCounter();
             int skillIndex = base.getSkillIndex();
 
             if (PetManager.isCompanion(shooterLiving)) {

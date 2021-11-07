@@ -57,7 +57,6 @@ public class ProjectileMechanicBase {
 
     //Piercing
     private LivingEntity caster;
-    private int castCounter;
     private int skillIndex;
 
     public ProjectileMechanicBase(Class<? extends Projectile> projectileType, SpreadType spreadType, double radius,
@@ -148,12 +147,11 @@ public class ProjectileMechanicBase {
         }
     }
 
-    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex, ProjectileCallback projectileCallback) {
+    public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int skillIndex, ProjectileCallback projectileCallback) {
         if (targets.isEmpty()) return false;
 
         this.skillIndex = skillIndex;
         this.caster = caster;
-        this.castCounter = castCounter;
         UUID skillKey = UUID.randomUUID(); //skill key to put into projectile
 
         // Fire from each target
@@ -308,11 +306,11 @@ public class ProjectileMechanicBase {
         boolean hitSuccess = false;
         if (hit == null) {
             if (projectile.isValid()) projectile.remove();
-            if (mustHitToWork) return null;
+            if (mustHitToWork) return targets;
 
             hit = new TemporaryEntity(projectile.getLocation(), caster);
         } else if (addCasterAsFirstTargetIfHitSuccess) {
-            if (CitizensAPI.getNPCRegistry().isNPC(hit)) return null;
+            if (CitizensAPI.getNPCRegistry().isNPC(hit)) return targets;
 
             hitSuccess = true;
             targets.add(caster);
@@ -332,7 +330,7 @@ public class ProjectileMechanicBase {
         }
 
         if (projectile instanceof Arrow) {
-            if (((Arrow) projectile).getPierceLevel() > 0) return null;
+            if (((Arrow) projectile).getPierceLevel() > 0) return targets;
         }
 
         projectile.remove();
@@ -430,14 +428,6 @@ public class ProjectileMechanicBase {
 
     public void setCaster(LivingEntity caster) {
         this.caster = caster;
-    }
-
-    public int getCastCounter() {
-        return castCounter;
-    }
-
-    public void setCastCounter(int castCounter) {
-        this.castCounter = castCounter;
     }
 
     public ParticleArrangement getParticleArrangement() {

@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementDrawCylinder;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ParticleArrangement;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
+import io.lumine.xikage.mythicmobs.adapters.AbstractLocation;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
 import io.lumine.xikage.mythicmobs.skills.ITargetedEntitySkill;
@@ -13,6 +14,7 @@ import io.lumine.xikage.mythicmobs.skills.Skill;
 import io.lumine.xikage.mythicmobs.skills.SkillMechanic;
 import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
 import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
@@ -60,7 +62,7 @@ public class MMMechanicProjectile extends SkillMechanic implements ITargetedEnti
         String amountValueKey = config.getString(new String[]{"amountValueKey"}, null);
         double angle = config.getDouble(new String[]{"angle"}, 30);
         double range = config.getDouble(new String[]{"range"}, 200);
-        boolean mustHitToWork = config.getBoolean(new String[]{"mustHitToWork"}, true);
+        boolean mustHitToWork = config.getBoolean(new String[]{"mustHitToWork"}, false);
 
         double radius = config.getDouble(new String[]{"radius"}, 0);
         double height = config.getDouble(new String[]{"height"}, 0);
@@ -104,35 +106,40 @@ public class MMMechanicProjectile extends SkillMechanic implements ITargetedEnti
 
     @Override
     public boolean castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
-        LivingEntity target = (LivingEntity) BukkitAdapter.adapt(abstractEntity);
         this.data = data;
 
+        LivingEntity caster = (LivingEntity) data.getCaster().getEntity().getBukkitEntity();
         ArrayList<LivingEntity> targets = new ArrayList<>();
-        targets.add(target);
+        targets.add(caster);
 
-        return this.base.execute((LivingEntity) data.getCaster().getEntity().getBukkitEntity(), 1, targets,
-                base.getCastCounter(), base.getSkillIndex(), this);
+        return this.base.execute(caster, 1, targets, base.getSkillIndex(), this);
     }
 
     @Override
     public ArrayList<LivingEntity> callback(Projectile projectile, Entity hit) {
         ArrayList<LivingEntity> targets = this.base.callback(projectile, hit);
 
+        if (targets.isEmpty()) return targets;
+
         List<AbstractEntity> abstractTargets = new ArrayList<>();
+        List<AbstractLocation> abstractLocations = new ArrayList<>();
 
         for (LivingEntity target : targets) {
             AbstractEntity adapt = BukkitAdapter.adapt(target);
             abstractTargets.add(adapt);
-        }
 
-        // AbstractEntity shooter = BukkitAdapter.adapt((LivingEntity) projectile.getShooter());
+            Location location = target.getLocation();
+            AbstractLocation adapt1 = BukkitAdapter.adapt(location);
+            abstractLocations.add(adapt1);
+        }
 
         if (onHitSkill.isPresent()) {
             Skill skill = onHitSkill.get();
 
             SkillMetadata sData = this.data.deepClone();
-            sData.setEntityTargets(abstractTargets);
             sData.setOrigin(abstractTargets.get(0).getLocation());
+            sData.setEntityTargets(abstractTargets);
+            sData.setLocationTargets(abstractLocations);
             if (skill.isUsable(sData)) {
                 skill.execute(sData);
             }

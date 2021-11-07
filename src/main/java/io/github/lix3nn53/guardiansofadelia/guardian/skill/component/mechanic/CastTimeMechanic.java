@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class CastTimeMechanic extends MechanicComponent {
 
+    private static final int MIN_DELAY = 2;
     private final int DELAY;
     private final String TEXT;
 
@@ -56,7 +57,7 @@ public class CastTimeMechanic extends MechanicComponent {
         int holoTime = Math.max(DELAY, 50);
 
         for (LivingEntity target : targets) {
-            if (DELAY - 2 > 0) {
+            if (DELAY - MIN_DELAY > 0) {
                 StatusEffectManager.addStatus(target, StatusEffectType.STUN, DELAY - 2);
             }
 
@@ -89,7 +90,9 @@ public class CastTimeMechanic extends MechanicComponent {
     public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
         if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
 
-        additions.add(ChatPalette.GOLD + "Cast time: " + ChatPalette.YELLOW + DELAY);
+        if (DELAY - MIN_DELAY > 0) {
+            additions.add(ChatPalette.GOLD + "Cast time: " + ChatPalette.YELLOW + DELAY + " ticks");
+        }
 
         return getSkillLoreAdditionsOfChildren(additions, skillLevel);
     }
