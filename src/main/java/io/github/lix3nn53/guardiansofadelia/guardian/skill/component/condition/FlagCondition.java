@@ -5,7 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.ConditionCo
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.Collections;
 import java.util.List;
 
 public class FlagCondition extends ConditionComponent {
@@ -14,11 +13,14 @@ public class FlagCondition extends ConditionComponent {
     private final boolean isSet;
     private final boolean isUnique;
 
-    public FlagCondition(String key, boolean isSet, boolean isUnique) {
+    private final boolean checkCasterOnly;
+
+    public FlagCondition(String key, boolean isSet, boolean isUnique, boolean checkCasterOnly) {
         super(false);
         this.key = key;
         this.isSet = isSet;
         this.isUnique = isUnique;
+        this.checkCasterOnly = checkCasterOnly;
     }
 
     public FlagCondition(ConfigurationSection configurationSection) {
@@ -35,6 +37,12 @@ public class FlagCondition extends ConditionComponent {
         this.key = configurationSection.getString("key");
         this.isSet = configurationSection.getBoolean("isSet");
         this.isUnique = configurationSection.contains("isUnique") && configurationSection.getBoolean("isUnique");
+
+        if (configurationSection.contains("checkCasterOnly")) {
+            checkCasterOnly = configurationSection.getBoolean("checkCasterOnly");
+        } else {
+            checkCasterOnly = false;
+        }
     }
 
     @Override
@@ -42,17 +50,31 @@ public class FlagCondition extends ConditionComponent {
         if (targets.isEmpty()) return false;
 
         boolean success = false;
-        for (LivingEntity target : targets) {
+        if (checkCasterOnly) {
             boolean hasFlag;
 
             if (isUnique) {
-                hasFlag = SkillDataManager.hasFlag(target, key + castCounter);
+                hasFlag = SkillDataManager.hasFlag(caster, key + castCounter);
             } else {
-                hasFlag = SkillDataManager.hasFlag(target, key);
+                hasFlag = SkillDataManager.hasFlag(caster, key);
             }
 
             if (hasFlag == isSet) {
-                success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter, skillIndex) || success;
+                success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex) || success;
+            }
+        } else {
+            for (LivingEntity target : targets) {
+                boolean hasFlag;
+
+                if (isUnique) {
+                    hasFlag = SkillDataManager.hasFlag(target, key + castCounter);
+                } else {
+                    hasFlag = SkillDataManager.hasFlag(target, key);
+                }
+
+                if (hasFlag == isSet) {
+                    success = executeChildren(caster, skillLevel, targets, castCounter, skillIndex) || success;
+                }
             }
         }
 

@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -48,9 +49,11 @@ public class MerchantMenu extends GuiGeneric {
         if (merchantType.equals(MerchantType.WEAPONSMITH)) {
             ItemStack weapons = new ItemStack(Material.NETHERITE_SWORD);
             ItemMeta itemMeta = weapons.getItemMeta();
+            itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             itemMeta.setDisplayName("Weapons");
             List<String> lore = new ArrayList<>();
             lore.add("");
+            lore.add("Buy weapons");
             itemMeta.setLore(lore);
             weapons.setItemMeta(itemMeta);
             setItem(18, weapons, MerchantPageType.WEAPON);
@@ -58,68 +61,80 @@ public class MerchantMenu extends GuiGeneric {
             ItemStack enchant = new ItemStack(Material.DIAMOND_BLOCK);
             itemMeta = enchant.getItemMeta();
             itemMeta.setDisplayName("Enchant Items");
-            List<String> lore1 = new ArrayList<>();
-            lore1.add("Strengthen your items with magical stones!");
-            itemMeta.setLore(lore1);
+            lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Strengthen your items with magical stones!");
+            itemMeta.setLore(lore);
             enchant.setItemMeta(itemMeta);
             setItem(20, enchant, MerchantPageType.ENCHANT);
         } else if (merchantType.equals(MerchantType.ARMORSMITH)) {
             ItemStack armors = new ItemStack(Material.NETHERITE_CHESTPLATE);
             ItemMeta itemMeta = armors.getItemMeta();
+            itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             itemMeta.setDisplayName("Armors");
-            List<String> lore2 = new ArrayList<>();
-            lore2.add("");
-            itemMeta.setLore(lore2);
+            List<String> lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Buy armors");
+            itemMeta.setLore(lore);
             armors.setItemMeta(itemMeta);
             setItem(18, armors, MerchantPageType.ARMOR);
 
             ItemStack shields = new ItemStack(Material.SHIELD);
             itemMeta.setDisplayName("Shields");
-            List<String> lore3 = new ArrayList<>();
-            lore3.add("");
-            itemMeta.setLore(lore3);
+            lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Buy shields");
+            itemMeta.setLore(lore);
             shields.setItemMeta(itemMeta);
             setItem(20, shields, MerchantPageType.SHIELD);
 
             ItemStack enchant = new ItemStack(Material.DIAMOND_BLOCK);
             itemMeta = enchant.getItemMeta();
             itemMeta.setDisplayName("Enchant Items");
-            List<String> lore1 = new ArrayList<>();
-            lore1.add("Strengthen your items with magical stones!");
-            itemMeta.setLore(lore1);
+            lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Strengthen your items with magical stones!");
+            itemMeta.setLore(lore);
             enchant.setItemMeta(itemMeta);
             setItem(22, enchant, MerchantPageType.ENCHANT);
         } else if (merchantType.equals(MerchantType.STORAGE_KEEPER)) {
             ItemStack personal = new ItemStack(Material.CHEST);
             ItemMeta itemMeta = personal.getItemMeta();
+            itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             itemMeta.setDisplayName("Personal Storage");
             List<String> lore = new ArrayList<>();
             lore.add("");
+            lore.add("Deposit or withdraw items in your personal storage");
             itemMeta.setLore(lore);
             personal.setItemMeta(itemMeta);
             setItem(18, personal, MerchantPageType.PERSONAL_STORAGE);
 
             ItemStack guild = new ItemStack(Material.ENDER_CHEST);
             itemMeta.setDisplayName("Guild Storage");
-            List<String> lore2 = new ArrayList<>();
-            lore2.add("");
-            itemMeta.setLore(lore2);
+            lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Deposit or withdraw items in your guild's storage");
+            itemMeta.setLore(lore);
             guild.setItemMeta(itemMeta);
             setItem(20, guild, MerchantPageType.GUILD_STORAGE);
 
             ItemStack bazaar = new ItemStack(Material.CHEST);
             itemMeta.setDisplayName("Bazaar Storage");
-            List<String> lore3 = new ArrayList<>();
-            lore3.add("");
-            itemMeta.setLore(lore3);
+            lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Claim your earnings from selling items on bazaar.");
+            lore.add("");
+            lore.add("Your items on sale are stored here for safety.");
+            itemMeta.setLore(lore);
             bazaar.setItemMeta(itemMeta);
             setItem(22, bazaar, MerchantPageType.BAZAAR_STORAGE);
 
             ItemStack premium = new ItemStack(Material.ENDER_CHEST);
             itemMeta.setDisplayName("Premium Storage");
-            List<String> lore4 = new ArrayList<>();
-            lore4.add("");
-            itemMeta.setLore(lore4);
+            lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Claim items purchased from web store.");
+            itemMeta.setLore(lore);
             premium.setItemMeta(itemMeta);
             setItem(24, premium, MerchantPageType.PREMIUM_STORAGE);
         } else if (merchantType.equals(MerchantType.MAGIC_SHOP)) {
@@ -132,6 +147,7 @@ public class MerchantMenu extends GuiGeneric {
             itemMeta.setDisplayName("Potions");
             List<String> lore = new ArrayList<>();
             lore.add("");
+            lore.add("Buy potions");
             itemMeta.setLore(lore);
             weapons.setItemMeta(itemMeta);
             setItem(18, weapons, MerchantPageType.POTIONS);
@@ -147,18 +163,20 @@ public class MerchantMenu extends GuiGeneric {
         } else if (merchantType.equals(MerchantType.TOOL_SHOP)) {
             ItemStack weapons = new ItemStack(Material.NETHERITE_PICKAXE);
             ItemMeta itemMeta = weapons.getItemMeta();
-            itemMeta.setDisplayName("Tools");
+            itemMeta.setDisplayName("Gathering Tools");
             List<String> lore = new ArrayList<>();
             lore.add("");
+            lore.add("Buy gathering tools");
             itemMeta.setLore(lore);
             weapons.setItemMeta(itemMeta);
             setItem(18, weapons, MerchantPageType.TOOL);
 
             ItemStack armors = new ItemStack(Material.DARK_OAK_BOAT);
             itemMeta.setDisplayName("Utility");
-            List<String> lore2 = new ArrayList<>();
-            lore2.add("");
-            itemMeta.setLore(lore2);
+            lore = new ArrayList<>();
+            lore.add("");
+            lore.add("Buy utility items");
+            itemMeta.setLore(lore);
             armors.setItemMeta(itemMeta);
             setItem(20, armors, MerchantPageType.UTILITY);
         }

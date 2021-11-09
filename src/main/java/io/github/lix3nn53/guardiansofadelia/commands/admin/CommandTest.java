@@ -74,9 +74,9 @@ public class CommandTest implements CommandExecutor {
                 damages.add(1d);
                 DamageMechanic damageMechanic = new DamageMechanic(false, damages, null, ElementType.FIRE, null);
 
-                FlagCondition flagCondition = new FlagCondition("trapKey", false, false);
+                FlagCondition flagCondition = new FlagCondition("trapKey", false, false, false);
                 SelfTarget selfTargetForFlag = new SelfTarget();
-                FlagCondition flagConditionForFlag = new FlagCondition("trapKey", false, false);
+                FlagCondition flagConditionForFlag = new FlagCondition("trapKey", false, false, false);
 
                 List<Integer> ticks = new ArrayList<>();
                 ticks.add(40);

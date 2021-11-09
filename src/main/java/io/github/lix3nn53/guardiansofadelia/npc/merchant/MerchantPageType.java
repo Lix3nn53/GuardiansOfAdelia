@@ -385,8 +385,6 @@ public enum MerchantPageType {
 
         ItemStack boat = OtherItems.getBoat();
         line1.addWord(boat, 1);
-        ItemStack food = OtherItems.getPetFood(shopLevel);
-        line1.addWord(food, 1);
 
         GuiPage guiPage = new GuiPage();
         guiPage.addLine(line1);

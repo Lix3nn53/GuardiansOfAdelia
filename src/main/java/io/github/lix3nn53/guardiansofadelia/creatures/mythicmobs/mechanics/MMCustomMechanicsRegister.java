@@ -29,6 +29,8 @@ public class MMCustomMechanicsRegister implements Listener {
             event.register(new MMMechanicDisguise(event.getConfig()));
         } else if (event.getMechanicName().equalsIgnoreCase("GoaProjectile")) {
             event.register(new MMMechanicProjectile(event.getConfig()));
+        } else if (event.getMechanicName().equalsIgnoreCase("GoaTargetPlayer")) {
+            event.register(new MMMechanicTargetPlayer(event.getConfig()));
         }
     }
 }
