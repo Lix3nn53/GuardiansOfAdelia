@@ -10,8 +10,8 @@ public class StatPassive implements Stat {
     private final HashMap<AttributeType, Integer> attributeTypeToValue;
     private final HashMap<ElementType, Integer> elementTypeToValue;
 
-    private final List<Double> unsatisfiedRanksAttributes = new LinkedList<>(Arrays.asList(0.2, 0.4, 0.6, 0.8, 1.0));
-    private final List<Double> unsatisfiedRanksElements = new LinkedList<>(Arrays.asList(0.2, 0.4, 0.6, 0.8, 1.0));
+    private final List<Float> unsatisfiedRanksAttributes = new LinkedList<>(Arrays.asList(0.2f, 0.4f, 0.6f, 0.8f, 1.0f));
+    private final List<Float> unsatisfiedRanksElements = new LinkedList<>(Arrays.asList(0.2f, 0.4f, 0.6f, 0.8f, 1.0f));
 
     public StatPassive(HashMap<AttributeType, Integer> attributeTypeToValue, HashMap<ElementType, Integer> elementTypeToValue) {
         this.attributeTypeToValue = attributeTypeToValue;
@@ -127,7 +127,7 @@ public class StatPassive implements Stat {
         }
 
         int random;
-        double percent;
+        float percent;
         ElementType statToSatisfyElement = null;
         AttributeType statToSatisfyAttribute = null;
         if (isElement) {
@@ -149,7 +149,7 @@ public class StatPassive implements Stat {
         int gap = maxValue - minValue;
         // if (isElement) System.out.println("percent: " + percent);
 
-        double unitPercent = 0.2;
+        float unitPercent = 0.2f;
 
         int lowerLimit = (int) (gap * (percent - unitPercent) + 0.5);
         int upperLimit = (int) ((gap * (percent)) + 0.5);

@@ -43,31 +43,31 @@ public enum ArmorGearType {
         return "";
     }
 
-    public double getHealthReduction() {
+    public float getHealthReduction() {
         switch (this) {
             case HEAVY_ARMOR:
                 return 1;
             case PLATE_ARMOR:
-                return 0.85;
+                return 0.85f;
             case LIGHT_ARMOR:
             case FEATHER_ARMOR:
             case CLOTH_ARMOR:
-                return 0.7;
+                return 0.7f;
         }
 
         return 0;
     }
 
-    public double getElementDefenseReduction() {
+    public float getElementDefenseReduction() {
         switch (this) {
             case HEAVY_ARMOR:
                 return 1;
             case PLATE_ARMOR:
-                return 0.85;
+                return 0.85f;
             case LIGHT_ARMOR:
             case FEATHER_ARMOR:
             case CLOTH_ARMOR:
-                return 0.7;
+                return 0.7f;
         }
 
         return 0;

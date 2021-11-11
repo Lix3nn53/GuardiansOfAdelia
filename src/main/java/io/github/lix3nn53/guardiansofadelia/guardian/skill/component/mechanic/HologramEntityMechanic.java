@@ -26,10 +26,10 @@ public class HologramEntityMechanic extends MechanicComponent {
     private final String DISPLAY_TEXT;
     private final boolean GRAVITY;
     private final boolean SAVE;
-    private final double speed;
-    private final double right;
-    private final double upward;
-    private final double forward;
+    private final float speed;
+    private final float right;
+    private final float upward;
+    private final float forward;
 
     public HologramEntityMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -68,22 +68,22 @@ public class HologramEntityMechanic extends MechanicComponent {
         }
 
         if (configurationSection.contains("speed")) {
-            this.speed = configurationSection.getDouble("speed");
+            this.speed = (float) configurationSection.getDouble("speed");
         } else {
             this.speed = 0;
         }
         if (configurationSection.contains("right")) {
-            this.right = configurationSection.getDouble("right");
+            this.right = (float) configurationSection.getDouble("right");
         } else {
             this.right = 0;
         }
         if (configurationSection.contains("upward")) {
-            this.upward = configurationSection.getDouble("upward");
+            this.upward = (float) configurationSection.getDouble("upward");
         } else {
             this.upward = 0;
         }
         if (configurationSection.contains("forward")) {
-            this.forward = configurationSection.getDouble("forward");
+            this.forward = (float) configurationSection.getDouble("forward");
         } else {
             this.forward = 0;
         }
@@ -111,7 +111,7 @@ public class HologramEntityMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             Location baseLocation = target.getLocation().clone();
-            GuardiansOfAdelia.getInstance().getLogger().info("baseLocation: " + baseLocation.toString());
+            GuardiansOfAdelia.getInstance().getLogger().info("baseLocation: " + baseLocation);
 
             Vector looking = baseLocation.getDirection().setY(0).normalize();
             Vector normal = looking.clone().crossProduct(UP);
@@ -119,7 +119,7 @@ public class HologramEntityMechanic extends MechanicComponent {
             looking.multiply(forward).add(normal.multiply(right));
             baseLocation.add(looking).add(0, upward + 0.5, 0);
 
-            GuardiansOfAdelia.getInstance().getLogger().info("next baseLocation: " + baseLocation.toString());
+            GuardiansOfAdelia.getInstance().getLogger().info("next baseLocation: " + baseLocation);
             LivingEntity model = (LivingEntity) baseLocation.getWorld().spawnEntity(baseLocation, entityType);
             model.setAI(false);
             model.setInvulnerable(true);

@@ -14,7 +14,7 @@ public class ArrangementFillCircle extends ArrangementWithData {
     private final int amount;
     private final Direction direction;
 
-    public ArrangementFillCircle(Particle particle, double radius, int amount, Particle.DustOptions dustOptions, Direction direction, double minHeight, double maxHeight, double gap) {
+    public ArrangementFillCircle(Particle particle, float radius, int amount, Particle.DustOptions dustOptions, Direction direction, float minHeight, float maxHeight, float gap) {
         super(particle, dustOptions, minHeight, maxHeight, gap);
         this.amount = amount;
         this.direction = direction;
@@ -37,7 +37,7 @@ public class ArrangementFillCircle extends ArrangementWithData {
         this.direction = Direction.valueOf(configurationSection.getString("direction"));
 
         // Data that animations can modify
-        addData(configurationSection.getDouble("radius"));
+        addData((float) configurationSection.getDouble("radius"));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ArrangementFillCircle extends ArrangementWithData {
         if (offset != null) {
             location1.add(offset);
         }
-        double radius = getData(0);
+        float radius = getData(0);
         ParticleShapes.fillCircle(location1, particle, radius, amount, dustOptions, direction);
     }
 
@@ -56,7 +56,7 @@ public class ArrangementFillCircle extends ArrangementWithData {
         if (offset != null) {
             location1.add(offset);
         }
-        double radius = getData(0);
+        float radius = getData(0);
         ParticleShapes.fillCircle(location1, particle, radius, amount, dustOptions, direction);
     }
 }

@@ -23,13 +23,13 @@ public class Ingredient {
     private final int customModelData;
     private final Color potionColor;
     private final int maxAmountPerGather;
-    private final double dropRate;
+    private final float dropRate;
     private final boolean enchant;
 
     private final List<String> lore;
 
     public Ingredient(int key, Material material, String name, int ingredientLevel, List<String> jobsCanUse, List<String> extraText,
-                      int customModelData, Color potionColor, int maxAmountPerGather, double dropRate, boolean enchant) {
+                      int customModelData, Color potionColor, int maxAmountPerGather, float dropRate, boolean enchant) {
         this.key = key;
         this.material = material;
         this.name = name;
@@ -87,9 +87,9 @@ public class Ingredient {
      * @return amount dropped
      */
     public int gather(boolean isDungeon) {
-        double dropRateFinal = isDungeon ? dropRate * 1.2 : dropRate;
+        float dropRateFinal = isDungeon ? dropRate * 1.2f : dropRate;
         if (dropRateFinal < 1) {
-            double dropRandom = Math.random();
+            float dropRandom = (float) Math.random();
 
             if (dropRandom <= dropRateFinal) {
                 Random random = new Random();

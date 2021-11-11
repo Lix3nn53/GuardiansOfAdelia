@@ -34,14 +34,14 @@ public enum ItemTier {
         return color;
     }
 
-    public double getBonusMultiplier() {
-        double percent = 1;
+    public float getBonusMultiplier() {
+        float percent = 1;
         if (this == ItemTier.RARE) {
-            percent = 1.2;
+            percent = 1.2f;
         } else if (this == ItemTier.MYSTIC) {
-            percent = 1.4;
+            percent = 1.4f;
         } else if (this == ItemTier.LEGENDARY) {
-            percent = 1.8;
+            percent = 1.8f;
         }
         return percent;
     }

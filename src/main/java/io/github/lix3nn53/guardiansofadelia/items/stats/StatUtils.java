@@ -23,12 +23,12 @@ import java.util.List;
 public class StatUtils {
 
     // Values to use while generating items
-    private static final double ITEM_HEALTH = 5;
-    private static final double ITEM_DEFENSE = 5;
-    private static final double ITEM_DAMAGE = 2;
+    private static final float ITEM_HEALTH = 5;
+    private static final float ITEM_DEFENSE = 5;
+    private static final float ITEM_DAMAGE = 2;
 
     // Formula
-    private static final double HALF_REDUCTION_DEFENSE = 2000.0;
+    private static final float HALF_REDUCTION_DEFENSE = 2000f;
 
     public static Stat getStat(ItemStack item) {
         Material mat = item.getType();
@@ -211,7 +211,7 @@ public class StatUtils {
         return true;
     }
 
-    public static double getDefenseReduction(double totalDefense) {
+    public static float getDefenseReduction(float totalDefense) {
         return (1 - (totalDefense / (totalDefense + HALF_REDUCTION_DEFENSE))); //damage reduction formula, if totalDefense equals second paramater reduction is %50
     }
 

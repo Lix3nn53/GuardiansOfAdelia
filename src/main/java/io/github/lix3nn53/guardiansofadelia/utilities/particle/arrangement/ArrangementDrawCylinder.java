@@ -11,9 +11,9 @@ import javax.annotation.Nullable;
 public class ArrangementDrawCylinder extends ArrangementWithData {
 
     private final int amount;
-    private final double height;
+    private final float height;
 
-    public ArrangementDrawCylinder(Particle particle, Particle.DustOptions dustOptions, double minHeight, double maxHeight, double gap, int amount, double height) {
+    public ArrangementDrawCylinder(Particle particle, Particle.DustOptions dustOptions, float minHeight, float maxHeight, float gap, int amount, float height) {
         super(particle, dustOptions, minHeight, maxHeight, gap);
         this.amount = amount;
         this.height = height;
@@ -27,15 +27,15 @@ public class ArrangementDrawCylinder extends ArrangementWithData {
         }
 
         this.amount = configurationSection.getInt("amount");
-        this.height = configurationSection.contains("height") ? configurationSection.getDouble("height") : 0;
+        this.height = configurationSection.contains("height") ? (float) configurationSection.getDouble("height") : 0;
 
         // Data that animations can modify
-        addData(configurationSection.getDouble("radius"));
+        addData((float) configurationSection.getDouble("radius"));
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset) {
-        double radius = getData(0);
+        float radius = getData(0);
 
         ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
 
@@ -44,7 +44,7 @@ public class ArrangementDrawCylinder extends ArrangementWithData {
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
-        double radius = getData(0);
+        float radius = getData(0);
 
         ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
 

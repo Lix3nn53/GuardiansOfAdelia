@@ -41,8 +41,8 @@ public class GatheringModelState {
         Material material = gatheringModelData.getMaterial();
         String title = gatheringModelData.getTitle();
 
-        double x = Math.toRadians(baseLocation.getPitch());
-        double y = Math.toRadians(baseLocation.getYaw());
+        float x = (float) Math.toRadians(baseLocation.getPitch());
+        float y = (float) Math.toRadians(baseLocation.getYaw());
         EulerAngle eulerAngle = new EulerAngle(x, y, 0);
 
         Location clone = baseLocation.clone();

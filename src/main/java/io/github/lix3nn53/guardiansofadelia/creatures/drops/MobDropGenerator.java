@@ -26,11 +26,11 @@ public class MobDropGenerator {
     public static List<ItemStack> getDrops(int entityLevel, boolean isDungeon) {
         List<ItemStack> drops = new ArrayList<>();
 
-        double random = Math.random();
+        float random = (float) Math.random();
         float dropRate = DROP_RATE;
 
         if (BoostPremiumManager.isBoostActive(BoostPremium.LOOT)) {
-            dropRate = (float) BoostPremium.LOOT.applyTo(dropRate);
+            dropRate = BoostPremium.LOOT.applyTo(dropRate);
         }
 
         if (isDungeon) {
@@ -41,9 +41,9 @@ public class MobDropGenerator {
             GearLevel gearLevel = GearLevel.getGearLevel(entityLevel);
 
             //Tier
-            double mysticTierChange = 0.05;
-            double rareTierChange = mysticTierChange + 0.4;
-            double tierRandom = Math.random(); //Common or rare?
+            float mysticTierChange = 0.05f;
+            float rareTierChange = mysticTierChange + 0.4f;
+            float tierRandom = (float) Math.random(); //Common or rare?
 
             ItemTier tier = ItemTier.COMMON;
 
@@ -70,10 +70,10 @@ public class MobDropGenerator {
 
                 drops.add(droppedItem);
             } else if (dropType == 1) {
-                double shieldChange = 0.2;
-                double armorOrShieldRandom = Math.random(); // armor or shield?
+                float shieldChance = 0.2f;
+                float armorOrShieldRandom = (float) Math.random(); // armor or shield?
 
-                if (armorOrShieldRandom < shieldChange) { // shield
+                if (armorOrShieldRandom < shieldChance) { // shield
                     ShieldGearType[] values = ShieldGearType.values();
                     int gearRandom = rand.nextInt(values.length);
 

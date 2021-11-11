@@ -151,8 +151,8 @@ public class Attribute {
         }
     }
 
-    public double getIncrement(int playerLevel, String playerClass) {
-        double bonusFromLevel = getBonusFromLevel(playerLevel, playerClass) * attributeType.getBonusFromLevelReduction();
+    public float getIncrement(int playerLevel, String playerClass) {
+        float bonusFromLevel = getBonusFromLevel(playerLevel, playerClass) * attributeType.getBonusFromLevelReduction();
 
         return (invested + getBonusFromEquipment() + bonusFromLevel) * attributeType.getIncrementPerPoint();
     }
@@ -177,15 +177,15 @@ public class Attribute {
             switch (attributeType) {
                 case EARTH:
                     player.sendMessage("Bonus earth fix health");
-                    double increment = attributeType.getIncrement();
-                    double v = increment * bonusPointDifference;
+                    float increment = attributeType.getIncrement();
+                    float v = increment * bonusPointDifference;
 
-                    double currentHealth = player.getHealth();
-                    double maxHealth = player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue();
+                    float currentHealth = player.getHealth();
+                    float maxHealth = player.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue();
 
                     if (currentHealth == maxHealth) break;
 
-                    double nextHealth = currentHealth + v;
+                    float nextHealth = currentHealth + v;
 
                     if (nextHealth > maxHealth) {
                         nextHealth = maxHealth;
@@ -200,11 +200,11 @@ public class Attribute {
 
                     int currentMana = rpgCharacterStats.getCurrentMana();
 
-                    double maxMana = rpgCharacterStats.getTotalMaxMana();
+                    float maxMana = rpgCharacterStats.getTotalMaxMana();
 
                     if (currentMana == maxMana) break;
 
-                    double nextMana = currentMana + v;
+                    float nextMana = currentMana + v;
 
                     if (nextMana > maxMana) {
                         nextMana = maxMana;

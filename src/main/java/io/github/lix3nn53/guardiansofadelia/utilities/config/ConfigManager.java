@@ -108,9 +108,9 @@ public class ConfigManager {
             if (worldString == null) continue;
 
             World world = Bukkit.getWorld(worldString);
-            double x = hologramsConfig.getDouble("Hologram" + i + ".x");
-            double y = hologramsConfig.getDouble("Hologram" + i + ".y");
-            double z = hologramsConfig.getDouble("Hologram" + i + ".z");
+            float x = (float) hologramsConfig.getDouble("Hologram" + i + ".x");
+            float y = (float) hologramsConfig.getDouble("Hologram" + i + ".y");
+            float z = (float) hologramsConfig.getDouble("Hologram" + i + ".z");
             Location location = new Location(world, x, y, z);
 
             List<String> texts = hologramsConfig.getStringList("Hologram" + i + ".texts");
@@ -131,9 +131,9 @@ public class ConfigManager {
         List<Location> locationList = new ArrayList<>();
         for (int i = 1; i < 9; i++) {
             String worldName = characterSelectionConfig.getString("characterSelectionHologram" + i + ".world");
-            double x = characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".x");
-            double y = characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".y");
-            double z = characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".z");
+            float x = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".x");
+            float y = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".y");
+            float z = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".z");
             float yaw = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".yaw");
             float pitch = (float) characterSelectionConfig.getDouble("characterSelectionHologram" + i + ".pitch");
             Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
@@ -143,18 +143,18 @@ public class ConfigManager {
         CharacterSelectionScreenManager.setArmorStandLocationBases(locationList);
 
         String worldNameCenter = characterSelectionConfig.getString("characterSelection" + "Center" + ".world");
-        double xCenter = characterSelectionConfig.getDouble("characterSelection" + "Center" + ".x");
-        double yCenter = characterSelectionConfig.getDouble("characterSelection" + "Center" + ".y");
-        double zCenter = characterSelectionConfig.getDouble("characterSelection" + "Center" + ".z");
+        float xCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".x");
+        float yCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".y");
+        float zCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".z");
         float yawCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".yaw");
         float pitchCenter = (float) characterSelectionConfig.getDouble("characterSelection" + "Center" + ".pitch");
         Location locationCenter = new Location(Bukkit.getWorld(worldNameCenter), xCenter, yCenter, zCenter, yawCenter, pitchCenter);
         CharacterSelectionScreenManager.setCharacterSelectionCenter(locationCenter);
 
         String worldNameTuto = characterSelectionConfig.getString("tutorialStart" + ".world");
-        double xTuto = characterSelectionConfig.getDouble("tutorialStart" + ".x");
-        double yTuto = characterSelectionConfig.getDouble("tutorialStart" + ".y");
-        double zTuto = characterSelectionConfig.getDouble("tutorialStart" + ".z");
+        float xTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".x");
+        float yTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".y");
+        float zTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".z");
         float yawTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".yaw");
         float pitchTuto = (float) characterSelectionConfig.getDouble("tutorialStart" + ".pitch");
         Location locationTuto = new Location(Bukkit.getWorld(worldNameTuto), xTuto, yTuto, zTuto, yawTuto, pitchTuto);
@@ -203,9 +203,9 @@ public class ConfigManager {
             String townName = townsConfig.getString("town" + i + ".name");
             int level = townsConfig.getInt("town" + i + ".level");
             String worldName = townsConfig.getString("town" + i + ".world");
-            double x = townsConfig.getDouble("town" + i + ".x");
-            double y = townsConfig.getDouble("town" + i + ".y");
-            double z = townsConfig.getDouble("town" + i + ".z");
+            float x = (float) townsConfig.getDouble("town" + i + ".x");
+            float y = (float) townsConfig.getDouble("town" + i + ".y");
+            float z = (float) townsConfig.getDouble("town" + i + ".z");
             float yaw = (float) townsConfig.getDouble("town" + i + ".yaw");
             float pitch = (float) townsConfig.getDouble("town" + i + ".pitch");
             Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);

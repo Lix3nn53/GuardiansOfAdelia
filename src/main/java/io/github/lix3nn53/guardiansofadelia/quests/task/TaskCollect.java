@@ -15,14 +15,14 @@ public final class TaskCollect implements Task {
     public final static Material DROP_MATERIAL = Material.PINK_DYE;
 
     private final List<String> keyOfMobsItemDropsFrom;
-    private final double chance;
+    private final float chance;
     private final int amountNeeded;
     private final boolean removeOnTurnIn;
     private final ItemStack itemStack;
     private List<Action> onCompleteActions = new ArrayList<>();
     private int progress;
 
-    public TaskCollect(final List<String> keyOfMobsItemDropsFrom, final double chance, final ItemStack itemStack, final int amountNeeded, boolean removeOnTurnIn) {
+    public TaskCollect(final List<String> keyOfMobsItemDropsFrom, final float chance, final ItemStack itemStack, final int amountNeeded, boolean removeOnTurnIn) {
         this.keyOfMobsItemDropsFrom = keyOfMobsItemDropsFrom;
         this.chance = chance;
         this.itemStack = itemStack.clone();
@@ -149,7 +149,7 @@ public final class TaskCollect implements Task {
         return keyOfMobsItemDropsFrom;
     }
 
-    public double getChance() {
+    public float getChance() {
         return chance;
     }
 

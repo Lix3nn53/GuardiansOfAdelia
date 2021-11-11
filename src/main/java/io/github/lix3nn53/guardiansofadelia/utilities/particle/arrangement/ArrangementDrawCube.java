@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 public class ArrangementDrawCube extends ArrangementWithData {
 
-    private final double gap;
+    private final float gap;
 
     public ArrangementDrawCube(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -18,12 +18,12 @@ public class ArrangementDrawCube extends ArrangementWithData {
             configLoadError("gap");
         }
 
-        this.gap = configurationSection.getDouble("gap");
+        this.gap = (float) configurationSection.getDouble("gap");
 
         // Data that animations can modify
-        addData(configurationSection.getDouble("length_x"));
-        addData(configurationSection.getDouble("length_y"));
-        addData(configurationSection.getDouble("length_z"));
+        addData((float) configurationSection.getDouble("length_x"));
+        addData((float) configurationSection.getDouble("length_y"));
+        addData((float) configurationSection.getDouble("length_z"));
     }
 
     @Override

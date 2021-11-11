@@ -84,6 +84,12 @@ public class DatabaseManager {
             try {
                 GuardianData guardianData = DatabaseQueries.getGuardianData(uuid);
 
+                if (guardianData.getLanguage() == null) {
+                    player.sendMessage(ChatPalette.YELLOW + "Changing to client language...");
+                    String locale = player.getLocale();
+                    guardianData.setLanguage(player, locale);
+                }
+
                 List<Player> friendsOfPlayer = DatabaseQueries.getFriendsOfPlayer(uuid);
                 guardianData.setFriends(friendsOfPlayer);
 
@@ -204,8 +210,9 @@ public class DatabaseManager {
         ItemStack[] personalStorage = guardianData.getPersonalStorage();
         ItemStack[] bazaarStorage = guardianData.getBazaarStorage();
         ItemStack[] premiumStorage = guardianData.getPremiumStorage();
+        String language = guardianData.getLanguage();
         try {
-            DatabaseQueries.setGuardianData(uuid, lastPrizeDate, staffRank, premiumRank, personalStorage, bazaarStorage, premiumStorage);
+            DatabaseQueries.setGuardianData(uuid, lastPrizeDate, staffRank, premiumRank, personalStorage, bazaarStorage, premiumStorage, language);
         } catch (SQLException e) {
             e.printStackTrace();
         }

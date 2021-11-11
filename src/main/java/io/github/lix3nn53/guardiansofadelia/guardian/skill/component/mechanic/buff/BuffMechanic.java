@@ -19,12 +19,12 @@ import java.util.List;
 public class BuffMechanic extends MechanicComponent {
 
     private final BuffType buffType;
-    private final List<Double> multiplier;
+    private final List<Float> multiplier;
     private final List<Integer> ticks;
 
     private final String multiplyDurationValue;
 
-    public BuffMechanic(BuffType buffType, List<Double> multiplier, List<Integer> ticks, String multiplyDurationValue) {
+    public BuffMechanic(BuffType buffType, List<Float> multiplier, List<Integer> ticks, String multiplyDurationValue) {
         super(false);
 
         this.buffType = buffType;
@@ -49,7 +49,7 @@ public class BuffMechanic extends MechanicComponent {
         }
 
         this.buffType = BuffType.valueOf(configurationSection.getString("buffType"));
-        this.multiplier = configurationSection.getDoubleList("multipliers");
+        this.multiplier = configurationSection.getFloatList("multipliers");
         this.ticks = configurationSection.contains("ticks") ? configurationSection.getIntegerList("ticks") : new ArrayList<>();
         this.multiplyDurationValue = configurationSection.contains("multiplyDurationValue") ? configurationSection.getString("multiplyDurationValue") : null;
     }
@@ -58,7 +58,7 @@ public class BuffMechanic extends MechanicComponent {
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
-        double multiplierToUse = multiplier.get(skillLevel - 1);
+        float multiplierToUse = multiplier.get(skillLevel - 1);
 
         // add +2 ticks to duration because of repeating buffs icons disappear otherwise. Amplifier 0 anyways
         // if ticks is empty duration is forever

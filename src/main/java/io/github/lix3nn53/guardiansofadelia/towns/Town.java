@@ -14,8 +14,8 @@ public class Town {
         this.level = level;
     }
 
-    public double getDistanceSquared(Location location) {
-        return this.location.distanceSquared(location);
+    public float getDistanceSquared(Location location) {
+        return (float) this.location.distanceSquared(location);
     }
 
     public Location getLocation() {

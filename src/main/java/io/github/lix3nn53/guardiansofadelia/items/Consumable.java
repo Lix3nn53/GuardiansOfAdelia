@@ -28,8 +28,8 @@ public enum Consumable {
     POTION_INSTANT_HYBRID,
     POTION_REGENERATION_HEALTH;
 
-    private final double HYBRID_NERF = 0.8;
-    private final double REGEN_NERF = 0.05;
+    private final float HYBRID_NERF = 0.8f;
+    private final float REGEN_NERF = 0.05f;
 
     public void consume(Player player, int skillLevel, ItemStack itemStack) {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
@@ -65,7 +65,7 @@ public enum Consumable {
     }
 
     public SkillComponent getTrigger() {
-        List<Double> multipliers = new ArrayList<>(); //buff multipliers
+        List<Float> multipliers = new ArrayList<>(); //buff multipliers
         multipliers.add(getBuffMultiplier(1));
         multipliers.add(getBuffMultiplier(2));
         multipliers.add(getBuffMultiplier(3));
@@ -386,29 +386,29 @@ public enum Consumable {
         return 80;
     }
 
-    public double getBuffMultiplier(int level) {
+    public float getBuffMultiplier(int level) {
         switch (level) {
             case 1:
-                return 0.08;
+                return 0.08f;
             case 2:
-                return 0.1;
+                return 0.1f;
             case 3:
-                return 0.12;
+                return 0.12f;
             case 4:
-                return 0.14;
+                return 0.14f;
             case 5:
-                return 0.16;
+                return 0.16f;
             case 6:
-                return 0.18;
+                return 0.18f;
             case 7:
-                return 0.2;
+                return 0.2f;
             case 8:
-                return 0.22;
+                return 0.22f;
             case 9:
-                return 0.22;
+                return 0.22f;
             case 10:
-                return 0.24;
+                return 0.24f;
         }
-        return 0.08;
+        return 0.08f;
     }
 }

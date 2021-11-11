@@ -37,7 +37,7 @@ public class LootChestManager {
             List<LootChest> lootChests = chunkKeyToLootChests.get(chunkKey);
 
             for (LootChest lootChest : lootChests) {
-                double v = lootChest.getLocation().distanceSquared(location);
+                float v = (float) lootChest.getLocation().distanceSquared(location);
                 if (v < 4) {
                     return lootChest;
                 }

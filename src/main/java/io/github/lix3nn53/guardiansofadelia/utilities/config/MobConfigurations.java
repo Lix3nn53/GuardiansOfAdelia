@@ -39,7 +39,7 @@ public class MobConfigurations {
 
             for (ElementType type : ElementType.values()) {
                 if (resistances.contains(type.name())) {
-                    double resistance = resistances.getDouble(type.name());
+                    float resistance = (float) resistances.getDouble(type.name());
 
                     MMManager.addElementResistance(key, type, resistance);
                 }

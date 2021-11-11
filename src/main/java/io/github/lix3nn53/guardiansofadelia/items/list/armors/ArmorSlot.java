@@ -61,13 +61,13 @@ public enum ArmorSlot {
         return inventory.getHelmet();
     }
 
-    public double getAttributeReduction() {
+    public float getAttributeReduction() {
         switch (this) {
             case HELMET:
             case BOOTS:
-                return 0.4;
+                return 0.4f;
             case LEGGINGS:
-                return 0.7;
+                return 0.7f;
         }
 
         return 1;

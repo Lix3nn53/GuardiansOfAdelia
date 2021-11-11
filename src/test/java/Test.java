@@ -13,14 +13,14 @@ public class Test {
         }
 
         int size = monsterPool.size();
-        double darknessPercent = darkness / 100d;
+        float darknessPercent = darkness / 100f;
 
         int totalWeight = 0;
         List<Integer> weights = new ArrayList<>();
         for (int i = 1; i <= size; i++) { // start from 1 so first index has a percent and last one is 100
-            double indexPercent = i / (double) size;
-            double diff = Math.abs(indexPercent - darknessPercent);
-            double diffReverse = 1 - diff;
+            float indexPercent = i / (float) size;
+            float diff = Math.abs(indexPercent - darknessPercent);
+            float diffReverse = 1 - diff;
 
             int weight = (int) (10 * diffReverse * diffReverse * diffReverse + 0.5); // to make differences between indexes larger
             System.out.println("weight " + i + ": " + weight);
@@ -29,7 +29,7 @@ public class Test {
         }
         System.out.println("totalWeight: " + totalWeight);
 
-        double randomWeight = Math.random() * totalWeight;
+        float randomWeight = (float) Math.random() * totalWeight;
         System.out.println("randomWeight: " + randomWeight);
 
         int weightCounter = 0;
@@ -88,7 +88,7 @@ public class Test {
         }*/
 
         /*int reqLevel = 4;
-        double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
+        float price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
 
         ItemTier itemTier = ItemTier.COMMON;
         price = price * itemTier.getBonusMultiplier();
@@ -116,7 +116,7 @@ public class Test {
 
             //Share
             if (shareCount > 1) {
-                double expMultiplier = 1 - (0.1 * shareCount);
+                float expMultiplier = 1 - (0.1 * shareCount);
 
                 exp = (int) (exp * expMultiplier + 0.5);
             }
@@ -131,7 +131,7 @@ public class Test {
             currentMana = totalMaxMana;
         }
 
-        double ratio = (double) currentMana / totalMaxMana;
+        float ratio = (float) currentMana / totalMaxMana;
         int foodLevel = (int) (19 * ratio + 0.5);
 
         if (currentMana > 0) {
@@ -149,9 +149,9 @@ public class Test {
 
         Vector[] cubeCorners = new Vector[8];
 
-        double length_x = vector.getX() / 2.0;
-        double length_y = vector.getY() / 2.0;
-        double length_z = vector.getZ() / 2.0;
+        float length_x = vector.getX() / 2.0;
+        float length_y = vector.getY() / 2.0;
+        float length_z = vector.getZ() / 2.0;
 
         Vector centerVector = new Vector(0, 0, 0);
         System.out.println("CUBE DRAW: " + vector.getX() + ", " + vector.getY() + ", " + vector.getZ());
@@ -188,15 +188,15 @@ public class Test {
         System.out.println("t3: " + t3);
 
         Vector yLocal = t1.clone().subtract(b1);
-        double yLength = yLocal.length(); // size1 = np.linalg.norm(dir1)
+        float yLength = yLocal.length(); // size1 = np.linalg.norm(dir1)
         yLocal = yLocal.normalize(); // dir1 = dir1.divide(new Vector(size1, size1, size1));
 
         Vector xLocal = b2.clone().subtract(b1);
-        double xLength = xLocal.length();
+        float xLength = xLocal.length();
         xLocal = xLocal.normalize();
 
         Vector zLocal = b4.clone().subtract(b1);
-        double zLength = zLocal.length();
+        float zLength = zLocal.length();
         zLocal = zLocal.normalize();
 
         // cube3d_center = (b1 + t3)/2.0
@@ -228,9 +228,9 @@ public class Test {
         for (Vector target : points) {
             Vector v = target.clone().subtract(center); // direction vector from cube center to the target point
 
-            double py = Math.abs(v.dot(yLocal)) * 2;
-            double px = Math.abs(v.dot(xLocal)) * 2;
-            double pz = Math.abs(v.dot(zLocal)) * 2;
+            float py = Math.abs(v.dot(yLocal)) * 2;
+            float px = Math.abs(v.dot(xLocal)) * 2;
+            float pz = Math.abs(v.dot(zLocal)) * 2;
 
             if (px <= xLength && py <= yLength && pz <= zLength) {
                 result.add(target);
@@ -290,30 +290,30 @@ public class Test {
                 totalArmor += armorSet.getDefense(armorSlot, ArmorGearType.FEATHER_ARMOR);
             }
             System.out.println("armorSet health: " + totalHp);
-            double defenseReduction = StatUtils.getDefenseReduction(totalArmor);
+            float defenseReduction = StatUtils.getDefenseReduction(totalArmor);
             System.out.println("armorSet defense: " + totalArmor + " - " + "(" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
             ShieldSet shieldSet = new ShieldSet("requiredLevel" + requiredLevel, requiredLevel, 0);
             System.out.println("shieldSet health: " + shieldSet.getHealth(ShieldGearType.SHIELD));
         }*/
 
-        /*double angle = 30;
+        /*float angle = 30;
 
-        double[][] rotationY = MatrixHelper.rotationY(angle);
+        float[][] rotationY = MatrixHelper.rotationY(angle);
 
         System.out.println("rotationY: " + Arrays.deepToString(rotationY));
 
-        double[][] location = new double[][]{new double[]{5}, new double[]{5}, new double[]{5}};
+        float[][] location = new float[][]{new float[]{5}, new float[]{5}, new float[]{5}};
 
         System.out.println("location: " + Arrays.deepToString(location));
 
-        double[][] result = MatrixHelper.multiplyMatrices(rotationY, location);
+        float[][] result = MatrixHelper.multiplyMatrices(rotationY, location);
 
         System.out.println("result: " + Arrays.deepToString(result));
         System.out.println("result x: " + result[0][0]);
         System.out.println("result y: " + result[1][0]);
         System.out.println("result z: " + result[2][0]);
 
-        double[][] translation = MatrixHelper.translate(result[0][0], result[1][0], result[2][0], new Vector(0, 10, 0));
+        float[][] translation = MatrixHelper.translate(result[0][0], result[1][0], result[2][0], new Vector(0, 10, 0));
 
 
         System.out.println("translation: " + Arrays.deepToString(translation));*/
@@ -368,7 +368,7 @@ public class Test {
                 //Share
                 int shareCount = 1;
                 if (shareCount > 1) {
-                    double expMultiplier = 1 - (0.1 * shareCount);
+                    float expMultiplier = 1 - (0.1 * shareCount);
 
                     exp = (int) (exp * expMultiplier + 0.5);
                 }
@@ -420,7 +420,7 @@ public class Test {
         System.out.println(currentName);
         String stripColor = ChatColor.stripColor(currentName);
         System.out.println(stripColor);*/
-        /*List<Double> downRatesForLevel = new ArrayList<>();
+        /*List<Float> downRatesForLevel = new ArrayList<>();
         downRatesForLevel.add(0.75);
         downRatesForLevel.add(0.6);
         downRatesForLevel.add(0.45);
@@ -432,12 +432,12 @@ public class Test {
         downRatesForLevel.add(0.01);
 
         int value = 640;
-        for (double rate : downRatesForLevel) {
+        for (float rate : downRatesForLevel) {
             System.out.println(value * rate);
         }*/
     }
 
-    private static double expFormula(int level) {
+    private static float expFormula(int level) {
         return 10 + Math.round(5 * Math.pow(level, 3) / 4);
     }
 
@@ -458,7 +458,7 @@ public class Test {
         int armor = 4000;
 
         //dmg reduction formula
-        double reduction = ( 1 - ( armor / (armor + 3000.0) ) );
+        float reduction = (1 - (armor / (armor + 3000f)));
 
         System.out.println(reduction);
 
@@ -468,7 +468,7 @@ public class Test {
 
         int count = 1;
         for (int i = 1; i <= 210; i+=20) {
-            double pow = Math.pow(i, 1.0/2.0) / 2.5 * Math.pow(i, 2);
+            float pow = (float) (Math.pow(i, 1f / 2f) / 2.5f * Math.pow(i, 2f));
             int result = (int) (pow + 0.5);
             System.out.println(count + ": " + result);
             count++;
@@ -497,28 +497,28 @@ public class Test {
         monstersToKill.add(900);
 
         for (int lvl = 0; lvl <=90; lvl++) {
-            //double exp = x * lvl * lvl + y * lvl + z;
-            double exp = expFormula(lvl);
+            //float exp = x * lvl * lvl + y * lvl + z;
+            float exp = expFormula(lvl);
             System.out.println("Level " + lvl + " TotalExp: " + exp);
         }
 
         for (int lvl = 0; lvl <=90; lvl+=5) {
-            //double exp = x * lvl * lvl + y * lvl + z;
-            double exp = expFormula(lvl);
+            //float exp = x * lvl * lvl + y * lvl + z;
+            float exp = expFormula(lvl);
             int i = (int) (lvl / 5 + 0.5);
             System.out.println("Level " + lvl + " MobKill: " + monstersToKill.get(i));
         }
 
         for (int lvl = 0; lvl <=90; lvl++) {
-            //double exp = x * lvl * lvl + y * lvl + z;
-            double exp = expFormula(lvl);
+            //float exp = x * lvl * lvl + y * lvl + z;
+            float exp = expFormula(lvl);
             int i = (int) (lvl / 5 + 0.5);
             System.out.println("Level " + lvl + " ExpPerMob: " + exp / monstersToKill.get(i));
         }
 
         for (int lvl = 0; lvl <=90; lvl+=5) {
-            //double exp = x * lvl * lvl + y * lvl + z;
-            double exp = expFormula(lvl);
+            //float exp = x * lvl * lvl + y * lvl + z;
+            float exp = expFormula(lvl);
             int i = (int) (lvl / 5 + 0.5);
             System.out.println("Level " + lvl + " ExpPerMob: " + exp / monstersToKill.get(i));
         }
@@ -543,19 +543,19 @@ public class Test {
         classes.add("hunter");
 
         for (String clas : classes) {
-            double maxhp = 20000;
-            double maxmp = 20000;
-            double maxdmg = 2000;
-            double maxmdmg = 2000;
-            double maxdef = 2000;
-            double maxmdef = 2000;
+            float maxhp = 20000;
+            float maxmp = 20000;
+            float maxdmg = 2000;
+            float maxmdmg = 2000;
+            float maxdef = 2000;
+            float maxmdef = 2000;
 
-            double hp = 5;
-            double mp = 5;
-            double dmg = 5;
-            double mdmg = 5;
-            double def = 5;
-            double mdef = 5;
+            float hp = 5;
+            float mp = 5;
+            float dmg = 5;
+            float mdmg = 5;
+            float def = 5;
+            float mdef = 5;
             if (clas.equals("knight")) {
                 hp = 5;
                 mp = 2;
@@ -622,16 +622,16 @@ public class Test {
             classToMaxMDEF.put(clas, (int) (maxmdef / 5 * mdef));
         }
 
-        List<Double> downRatesForLevel = new ArrayList<>();
-        downRatesForLevel.add(0.75);
-        downRatesForLevel.add(0.6);
-        downRatesForLevel.add(0.45);
-        downRatesForLevel.add(0.325);
-        downRatesForLevel.add(0.2);
-        downRatesForLevel.add(0.125);
-        downRatesForLevel.add(0.05);
-        downRatesForLevel.add(0.02);
-        downRatesForLevel.add(0.005);
+        List<Float> downRatesForLevel = new ArrayList<>();
+        downRatesForLevel.add(0.75f);
+        downRatesForLevel.add(0.6f);
+        downRatesForLevel.add(0.45f);
+        downRatesForLevel.add(0.325f);
+        downRatesForLevel.add(0.2f);
+        downRatesForLevel.add(0.125f);
+        downRatesForLevel.add(0.05f);
+        downRatesForLevel.add(0.02f);
+        downRatesForLevel.add(0.005f);
 
         for (String key : classes) {
             int levelCount = 90;
@@ -647,7 +647,7 @@ public class Test {
             System.out.println(key + " level " + levelCount + " def: " + def);
             Integer mdef = classToMaxMDEF.get(key);
             System.out.println(key + " level " + levelCount + " mdef: " + mdef);
-            for (double rate : downRatesForLevel) {
+            for (float rate : downRatesForLevel) {
                 levelCount -= 10;
                 System.out.println(key + " level " + levelCount + " hp: " + hp * rate);
                 System.out.println(key + " level " + levelCount + " mp: " + mp * rate);
@@ -678,19 +678,19 @@ public class Test {
         classes.add("hunter");
 
         for (String clas : classes) {
-            double maxhp = 20000;
-            double maxmp = 20000;
-            double maxdmg = 2000;
-            double maxmdmg = 2000;
-            double maxdef = 2000;
-            double maxmdef = 2000;
+            float maxhp = 20000;
+            float maxmp = 20000;
+            float maxdmg = 2000;
+            float maxmdmg = 2000;
+            float maxdef = 2000;
+            float maxmdef = 2000;
 
-            double hp = 5;
-            double mp = 5;
-            double dmg = 5;
-            double mdmg = 5;
-            double def = 5;
-            double mdef = 5;
+            float hp = 5;
+            float mp = 5;
+            float dmg = 5;
+            float mdmg = 5;
+            float def = 5;
+            float mdef = 5;
             if (clas.equals("knight")) {
                 hp = 5;
                 mp = 2;
@@ -757,15 +757,15 @@ public class Test {
             classToMaxMDEF.put(clas, (int) (maxmdef / 5 * mdef));
         }
 
-        List<Double> downRatesForLevel = new ArrayList<>();
-        downRatesForLevel.add(0.75);
-        downRatesForLevel.add(0.6);
-        downRatesForLevel.add(0.45);
-        downRatesForLevel.add(0.325);
-        downRatesForLevel.add(0.2);
-        downRatesForLevel.add(0.125);
-        downRatesForLevel.add(0.05);
-        downRatesForLevel.add(0.02);
+        List<Float> downRatesForLevel = new ArrayList<>();
+        downRatesForLevel.add(0.75f);
+        downRatesForLevel.add(0.6f);
+        downRatesForLevel.add(0.45f);
+        downRatesForLevel.add(0.325f);
+        downRatesForLevel.add(0.2f);
+        downRatesForLevel.add(0.125f);
+        downRatesForLevel.add(0.05f);
+        downRatesForLevel.add(0.02f);
 
         for (String key : classes) {
             int levelCount = 90;
@@ -797,7 +797,7 @@ public class Test {
                 System.out.println(key + " level " + (levelCount - 10) + "~" + levelCount + " leg def: " + (def) / 11 * 3);
                 System.out.println(key + " level " + (levelCount - 10) + "~" + levelCount + " leg mdef: " + (mdef) / 11 * 3);
             }
-            for (double rate : downRatesForLevel) {
+            for (float rate : downRatesForLevel) {
                 levelCount -= 10;
                 if (key.equals("knight") || key.equals("paladin")) {
                     System.out.println(key + " level " + (levelCount - 10) + "~" + levelCount + " helmet & boot hp: " + (hp * rate) / 14 * 2);

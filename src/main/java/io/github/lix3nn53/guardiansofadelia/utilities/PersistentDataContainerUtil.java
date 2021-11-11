@@ -30,12 +30,12 @@ public class PersistentDataContainerUtil {
         return false;
     }
 
-    public static boolean hasDouble(ItemStack itemStack, String key) {
+    public static boolean hasFloat(ItemStack itemStack, String key) {
         if (itemStack.hasItemMeta()) {
             ItemMeta itemMeta = itemStack.getItemMeta();
             NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
             PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-            return persistentDataContainer.has(namespacedKey, PersistentDataType.DOUBLE);
+            return persistentDataContainer.has(namespacedKey, PersistentDataType.FLOAT);
         }
         return false;
     }
@@ -58,20 +58,20 @@ public class PersistentDataContainerUtil {
         return null;
     }
 
-    public static void putDouble(String key, double value, ItemStack itemStack) {
+    public static void putFloat(String key, float value, ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
         PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-        persistentDataContainer.set(namespacedKey, PersistentDataType.DOUBLE, value);
+        persistentDataContainer.set(namespacedKey, PersistentDataType.FLOAT, value);
         itemStack.setItemMeta(itemMeta);
     }
 
-    public static double getDouble(ItemStack itemStack, String key) {
+    public static float getFloat(ItemStack itemStack, String key) {
         if (itemStack.hasItemMeta()) {
             ItemMeta itemMeta = itemStack.getItemMeta();
             NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
             PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-            return persistentDataContainer.get(namespacedKey, PersistentDataType.DOUBLE);
+            return persistentDataContainer.get(namespacedKey, PersistentDataType.FLOAT);
         }
         return 0;
     }
@@ -120,22 +120,22 @@ public class PersistentDataContainerUtil {
         return persistentDataContainer.get(namespacedKey, PersistentDataType.INTEGER);
     }
 
-    public static boolean hasDouble(Entity entity, String key) {
+    public static boolean hasFloat(Entity entity, String key) {
         NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
         PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
-        return persistentDataContainer.has(namespacedKey, PersistentDataType.DOUBLE);
+        return persistentDataContainer.has(namespacedKey, PersistentDataType.FLOAT);
     }
 
-    public static void putDouble(String key, double value, Entity entity) {
+    public static void putFloat(String key, float value, Entity entity) {
         NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
         PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
-        persistentDataContainer.set(namespacedKey, PersistentDataType.DOUBLE, value);
+        persistentDataContainer.set(namespacedKey, PersistentDataType.FLOAT, value);
     }
 
-    public static double getDouble(Entity entity, String key) {
+    public static float getFloat(Entity entity, String key) {
         NamespacedKey namespacedKey = new NamespacedKey(GuardiansOfAdelia.getInstance(), key);
         PersistentDataContainer persistentDataContainer = entity.getPersistentDataContainer();
-        return persistentDataContainer.get(namespacedKey, PersistentDataType.DOUBLE);
+        return persistentDataContainer.get(namespacedKey, PersistentDataType.FLOAT);
     }
 
     public static boolean hasString(Entity entity, String key) {

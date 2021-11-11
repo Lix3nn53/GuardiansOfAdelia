@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ConeTarget extends TargetComponent {
 
-    private final List<Double> angleList;
-    private final List<Double> rangeList;
+    private final List<Float> angleList;
+    private final List<Float> rangeList;
     // PARTICLE
     private final int amount;
     private final int amounty;
@@ -36,8 +36,8 @@ public class ConeTarget extends TargetComponent {
             configLoadError("rangeList");
         }
 
-        this.angleList = configurationSection.getDoubleList("angleList");
-        this.rangeList = configurationSection.getDoubleList("rangeList");
+        this.angleList = configurationSection.getFloatList("angleList");
+        this.rangeList = configurationSection.getFloatList("rangeList");
 
         // PARTICLE
         if (!configurationSection.contains("particle")) {
@@ -56,8 +56,8 @@ public class ConeTarget extends TargetComponent {
         if (targets.isEmpty()) return false;
 
         List<LivingEntity> cone = new ArrayList<>();
-        double angle = angleList.get(skillLevel - 1);
-        double range = rangeList.get(skillLevel - 1);
+        float angle = angleList.get(skillLevel - 1);
+        float range = rangeList.get(skillLevel - 1);
         for (LivingEntity target : targets) {
             List<LivingEntity> coneTargets = TargetHelper.getConeTargets(target, angle, range);
 

@@ -103,24 +103,24 @@ public enum WeaponGearType {
         return WeaponAttackSpeed.SLOW;
     }
 
-    public double getCriticalChance() {
+    public float getCriticalChance() {
         switch (this) {
             case SWORD:
             case GREAT_SWORD:
             case SPEAR:
             case BOW:
             case WAND:
-                return 0.07;
+                return 0.07f;
             case STAFF:
             case DAGGER:
-                return 0.05;
+                return 0.05f;
             case BATTLE_AXE:
             case WAR_HAMMER:
             case CROSSBOW:
-                return 0.09;
+                return 0.09f;
         }
 
-        return 0.05;
+        return 0.05f;
     }
 
     public String getDisplayName() {
@@ -169,7 +169,7 @@ public enum WeaponGearType {
         return true;
     }
 
-    public double getMeleeDamageReduction() {
+    public float getMeleeDamageReduction() {
         switch (this) {
             case SWORD:
             case BATTLE_AXE:
@@ -182,7 +182,7 @@ public enum WeaponGearType {
             case CROSSBOW:
             case STAFF:
             case WAND:
-                return 0.2;
+                return 0.2f;
         }
 
         return 0;
@@ -202,7 +202,7 @@ public enum WeaponGearType {
 
     public void onHitEffect(LivingEntity caster, LivingEntity target) {
         /*if (this.equals(WeaponGearType.WAR_HAMMER)) {
-            ArrayList<Double> speedList = new ArrayList<>();
+            ArrayList<Float> speedList = new ArrayList<>();
             speedList.add(1.2);
             speedList.add(1.2);
             speedList.add(1.2);

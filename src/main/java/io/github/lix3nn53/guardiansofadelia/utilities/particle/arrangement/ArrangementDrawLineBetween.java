@@ -6,9 +6,9 @@ import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 
 public class ArrangementDrawLineBetween extends ArrangementSingle implements ParticleArrangementMultipleLocation {
-    protected final double gap;
+    protected final float gap;
 
-    protected ArrangementDrawLineBetween(Particle particle, Particle.DustOptions dustOptions, double gap, double singleMinHeight, double singleMaxHeight, double singleGap) {
+    protected ArrangementDrawLineBetween(Particle particle, Particle.DustOptions dustOptions, float gap, float singleMinHeight, float singleMaxHeight, float singleGap) {
         super(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
         this.gap = gap;
     }
@@ -20,7 +20,7 @@ public class ArrangementDrawLineBetween extends ArrangementSingle implements Par
             configLoadError("gap");
         }
 
-        this.gap = configurationSection.getDouble("gap");
+        this.gap = (float) configurationSection.getDouble("gap");
     }
 
     @Override

@@ -15,11 +15,11 @@ import java.util.Random;
 public class ArrangementSingle implements ParticleArrangement {
     protected final Particle particle;
     protected final Particle.DustOptions dustOptions;
-    protected final double singleMinHeight;
-    protected final double singleMaxHeight;
-    protected final double singleGap;
+    protected final float singleMinHeight;
+    protected final float singleMaxHeight;
+    protected final float singleGap;
 
-    public ArrangementSingle(Particle particle, Particle.DustOptions dustOptions, double singleMinHeight, double singleMaxHeight, double singleGap) {
+    public ArrangementSingle(Particle particle, Particle.DustOptions dustOptions, float singleMinHeight, float singleMaxHeight, float singleGap) {
         this.particle = particle;
         this.dustOptions = dustOptions;
         this.singleMinHeight = singleMinHeight;
@@ -47,9 +47,9 @@ public class ArrangementSingle implements ParticleArrangement {
             dustOptions = null;
         }
 
-        this.singleMinHeight = configurationSection.contains("singleMinHeight") ? configurationSection.getDouble("singleMinHeight") : 0;
-        this.singleMaxHeight = configurationSection.contains("singleMaxHeight") ? configurationSection.getDouble("singleMaxHeight") : 0;
-        this.singleGap = configurationSection.contains("singleGap") ? configurationSection.getDouble("singleGap") : 0;
+        this.singleMinHeight = configurationSection.contains("singleMinHeight") ? (float) configurationSection.getDouble("singleMinHeight") : 0;
+        this.singleMaxHeight = configurationSection.contains("singleMaxHeight") ? (float) configurationSection.getDouble("singleMaxHeight") : 0;
+        this.singleGap = configurationSection.contains("singleGap") ? (float) configurationSection.getDouble("singleGap") : 0;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ArrangementSingle implements ParticleArrangement {
 
         if (singleMaxHeight > 0) {
             Random r = new Random();
-            double height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextDouble();
+            float height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextFloat();
 
             ParticleShapes.playSingleParticleWithHeight(location1, particle, dustOptions, height, singleGap);
         } else {
@@ -77,7 +77,7 @@ public class ArrangementSingle implements ParticleArrangement {
 
         if (singleMaxHeight > 0) {
             Random r = new Random();
-            double height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextDouble();
+            float height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextFloat();
 
             ParticleShapes.playSingleParticleWithHeight(location.getWorld(), vector, particle, dustOptions, height, singleGap);
         } else {

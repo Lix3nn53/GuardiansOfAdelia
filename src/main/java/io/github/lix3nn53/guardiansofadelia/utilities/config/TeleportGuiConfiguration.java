@@ -25,9 +25,9 @@ public class TeleportGuiConfiguration {
 
             String worldString = current.getString("world");
             World world = Bukkit.getWorld(worldString);
-            double x = current.getDouble("x");
-            double y = current.getDouble("y");
-            double z = current.getDouble("z");
+            float x = (float) current.getDouble("x");
+            float y = (float) current.getDouble("y");
+            float z = (float) current.getDouble("z");
             float yaw = (float) current.getDouble("yaw");
             float pitch = (float) current.getDouble("pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);

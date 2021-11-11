@@ -28,7 +28,7 @@ public class GearPassive implements RPGGear {
             name = tier.getTierColor() + GearSetStr + " " + name;
         }
 
-        double bonusPercent = tier.getBonusMultiplier();
+        float bonusPercent = tier.getBonusMultiplier();
 
         List<String> lore = new ArrayList<>();
 

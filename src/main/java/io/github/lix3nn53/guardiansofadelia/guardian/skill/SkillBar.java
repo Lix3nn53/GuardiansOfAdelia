@@ -218,7 +218,7 @@ public class SkillBar {
         }
     }
 
-    public static double abilityHasteToMultiplier(double abilityHaste) {
+    public static float abilityHasteToMultiplier(float abilityHaste) {
         return 100 / (100 + abilityHaste);
     }
 
@@ -299,7 +299,7 @@ public class SkillBar {
         // mana cost
         rpgCharacterStats.consumeMana(manaCost);
 
-        double abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
+        float abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
 
         int cooldownInTicks = (int) (((skill.getCooldown(skillLevel) * 20) * abilityHasteToMultiplier(abilityHaste)) + 0.5); // Ability haste formula from League of Legends
         PlayerInventory inventory = player.getInventory();
@@ -319,7 +319,7 @@ public class SkillBar {
                 } else {
                     int cooldownLeft = cooldownInTicks - ticksPassed;
                     int secondsLeft = cooldownLeft / 20;
-                    double modulus = cooldownLeft % 20;
+                    float modulus = cooldownLeft % 20;
 
                     if (modulus > 0) {
                         secondsLeft++;

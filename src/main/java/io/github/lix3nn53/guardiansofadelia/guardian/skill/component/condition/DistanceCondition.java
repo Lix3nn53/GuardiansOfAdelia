@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DistanceCondition extends ConditionComponent {
 
-    private final double distance;
+    private final float distance;
     private final boolean inside;
 
     public DistanceCondition(ConfigurationSection configurationSection) {
@@ -33,9 +33,9 @@ public class DistanceCondition extends ConditionComponent {
 
         boolean success = false;
         for (LivingEntity target : targets) {
-            double currentDistance = caster.getLocation().distanceSquared(target.getLocation());
+            float currentDistance = (float) caster.getLocation().distanceSquared(target.getLocation());
 
-            double v = distance * distance;
+            float v = distance * distance;
 
             if (inside == currentDistance <= v) {
                 success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter, skillIndex) || success;

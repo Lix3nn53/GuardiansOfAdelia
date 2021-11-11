@@ -49,7 +49,7 @@ public class JobGatheringConfigurations {
 
             String name = ChatColor.translateAlternateColorCodes('&', nameStr);
             int maxAmountPerGather = ingredientsConfig.getInt("i" + i + ".maxAmountPerGather");
-            double dropRate = ingredientsConfig.contains("i" + i + ".dropRate") ? ingredientsConfig.getDouble("i" + i + ".dropRate") : 1;
+            float dropRate = ingredientsConfig.contains("i" + i + ".dropRate") ? (float) ingredientsConfig.getDouble("i" + i + ".dropRate") : 1;
             boolean enchant = ingredientsConfig.getBoolean("i" + i + ".enchant");
 
             Ingredient ingredient = new Ingredient(i, material, name, ingredientLevel, jobsCanUse, extraText, customModelData, potionColor, maxAmountPerGather, dropRate, enchant);
@@ -81,17 +81,17 @@ public class JobGatheringConfigurations {
 
                 String worldString = gatheringModelsConfig.getString("i" + i + ".loc" + l + ".world");
                 World world = Bukkit.getWorld(worldString);
-                double x = gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".x");
-                double y = gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".y");
-                double z = gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".z");
+                float x = (float) gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".x");
+                float y = (float) gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".y");
+                float z = (float) gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".z");
                 Location location = new Location(world, x, y, z);
 
                 EulerAngle rotation = new EulerAngle(0, 0, 0);
 
                 if (gatheringModelsConfig.contains("i" + i + ".loc" + l + ".rotation.x")) {
-                    double x1 = gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".rotation.x");
-                    double y1 = gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".rotation.y");
-                    double z1 = gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".rotation.z");
+                    float x1 = (float) gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".rotation.x");
+                    float y1 = (float) gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".rotation.y");
+                    float z1 = (float) gatheringModelsConfig.getDouble("i" + i + ".loc" + l + ".rotation.z");
                     rotation = new EulerAngle(x1, y1, z1);
                 }
 
@@ -149,9 +149,9 @@ public class JobGatheringConfigurations {
                 World world = baseLocation.getWorld();
                 String worldName = world.getName();
 
-                double x = baseLocation.getX();
-                double y = baseLocation.getY();
-                double z = baseLocation.getZ();
+                float x = (float) baseLocation.getX();
+                float y = (float) baseLocation.getY();
+                float z = (float) baseLocation.getZ();
 
                 gatheringModelsConfig.set("i" + id + ".loc" + count + ".world", worldName);
                 gatheringModelsConfig.set("i" + id + ".loc" + count + ".x", x);
@@ -159,9 +159,9 @@ public class JobGatheringConfigurations {
                 gatheringModelsConfig.set("i" + id + ".loc" + count + ".z", z);
 
                 EulerAngle rotation = gatheringModelState.getRotation();
-                double x1 = rotation.getX();
-                double y1 = rotation.getY();
-                double z1 = rotation.getZ();
+                float x1 = (float) rotation.getX();
+                float y1 = (float) rotation.getY();
+                float z1 = (float) rotation.getZ();
                 if (x1 != 0 || y1 != 0 || z1 != 0) {
                     gatheringModelsConfig.set("i" + id + ".loc" + count + ".rotation.x", x1);
                     gatheringModelsConfig.set("i" + id + ".loc" + count + ".rotation.y", y1);

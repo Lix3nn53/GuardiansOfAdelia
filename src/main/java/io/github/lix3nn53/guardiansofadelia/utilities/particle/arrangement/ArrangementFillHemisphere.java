@@ -25,7 +25,7 @@ public class ArrangementFillHemisphere extends ArrangementWithData {
         this.amount = configurationSection.getInt("amount");
 
         // Data that animations can modify
-        addData(configurationSection.getDouble("radius"));
+        addData((float) configurationSection.getDouble("radius"));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ArrangementFillHemisphere extends ArrangementWithData {
         if (offset != null) {
             location1.add(offset);
         }
-        double radius = getData(0);
+        float radius = getData(0);
         ParticleShapes.fillHemisphere(location1, particle, radius, amount, dustOptions);
     }
 
@@ -44,7 +44,7 @@ public class ArrangementFillHemisphere extends ArrangementWithData {
         if (offset != null) {
             location1.add(offset);
         }
-        double radius = getData(0);
+        float radius = getData(0);
         ParticleShapes.fillHemisphere(location1, particle, radius, amount, dustOptions);
     }
 }

@@ -48,7 +48,7 @@ public class PetMovement {
                     List<Entity> nearbyEntities = pet.getNearbyEntities(range, range, range);
                     LivingEntity targetEnemy = determineTarget(player, nearbyEntities);
                     if (targetEnemy != null) {
-                        double height = targetEnemy.getHeight() / 2;
+                        float height = (float) (targetEnemy.getHeight()) / 2f;
                         Location enemyLocation = targetEnemy.getLocation().add(0, height, 0);
                         Vector vectorBetweenPoints = enemyLocation.toVector().subtract(start.toVector());
                         start.setDirection(vectorBetweenPoints);
@@ -89,16 +89,16 @@ public class PetMovement {
                 target.subtract(upward.multiply(1.6));
 
                 Vector vectorBetweenPoints = target.toVector().subtract(start.toVector());
-                double distance = vectorBetweenPoints.length();
-                if (distance < 1.4) return; // Pet is close enough to player head
+                float distance = (float) vectorBetweenPoints.length();
+                if (distance < 1.4f) return; // Pet is close enough to player head
 
                 target.add(dirOfTarget.multiply(-0.8)).add(side.multiply(1.6));
                 // End - Calculate offset
 
                 vectorBetweenPoints = target.toVector().subtract(start.toVector());
-                distance = vectorBetweenPoints.length();
+                distance = (float) vectorBetweenPoints.length();
 
-                if (distance < 0.4) return; // Pet is close enough to target location
+                if (distance < 0.4f) return; // Pet is close enough to target location
                 if (distance > 24) {
                     pet.teleport(target);
                     return;
@@ -108,7 +108,7 @@ public class PetMovement {
                 Vector nextDirection = previousDirection.add(direction); // Add previousDirection to direction so pet makes a smooth turn
                 nextDirection.normalize();
 
-                double travel = distance / 20D; // Use distances to calculate how fast a pet will travel. Longer the distance, faster the pet.
+                float travel = distance / 20f; // Use distances to calculate how fast a pet will travel. Longer the distance, faster the pet.
                 start.add(nextDirection.multiply(travel));
 
                 start.setDirection(direction); // Make pet look at the same direction as player

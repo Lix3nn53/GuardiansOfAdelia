@@ -50,36 +50,36 @@ public class EnchantManager {
         return 4;
     }
 
-    public static double getChance(Player player, int currentEnchantLevel) {
+    public static float getChance(Player player, int currentEnchantLevel) {
         if (player.getGameMode().equals(GameMode.CREATIVE)) {
             return 1;
         }
 
-        double chance = 0;
+        float chance = 0;
         if (currentEnchantLevel == 0) {
-            chance = 0.84;
+            chance = 0.84f;
         } else if (currentEnchantLevel == 1) {
-            chance = 0.8;
+            chance = 0.8f;
         } else if (currentEnchantLevel == 2) {
-            chance = 0.76;
+            chance = 0.76f;
         } else if (currentEnchantLevel == 3) {
-            chance = 0.72;
+            chance = 0.72f;
         } else if (currentEnchantLevel == 4) {
-            chance = 0.67;
+            chance = 0.67f;
         } else if (currentEnchantLevel == 5) {
-            chance = 0.6;
+            chance = 0.6f;
         } else if (currentEnchantLevel == 6) {
-            chance = 0.53;
+            chance = 0.53f;
         } else if (currentEnchantLevel == 7) {
-            chance = 0.47;
+            chance = 0.47f;
         } else if (currentEnchantLevel == 8) {
-            chance = 0.4;
+            chance = 0.4f;
         } else if (currentEnchantLevel == 9) {
-            chance = 0.32;
+            chance = 0.32f;
         } else if (currentEnchantLevel == 10) {
-            chance = 0.26;
+            chance = 0.26f;
         } else if (currentEnchantLevel == 11) {
-            chance = 0.2;
+            chance = 0.2f;
         }
 
         if (BoostPremiumManager.isBoostActive(BoostPremium.ENCHANT)) {
@@ -89,7 +89,7 @@ public class EnchantManager {
         return chance;
     }
 
-    public static double getSellGuiMultiplier(int enchantLevel) {
+    public static float getSellGuiMultiplier(int enchantLevel) {
         if (enchantLevel == 1) {
             return 1;
         } else if (enchantLevel == 2) {
@@ -97,23 +97,23 @@ public class EnchantManager {
         } else if (enchantLevel == 3) {
             return 1;
         } else if (enchantLevel == 4) {
-            return 1.1;
+            return 1.1f;
         } else if (enchantLevel == 5) {
-            return 1.2;
+            return 1.2f;
         } else if (enchantLevel == 6) {
-            return 1.3;
+            return 1.3f;
         } else if (enchantLevel == 7) {
-            return 1.4;
+            return 1.4f;
         } else if (enchantLevel == 8) {
-            return 1.6;
+            return 1.6f;
         } else if (enchantLevel == 9) {
-            return 1.8;
+            return 1.8f;
         } else if (enchantLevel == 10) {
             return 2;
         } else if (enchantLevel == 11) {
-            return 2.25;
+            return 2.25f;
         } else if (enchantLevel == 12) {
-            return 2.5;
+            return 2.5f;
         }
 
         return 1;

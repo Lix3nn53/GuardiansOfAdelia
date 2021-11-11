@@ -18,10 +18,10 @@ import java.util.List;
 public class HealMechanic extends MechanicComponent {
 
     private final List<Integer> healAmountList;
-    private final List<Double> healPercentList;
+    private final List<Float> healPercentList;
     private final String multiplyWithValue;
 
-    public HealMechanic(List<Integer> healAmountList, List<Double> healPercentList, @Nullable String multiplyWithValue) {
+    public HealMechanic(List<Integer> healAmountList, List<Float> healPercentList, @Nullable String multiplyWithValue) {
         super(false);
         this.healAmountList = healAmountList;
         this.healPercentList = healPercentList;
@@ -42,7 +42,7 @@ public class HealMechanic extends MechanicComponent {
         }
 
         if (configurationSection.contains("healPercentList")) {
-            this.healPercentList = configurationSection.getDoubleList("healPercentList");
+            this.healPercentList = configurationSection.getFloatList("healPercentList");
         } else {
             this.healPercentList = new ArrayList<>();
         }
@@ -61,12 +61,12 @@ public class HealMechanic extends MechanicComponent {
 
         boolean healed = false;
         for (LivingEntity ent : targets) {
-            double currentHealth = ent.getHealth();
+            float currentHealth = (float) ent.getHealth();
 
             AttributeInstance attribute = ent.getAttribute(Attribute.GENERIC_MAX_HEALTH);
             if (attribute == null) continue;
 
-            double maxHealth = attribute.getValue();
+            float maxHealth = (float) attribute.getValue();
 
             if (currentHealth == maxHealth) continue;
 
@@ -88,7 +88,7 @@ public class HealMechanic extends MechanicComponent {
                 return false;
             }
 
-            double nextHealth = currentHealth + healAmount;
+            float nextHealth = currentHealth + healAmount;
 
             if (nextHealth > maxHealth) {
                 nextHealth = maxHealth;

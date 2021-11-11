@@ -646,9 +646,9 @@ public final class Quest {
                 TaskCollect taskCollect = (TaskCollect) task;
                 List<String> keyOfMobsItemDropsFrom = taskCollect.getKeyOfMobsItemDropsFrom();
                 if (keyOfMobsItemDropsFrom.contains(internalName)) {
-                    double chance = taskCollect.getChance();
+                    float chance = taskCollect.getChance();
                     if (chance > 0) {
-                        double random = Math.random();
+                        float random = (float) Math.random();
                         if (random < chance) {
                             return taskCollect.getItemStack();
                         }

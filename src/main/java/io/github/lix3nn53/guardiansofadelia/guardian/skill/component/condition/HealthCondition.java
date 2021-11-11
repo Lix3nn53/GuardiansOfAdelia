@@ -10,8 +10,8 @@ import java.util.List;
 
 public class HealthCondition extends ConditionComponent {
 
-    private final double minPercent;
-    private final double maxPercent;
+    private final float minPercent;
+    private final float maxPercent;
 
     public HealthCondition(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -24,8 +24,8 @@ public class HealthCondition extends ConditionComponent {
             configLoadError("maxPercent");
         }
 
-        this.minPercent = configurationSection.getDouble("minPercent");
-        this.maxPercent = configurationSection.getDouble("maxPercent");
+        this.minPercent = (float) configurationSection.getDouble("minPercent");
+        this.maxPercent = (float) configurationSection.getDouble("maxPercent");
     }
 
     @Override
@@ -34,9 +34,9 @@ public class HealthCondition extends ConditionComponent {
 
         boolean success = false;
         for (LivingEntity target : targets) {
-            double currentHealth = target.getHealth();
-            double maxHealth = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-            double value = currentHealth / maxHealth;
+            float currentHealth = (float) target.getHealth();
+            float maxHealth = (float) target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+            float value = currentHealth / maxHealth;
 
             if (value > minPercent && value <= maxPercent) {
                 success = executeChildren(caster, skillLevel, Collections.singletonList(target), castCounter, skillIndex) || success;

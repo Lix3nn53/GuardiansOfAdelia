@@ -14,9 +14,9 @@ import java.util.List;
 public class WarpMechanic extends MechanicComponent {
 
     private final boolean throughWalls;
-    private final List<Double> forward;
-    private final List<Double> upward;
-    private final List<Double> right;
+    private final List<Float> forward;
+    private final List<Float> upward;
+    private final List<Float> right;
 
     public WarpMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -38,9 +38,9 @@ public class WarpMechanic extends MechanicComponent {
         }
 
         this.throughWalls = configurationSection.getBoolean("throughWalls");
-        this.forward = configurationSection.getDoubleList("forwardList");
-        this.upward = configurationSection.getDoubleList("upwardList");
-        this.right = configurationSection.getDoubleList("rightList");
+        this.forward = configurationSection.getFloatList("forwardList");
+        this.upward = configurationSection.getFloatList("upwardList");
+        this.right = configurationSection.getFloatList("rightList");
     }
 
     @Override

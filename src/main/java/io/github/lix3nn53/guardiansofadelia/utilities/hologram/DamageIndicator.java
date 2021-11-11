@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class DamageIndicator {
 
     public static void spawnNonPacket(String text, Location baseLocation) {
-        Location indicatorLocation = LocationUtils.randomPointNoY(baseLocation, 1.2);
+        Location indicatorLocation = LocationUtils.randomPointNoY(baseLocation, 1.2f);
 
         Hologram hologram = new Hologram(indicatorLocation, text);
 
@@ -38,7 +38,7 @@ public class DamageIndicator {
     }
 
     public static void showPlayerRandomLocation(Player player, String text, Location baseLocation, long duration) {
-        Location location = LocationUtils.randomPointNoY(baseLocation, 1.2);
+        Location location = LocationUtils.randomPointNoY(baseLocation, 1.2f);
 
         showPlayer(player, text, location, duration);
     }

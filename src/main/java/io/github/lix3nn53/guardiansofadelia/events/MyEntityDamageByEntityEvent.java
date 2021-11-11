@@ -169,7 +169,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (owner != null) damageSource = owner;
                     }
 
-                    double damage = event.getDamage();
+                    float damage = (float) event.getDamage();
 
                     if (!isSkill) { //deal mob damage if melee or projectile
                         int customDamage = getCustomDamage(damageSource);
@@ -212,7 +212,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                                 int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
                                 totalDefense += targetRpgCharacterStats.getElement(damageType).getTotal(); // Element is added to defense
 
-                                double reduction = StatUtils.getDefenseReduction(totalDefense);
+                                float reduction = StatUtils.getDefenseReduction(totalDefense);
 
                                 damage = damage * reduction;
 
@@ -239,10 +239,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                double damage = event.getDamage();
+                float damage = (float) event.getDamage();
                 boolean isCritical = false;
                 Location targetLocation = livingTarget.getLocation();
-                double targetHeight = livingTarget.getHeight();
+                float targetHeight = (float) livingTarget.getHeight();
 
                 if (pet == null) { // attacker is not a pet
                     if (PetManager.isCompanion(livingTarget)) { // on player attack to pet
@@ -293,7 +293,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
 
                             if (weaponGearType != null) {
-                                double meleeDamageReduction = weaponGearType.getMeleeDamageReduction();
+                                float meleeDamageReduction = weaponGearType.getMeleeDamageReduction();
                                 damage *= meleeDamageReduction;
 
                                 weaponGearType.onHitEffect(player, livingTarget);
@@ -316,14 +316,14 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     damage *= rpgCharacterStats.getBuffValue(BuffType.ELEMENT_DAMAGE);
 
                     //add critical damage right before defense
-                    double totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
-                    double random = Math.random();
+                    float totalCriticalChance = rpgCharacterStats.getTotalCriticalChance();
+                    float random = (float) Math.random();
                     if (random <= totalCriticalChance) {
                         damage *= rpgCharacterStats.getTotalCriticalDamage();
                         isCritical = true;
                         Particle particle = Particle.CRIT;
                         // ParticleShapes.playSingleParticle(targetLocation, particle, null);
-                        ParticleShapes.fillHemisphere(targetLocation.clone().add(0, targetHeight + 0.25, 0), particle, 0.2, 48, null);
+                        ParticleShapes.fillHemisphere(targetLocation.clone().add(0, targetHeight + 0.25, 0), particle, 0.2f, 48, null);
                         player.playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 0.6F, 2.0F);
                     }
                 } else {
@@ -370,7 +370,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                             int totalDefense = targetRpgCharacterStats.getTotalElementDefense();
                             totalDefense += targetRpgCharacterStats.getElement(damageType).getTotal();
 
-                            double reduction = StatUtils.getDefenseReduction(totalDefense);
+                            float reduction = StatUtils.getDefenseReduction(totalDefense);
 
                             damage = damage * reduction;
                         }
@@ -381,7 +381,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                     if (mythicMobInstance != null) {
                         String internalName = mythicMobInstance.getType().getInternalName();
                         if (MMManager.hasElementResistance(internalName, damageType)) {
-                            double elementResistance = MMManager.getElementResistance(internalName, damageType);
+                            float elementResistance = MMManager.getElementResistance(internalName, damageType);
 
                             damage = damage * elementResistance;
                         }
@@ -402,10 +402,10 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 event.setDamage(damage);
 
-                double finalDamage = event.getFinalDamage();
+                float finalDamage = (float) event.getFinalDamage();
 
-                double protectionDamage = finalDamage;
-                double livingTargetHealth = livingTarget.getHealth();
+                float protectionDamage = finalDamage;
+                float livingTargetHealth = (float) livingTarget.getHealth();
                 //on Kill
                 if (finalDamage >= livingTargetHealth) {
                     protectionDamage = livingTargetHealth;
@@ -449,19 +449,19 @@ public class MyEntityDamageByEntityEvent implements Listener {
         return false;
     }
 
-    private void lifeSteal(Player player, RPGCharacterStats rpgCharacterStats, double finalDamage) {
-        double lfStealPercent = rpgCharacterStats.getBuffValue(BuffType.LIFE_STEAL);
+    private void lifeSteal(Player player, RPGCharacterStats rpgCharacterStats, float finalDamage) {
+        float lfStealPercent = rpgCharacterStats.getBuffValue(BuffType.LIFE_STEAL);
         if (lfStealPercent != 0) {
-            double currentHealth = player.getHealth();
+            float currentHealth = (float) player.getHealth();
 
             AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
             if (attribute != null) {
-                double maxHealth = attribute.getValue();
+                float maxHealth = (float) attribute.getValue();
 
                 if (currentHealth < maxHealth) {
-                    double healAmount = finalDamage * lfStealPercent;
+                    float healAmount = finalDamage * lfStealPercent;
 
-                    double nextHealth = currentHealth + healAmount;
+                    float nextHealth = currentHealth + healAmount;
 
                     if (nextHealth > maxHealth) {
                         nextHealth = maxHealth;

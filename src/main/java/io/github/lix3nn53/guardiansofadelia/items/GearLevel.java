@@ -21,11 +21,11 @@ public enum GearLevel {
     EIGHT,
     NINE;
 
-    private static final double MIN_STAT_MULTIPLIER = 0.25;
-    private static final double MAX_STAT_MULTIPLIER = 1.2;
+    private static final float MIN_STAT_MULTIPLIER = 0.25f;
+    private static final float MAX_STAT_MULTIPLIER = 1.2f;
 
-    private static final double NORMAL_ITEM_NERF = 0.6; // passive stats on normal item
-    private static final double ATTRIBUTE_NERF = 0.2;
+    private static final float NORMAL_ITEM_NERF = 0.6f; // passive stats on normal item
+    private static final float ATTRIBUTE_NERF = 0.2f;
 
     public static GearLevel getGearLevel(ItemStack itemStack) {
         if (PersistentDataContainerUtil.hasInteger(itemStack, "reqLevel")) {
@@ -57,7 +57,7 @@ public enum GearLevel {
             return 0;
         }
 
-        double v = Math.pow((ordinal() + 2), 2) * MIN_STAT_MULTIPLIER;
+        float v = (float) (Math.pow((ordinal() + 2), 2)) * MIN_STAT_MULTIPLIER;
 
         if (!isPassive) {
             v = v * NORMAL_ITEM_NERF;
@@ -75,7 +75,7 @@ public enum GearLevel {
             return 0;
         }
 
-        double v = Math.pow((ordinal() + 2), 2) * MAX_STAT_MULTIPLIER;
+        float v = (float) (Math.pow((ordinal() + 2), 2)) * MAX_STAT_MULTIPLIER;
 
         if (!isPassive) {
             v = v * NORMAL_ITEM_NERF;

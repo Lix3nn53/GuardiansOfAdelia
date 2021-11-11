@@ -25,8 +25,8 @@ public class SoundMechanic extends MechanicComponent {
         }
 
         String soundString = configurationSection.getString("sound").toLowerCase();
-        float volume = (float) configurationSection.getDouble("volume");
-        float pitch = (float) configurationSection.getDouble("pitch");
+        float volume = (float) (float) configurationSection.getDouble("volume");
+        float pitch = (float) (float) configurationSection.getDouble("pitch");
 
         this.goaSound = new CustomSound(soundString, volume, pitch);
     }

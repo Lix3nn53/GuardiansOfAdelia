@@ -20,7 +20,7 @@ public class ProjectileUtil {
      * @param amount amount of directions to calculate
      * @return the list of calculated directions
      */
-    public static ArrayList<Vector> calcSpread(Vector dir, double angle, int amount) {
+    public static ArrayList<Vector> calcSpread(Vector dir, float angle, int amount) {
         // Special cases
         if (amount <= 0) {
             return new ArrayList<>();
@@ -44,35 +44,35 @@ public class ProjectileUtil {
         base.normalize();
 
         // Get the vertical angle
-        double vBaseAngle = Math.acos(Math.max(-1, Math.min(base.dot(dir), 1)));
+        float vBaseAngle = (float) Math.acos(Math.max(-1, Math.min(base.dot(dir), 1)));
         if (dir.getY() < 0) {
             vBaseAngle = -vBaseAngle;
         }
-        double hAngle = Math.toDegrees(Math.acos(Math.max(-1, Math.min(1, base.dot(X_VEC)))));
+        float hAngle = (float) Math.toDegrees(Math.acos(Math.max(-1f, Math.min(1f, (float) base.dot(X_VEC)))));
         System.out.println("hAngle: " + hAngle);
         if (dir.getZ() < 0) {
             hAngle = -hAngle;
         }
 
         // Calculate directions
-        double angleIncrement = angle / amount;
+        float angleIncrement = angle / amount;
         System.out.println("angleIncrement: " + angleIncrement);
         if (amount % 2 == 1) {
             angle += angleIncrement;
         }
         for (int i = 0; i < amount; i++) {
             // Initial calculations
-            double bonusAngle = angle / 2 - angleIncrement * i;
+            float bonusAngle = angle / 2 - angleIncrement * i;
             System.out.println("bonusAngle: " + bonusAngle);
-            double totalAngle = hAngle + bonusAngle;
+            float totalAngle = hAngle + bonusAngle;
             System.out.println("totalAngle" + totalAngle);
-            double vAngle = vBaseAngle * Math.cos(Math.toRadians(bonusAngle));
-            double x = Math.cos(vAngle);
+            float vAngle = (float) (vBaseAngle * Math.cos(Math.toRadians(bonusAngle)));
+            float x = (float) Math.cos(vAngle);
 
             // Get the velocity
-            double vx = x * Math.cos(Math.toRadians(totalAngle));
-            double vy = Math.sin(vAngle);
-            double vz = x * Math.sin(Math.toRadians(totalAngle));
+            float vx = (float) (x * Math.cos(Math.toRadians(totalAngle)));
+            float vy = (float) Math.sin(vAngle);
+            float vz = (float) (x * Math.sin(Math.toRadians(totalAngle)));
 
             // Launch the projectile
             list.add(new Vector(vx, vy, vz));
@@ -91,7 +91,7 @@ public class ProjectileUtil {
      * @param amount amount of locations to calculate
      * @return list of locations to spawn projectiles
      */
-    public static ArrayList<Location> calcRain(Location loc, double radius, double height, int amount) {
+    public static ArrayList<Location> calcRain(Location loc, float radius, float height, int amount) {
         ArrayList<Location> list = new ArrayList<>();
         if (amount <= 0) {
             return list;
@@ -105,13 +105,13 @@ public class ProjectileUtil {
         // Calculate locations
         int tiers = (amount + 7) / 8;
         for (int i = 0; i < tiers; i++) {
-            double rad = radius * (tiers - i) / tiers;
+            float rad = radius * (tiers - i) / tiers;
             int tierNum = Math.min(amount, 8);
-            double increment = 360 / tierNum;
-            double angle = (i % 2) * 22.5;
+            float increment = 360 / tierNum;
+            float angle = (float) ((i % 2) * 22.5);
             for (int j = 0; j < tierNum; j++) {
-                double dx = Math.cos(angle) * rad;
-                double dz = Math.sin(angle) * rad;
+                float dx = (float) (Math.cos(angle) * rad);
+                float dz = (float) (Math.sin(angle) * rad);
                 Location l = loc.clone();
                 l.add(dx, 0, dz);
                 list.add(l);

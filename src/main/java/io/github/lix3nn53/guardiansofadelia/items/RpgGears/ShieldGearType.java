@@ -19,11 +19,11 @@ public enum ShieldGearType {
         return "Shield";
     }
 
-    public double getHealthReduction() {
-        return 0.7;
+    public float getHealthReduction() {
+        return 0.7f;
     }
 
-    public double getElementDefenseReduction() {
-        return 0.7;
+    public float getElementDefenseReduction() {
+        return 0.7f;
     }
 }

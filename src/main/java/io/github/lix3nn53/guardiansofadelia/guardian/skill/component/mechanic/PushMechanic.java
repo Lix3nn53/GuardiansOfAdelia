@@ -12,11 +12,11 @@ import java.util.List;
 public class PushMechanic extends MechanicComponent {
 
     private final PushType pushType;
-    private final List<Double> speedList;
+    private final List<Float> speedList;
     private final boolean centerSelf;
-    private final double offsetY;
+    private final float offsetY;
 
-    public PushMechanic(PushType pushType, List<Double> speedList, boolean centerSelf, double offsetY) {
+    public PushMechanic(PushType pushType, List<Float> speedList, boolean centerSelf, float offsetY) {
         super(false);
 
         this.pushType = pushType;
@@ -41,13 +41,13 @@ public class PushMechanic extends MechanicComponent {
         }
 
         if (configurationSection.contains("offsetY")) {
-            this.offsetY = configurationSection.getDouble("offsetY");
+            this.offsetY = (float) configurationSection.getDouble("offsetY");
         } else {
             offsetY = 0;
         }
 
         this.pushType = PushType.valueOf(configurationSection.getString("pushType"));
-        this.speedList = configurationSection.getDoubleList("speedList");
+        this.speedList = configurationSection.getFloatList("speedList");
         this.centerSelf = configurationSection.getBoolean("centerSelf");
     }
 
@@ -69,7 +69,7 @@ public class PushMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             final Vector vel = target.getLocation().subtract(center).toVector();
-            double v = vel.lengthSquared();
+            float v = (float) vel.lengthSquared();
             if (v == 0) {
                 continue;
             } else if (pushType.equals(PushType.INVERSE)) {

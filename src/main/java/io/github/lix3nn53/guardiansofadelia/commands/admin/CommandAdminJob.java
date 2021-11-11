@@ -49,9 +49,9 @@ public class CommandAdminJob implements CommandExecutor {
 
                 player.sendMessage(ChatPalette.GREEN_DARK + "Added new gathering model!");
             } else if (args[0].equals("rotate")) {
-                double x = Double.parseDouble(args[1]);
-                double y = Double.parseDouble(args[2]);
-                double z = Double.parseDouble(args[3]);
+                float x = Float.parseFloat(args[1]);
+                float y = Float.parseFloat(args[2]);
+                float z = Float.parseFloat(args[3]);
 
                 List<Entity> nearbyEntities = player.getNearbyEntities(4, 4, 4);
                 for (Entity entity : nearbyEntities) {
@@ -69,9 +69,9 @@ public class CommandAdminJob implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("move")) {
-                double x = Double.parseDouble(args[1]);
-                double y = Double.parseDouble(args[2]);
-                double z = Double.parseDouble(args[3]);
+                float x = Float.parseFloat(args[1]);
+                float y = Float.parseFloat(args[2]);
+                float z = Float.parseFloat(args[3]);
 
                 List<Entity> nearbyEntities = player.getNearbyEntities(4, 4, 4);
                 for (Entity entity : nearbyEntities) {

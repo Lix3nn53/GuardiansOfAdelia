@@ -17,12 +17,12 @@ import java.util.List;
 
 public class DamageMechanic extends MechanicComponent {
 
-    private final List<Double> damageList;
-    private final List<Double> damageMultiplyList; // Multiply this value with according attribute of attacker to determine damage value
+    private final List<Float> damageList;
+    private final List<Float> damageMultiplyList; // Multiply this value with according attribute of attacker to determine damage value
     private final ElementType damageType;
     private final String multiplyWithValue;
 
-    public DamageMechanic(boolean addLore, List<Double> damageList, List<Double> damageMultiplyList, ElementType damageType, String multiplyWithValue) {
+    public DamageMechanic(boolean addLore, List<Float> damageList, List<Float> damageMultiplyList, ElementType damageType, String multiplyWithValue) {
         super(addLore);
         this.damageList = damageList;
         this.damageMultiplyList = damageMultiplyList != null ? damageMultiplyList : new ArrayList<>();
@@ -48,16 +48,16 @@ public class DamageMechanic extends MechanicComponent {
         }
 
         this.damageType = ElementType.valueOf(configurationSection.getString("damageType"));
-        this.damageList = configurationSection.contains("damageList") ? configurationSection.getDoubleList("damageList") : new ArrayList<>();
+        this.damageList = configurationSection.contains("damageList") ? configurationSection.getFloatList("damageList") : new ArrayList<>();
 
-        this.damageMultiplyList = configurationSection.contains("damageMultiplyList") ? configurationSection.getDoubleList("damageMultiplyList") : new ArrayList<>();
+        this.damageMultiplyList = configurationSection.contains("damageMultiplyList") ? configurationSection.getFloatList("damageMultiplyList") : new ArrayList<>();
     }
 
     @Override
     public boolean execute(LivingEntity caster, int skillLevel, List<LivingEntity> targets, int castCounter, int skillIndex) {
         if (targets.isEmpty()) return false;
 
-        double calcDamage = 0;
+        float calcDamage = 0;
 
         if (!damageMultiplyList.isEmpty()) {
             if (caster instanceof Player) {
@@ -69,10 +69,10 @@ public class DamageMechanic extends MechanicComponent {
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                         String rpgClassStr = activeCharacter.getRpgClassStr();
 
-                        double statValue = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
+                        float statValue = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
                         statValue += rpgCharacterStats.getElement(damageType).getTotal();
 
-                        double multiply = damageMultiplyList.get(skillLevel - 1);
+                        float multiply = damageMultiplyList.get(skillLevel - 1);
 
                         calcDamage += statValue * multiply;
                     }

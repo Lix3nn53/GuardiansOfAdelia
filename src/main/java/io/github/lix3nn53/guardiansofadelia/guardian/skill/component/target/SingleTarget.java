@@ -17,10 +17,10 @@ import java.util.List;
  */
 public class SingleTarget extends TargetComponent {
 
-    private final List<Double> range;
-    private final double tolerance;
+    private final List<Float> range;
+    private final float tolerance;
     // PARTICLE
-    private final double gap;
+    private final float gap;
     private final ArrangementSingle arrangementSingle;
 
     public SingleTarget(ConfigurationSection configurationSection) {
@@ -34,8 +34,8 @@ public class SingleTarget extends TargetComponent {
             configLoadError("tolerance");
         }
 
-        this.range = configurationSection.getDoubleList("ranges");
-        this.tolerance = configurationSection.getDouble("tolerance");
+        this.range = configurationSection.getFloatList("ranges");
+        this.tolerance = (float) configurationSection.getDouble("tolerance");
 
         // PARTICLE
         if (!configurationSection.contains("particle")) {
@@ -45,7 +45,7 @@ public class SingleTarget extends TargetComponent {
         ConfigurationSection particleSection = configurationSection.getConfigurationSection("particle");
 
         this.arrangementSingle = new ArrangementSingle(particleSection);
-        this.gap = particleSection.contains("gap") ? particleSection.getDouble("gap") : 0;
+        this.gap = particleSection.contains("gap") ? (float) particleSection.getDouble("gap") : 0;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class SingleTarget extends TargetComponent {
 
                 Location eyeLocation = target.getEyeLocation();
 
-                double v = singleTarget.getHeight() / 2;
+                float v = (float) (singleTarget.getHeight()) / 2f;
                 Location targetLocation = singleTarget.getLocation().add(0, v, 0);
 
                 ParticleShapes.drawLineBetween(eyeLocation.getWorld(), eyeLocation.toVector(), arrangementSingle, targetLocation.toVector(), gap);

@@ -35,7 +35,7 @@ public class HologramMechanic extends MechanicComponent {
     private final boolean GRAVITY;
     private final boolean MARKER;
     private final boolean SAVE;
-    private final double SPEED;
+    private final float SPEED;
 
     private final Vector OFFSET;
     private final EulerAngle ANGLE;
@@ -86,21 +86,21 @@ public class HologramMechanic extends MechanicComponent {
         }
 
         if (configurationSection.contains("speed")) {
-            this.SPEED = configurationSection.getDouble("speed");
+            this.SPEED = (float) configurationSection.getDouble("speed");
         } else {
             this.SPEED = 0;
         }
         this.SAVE = configurationSection.contains("save") && configurationSection.getBoolean("save");
 
-        double upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0;
-        double forward = configurationSection.contains("forward") ? configurationSection.getDouble("forward") : 0;
-        double right = configurationSection.contains("right") ? configurationSection.getDouble("right") : 0;
+        float upward = configurationSection.contains("upward") ? (float) configurationSection.getDouble("upward") : 0;
+        float forward = configurationSection.contains("forward") ? (float) configurationSection.getDouble("forward") : 0;
+        float right = configurationSection.contains("right") ? (float) configurationSection.getDouble("right") : 0;
 
         this.OFFSET = new Vector(forward, upward, right);
 
-        double anglex = configurationSection.contains("anglex") ? configurationSection.getDouble("anglex") : 0;
-        double angley = configurationSection.contains("angley") ? configurationSection.getDouble("angley") : 0;
-        double anglez = configurationSection.contains("anglez") ? configurationSection.getDouble("anglez") : 0;
+        float anglex = configurationSection.contains("anglex") ? (float) configurationSection.getDouble("anglex") : 0;
+        float angley = configurationSection.contains("angley") ? (float) configurationSection.getDouble("angley") : 0;
+        float anglez = configurationSection.contains("anglez") ? (float) configurationSection.getDouble("anglez") : 0;
 
         this.ANGLE = new EulerAngle(anglex, angley, anglez);
     }

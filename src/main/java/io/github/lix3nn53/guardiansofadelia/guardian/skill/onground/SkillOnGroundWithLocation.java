@@ -21,9 +21,9 @@ public class SkillOnGroundWithLocation {
 
         String worldStr = configurationSection.getString("loc.world");
         World world = Bukkit.getWorld(worldStr);
-        double x = configurationSection.getDouble("loc.x");
-        double y = configurationSection.getDouble("loc.y");
-        double z = configurationSection.getDouble("loc.z");
+        float x = (float) configurationSection.getDouble("loc.x");
+        float y = (float) configurationSection.getDouble("loc.y");
+        float z = (float) configurationSection.getDouble("loc.z");
 
         location = new Location(world, x, y, z);
     }

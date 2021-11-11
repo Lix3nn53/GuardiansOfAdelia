@@ -21,7 +21,7 @@ public class BazaarCustomerGui extends GuiGeneric {
         ItemStack glassInfo = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE, 1);
         ItemMeta itemMeta = glassInfo.getItemMeta();
 
-        itemMeta.setDisplayName(ChatPalette.GOLD + "Double click to buy an item");
+        itemMeta.setDisplayName(ChatPalette.GOLD + "Float click to buy an item");
         glassInfo.setItemMeta(itemMeta);
 
         for (int i = 18; i <= 26; i++) {

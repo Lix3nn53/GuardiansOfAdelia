@@ -20,9 +20,9 @@ public class TeleportationUtils {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.isFreeToAct()) {
                 guardianData.setTeleporting(true);
-                final double startPosX = player.getLocation().getX();
-                final double startPosY = player.getLocation().getY();
-                final double startPosZ = player.getLocation().getZ();
+                final float startPosX = (float) player.getLocation().getX();
+                final float startPosY = (float) player.getLocation().getY();
+                final float startPosZ = (float) player.getLocation().getZ();
 
                 ArmorStand hologramTop = new Hologram(player.getLocation().add(0.0, 2.6, 0.0),
                         ChatPalette.BLUE + "< " + ChatPalette.YELLOW + destination + ChatPalette.BLUE + " >").getArmorStand();
@@ -43,9 +43,9 @@ public class TeleportationUtils {
                         if (doesDivide) {
                             int currentStep = ticksRun / 4;
 
-                            double differenceX = Math.abs(startPosX - player.getLocation().getX());
-                            double differenceY = Math.abs(startPosY - player.getLocation().getY());
-                            double differenceZ = Math.abs(startPosZ - player.getLocation().getZ());
+                            float differenceX = Math.abs(startPosX - (float) player.getLocation().getX());
+                            float differenceY = Math.abs(startPosY - (float) player.getLocation().getY());
+                            float differenceZ = Math.abs(startPosZ - (float) player.getLocation().getZ());
 
                             if (currentStep < stepCount) {
                                 if (isTeleportCanceled(differenceX, differenceY, differenceZ)) {
@@ -68,7 +68,7 @@ public class TeleportationUtils {
         }
     }
 
-    private static boolean isTeleportCanceled(double differenceX, double differenceY, double differenceZ) {
+    private static boolean isTeleportCanceled(float differenceX, float differenceY, float differenceZ) {
         return differenceX > 1 || differenceY > 1 || differenceZ > 1;
     }
 

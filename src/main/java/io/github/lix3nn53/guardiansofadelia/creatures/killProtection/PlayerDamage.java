@@ -11,8 +11,8 @@ final class PlayerDamage {
 
     private final HashMap<Player, Integer> playerDamages = new HashMap<>();
 
-    void dealDamage(Player player, double damageDouble) {
-        int damage = (int) (damageDouble + 0.5);
+    void dealDamage(Player player, float damageFloat) {
+        int damage = (int) (damageFloat + 0.5);
         if (PartyManager.inParty(player)) {
             Party party = PartyManager.getParty(player);
             List<Player> members = party.getMembers();
@@ -37,7 +37,7 @@ final class PlayerDamage {
     List<Player> getBestPlayers() {
         List<Player> players = new ArrayList<>();
         if (!playerDamages.isEmpty()) {
-            double max = Collections.max(playerDamages.values());
+            float max = Collections.max(playerDamages.values());
 
             return playerDamages.entrySet().stream()
                     .filter(entry -> entry.getValue() == max)

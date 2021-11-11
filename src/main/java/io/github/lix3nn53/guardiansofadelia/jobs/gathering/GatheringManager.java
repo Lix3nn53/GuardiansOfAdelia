@@ -194,9 +194,9 @@ public class GatheringManager {
                 guardianData.setGathering(true);
                 gatheringModelState.setBeingGathered(true);
 
-                final double startPosX = player.getLocation().getX();
-                final double startPosY = player.getLocation().getY();
-                final double startPosZ = player.getLocation().getZ();
+                final float startPosX = (float) player.getLocation().getX();
+                final float startPosY = (float) player.getLocation().getY();
+                final float startPosZ = (float) player.getLocation().getZ();
 
                 int period = 16; // ticks to wait between each step
                 if (BoostPremiumManager.isBoostActive(BoostPremium.GATHER)) {
@@ -212,9 +212,9 @@ public class GatheringManager {
 
                     @Override
                     public void run() {
-                        double differenceX = Math.abs(startPosX - player.getLocation().getX());
-                        double differenceY = Math.abs(startPosY - player.getLocation().getY());
-                        double differenceZ = Math.abs(startPosZ - player.getLocation().getZ());
+                        float differenceX = Math.abs(startPosX - (float) player.getLocation().getX());
+                        float differenceY = Math.abs(startPosY - (float) player.getLocation().getY());
+                        float differenceZ = Math.abs(startPosZ - (float) player.getLocation().getZ());
 
                         ArmorStand armorStand = gatheringModelState.getArmorStand();
                         if (secsRun == 0) {

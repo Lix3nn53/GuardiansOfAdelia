@@ -21,7 +21,7 @@ import java.util.List;
 public class Enchant {
 
     private final Player player;
-    private final double MULTIPLIER = 1.05;
+    private final float MULTIPLIER = 1.05f;
     private final ItemStack itemStack;
     private int currentEnchantLevel;
 
@@ -33,8 +33,8 @@ public class Enchant {
     }
 
     public boolean enchantItem() {
-        double roll = Math.random();
-        double chance = EnchantManager.getChance(player, currentEnchantLevel);
+        float roll = (float) Math.random();
+        float chance = EnchantManager.getChance(player, currentEnchantLevel);
         boolean isSuccess = roll <= chance;
         if (isSuccess) {
             successItem();

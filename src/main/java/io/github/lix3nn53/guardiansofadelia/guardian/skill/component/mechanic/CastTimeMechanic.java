@@ -61,7 +61,7 @@ public class CastTimeMechanic extends MechanicComponent {
                 StatusEffectManager.addStatus(target, StatusEffectType.STUN, DELAY - 2);
             }
 
-            double height = target.getHeight();
+            float height = (float) target.getHeight();
             Location location = target.getLocation().add(new Vector(0, height + 0.2, 0));
 
             List<Entity> nearbyEntities = target.getNearbyEntities(24, 24, 24);

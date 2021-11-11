@@ -72,7 +72,7 @@ public class SellGui extends GuiGeneric {
     }
 
     public static int getSellValue(int reqLevel, ItemTier itemTier, int enchantLevel) {
-        double price = Math.max(1, Math.pow(reqLevel, 1.2) / 4);
+        float price = Math.max(1, (float) Math.pow(reqLevel, 1.2f) / 4f);
 
         price = price * itemTier.getBonusMultiplier();
 

@@ -57,8 +57,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
                         LivingEntity livingEntity = (LivingEntity) rightClicked;
                         if (PetManager.isCompanionAlsoPet(livingEntity)) {
                             AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-                            double maxHealth = attribute.getValue();
-                            double currentHealth = livingEntity.getHealth();
+                            float maxHealth = (float) attribute.getValue();
+                            float currentHealth = (float) livingEntity.getHealth();
                             if (currentHealth < maxHealth) {
                                 int healAmount = 100;
                                 if (foodLevel == 2) {
@@ -70,7 +70,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                                 } else if (foodLevel == 5) {
                                     healAmount = 1200;
                                 }
-                                double setHealthAmount = currentHealth + healAmount;
+                                float setHealthAmount = currentHealth + healAmount;
                                 if (setHealthAmount > maxHealth) {
                                     setHealthAmount = maxHealth;
                                 }
@@ -80,7 +80,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                                 int amount = itemInMainHand.getAmount();
                                 itemInMainHand.setAmount(amount - 1);
 
-                                ArrangementFillCircle particle = new ArrangementFillCircle(Particle.HEART, 1.2, 6, null, Direction.XZ, 0, 1.2, 0.2);
+                                ArrangementFillCircle particle = new ArrangementFillCircle(Particle.HEART, 1.2f, 6, null, Direction.XZ, 0, 1.2f, 0.2f);
                                 particle.play(livingEntity.getLocation().clone().add(0, 1.2, 0), new Vector());
                             } else {
                                 player.sendMessage(ChatPalette.RED + "Pet health is already full");

@@ -28,7 +28,7 @@ public class MMMechanicHologram extends SkillMechanic implements ITargetedEntity
     }
 
     public static void chatHologram(LivingEntity entity, String message) {
-        double height = entity.getHeight();
+        float height = (float) entity.getHeight();
         Location location = entity.getLocation().clone().add(0, height + 0.4, 0);
 
         new BukkitRunnable() {

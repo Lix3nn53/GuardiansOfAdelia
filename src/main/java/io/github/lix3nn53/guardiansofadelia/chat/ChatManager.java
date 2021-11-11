@@ -20,7 +20,7 @@ public class ChatManager {
     private static final List<Player> chatCooldown = new ArrayList<>();
 
     public static void chatHologram(Player player, String message) {
-        double height = player.getHeight();
+        float height = (float) player.getHeight();
         Location location = player.getLocation().clone().add(0, height + 0.4, 0);
 
         new BukkitRunnable() {
@@ -47,8 +47,8 @@ public class ChatManager {
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
     }
 
-    public static void chatHologramEntity(Entity entity, String message, int durationTicks, double offsetY) {
-        double height = entity.getHeight();
+    public static void chatHologramEntity(Entity entity, String message, int durationTicks, float offsetY) {
+        float height = (float) entity.getHeight();
         Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
 
         new BukkitRunnable() {
@@ -73,8 +73,8 @@ public class ChatManager {
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 2L);
     }
 
-    public static void chatHologramEntityWithCountDown(Entity entity, String message, int durationTicks, double offsetY) {
-        double height = entity.getHeight();
+    public static void chatHologramEntityWithCountDown(Entity entity, String message, int durationTicks, float offsetY) {
+        float height = (float) entity.getHeight();
         Location location = entity.getLocation().clone().add(0, height + 0.4 + offsetY, 0);
 
         new BukkitRunnable() {

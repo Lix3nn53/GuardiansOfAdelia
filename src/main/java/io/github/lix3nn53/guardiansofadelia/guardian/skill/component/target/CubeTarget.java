@@ -18,17 +18,17 @@ import java.util.List;
  */
 public class CubeTarget extends TargetComponent {
 
-    protected final List<Double> forwardList;
-    protected final List<Double> upwardList;
-    protected final List<Double> rightList;
+    protected final List<Float> forwardList;
+    protected final List<Float> upwardList;
+    protected final List<Float> rightList;
     protected final boolean resetY;
     protected final boolean centerEye;
-    private final List<Double> length_xList;
-    private final List<Double> length_yList;
-    private final List<Double> length_zList;
-    private final List<Double> offset_xList;
-    private final List<Double> offset_yList;
-    private final List<Double> offset_zList;
+    private final List<Float> length_xList;
+    private final List<Float> length_yList;
+    private final List<Float> length_zList;
+    private final List<Float> offset_xList;
+    private final List<Float> offset_yList;
+    private final List<Float> offset_zList;
     //ROTATION
     private final boolean rotation;
     private final boolean rotationMatchEye;
@@ -36,7 +36,7 @@ public class CubeTarget extends TargetComponent {
     private final float pitch;
 
     // Particle custom
-    private final double gap;
+    private final float gap;
     // PARTICLE
     private final ArrangementSingle arrangementSingle;
 
@@ -47,17 +47,17 @@ public class CubeTarget extends TargetComponent {
         if (!configurationSection.contains("length_yList")) configLoadError("length_yList");
         if (!configurationSection.contains("length_zList")) configLoadError("length_zList");
 
-        this.length_xList = configurationSection.getDoubleList("length_xList");
-        this.length_yList = configurationSection.getDoubleList("length_yList");
-        this.length_zList = configurationSection.getDoubleList("length_zList");
+        this.length_xList = configurationSection.getFloatList("length_xList");
+        this.length_yList = configurationSection.getFloatList("length_yList");
+        this.length_zList = configurationSection.getFloatList("length_zList");
 
-        this.offset_xList = configurationSection.contains("offset_xList") ? configurationSection.getDoubleList("offset_xList") : null;
-        this.offset_yList = configurationSection.contains("offset_yList") ? configurationSection.getDoubleList("offset_yList") : null;
-        this.offset_zList = configurationSection.contains("offset_zList") ? configurationSection.getDoubleList("offset_zList") : null;
+        this.offset_xList = configurationSection.contains("offset_xList") ? configurationSection.getFloatList("offset_xList") : null;
+        this.offset_yList = configurationSection.contains("offset_yList") ? configurationSection.getFloatList("offset_yList") : null;
+        this.offset_zList = configurationSection.contains("offset_zList") ? configurationSection.getFloatList("offset_zList") : null;
 
-        this.forwardList = configurationSection.contains("forwardList") ? configurationSection.getDoubleList("forwardList") : null;
-        this.upwardList = configurationSection.contains("upwardList") ? configurationSection.getDoubleList("upwardList") : null;
-        this.rightList = configurationSection.contains("rightList") ? configurationSection.getDoubleList("rightList") : null;
+        this.forwardList = configurationSection.contains("forwardList") ? configurationSection.getFloatList("forwardList") : null;
+        this.upwardList = configurationSection.contains("upwardList") ? configurationSection.getFloatList("upwardList") : null;
+        this.rightList = configurationSection.contains("rightList") ? configurationSection.getFloatList("rightList") : null;
 
         this.resetY = configurationSection.contains("resetY") && configurationSection.getBoolean("resetY");
         this.centerEye = configurationSection.contains("centerEye") && configurationSection.getBoolean("centerEye");
@@ -65,11 +65,11 @@ public class CubeTarget extends TargetComponent {
         this.rotation = configurationSection.getBoolean("rotation");
         this.rotationMatchEye = configurationSection.getBoolean("rotationMatchEye");
 
-        this.yaw = configurationSection.contains("yaw") ? (float) configurationSection.getDouble("yaw") : 0;
-        this.pitch = configurationSection.contains("pitch") ? (float) configurationSection.getDouble("pitch") : 0;
+        this.yaw = configurationSection.contains("yaw") ? (float) (float) configurationSection.getDouble("yaw") : 0;
+        this.pitch = configurationSection.contains("pitch") ? (float) (float) configurationSection.getDouble("pitch") : 0;
 
         // Particle custom
-        this.gap = configurationSection.getDouble("gap");
+        this.gap = (float) configurationSection.getDouble("gap");
 
         // PARTICLE
         if (!configurationSection.contains("particle")) {
@@ -89,15 +89,15 @@ public class CubeTarget extends TargetComponent {
 
         Vector offset = new Vector(0, 0, 0);
         if (offset_xList != null) {
-            double offset_x = offset_xList.get(skillLevel - 1);
+            float offset_x = offset_xList.get(skillLevel - 1);
             offset.setX(offset_x);
         }
         if (offset_xList != null) {
-            double offset_y = offset_yList.get(skillLevel - 1);
+            float offset_y = offset_yList.get(skillLevel - 1);
             offset.setY(offset_y);
         }
         if (offset_xList != null) {
-            double offset_z = offset_zList.get(skillLevel - 1);
+            float offset_z = offset_zList.get(skillLevel - 1);
             offset.setZ(offset_z);
         }
         for (LivingEntity ent : targets) {
@@ -105,9 +105,9 @@ public class CubeTarget extends TargetComponent {
             // Offset
             location.add(offset);
             // Length
-            double length_x = length_xList.get(skillLevel - 1);
-            double length_y = length_yList.get(skillLevel - 1);
-            double length_z = length_zList.get(skillLevel - 1);
+            float length_x = length_xList.get(skillLevel - 1);
+            float length_y = length_yList.get(skillLevel - 1);
+            float length_z = length_zList.get(skillLevel - 1);
             Vector lengthV = new Vector(length_x, length_y, length_z);
 
             Vector dir = location.getDirection();
@@ -115,9 +115,9 @@ public class CubeTarget extends TargetComponent {
             dir.normalize();
             Vector side = dir.clone().crossProduct(new Vector(0, 1, 0));
             Vector upwardly = dir.clone().crossProduct(side);
-            double forward = 0;
-            double upward = 0;
-            double right = 0;
+            float forward = 0;
+            float upward = 0;
+            float right = 0;
             if (forwardList != null) forward = forwardList.get(skillLevel - 1);
             if (upwardList != null) forward = upwardList.get(skillLevel - 1);
             if (rightList != null) forward = rightList.get(skillLevel - 1);

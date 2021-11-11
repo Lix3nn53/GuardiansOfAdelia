@@ -36,14 +36,14 @@ public class ProjectileMechanicBase {
 
     private final Class<? extends Projectile> projectileType;
     private final SpreadType spreadType;
-    private final double radius;
-    private final double height;
-    private final double speed;
+    private final float radius;
+    private final float height;
+    private final float speed;
     private final List<Integer> amountList;
     private final String amountValueKey;
-    private final double angle;
-    private final double upward;
-    private final double range;
+    private final float angle;
+    private final float upward;
+    private final float range;
     private final boolean mustHitToWork;
     //Particle projectile
     private final ParticleArrangement particleArrangement;
@@ -59,9 +59,9 @@ public class ProjectileMechanicBase {
     private LivingEntity caster;
     private int skillIndex;
 
-    public ProjectileMechanicBase(Class<? extends Projectile> projectileType, SpreadType spreadType, double radius,
-                                  double height, double speed, List<Integer> amountList, String amountValueKey,
-                                  double angle, double upward, double range, boolean mustHitToWork,
+    public ProjectileMechanicBase(Class<? extends Projectile> projectileType, SpreadType spreadType, float radius,
+                                  float height, float speed, List<Integer> amountList, String amountValueKey,
+                                  float angle, float upward, float range, boolean mustHitToWork,
                                   ParticleArrangement particleArrangement, boolean isProjectileInvisible, Optional<Material> disguiseMaterial, int disguiseCustomModelData, boolean addCasterAsFirstTargetIfHitSuccess, boolean addCasterAsSecondTargetIfHitFail) {
         this.projectileType = projectileType;
         this.spreadType = spreadType;
@@ -87,16 +87,16 @@ public class ProjectileMechanicBase {
         this.projectileType = (Class<? extends Projectile>) Class.forName("org.bukkit.entity." + projectileClass);
 
         spreadType = SpreadType.valueOf(configurationSection.getString("spreadType"));
-        speed = configurationSection.getDouble("speed");
+        speed = (float) configurationSection.getDouble("speed");
         amountList = configurationSection.getIntegerList("amountList");
         amountValueKey = configurationSection.getString("amountValueKey");
-        angle = configurationSection.getDouble("angle");
-        range = configurationSection.getDouble("range");
+        angle = (float) configurationSection.getDouble("angle");
+        range = (float) configurationSection.getDouble("range");
         mustHitToWork = configurationSection.getBoolean("mustHitToWork");
 
         if (spreadType.equals(SpreadType.RAIN)) {
-            radius = configurationSection.getDouble("radius");
-            height = configurationSection.getDouble("height");
+            radius = (float) configurationSection.getDouble("radius");
+            height = (float) configurationSection.getDouble("height");
         } else {
             radius = 0;
             height = 0;
@@ -111,7 +111,7 @@ public class ProjectileMechanicBase {
         }
 
         if (configurationSection.contains("upward")) {
-            this.upward = configurationSection.getDouble("upward");
+            this.upward = (float) configurationSection.getDouble("upward");
         } else {
             this.upward = 0;
         }
@@ -386,15 +386,15 @@ public class ProjectileMechanicBase {
         return spreadType;
     }
 
-    public double getRadius() {
+    public float getRadius() {
         return radius;
     }
 
-    public double getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public double getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 
@@ -406,15 +406,15 @@ public class ProjectileMechanicBase {
         return amountValueKey;
     }
 
-    public double getAngle() {
+    public float getAngle() {
         return angle;
     }
 
-    public double getUpward() {
+    public float getUpward() {
         return upward;
     }
 
-    public double getRange() {
+    public float getRange() {
         return range;
     }
 

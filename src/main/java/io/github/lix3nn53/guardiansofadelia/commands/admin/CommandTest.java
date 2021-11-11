@@ -58,20 +58,20 @@ public class CommandTest implements CommandExecutor {
 
                 SelfTarget selfTarget = new SelfTarget();
 
-                ArrangementSingle arrangementSingle = new ArrangementSingle(Particle.FLAME, null, 0.1, 0.5, 0.1);
+                ArrangementSingle arrangementSingle = new ArrangementSingle(Particle.FLAME, null, 0.1f, 0.5f, 0.1f);
                 /* ParticleMechanic particleMechanic = new ParticleMechanic(false, arrangementSingle, new ArrayList<>(), null, 0, 0,
                         false, true, true, true, 0, 0, 0, 0, 0);*/
 
-                ArrayList<Double> radiusList = new ArrayList<>();
-                radiusList.add(5d);
+                ArrayList<Float> radiusList = new ArrayList<>();
+                radiusList.add(5f);
                 ArrayList<Integer> amountList = new ArrayList<>();
                 amountList.add(20);
                 AreaTarget areaTarget = new AreaTarget(false, true, true, false, 10, false, false,
-                        false, radiusList, amountList, null, null, null, 0.2, arrangementSingle, null);
+                        false, radiusList, amountList, null, null, null, 0.2f, arrangementSingle, null);
 
 
-                ArrayList<Double> damages = new ArrayList<>();
-                damages.add(1d);
+                ArrayList<Float> damages = new ArrayList<>();
+                damages.add(1f);
                 DamageMechanic damageMechanic = new DamageMechanic(false, damages, null, ElementType.FIRE, null);
 
                 FlagCondition flagCondition = new FlagCondition("trapKey", false, false, false);
@@ -140,7 +140,7 @@ public class CommandTest implements CommandExecutor {
                     armorStand.setGravity(false);
                 }
             } else if (args[0].equals("damage")) {
-                double damage = Double.parseDouble(args[1]);
+                float damage = Float.parseFloat(args[1]);
 
                 player.damage(damage);
             }

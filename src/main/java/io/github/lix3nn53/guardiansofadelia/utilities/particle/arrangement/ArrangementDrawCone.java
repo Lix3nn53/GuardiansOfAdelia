@@ -11,7 +11,7 @@ public class ArrangementDrawCone extends ArrangementWithData {
 
     private final int amount;
     private final int amounty;
-    private final double angle;
+    private final float angle;
 
     public ArrangementDrawCone(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -37,12 +37,12 @@ public class ArrangementDrawCone extends ArrangementWithData {
         this.angle = configurationSection.getInt("angle");
 
         // Data that animations can modify
-        addData(configurationSection.getDouble("length"));
+        addData((float) configurationSection.getDouble("length"));
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset) {
-        double length = getData(0);
+        float length = getData(0);
 
         ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
 
@@ -51,7 +51,7 @@ public class ArrangementDrawCone extends ArrangementWithData {
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
-        double length = getData(0);
+        float length = getData(0);
 
         ArrangementSingle arrangementSingle = new ArrangementSingle(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
 

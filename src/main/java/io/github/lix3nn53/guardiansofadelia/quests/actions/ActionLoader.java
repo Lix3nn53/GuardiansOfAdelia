@@ -79,11 +79,11 @@ public class ActionLoader {
         } else if (actionType.equals(TeleportAction.class.getSimpleName())) {
             World world = Bukkit.getWorld(configurationSection.getString("world"));
 
-            double x = configurationSection.getDouble(".x");
-            double y = configurationSection.getDouble(".y");
-            double z = configurationSection.getDouble(".z");
-            float yaw = (float) configurationSection.getDouble(".yaw");
-            float pitch = (float) configurationSection.getDouble(".pitch");
+            float x = (float) configurationSection.getDouble(".x");
+            float y = (float) configurationSection.getDouble(".y");
+            float z = (float) configurationSection.getDouble(".z");
+            float yaw = (float) (float) configurationSection.getDouble(".yaw");
+            float pitch = (float) (float) configurationSection.getDouble(".pitch");
 
             Location location = new Location(world, x, y, z, yaw, pitch);
 

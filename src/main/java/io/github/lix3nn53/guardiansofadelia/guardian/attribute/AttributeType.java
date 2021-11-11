@@ -60,7 +60,7 @@ public enum AttributeType {
         return "attributeDescription";
     }
 
-    public double getIncrementPerPoint() {
+    public float getIncrementPerPoint() {
         switch (this) {
             case BONUS_ELEMENT_DAMAGE:
                 return 1;
@@ -71,23 +71,23 @@ public enum AttributeType {
             case BONUS_MAX_MANA:
                 return 1;
             case BONUS_CRITICAL_CHANCE:
-                return 0.0005;
+                return 0.0005f;
         }
         return 1;
     }
 
-    public double getBonusFromLevelReduction() {
+    public float getBonusFromLevelReduction() {
         switch (this) {
             case BONUS_ELEMENT_DAMAGE:
-                return 0.1;
+                return 0.1f;
             case BONUS_ELEMENT_DEFENSE:
-                return 0.2;
+                return 0.2f;
             case BONUS_MAX_HEALTH:
-                return 0.1;
+                return 0.1f;
             case BONUS_MAX_MANA:
-                return 0.05;
+                return 0.05f;
             case BONUS_CRITICAL_CHANCE:
-                return 0.05;
+                return 0.05f;
         }
         return 1;
     }

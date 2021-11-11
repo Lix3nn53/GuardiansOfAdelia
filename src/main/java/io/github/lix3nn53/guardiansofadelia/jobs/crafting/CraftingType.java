@@ -21,21 +21,21 @@ public enum CraftingType {
     public String getName() {
         switch (this) {
             case WEAPON_RANGED:
-                return "Ranged Weapon Crafting";
+                return "Ranged Weaponsmith";
             case ARMOR_HEAVY:
-                return "Heavy Armor Crafting";
+                return "Heavy Armorsmith";
             case ARMOR_LIGHT:
-                return "Light Armor Crafting";
+                return "Light Armorsmith";
             case POTION:
-                return "Potion Crafting";
+                return "Alchemy";
             case FOOD:
-                return "Food Crafting";
+                return "Cooking";
             case JEWEL:
-                return "Jewel Crafting";
+                return "Jewelsmith";
             case ENCHANT_STONE:
                 return "Enchant-Stone Crafting";
         }
-        return "Melee Weapon";
+        return "Melee Weaponsmith";
     }
 
     public List<ItemStack> getItemsToCraft(GearLevel gearLevel) {

@@ -24,8 +24,8 @@ import java.util.Random;
 
 public class DungeonPrizeChestManager {
 
-    private static final double RADIUS = 4;
-    private static final double HEIGHT = 1.5;
+    private static final float RADIUS = 4;
+    private static final float HEIGHT = 1.5f;
 
     private static final HashMap<ArmorStand, PrizeChest> entityToPrizeChest = new HashMap<>();
     private static final HashMap<ArmorStand, ArmorStand> entityToIcon = new HashMap<>();
@@ -118,19 +118,19 @@ public class DungeonPrizeChestManager {
     }
 
     private static Vector[] calculateLocations(Location center, int amount) {
-        double fullRadian = Math.toRadians(360);
+        float fullRadian = (float) Math.toRadians(360);
 
         Vector centerVector = center.toVector().add(new Vector(0, HEIGHT, 0));
 
         Vector[] points = new Vector[amount];
         int index = 0;
-        for (double i = 0; i < amount; i++) {
-            double percent = i / amount;
-            double theta = fullRadian * percent;
-            double dx = RADIUS * Math.cos(theta);
-            double dy = 0;
-            double dz = RADIUS * Math.sin(theta);
-            //double dy = radius * Math.sin(theta);
+        for (float i = 0; i < amount; i++) {
+            float percent = i / amount;
+            float theta = fullRadian * percent;
+            float dx = RADIUS * (float) Math.cos(theta);
+            float dy = 0;
+            float dz = RADIUS * (float) Math.sin(theta);
+            //float dy = radius * Math.sin(theta);
             points[index] = centerVector.clone().add(new Vector(dx, dy, dz));
             index++;
         }

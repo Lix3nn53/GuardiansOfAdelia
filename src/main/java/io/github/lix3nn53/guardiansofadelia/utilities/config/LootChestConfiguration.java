@@ -38,9 +38,9 @@ public class LootChestConfiguration {
             ConfigurationSection section = lootChestsConfig.getConfigurationSection("chest" + i);
             String worldString = section.getString("world");
             World world = Bukkit.getWorld(worldString);
-            double x = section.getDouble("x");
-            double y = section.getDouble("y");
-            double z = section.getDouble("z");
+            float x = (float) section.getDouble("x");
+            float y = (float) section.getDouble("y");
+            float z = (float) section.getDouble("z");
             Location location = new Location(world, x, y, z);
             String tierStr = section.getString("tier");
             LootChestTier lootChestTier = LootChestTier.valueOf(tierStr);

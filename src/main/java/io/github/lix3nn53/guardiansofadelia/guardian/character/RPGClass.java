@@ -67,8 +67,8 @@ public class RPGClass {
 
     public int getAttributeBonusForLevel(AttributeType attributeType, int level) {
         int tier = attributeTiers.get(attributeType);
-        double levelD = level;
-        double tierD = tier;
+        float levelD = level;
+        float tierD = tier;
 
         return (int) ((levelD * ((levelD * tierD) / (levelD * 0.2))) + 0.5);
     }

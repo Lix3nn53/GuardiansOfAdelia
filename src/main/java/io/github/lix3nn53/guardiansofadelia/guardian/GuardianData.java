@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
@@ -43,6 +44,8 @@ public class GuardianData {
     private Bazaar bazaar;
 
     private final DailyRewardInfo dailyRewardInfo = new DailyRewardInfo();
+
+    private String language = null;
 
     public GuardianData() {
         personalStorage.setLocked(false);
@@ -226,5 +229,27 @@ public class GuardianData {
 
     public DailyRewardInfo getDailyRewardInfo() {
         return dailyRewardInfo;
+    }
+
+    public void setLanguage(Player player, String language) {
+        player.sendMessage(ChatPalette.YELLOW + "Changing to language: " + language);
+        if (!Translation.exists(language)) {
+            language = Translation.DEFAULT_LANG;
+            player.sendMessage(ChatPalette.RED + "This language does not exist, using default: " + language);
+        } else {
+            player.sendMessage(ChatPalette.GREEN + "Successfully changed to " + language);
+        }
+        this.language = language;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        if (!Translation.exists(language)) {
+            language = Translation.DEFAULT_LANG;
+        }
+        this.language = language;
     }
 }

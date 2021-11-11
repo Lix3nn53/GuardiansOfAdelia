@@ -49,9 +49,9 @@ public class TaskLoader {
                 nameOfMobsItemDropsFrom.add(internalName);
             }
 
-            double chance = 0;
+            float chance = 0;
             if (!nameOfMobsItemDropsFrom.isEmpty()) {
-                chance = configurationSection.getDouble("chance");
+                chance = (float) configurationSection.getDouble("chance");
             }
             ConfigurationSection itemDrop = configurationSection.getConfigurationSection("itemDrop");
             ItemStack questItem = ItemReferenceLoader.loadItemReference(itemDrop);
@@ -127,9 +127,9 @@ public class TaskLoader {
         } else if (componentType.equals(TaskReach.class.getSimpleName())) {
             World world = Bukkit.getWorld(configurationSection.getString("world"));
 
-            double x = configurationSection.getDouble("x");
-            double y = configurationSection.getDouble("y");
-            double z = configurationSection.getDouble("z");
+            float x = (float) configurationSection.getDouble("x");
+            float y = (float) configurationSection.getDouble("y");
+            float z = (float) configurationSection.getDouble("z");
 
             Location location = new Location(world, x, y, z);
 

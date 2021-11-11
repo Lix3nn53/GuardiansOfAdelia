@@ -32,7 +32,7 @@ public class RPGItemUtils {
         itemStack.setItemMeta(itemMeta);
     }
 
-    public static void setAttackSpeed(ItemStack itemStack, double amount) {
+    public static void setAttackSpeed(ItemStack itemStack, float amount) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.removeAttributeModifier(Attribute.GENERIC_ATTACK_SPEED);
 

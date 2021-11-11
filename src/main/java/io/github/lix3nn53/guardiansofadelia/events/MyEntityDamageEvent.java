@@ -66,7 +66,7 @@ public class MyEntityDamageEvent implements Listener {
             return;
         }
 
-        double customNaturalDamage = getCustomNaturalDamage(cause, (LivingEntity) entity);
+        float customNaturalDamage = getCustomNaturalDamage(cause, (LivingEntity) entity);
         if (customNaturalDamage > 0) {
             event.setDamage(customNaturalDamage);
         }
@@ -76,14 +76,14 @@ public class MyEntityDamageEvent implements Listener {
         if (entityType.equals(EntityType.PLAYER)) {
             Player player = (Player) entity;
 
-            double finalDamage = event.getFinalDamage();
+            float finalDamage = (float) event.getFinalDamage();
             if (PartyManager.inParty(player)) {
                 Party party = PartyManager.getParty(player);
                 party.getBoard().updateHP(player.getName(), (int) (player.getHealth() - finalDamage + 0.5));
             }
         } else {
             LivingEntity livingEntity = (LivingEntity) entity;
-            PetManager.onTakeDamage(livingEntity, livingEntity.getHealth(), event.getFinalDamage());
+            PetManager.onTakeDamage(livingEntity, (float) livingEntity.getHealth(), (float) event.getFinalDamage());
         }
 
         LivingEntity livingEntity = (LivingEntity) entity;
@@ -94,8 +94,8 @@ public class MyEntityDamageEvent implements Listener {
         }
     }
 
-    private double getCustomNaturalDamage(EntityDamageEvent.DamageCause cause, LivingEntity entity) {
-        double maxHealth = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+    private float getCustomNaturalDamage(EntityDamageEvent.DamageCause cause, LivingEntity entity) {
+        float maxHealth = (float) entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         if (cause.equals(EntityDamageEvent.DamageCause.FALL) && entity instanceof Player) {
             float fallDistance = entity.getFallDistance();
 

@@ -27,7 +27,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     private final List<Integer> DURATION;
 
     private final ElementType element;
-    private final List<Double> elementPercents;
+    private final List<Float> elementPercents;
 
     private boolean SAVE = false;
     private final Optional<String> maxAmountVar;
@@ -55,7 +55,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         this.mobCode = configurationSection.getString("mobCode");
         this.amounts = configurationSection.getIntegerList("amounts");
         this.element = ElementType.valueOf(configurationSection.getString("element"));
-        this.elementPercents = configurationSection.getDoubleList("elementPercents");
+        this.elementPercents = configurationSection.getFloatList("elementPercents");
 
         if (configurationSection.contains("durations")) {
             this.DURATION = configurationSection.getIntegerList("durations");
@@ -81,7 +81,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
         if (targets.isEmpty()) return false;
 
         int amount = amounts.get(skillLevel - 1);
-        double elementPercent = elementPercents.get(skillLevel - 1);
+        float elementPercent = elementPercents.get(skillLevel - 1);
 
         int level = 0;
         if (caster instanceof Player) {
@@ -95,9 +95,9 @@ public class SpawnCompanionMechanic extends MechanicComponent {
                     int elementPoints = element.getTotal();
 
                     String rpgClassStr = activeCharacter.getRpgClassStr();
-                    double playerDamage = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
+                    float playerDamage = rpgCharacterStats.getTotalElementDamage(player, rpgClassStr);
 
-                    double total = playerDamage + elementPoints;
+                    float total = playerDamage + elementPoints;
 
                     level = (int) (total * elementPercent + 0.5);
                 }

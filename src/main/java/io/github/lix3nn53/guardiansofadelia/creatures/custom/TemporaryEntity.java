@@ -486,7 +486,7 @@ public class TemporaryEntity implements LivingEntity {
 
     @Override
     public List<Entity> getNearbyEntities(double v, double v1, double v2) {
-        return TargetHelper.getNearbySphereNonLiving(this.location, v);
+        return TargetHelper.getNearbySphereNonLiving(this.location, (float) v);
     }
 
     @Override

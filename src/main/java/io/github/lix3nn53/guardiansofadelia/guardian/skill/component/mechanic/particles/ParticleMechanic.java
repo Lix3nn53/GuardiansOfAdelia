@@ -15,11 +15,11 @@ import java.util.List;
 public class ParticleMechanic extends MechanicComponent {
 
     protected final ParticleArrangement particleArrangement;
-    protected final List<List<Double>> dataIndexToDataList; // Data index is index of data while data list contains values according to skill level
+    protected final List<List<Float>> dataIndexToDataList; // Data index is index of data while data list contains values according to skill level
 
-    protected final List<Double> forwardList;
-    protected final double upward;
-    protected final double right;
+    protected final List<Float> forwardList;
+    protected final float upward;
+    protected final float right;
 
     protected final boolean resetY;
     protected final boolean centerEye;
@@ -29,13 +29,13 @@ public class ParticleMechanic extends MechanicComponent {
     protected final float yaw;
     protected final float pitch;
 
-    protected final double offsetx;
-    protected final double offsety;
-    protected final double offsetz;
+    protected final float offsetx;
+    protected final float offsety;
+    protected final float offsetz;
 
-    public ParticleMechanic(boolean addLore, ParticleArrangement particleArrangement, List<List<Double>> dataIndexToDataList,
-                            List<Double> forwardList, double upward, double right, boolean resetY, boolean centerEye, boolean rotation,
-                            boolean rotationMatchEye, float yaw, float pitch, double offsetx, double offsety, double offsetz) {
+    public ParticleMechanic(boolean addLore, ParticleArrangement particleArrangement, List<List<Float>> dataIndexToDataList,
+                            List<Float> forwardList, float upward, float right, boolean resetY, boolean centerEye, boolean rotation,
+                            boolean rotationMatchEye, float yaw, float pitch, float offsetx, float offsety, float offsetz) {
         super(addLore);
         this.particleArrangement = particleArrangement;
         this.dataIndexToDataList = dataIndexToDataList;
@@ -62,30 +62,30 @@ public class ParticleMechanic extends MechanicComponent {
         this.dataIndexToDataList = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
             if (!configurationSection.contains("data" + i)) break;
-            this.dataIndexToDataList.add(configurationSection.getDoubleList("data" + i));
+            this.dataIndexToDataList.add(configurationSection.getFloatList("data" + i));
         }
 
-        this.forwardList = configurationSection.contains("forwardList") ? configurationSection.getDoubleList("forwardList") : null;
-        this.upward = configurationSection.contains("upward") ? configurationSection.getDouble("upward") : 0;
-        this.right = configurationSection.contains("right") ? configurationSection.getDouble("right") : 0;
+        this.forwardList = configurationSection.contains("forwardList") ? configurationSection.getFloatList("forwardList") : null;
+        this.upward = configurationSection.contains("upward") ? (float) configurationSection.getDouble("upward") : 0;
+        this.right = configurationSection.contains("right") ? (float) configurationSection.getDouble("right") : 0;
 
         this.resetY = configurationSection.contains("resetY") && configurationSection.getBoolean("resetY");
         this.centerEye = configurationSection.contains("centerEye") && configurationSection.getBoolean("centerEye");
         this.rotation = configurationSection.contains("rotation") && configurationSection.getBoolean("rotation");
         this.rotationMatchEye = configurationSection.contains("rotationMatchEye") && configurationSection.getBoolean("rotationMatchEye");
 
-        this.yaw = configurationSection.contains("yaw") ? (float) configurationSection.getDouble("yaw") : 0;
-        this.pitch = configurationSection.contains("pitch") ? (float) configurationSection.getDouble("pitch") : 0;
+        this.yaw = configurationSection.contains("yaw") ? (float) (float) configurationSection.getDouble("yaw") : 0;
+        this.pitch = configurationSection.contains("pitch") ? (float) (float) configurationSection.getDouble("pitch") : 0;
 
-        this.offsetx = configurationSection.contains("offsetx") ? configurationSection.getDouble("offsetx") : 0;
-        this.offsety = configurationSection.contains("offsety") ? configurationSection.getDouble("offsety") : 0;
-        this.offsetz = configurationSection.contains("offsetz") ? configurationSection.getDouble("offsetz") : 0;
+        this.offsetx = configurationSection.contains("offsetx") ? (float) configurationSection.getDouble("offsetx") : 0;
+        this.offsety = configurationSection.contains("offsety") ? (float) configurationSection.getDouble("offsety") : 0;
+        this.offsetz = configurationSection.contains("offsetz") ? (float) configurationSection.getDouble("offsetz") : 0;
     }
 
-    public static void playParticle(LivingEntity ent, int skillLevel, boolean centerEye, boolean resetY, List<Double> forwardList, double upward,
-                                    double right, List<List<Double>> dataIndexToDataList, ParticleArrangement particleArrangement, boolean rotation,
-                                    boolean rotationMatchEye, float yaw, float pitch, double offsetx, double offsety, double offsetz,
-                                    List<Double> dataIncrements, int counter) {
+    public static void playParticle(LivingEntity ent, int skillLevel, boolean centerEye, boolean resetY, List<Float> forwardList, float upward,
+                                    float right, List<List<Float>> dataIndexToDataList, ParticleArrangement particleArrangement, boolean rotation,
+                                    boolean rotationMatchEye, float yaw, float pitch, float offsetx, float offsety, float offsetz,
+                                    List<Float> dataIncrements, int counter) {
         Location location = centerEye ? ent.getEyeLocation() : ent.getLocation();
 
         Vector dir = location.getDirection();
@@ -93,17 +93,17 @@ public class ParticleMechanic extends MechanicComponent {
         dir.normalize();
         Vector side = dir.clone().crossProduct(new Vector(0, 1, 0));
         Vector upwardly = dir.clone().crossProduct(side);
-        double forward = 0;
+        float forward = 0;
         if (forwardList != null) forward = forwardList.get(skillLevel - 1);
         location.add(dir.multiply(forward)).subtract(upwardly.multiply(upward)).add(side.multiply(right));
 
         if (!dataIndexToDataList.isEmpty()) {
             ArrangementWithData arrangementWithRadius = (ArrangementWithData) particleArrangement;
 
-            List<Double> currentDataList = new ArrayList<>(); // get current
+            List<Float> currentDataList = new ArrayList<>(); // get current
             for (int i = 0; i < dataIndexToDataList.size(); i++) {
-                List<Double> list = dataIndexToDataList.get(i);
-                double current = list.get(skillLevel - 1);
+                List<Float> list = dataIndexToDataList.get(i);
+                float current = list.get(skillLevel - 1);
                 if (i < dataIncrements.size()) {
                     current += dataIncrements.get(i) * counter;
                 }

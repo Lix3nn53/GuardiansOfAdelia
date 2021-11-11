@@ -6,32 +6,32 @@ import org.bukkit.util.Vector;
 
 public class MatrixHelper {
 
-    public static double[][] rotationZ(double angle) {
-        return new double[][]{
-                new double[]{Math.cos(angle), -Math.sin(angle), 0d},
-                new double[]{Math.sin(angle), Math.cos(angle), 0d},
-                new double[]{0d, 0d, 1d},
+    public static float[][] rotationZ(float angle) {
+        return new float[][]{
+                new float[]{(float) Math.cos(angle), (float) -Math.sin(angle), 0f},
+                new float[]{(float) Math.sin(angle), (float) Math.cos(angle), 0f},
+                new float[]{0f, 0f, 1f},
         };
     }
 
-    public static double[][] rotationX(double angle) {
-        return new double[][]{
-                new double[]{1d, 0d, 0d},
-                new double[]{0d, Math.cos(angle), -Math.sin(angle)},
-                new double[]{0d, Math.sin(angle), Math.cos(angle)},
+    public static float[][] rotationX(float angle) {
+        return new float[][]{
+                new float[]{1f, 0f, 0f},
+                new float[]{0f, (float) Math.cos(angle), (float) -Math.sin(angle)},
+                new float[]{0f, (float) Math.sin(angle), (float) Math.cos(angle)},
         };
     }
 
-    public static double[][] rotationY(double angle) {
-        return new double[][]{
-                new double[]{Math.cos(angle), 0d, Math.sin(angle)},
-                new double[]{0d, 1d, 0d},
-                new double[]{-Math.sin(angle), 0d, Math.cos(angle)},
+    public static float[][] rotationY(float angle) {
+        return new float[][]{
+                new float[]{(float) Math.cos(angle), 0f, (float) Math.sin(angle)},
+                new float[]{0f, 1f, 0f},
+                new float[]{(float) -Math.sin(angle), 0f, (float) Math.cos(angle)},
         };
     }
 
-    public static double[][] multiplyMatrices(double[][] firstMatrix, double[][] secondMatrix) {
-        double[][] result = new double[firstMatrix.length][secondMatrix[0].length];
+    public static float[][] multiplyMatrices(float[][] firstMatrix, float[][] secondMatrix) {
+        float[][] result = new float[firstMatrix.length][secondMatrix[0].length];
 
         for (int row = 0; row < result.length; row++) {
             for (int col = 0; col < result[row].length; col++) {
@@ -42,36 +42,36 @@ public class MatrixHelper {
         return result;
     }
 
-    public static double multiplyMatricesCell(double[][] firstMatrix, double[][] secondMatrix, int row, int col) {
-        double cell = 0;
+    public static float multiplyMatricesCell(float[][] firstMatrix, float[][] secondMatrix, int row, int col) {
+        float cell = 0;
         for (int i = 0; i < secondMatrix.length; i++) {
             cell += firstMatrix[row][i] * secondMatrix[i][col];
         }
         return cell;
     }
 
-    public static double[][] locationToMatrix(Location location) {
-        double x = location.getX();
-        double y = location.getY();
-        double z = location.getZ();
+    public static float[][] locationToMatrix(Location location) {
+        float x = (float) location.getX();
+        float y = (float) location.getY();
+        float z = (float) location.getZ();
 
-        return new double[][]{new double[]{x}, new double[]{y}, new double[]{z}};
+        return new float[][]{new float[]{x}, new float[]{y}, new float[]{z}};
     }
 
-    public static Location matrixToLocation(World world, double[][] locationMatrix) {
-        double x = locationMatrix[0][0];
-        double y = locationMatrix[1][0];
-        double z = locationMatrix[2][0];
+    public static Location matrixToLocation(World worlf, float[][] locationMatrix) {
+        float x = locationMatrix[0][0];
+        float y = locationMatrix[1][0];
+        float z = locationMatrix[2][0];
 
-        return new Location(world, x, y, z);
+        return new Location(worlf, x, y, z);
     }
 
-    public static double[][] translationMatrix(double x, double y, double z) {
-        return new double[][]{
-                new double[]{1d, 0d, 0d, x},
-                new double[]{0d, 1d, 0d, y},
-                new double[]{0d, 0d, 1d, z},
-                new double[]{0d, 0d, 0d, 1},
+    public static float[][] translationMatrix(float x, float y, float z) {
+        return new float[][]{
+                new float[]{1f, 0f, 0f, x},
+                new float[]{0f, 1f, 0f, y},
+                new float[]{0f, 0f, 1f, z},
+                new float[]{0f, 0f, 0f, 1},
         };
     }
 
@@ -82,18 +82,18 @@ public class MatrixHelper {
      * @param vector translate by vector
      * @return
      */
-    public static double[][] translate(double x, double y, double z, Vector vector) {
-        double vx = vector.getX();
-        double vy = vector.getY();
-        double vz = vector.getZ();
+    public static float[][] translate(float x, float y, float z, Vector vector) {
+        float vx = (float) vector.getX();
+        float vy = (float) vector.getY();
+        float vz = (float) vector.getZ();
 
-        double[][] translationMatrix = translationMatrix(vx, vy, vz);
+        float[][] translationMatrix = translationMatrix(vx, vy, vz);
 
-        double[][] doubles = {new double[]{x}, new double[]{y}, new double[]{z}, new double[]{1}};
+        float[][] floats = {new float[]{x}, new float[]{y}, new float[]{z}, new float[]{1}};
 
-        double[][] multiply = multiplyMatrices(translationMatrix, doubles);
+        float[][] multiply = multiplyMatrices(translationMatrix, floats);
 
-        return new double[][]{new double[]{multiply[0][0]}, new double[]{multiply[1][0]}, new double[]{multiply[2][0]}};
+        return new float[][]{new float[]{multiply[0][0]}, new float[]{multiply[1][0]}, new float[]{multiply[2][0]}};
     }
 
     /**
@@ -102,11 +102,11 @@ public class MatrixHelper {
      * @return result of translate
      */
     public static Location translate(Location location, Vector vector) {
-        double x = location.getX();
-        double y = location.getY();
-        double z = location.getZ();
+        float x = (float) location.getX();
+        float y = (float) location.getY();
+        float z = (float) location.getZ();
 
-        double[][] translate = translate(x, y, z, vector);
+        float[][] translate = translate(x, y, z, vector);
 
         return new Location(location.getWorld(), translate[0][0], translate[1][0], translate[2][0]);
     }
@@ -116,11 +116,11 @@ public class MatrixHelper {
      * @param translateVector translate toTranslate by this vector
      */
     public static void translate(Vector toTranslate, Vector translateVector) {
-        double x = toTranslate.getX();
-        double y = toTranslate.getY();
-        double z = toTranslate.getZ();
+        float x = (float) toTranslate.getX();
+        float y = (float) toTranslate.getY();
+        float z = (float) toTranslate.getZ();
 
-        double[][] translate = translate(x, y, z, translateVector);
+        float[][] translate = translate(x, y, z, translateVector);
 
         toTranslate.setX(translate[0][0]);
         toTranslate.setY(translate[1][0]);

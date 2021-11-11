@@ -17,10 +17,10 @@ import java.util.List;
 public class ManaMechanic extends MechanicComponent {
 
     private final List<Integer> manaAmount;
-    private final List<Double> manaPercent;
+    private final List<Float> manaPercent;
     private final String multiplyWithValue;
 
-    public ManaMechanic(List<Integer> manaAmount, List<Double> manaPercent, @Nullable String multiplyWithValue) {
+    public ManaMechanic(List<Integer> manaAmount, List<Float> manaPercent, @Nullable String multiplyWithValue) {
         super(false);
         this.manaAmount = manaAmount;
         this.manaPercent = manaPercent;
@@ -45,7 +45,7 @@ public class ManaMechanic extends MechanicComponent {
         }
 
         this.manaAmount = configurationSection.getIntegerList("manaAmountList");
-        this.manaPercent = configurationSection.getDoubleList("manaPercentList");
+        this.manaPercent = configurationSection.getFloatList("manaPercentList");
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ManaMechanic extends MechanicComponent {
                         RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
                         int currentMana = rpgCharacterStats.getCurrentMana();
 
-                        double maxMana = rpgCharacterStats.getTotalMaxMana();
+                        float maxMana = rpgCharacterStats.getTotalMaxMana();
 
                         if (currentMana == maxMana) continue;
 

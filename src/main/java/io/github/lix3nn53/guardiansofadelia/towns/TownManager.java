@@ -19,8 +19,7 @@ public class TownManager {
     }
 
     public static Town getNearestTown(Location location) {
-        Town nearestTown = Collections.min(townNoToTown.values(), Comparator.comparingDouble(town -> town.getDistanceSquared(location)));
-        return nearestTown;
+        return Collections.min(townNoToTown.values(), Comparator.comparingDouble(town -> town.getDistanceSquared(location)));
     }
 
     public static Town getTown(int i) {

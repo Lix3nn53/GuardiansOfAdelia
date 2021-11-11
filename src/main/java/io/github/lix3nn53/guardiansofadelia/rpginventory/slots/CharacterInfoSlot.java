@@ -47,16 +47,16 @@ public class CharacterInfoSlot {
                 int expReq = RPGCharacterExperienceManager.getRequiredExperience(level);
                 int maxHealth = (int) (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 0.5);
                 int health = (int) (player.getHealth() + 0.5);
-                double criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
-                double criticalDamage = rpgCharacterStats.getTotalCriticalDamage() * 100;
+                float criticalChance = rpgCharacterStats.getTotalCriticalChance() * 100;
+                float criticalDamage = rpgCharacterStats.getTotalCriticalDamage() * 100;
 
                 final int totalDefense = rpgCharacterStats.getTotalElementDefense();
-                double defenseReduction = StatUtils.getDefenseReduction(totalDefense);
+                float defenseReduction = StatUtils.getDefenseReduction(totalDefense);
 
                 ElementType mainElement = rpgClass.getMainElement();
 
-                double abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
-                double cooldownReduction = SkillBar.abilityHasteToMultiplier(abilityHaste);
+                float abilityHaste = rpgCharacterStats.getTotalAbilityHaste();
+                float cooldownReduction = SkillBar.abilityHasteToMultiplier(abilityHaste);
                 RPGClassStats rpgClassStats = activeCharacter.getCurrentRPGClassStats();
                 int classLevel = RPGClassExperienceManager.getLevel(rpgClassStats.getTotalExperience());
 

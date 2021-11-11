@@ -52,10 +52,10 @@ public enum GearSetEffect {
                 Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE)).setBaseValue(0.7);
                 break;
             case CRITICAL_DAMAGE:
-                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_DAMAGE, 0.2, null);
+                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_DAMAGE, 0.2f, null);
                 break;
             case CRITICAL_CHANCE:
-                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_CHANCE, 0.1, null);
+                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_CHANCE, 0.1f, null);
                 break;
             case SLOW_FALLING:
                 PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW_FALLING, Integer.MAX_VALUE, 1);
@@ -85,7 +85,7 @@ public enum GearSetEffect {
                 player.addPotionEffect(potionEffect);
                 break;
             case LIFE_STEAL:
-                rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, 0.1, null);
+                rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, 0.1f, null);
                 break;
         }
     }
@@ -96,10 +96,10 @@ public enum GearSetEffect {
                 player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
                 break;
             case CRITICAL_DAMAGE:
-                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_DAMAGE, -0.2, null);
+                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_DAMAGE, -0.2f, null);
                 break;
             case CRITICAL_CHANCE:
-                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_CHANCE, -0.1, null);
+                rpgCharacterStats.addToBuffMultiplier(BuffType.CRIT_CHANCE, -0.1f, null);
                 break;
             case SLOW_FALLING:
                 player.removePotionEffect(PotionEffectType.SLOW_FALLING);
@@ -123,7 +123,7 @@ public enum GearSetEffect {
                 player.removePotionEffect(PotionEffectType.SPEED);
                 break;
             case LIFE_STEAL:
-                rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, -0.1, null);
+                rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, -0.1f, null);
                 break;
         }
     }

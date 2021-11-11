@@ -19,8 +19,8 @@ public class MyEntityRegainHealthEvent implements Listener {
         if (!(event.getEntity() instanceof LivingEntity)) return;
 
         LivingEntity livingEntity = (LivingEntity) event.getEntity();
-        double health = livingEntity.getHealth();
-        double amount = event.getAmount();
+        float health = (float) livingEntity.getHealth();
+        float amount = (float) event.getAmount();
 
         HealthBarManager.onLivingTargetHealthChange(livingEntity, (int) (-amount + 0.5), ChatPalette.GREEN_LIGHT, "heal");
 

@@ -32,7 +32,7 @@ public class GearWeapon implements RPGGear {
             gearSetExist = true;
         }
 
-        double bonusPercent = tier.getBonusMultiplier();
+        float bonusPercent = tier.getBonusMultiplier();
 
         elementDamage = (int) ((elementDamage * bonusPercent) + 0.5);
 
@@ -50,7 +50,7 @@ public class GearWeapon implements RPGGear {
         lore.add(GearWeapon.getLoreDamagePrefix() + elementDamage);
         lore.add(ChatPalette.BLUE_LIGHT + "ø Attack Speed: " + weaponAttackSpeed.getLoreString());
         lore.add(ChatPalette.GOLD + "☆ Critical chance: " + ChatPalette.GRAY + new DecimalFormat("##.##").format(gearType.getCriticalChance() * 100) + "%");
-        double meleeDamageReduction = gearType.getMeleeDamageReduction();
+        float meleeDamageReduction = gearType.getMeleeDamageReduction();
         if (meleeDamageReduction < 1) {
             lore.add(ChatPalette.RED + "Melee Damage Reduction: " + ChatPalette.GRAY + ((1 - meleeDamageReduction) * 100) + "%");
         }

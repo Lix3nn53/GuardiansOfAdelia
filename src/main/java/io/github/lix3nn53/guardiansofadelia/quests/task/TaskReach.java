@@ -84,7 +84,7 @@ public final class TaskReach implements Task {
     }
 
     public boolean progress(Player player, Location targetBlockLoc, int questID, int taskIndex, boolean ignorePrevent) {
-        double distanceSquared = targetBlockLoc.distanceSquared(this.blockLoc);
+        float distanceSquared = (float) targetBlockLoc.distanceSquared(this.blockLoc);
 
         int maxDistance = 81;
 

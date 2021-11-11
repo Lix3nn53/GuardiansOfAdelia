@@ -15,7 +15,7 @@ public class DelayWithHoloMessageMechanic extends MechanicComponent {
 
     private final long ticks;
     private final String message;
-    private final double offsetY;
+    private final float offsetY;
 
     public DelayWithHoloMessageMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -32,7 +32,7 @@ public class DelayWithHoloMessageMechanic extends MechanicComponent {
         this.message = configurationSection.getString("message");
 
         if (configurationSection.contains("offsetY")) {
-            this.offsetY = configurationSection.getDouble("offsetY");
+            this.offsetY = (float) configurationSection.getDouble("offsetY");
         } else {
             this.offsetY = 0;
         }

@@ -53,19 +53,19 @@ public class MMMechanicProjectile extends SkillMechanic implements ITargetedEnti
         }
 
         SpreadType spreadType = SpreadType.valueOf(config.getString(new String[]{"spreadType", "st"}, "CONE"));
-        double speed = config.getDouble(new String[]{"speed", "s"}, 1);
+        float speed = config.getFloat(new String[]{"speed", "s"}, 1);
 
         List<Integer> amountList = new ArrayList<>();
         int amount = config.getInteger(new String[]{"amount", "a"}, 1);
         amountList.add(amount);
 
         String amountValueKey = config.getString(new String[]{"amountValueKey"}, null);
-        double angle = config.getDouble(new String[]{"angle"}, 30);
-        double range = config.getDouble(new String[]{"range"}, 200);
+        float angle = config.getFloat(new String[]{"angle"}, 30);
+        float range = config.getFloat(new String[]{"range"}, 200);
         boolean mustHitToWork = config.getBoolean(new String[]{"mustHitToWork"}, false);
 
-        double radius = config.getDouble(new String[]{"radius"}, 0);
-        double height = config.getDouble(new String[]{"height"}, 0);
+        float radius = config.getFloat(new String[]{"radius"}, 0);
+        float height = config.getFloat(new String[]{"height"}, 0);
 
         //Particle projectile
         ParticleArrangement particleArrangement = null;
@@ -82,7 +82,7 @@ public class MMMechanicProjectile extends SkillMechanic implements ITargetedEnti
             particleArrangement = new ArrangementDrawCylinder(particle, dustOptions, 1, 1, 1, 1, 1);
         }
 
-        double upward = config.getDouble(new String[]{"upward"}, 0);
+        float upward = config.getFloat(new String[]{"upward"}, 0);
 
         //custom options
         boolean addCasterAsFirstTargetIfHitSuccess = config.getBoolean(new String[]{"addCasterAsFirstTargetIfHitSuccess"}, false);

@@ -33,11 +33,11 @@ public class MyPlayerMoveEvent implements Listener {
 
             if (to == null) return;
 
-            double x = from.getX();
-            double z = from.getZ();
+            float x = (float) from.getX();
+            float z = (float) from.getZ();
 
-            double toX = to.getX();
-            double toZ = to.getZ();
+            float toX = (float) to.getX();
+            float toZ = (float) to.getZ();
 
             if (x != toX || z != toZ) {
                 event.setCancelled(true);
@@ -46,8 +46,8 @@ public class MyPlayerMoveEvent implements Listener {
 
             // boolean rootedY = StatusEffectManager.isRootedY(player);
             if (onGround) {
-                double y = from.getY();
-                double toY = to.getY();
+                float y = (float) from.getY();
+                float toY = (float) to.getY();
 
                 if (y != toY) {
                     event.setCancelled(true);

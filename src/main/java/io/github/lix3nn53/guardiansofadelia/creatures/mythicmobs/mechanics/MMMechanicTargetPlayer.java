@@ -17,14 +17,14 @@ import java.util.List;
 
 public class MMMechanicTargetPlayer extends SkillMechanic implements ITargetedEntitySkill {
 
-    protected final double range;
+    protected final float range;
 
     public MMMechanicTargetPlayer(MythicLineConfig config) {
         super(config.getLine(), config);
         this.setAsyncSafe(false);
         this.setTargetsCreativePlayers(false);
 
-        this.range = config.getDouble(new String[]{"range", "r"}, 10);
+        this.range = config.getFloat(new String[]{"range", "r"}, 10);
     }
 
     @Override

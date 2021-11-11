@@ -56,10 +56,10 @@ public class GuardiansOfAdelia extends JavaPlugin {
     }
 
     private void startGlobalRegen() {
-        double manaPercent = 0.1;
-        double maxManaPercent = 0.4;
-        // double healPercent = 0.1;
-        // double maxHealthPercent = 1.0;
+        float manaPercent = 0.1f;
+        float maxManaPercent = 0.4f;
+        // float healPercent = 0.1;
+        // float maxHealthPercent = 1.0;
 
         new BukkitRunnable() {
             @Override
@@ -72,21 +72,21 @@ public class GuardiansOfAdelia extends JavaPlugin {
                             RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                             RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
-                            double currentMana = rpgCharacterStats.getCurrentMana();
-                            double maxMana = rpgCharacterStats.getTotalMaxMana();
+                            float currentMana = rpgCharacterStats.getCurrentMana();
+                            float maxMana = rpgCharacterStats.getTotalMaxMana();
                             if (currentMana < (maxMana * maxManaPercent)) {
-                                double nextMana = currentMana + (maxMana * manaPercent);
+                                float nextMana = currentMana + (maxMana * manaPercent);
                                 if (nextMana > maxMana) {
                                     nextMana = maxMana;
                                 }
                                 rpgCharacterStats.setCurrentMana((int) nextMana);
                             }
 
-                            /*double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-                            double currentHealth = player.getHealth();
+                            /*float maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+                            float currentHealth = player.getHealth();
 
                             if (currentHealth < (maxHealth * maxHealthPercent)) {
-                                double nextHealth = currentHealth + (maxHealth * healPercent);
+                                float nextHealth = currentHealth + (maxHealth * healPercent);
                                 if (nextHealth > maxHealth) {
                                     nextHealth = maxHealth;
                                 }
@@ -155,6 +155,7 @@ public class GuardiansOfAdelia extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MyPlayerItemConsumeEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerItemHeldEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerJoinEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MyPlayerLocaleChangeEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerMoveEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerPickupArrowEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MyPlayerPortalEvent(), this);

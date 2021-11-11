@@ -13,8 +13,8 @@ import java.util.List;
 
 public class GodDamageMechanic extends MechanicComponent {
 
-    private final List<Double> damageList;
-    private final List<Double> damagePercentList;
+    private final List<Float> damageList;
+    private final List<Float> damagePercentList;
 
     public GodDamageMechanic(ConfigurationSection configurationSection) {
         super(!configurationSection.contains("addLore") || configurationSection.getBoolean("addLore"));
@@ -25,13 +25,13 @@ public class GodDamageMechanic extends MechanicComponent {
         }
 
         if (configurationSection.contains("damageList")) {
-            this.damageList = configurationSection.getDoubleList("damageList");
+            this.damageList = configurationSection.getFloatList("damageList");
         } else {
             this.damageList = new ArrayList<>();
         }
 
         if (configurationSection.contains("damagePercentList")) {
-            this.damagePercentList = configurationSection.getDoubleList("damagePercentList");
+            this.damagePercentList = configurationSection.getFloatList("damagePercentList");
         } else {
             this.damagePercentList = new ArrayList<>();
         }
@@ -43,17 +43,17 @@ public class GodDamageMechanic extends MechanicComponent {
 
 
         for (LivingEntity ent : targets) {
-            double damage = 0;
+            float damage = 0;
             if (!damagePercentList.isEmpty()) {
                 AttributeInstance attribute = ent.getAttribute(Attribute.GENERIC_MAX_HEALTH);
                 if (attribute == null) continue;
 
-                double damagePercent = damagePercentList.get(skillLevel - 1);
-                double value = attribute.getValue();
+                float damagePercent = damagePercentList.get(skillLevel - 1);
+                float value = (float) attribute.getValue();
                 damage = value * damagePercent;
             }
             if (!damageList.isEmpty()) {
-                double damageAmount = damageList.get(skillLevel - 1);
+                float damageAmount = damageList.get(skillLevel - 1);
                 damage += damageAmount;
             }
 

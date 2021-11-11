@@ -726,8 +726,8 @@ public class MyInventoryClickEvent implements Listener {
 
                     String[] splitSecond = split[1].split("-");
 
-                    Location location = new Location(Bukkit.getWorld(splitSecond[0]), Double.parseDouble(splitSecond[1]),
-                            Double.parseDouble(splitSecond[2]), Double.parseDouble(splitSecond[3]));
+                    Location location = new Location(Bukkit.getWorld(splitSecond[0]), Float.parseFloat(splitSecond[1]),
+                            Float.parseFloat(splitSecond[2]), Float.parseFloat(splitSecond[3]));
 
                     CompassManager.setCompassItemLocation(player, split[0], location);
                     player.closeInventory();

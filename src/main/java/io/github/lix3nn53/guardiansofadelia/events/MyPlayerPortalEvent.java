@@ -29,7 +29,7 @@ public class MyPlayerPortalEvent implements Listener {
 
         Town town = TownManager.getTown(5);
         Location alberstolRuinsBase = town.getLocation();
-        double distanceSquared = location.distanceSquared(alberstolRuinsBase);
+        float distanceSquared = (float) location.distanceSquared(alberstolRuinsBase);
 
         if (distanceSquared < 1200) { //portal to Alberstol Ruins at Uruga
             World world = Bukkit.getWorld("world");
@@ -47,7 +47,7 @@ public class MyPlayerPortalEvent implements Listener {
                 NPC npcGatekeeper = npcRegistry.getById(47);
 
                 Location gatekeeperLocation = npcGatekeeper.getStoredLocation();
-                double distanceSquared2 = location.distanceSquared(gatekeeperLocation);
+                float distanceSquared2 = (float) location.distanceSquared(gatekeeperLocation);
 
                 if (distanceSquared2 < 900) { //portal to Alberstol Ruins at Uruga
                     World world = Bukkit.getWorld("world");

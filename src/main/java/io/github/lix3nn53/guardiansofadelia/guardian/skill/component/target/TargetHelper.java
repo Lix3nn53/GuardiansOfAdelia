@@ -14,30 +14,30 @@ import java.util.List;
 
 public class TargetHelper {
 
-    public static LivingEntity getLookingTarget(LivingEntity source, double range, double tolerance) {
+    public static LivingEntity getLookingTarget(LivingEntity source, float range, float tolerance) {
         List<Entity> list = source.getNearbyEntities(range, range, range);
         if (list.isEmpty()) return null;
 
         Vector facing = source.getLocation().getDirection();
-        double fLengthSq = facing.lengthSquared();
+        float fLengthSq = (float) facing.lengthSquared();
 
         LivingEntity target = null;
-        double minDistance = 99999;
+        float minDistance = 99999;
         for (Entity entity : list) {
 
             if (!isInFront(source, entity) || !(entity instanceof LivingEntity))
                 continue;
             Vector relative = entity.getLocation().subtract(source.getLocation()).toVector();
-            double dot = relative.dot(facing);
-            double rLengthSq = relative.lengthSquared();
-            double cosSquared = dot * dot / rLengthSq * fLengthSq;
-            double sinSquared = 1.0D - cosSquared;
-            double dSquared = rLengthSq * sinSquared;
+            float dot = (float) relative.dot(facing);
+            float rLengthSq = (float) relative.lengthSquared();
+            float cosSquared = dot * dot / rLengthSq * fLengthSq;
+            float sinSquared = 1.0f - cosSquared;
+            float dSquared = rLengthSq * sinSquared;
 
 
             if (dSquared < tolerance) {
                 // valid target
-                double distance = entity.getLocation().distanceSquared(source.getLocation());
+                float distance = (float) entity.getLocation().distanceSquared(source.getLocation());
                 if (distance < minDistance) {
                     minDistance = distance;
                     target = (LivingEntity) entity;
@@ -103,7 +103,7 @@ public class TargetHelper {
      * @param radius radius to get within
      * @return nearby entities
      */
-    public static List<LivingEntity> getNearbySphere(Location loc, double radius) {
+    public static List<LivingEntity> getNearbySphere(Location loc, float radius) {
         List<LivingEntity> result = new ArrayList<>();
 
         int minX = (int) (loc.getX() - radius) >> 4;
@@ -111,7 +111,7 @@ public class TargetHelper {
         int minZ = (int) (loc.getZ() - radius) >> 4;
         int maxZ = (int) (loc.getZ() + radius) >> 4;
 
-        double radiusSquare = radius * radius;
+        float radiusSquare = radius * radius;
 
         for (int i = minX; i <= maxX; i++)
             for (int j = minZ; j <= maxZ; j++)
@@ -129,7 +129,7 @@ public class TargetHelper {
      * @param radius radius to get within
      * @return nearby entities
      */
-    public static List<Entity> getNearbySphereNonLiving(Location loc, double radius) {
+    public static List<Entity> getNearbySphereNonLiving(Location loc, float radius) {
         List<Entity> result = new ArrayList<>();
 
         int minX = (int) (loc.getX() - radius) >> 4;
@@ -137,7 +137,7 @@ public class TargetHelper {
         int minZ = (int) (loc.getZ() - radius) >> 4;
         int maxZ = (int) (loc.getZ() + radius) >> 4;
 
-        double radiusSquare = radius * radius;
+        float radiusSquare = radius * radius;
 
         for (int i = minX; i <= maxX; i++)
             for (int j = minZ; j <= maxZ; j++)
@@ -150,15 +150,15 @@ public class TargetHelper {
 
     public static List<LivingEntity> getBoxTargets(World world, Vector b1, Vector b2, Vector b4, Vector t1, Vector t3) {
         Vector yLocal = t1.clone().subtract(b1);
-        double yLength = yLocal.length(); // size1 = np.linalg.norm(dir1)
+        float yLength = (float) yLocal.length(); // size1 = np.linalg.norm(dir1)
         yLocal = yLocal.normalize(); // dir1 = dir1.divide(new Vector(size1, size1, size1));
 
         Vector xLocal = b2.clone().subtract(b1);
-        double xLength = xLocal.length();
+        float xLength = (float) xLocal.length();
         xLocal = xLocal.normalize();
 
         Vector zLocal = b4.clone().subtract(b1);
-        double zLength = zLocal.length();
+        float zLength = (float) zLocal.length();
         zLocal = zLocal.normalize();
 
         // cube3d_center = (b1 + t3)/2.0
@@ -187,12 +187,12 @@ public class TargetHelper {
             Vector min = boundingBox.getMin();
             points.add(min);
 
-            double height = boundingBox.getHeight();
+            float height = (float) boundingBox.getHeight();
             points.add(min.clone().add(new Vector(0, height, 0)));
             points.add(max.clone().subtract(new Vector(0, height, 0)));
 
-            double widthX = boundingBox.getWidthX();
-            double widthZ = boundingBox.getWidthZ();
+            float widthX = (float) boundingBox.getWidthX();
+            float widthZ = (float) boundingBox.getWidthZ();
             points.add(min.clone().add(new Vector(widthX, 0, 0)));
             points.add(min.clone().add(new Vector(0, 0, widthZ)));
 
@@ -211,15 +211,15 @@ public class TargetHelper {
         return result;
     }
 
-    public static List<LivingEntity> getBoxTargets(World world, Vector[] cube, double length_x, double length_y, double length_z) {
+    public static List<LivingEntity> getBoxTargets(World world, Vector[] cube, float length_x, float length_y, float length_z) {
         List<LivingEntity> result = new ArrayList<>();
 
-        double highest_x = getHighest(cube, Axis.X);
-        double highest_y = getHighest(cube, Axis.Y);
-        double highest_z = getHighest(cube, Axis.Z);
-        double lowest_x = getLowest(cube, Axis.X);
-        double lowest_y = getLowest(cube, Axis.Y);
-        double lowest_z = getLowest(cube, Axis.Z);
+        float highest_x = getHighest(cube, Axis.X);
+        float highest_y = getHighest(cube, Axis.Y);
+        float highest_z = getHighest(cube, Axis.Z);
+        float lowest_x = getLowest(cube, Axis.X);
+        float lowest_y = getLowest(cube, Axis.Y);
+        float lowest_z = getLowest(cube, Axis.Z);
 
         Vector center = new Vector(lowest_x, lowest_y, lowest_z).add(new Vector(highest_x, highest_y, highest_z)).
                 divide(new Vector(2, 2, 2));
@@ -242,12 +242,12 @@ public class TargetHelper {
                 if (!(entity instanceof LivingEntity)) continue;
                 BoundingBox boundingBox = entity.getBoundingBox();
 
-                double maxX = boundingBox.getMaxX();
-                double maxY = boundingBox.getMaxY();
-                double maxZ = boundingBox.getMaxZ();
-                double minX = boundingBox.getMinX();
-                double minY = boundingBox.getMinY();
-                double minZ = boundingBox.getMinZ();
+                float maxX = (float) boundingBox.getMaxX();
+                float maxY = (float) boundingBox.getMaxY();
+                float maxZ = (float) boundingBox.getMaxZ();
+                float minX = (float) boundingBox.getMinX();
+                float minY = (float) boundingBox.getMinY();
+                float minZ = (float) boundingBox.getMinZ();
 
                 if (!overlaps(lowest_x, highest_x, minX, maxX)) {
                     continue; // NO INTERSECTION
@@ -264,73 +264,73 @@ public class TargetHelper {
         return result;
     }
 
-    public static double getHighest(Vector[] vectors, Axis axis) {
-        double result = 0;
+    public static float getHighest(Vector[] vectors, Axis axis) {
+        float result = 0;
 
         if (axis.equals(Axis.X)) {
-            result = vectors[0].getX();
+            result = (float) vectors[0].getX();
         } else if (axis.equals(Axis.Y)) {
-            result = vectors[0].getY();
+            result = (float) vectors[0].getY();
         } else if (axis.equals(Axis.Z)) {
-            result = vectors[0].getZ();
+            result = (float) vectors[0].getZ();
         }
 
         for (Vector vector : vectors) {
             if (axis.equals(Axis.X)) {
-                if (vector.getX() > result) result = vector.getX();
+                if (vector.getX() > result) result = (float) vector.getX();
             } else if (axis.equals(Axis.Y)) {
-                if (vector.getY() > result) result = vector.getY();
+                if (vector.getY() > result) result = (float) vector.getY();
             } else if (axis.equals(Axis.Z)) {
-                if (vector.getZ() > result) result = vector.getZ();
+                if (vector.getZ() > result) result = (float) vector.getZ();
             }
         }
 
         return result;
     }
 
-    public static double getLowest(Vector[] vectors, Axis axis) {
-        double result = 0;
+    public static float getLowest(Vector[] vectors, Axis axis) {
+        float result = 0;
 
         if (axis.equals(Axis.X)) {
-            result = vectors[0].getX();
+            result = (float) vectors[0].getX();
         } else if (axis.equals(Axis.Y)) {
-            result = vectors[0].getY();
+            result = (float) vectors[0].getY();
         } else if (axis.equals(Axis.Z)) {
-            result = vectors[0].getZ();
+            result = (float) vectors[0].getZ();
         }
 
         for (Vector vector : vectors) {
             if (axis.equals(Axis.X)) {
-                if (vector.getX() < result) result = vector.getX();
+                if (vector.getX() < result) result = (float) vector.getX();
             } else if (axis.equals(Axis.Y)) {
-                if (vector.getY() < result) result = vector.getY();
+                if (vector.getY() < result) result = (float) vector.getY();
             } else if (axis.equals(Axis.Z)) {
-                if (vector.getZ() < result) result = vector.getZ();
+                if (vector.getZ() < result) result = (float) vector.getZ();
             }
         }
 
         return result;
     }
 
-    public static boolean overlaps(double min1, double max1, double min2, double max2) {
+    public static boolean overlaps(float min1, float max1, float min2, float max2) {
         return isBetweenOrdered(min2, min1, max1) || isBetweenOrdered(min1, min2, max2);
     }
 
-    public static boolean isBetweenOrdered(double val, double lowerBound, double upperBound) {
+    public static boolean isBetweenOrdered(float val, float lowerBound, float upperBound) {
         return lowerBound <= val && val <= upperBound;
     }
 
-    public static boolean isPointInsideBox(Vector point, Vector center, Vector xLocal, Vector yLocal, Vector zLocal, double xLength, double yLength, double zLength) {
+    public static boolean isPointInsideBox(Vector point, Vector center, Vector xLocal, Vector yLocal, Vector zLocal, float xLength, float yLength, float zLength) {
         Vector v = point.clone().subtract(center); // direction vector from cube center to the target point
 
-        double py = Math.abs(v.dot(yLocal)) * 2;
-        double px = Math.abs(v.dot(xLocal)) * 2;
-        double pz = Math.abs(v.dot(zLocal)) * 2;
+        float py = (float) (Math.abs(v.dot(yLocal)) * 2);
+        float px = (float) (Math.abs(v.dot(xLocal)) * 2);
+        float pz = (float) (Math.abs(v.dot(zLocal)) * 2);
 
         return px <= xLength && py <= yLength && pz <= zLength;
     }
 
-    public static List<LivingEntity> getNearbyBox(Location loc, double radius) {
+    public static List<LivingEntity> getNearbyBox(Location loc, float radius) {
         List<LivingEntity> result = new ArrayList<>();
 
         int minX = (int) (loc.getX() - radius) >> 4;
@@ -347,11 +347,11 @@ public class TargetHelper {
         return result;
     }
 
-    public static double boxDistance(Location loc1, Location loc2) {
-        return Math.max(Math.max(Math.abs(loc1.getX() - loc2.getX()), Math.abs(loc1.getY() - loc2.getY())), Math.abs(loc1.getZ() - loc2.getZ()));
+    public static float boxDistance(Location loc1, Location loc2) {
+        return (float) Math.max(Math.max(Math.abs(loc1.getX() - loc2.getX()), Math.abs(loc1.getY() - loc2.getY())), Math.abs(loc1.getZ() - loc2.getZ()));
     }
 
-    public static List<LivingEntity> getConeTargets(LivingEntity source, double arc, double range) {
+    public static List<LivingEntity> getConeTargets(LivingEntity source, float arc, float range) {
         List<LivingEntity> targets = new ArrayList<>();
         List<Entity> list = source.getNearbyEntities(range, range, range);
         if (arc <= 0.0D) return targets;
@@ -359,8 +359,8 @@ public class TargetHelper {
 
         Vector dir = source.getEyeLocation().getDirection();
         dir.setY(0);
-        double cos = Math.cos(arc * Math.PI / 180.0D);
-        double cosSq = cos * cos;
+        float cos = (float) Math.cos(arc * Math.PI / 180.0f);
+        float cosSq = cos * cos;
 
 
         for (Entity entity : list) {
@@ -378,8 +378,8 @@ public class TargetHelper {
 
                 Vector relative = entity.getLocation().subtract(source.getEyeLocation()).toVector();
                 relative.setY(0);
-                double dot = relative.dot(dir);
-                double value = dot * dot / relative.lengthSquared();
+                float dot = (float) relative.dot(dir);
+                float value = dot * dot / (float) (relative.lengthSquared());
                 if (arc < 180.0D && dot > 0.0D && value >= cosSq) {
                     targets.add((LivingEntity) entity);
                     continue;

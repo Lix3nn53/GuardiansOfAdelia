@@ -24,12 +24,12 @@ public enum WeaponAttackSpeed {
         return color + name;
     }
 
-    public double getSpeedValue() {
-        double speed = -3;
+    public float getSpeedValue() {
+        float speed = -3;
         if (this == WeaponAttackSpeed.NORMAL) {
-            speed = -2.75;
+            speed = -2.75f;
         } else if (this == WeaponAttackSpeed.FAST) {
-            speed = -2.5;
+            speed = -2.5f;
         }/* else if (this == AttackSpeed.RAPID) {
             speed = -2.25;
         }*/

@@ -29,9 +29,9 @@ public class TeleportPortalsConfiguration {
 
             String worldString = current.getString("world");
             World world = Bukkit.getWorld(worldString);
-            double x = current.getDouble("x");
-            double y = current.getDouble("y");
-            double z = current.getDouble("z");
+            float x = (float) current.getDouble("x");
+            float y = (float) current.getDouble("y");
+            float z = (float) current.getDouble("z");
             float yaw = (float) current.getDouble("yaw");
             float pitch = (float) current.getDouble("pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
@@ -43,9 +43,9 @@ public class TeleportPortalsConfiguration {
 
             String tpWorldString = current.getString("tpWorld");
             World tpWorld = Bukkit.getWorld(tpWorldString);
-            double tpX = current.getDouble("tpX");
-            double tpY = current.getDouble("tpY");
-            double tpZ = current.getDouble("tpZ");
+            float tpX = (float) current.getDouble("tpX");
+            float tpY = (float) current.getDouble("tpY");
+            float tpZ = (float) current.getDouble("tpZ");
             float tpYaw = (float) current.getDouble("tpYaw");
             float tpPitch = (float) current.getDouble("tpPitch");
             Location tpLocation = new Location(tpWorld, tpX, tpY, tpZ, tpYaw, tpPitch);

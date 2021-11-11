@@ -14,7 +14,7 @@ import java.util.List;
 public class EntityUtils {
 
     /*
-    public static LivingEntity create(Location loc, String name, double hp, EntityType type) {
+    public static LivingEntity create(Location loc, String name, float hp, EntityType type) {
         LivingEntity entity = (LivingEntity) loc.getWorld().spawnEntity(loc, type);
         entity.setCustomName(name);
         entity.setCustomNameVisible(true);

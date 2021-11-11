@@ -47,21 +47,21 @@ public class LocationUtils {
     The sphere is centered at (x0,y0,z0) with the passed in radius.
     The returned point is returned as a three element array [x,y,z].
     */
-    public static Location randomSpherePoint(Location baseLocation, double radius) {
-        double u = Math.random();
-        double v = Math.random();
-        double theta = 2 * Math.PI * u;
-        double phi = Math.acos(2 * v - 1);
-        double x1 = (radius * Math.sin(phi) * Math.cos(theta));
-        double y1 = (radius * Math.sin(phi) * Math.sin(theta));
-        double z1 = (radius * Math.cos(phi));
+    public static Location randomSpherePoint(Location baseLocation, float radius) {
+        float u = (float) Math.random();
+        float v = (float) Math.random();
+        float theta = 2 * (float) Math.PI * u;
+        float phi = (float) Math.acos(2 * v - 1);
+        float x1 = (radius * (float) Math.sin(phi) * (float) Math.cos(theta));
+        float y1 = (radius * (float) Math.sin(phi) * (float) Math.sin(theta));
+        float z1 = (radius * (float) Math.cos(phi));
 
         return baseLocation.clone().add(x1, y1, z1);
     }
 
-    public static Location randomPointNoY(Location baseLocation, double radius) {
-        double x1 = (Math.random() * (radius * 2)) - radius;
-        double z1 = (Math.random() * (radius * 2)) - radius;
+    public static Location randomPointNoY(Location baseLocation, float radius) {
+        float x1 = ((float) Math.random() * (radius * 2)) - radius;
+        float z1 = ((float) Math.random() * (radius * 2)) - radius;
 
         return baseLocation.clone().add(x1, Math.random() + 0.8 - 2, z1);
     }

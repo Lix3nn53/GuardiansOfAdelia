@@ -59,9 +59,9 @@ public class RPGCharacterStats {
     private final int maxMana = 100;
     private int currentMana = 100;
 
-    private final double baseAbilityHaste = 0;
-    private final double baseCriticalChance = 0.01;
-    private final double baseCriticalDamageDamage = 1.5;
+    private final float baseAbilityHaste = 0;
+    private final float baseCriticalChance = 0.01f;
+    private final float baseCriticalDamageDamage = 1.5f;
     //armor slots
     private ArmorStatHolder helmet;
     private ArmorStatHolder chestplate;
@@ -72,12 +72,12 @@ public class RPGCharacterStats {
     private int damageBonusFromOffhand = 0;
 
     //buff multipliers from skills
-    private double buffElementDamage = 1;
-    private double buffElementDefense = 1;
-    private double buffCriticalChance = 0;
-    private double buffCriticalDamage = 0;
-    private double buffAbilityHaste = 0;
-    private double buffLifeSteal = 0;
+    private float buffElementDamage = 1;
+    private float buffElementDefense = 1;
+    private float buffCriticalChance = 0;
+    private float buffCriticalDamage = 0;
+    private float buffAbilityHaste = 0;
+    private float buffLifeSteal = 0;
 
     private ArmorGearType sameTypeArmorSet = null;
     private List<GearSet> gearSets = new ArrayList<>();
@@ -320,7 +320,7 @@ public class RPGCharacterStats {
 
     public int getTotalElementDefense() {
         int equipment = helmet.getDefense() + chestplate.getDefense() + leggings.getDefense() + boots.getDefense() + shield.getDefense();
-        double attr = attributeHashMap.get(AttributeType.BONUS_ELEMENT_DEFENSE).getIncrement(player.getLevel(), rpgClassStr);
+        float attr = attributeHashMap.get(AttributeType.BONUS_ELEMENT_DEFENSE).getIncrement(player.getLevel(), rpgClassStr);
 
         int def = (int) ((equipment + attr) * buffElementDefense + 0.5);
 
@@ -329,10 +329,10 @@ public class RPGCharacterStats {
         return def;
     }
 
-    public double getTotalCriticalChance() {
-        double chance = baseCriticalChance + attributeHashMap.get(AttributeType.BONUS_CRITICAL_CHANCE).getIncrement(player.getLevel(), rpgClassStr);
-        if (chance > 0.4) {
-            chance = 0.4;
+    public float getTotalCriticalChance() {
+        float chance = baseCriticalChance + attributeHashMap.get(AttributeType.BONUS_CRITICAL_CHANCE).getIncrement(player.getLevel(), rpgClassStr);
+        if (chance > 0.4f) {
+            chance = 0.4f;
         }
 
         chance += buffCriticalChance;
@@ -348,12 +348,12 @@ public class RPGCharacterStats {
         return chance;
     }
 
-    public double getTotalCriticalDamage() {
+    public float getTotalCriticalDamage() {
         return baseCriticalDamageDamage + buffCriticalDamage;
     }
 
-    public double getTotalAbilityHaste() {
-        double v = baseAbilityHaste + buffAbilityHaste;
+    public float getTotalAbilityHaste() {
+        float v = baseAbilityHaste + buffAbilityHaste;
 
         Material type = player.getInventory().getItemInMainHand().getType();
         WeaponGearType weaponGearType = WeaponGearType.fromMaterial(type);
@@ -432,7 +432,7 @@ public class RPGCharacterStats {
             currentMana = totalMaxMana;
         }
 
-        double ratio = (double) currentMana / totalMaxMana;
+        float ratio = (float) currentMana / totalMaxMana;
         int foodLevel = (int) (20 * ratio + 0.5);
 
         if (currentMana > 0) {
@@ -910,8 +910,8 @@ public class RPGCharacterStats {
                 helmetType, chestplateType, leggingsType, bootsType);
     }*/
 
-    public void addToBuffMultiplier(BuffType buffType, double addToMultiplier, PotionEffect potionEffect) {
-        double newValue = 1.0;
+    public void addToBuffMultiplier(BuffType buffType, float addToMultiplier, PotionEffect potionEffect) {
+        float newValue = 1.0f;
         if (buffType.equals(BuffType.ELEMENT_DAMAGE)) {
             this.buffElementDamage += addToMultiplier;
             newValue = this.buffElementDamage;
@@ -941,7 +941,7 @@ public class RPGCharacterStats {
         }
     }
 
-    public double getBuffValue(BuffType buffType) {
+    public float getBuffValue(BuffType buffType) {
         if (buffType.equals(BuffType.ELEMENT_DAMAGE)) {
             return this.buffElementDamage;
         } else if (buffType.equals(BuffType.ELEMENT_DEFENSE)) {

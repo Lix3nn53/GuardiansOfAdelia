@@ -141,18 +141,23 @@ public class MenuList {
         itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "WebStore ♥");
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + "Donations are not required but helps me so");
+        lore.add(ChatPalette.GRAY + "You can purchase premium items from webstore.");
+        lore.add(ChatPalette.GRAY + "");
+        lore.add(ChatPalette.GRAY + "Web store is the only income source to");
+        lore.add(ChatPalette.GRAY + "keep the servers running.");
+        lore.add(ChatPalette.GRAY + "");
+        lore.add(ChatPalette.GRAY + "It is not necessary but it helps a lot so");
         lore.add(ChatPalette.GRAY + "I can keep working on this project. Thanks <3");
         itemMeta.setLore(lore);
         donation.setItemMeta(itemMeta);
         guiGeneric.setItem(49, donation);
 
         ItemStack daily = new ItemStack(Material.WOODEN_PICKAXE);
-        itemMeta.setCustomModelData(10);
+        itemMeta.setCustomModelData(38);
         itemMeta.setDisplayName(ChatPalette.GOLD + "Daily Rewards");
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + "Gain rewards for being a regular player");
+        lore.add(ChatPalette.GRAY + "Gain rewards for visiting every day.");
         itemMeta.setLore(lore);
         daily.setItemMeta(itemMeta);
         guiGeneric.setItem(51, daily);

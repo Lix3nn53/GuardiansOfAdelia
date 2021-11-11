@@ -11,7 +11,7 @@ public class ArrangementFillCone extends ArrangementWithData {
 
     private final int amount;
     private final int amounty;
-    private final double angle;
+    private final float angle;
 
     public ArrangementFillCone(ConfigurationSection configurationSection) {
         super(configurationSection);
@@ -33,19 +33,19 @@ public class ArrangementFillCone extends ArrangementWithData {
         this.angle = configurationSection.getInt("angle");
 
         // Data that animations can modify
-        addData(configurationSection.getDouble("length"));
+        addData((float) configurationSection.getDouble("length"));
 
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset) {
-        double length = getData(0);
+        float length = getData(0);
         ParticleShapes.fillCone(location, particle, length, amount, amounty, angle, dustOptions, false, 0, 0, offset);
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
-        double length = getData(0);
+        float length = getData(0);
         ParticleShapes.fillCone(location, particle, length, amount, amounty, angle, dustOptions, true, yaw, pitch, offset);
     }
 }

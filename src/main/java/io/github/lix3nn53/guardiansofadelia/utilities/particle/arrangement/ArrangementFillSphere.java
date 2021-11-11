@@ -27,18 +27,18 @@ public class ArrangementFillSphere extends ArrangementWithData {
         this.amounty = configurationSection.getInt("amounty");
 
         // Data that animations can modify
-        addData(configurationSection.getDouble("radius"));
+        addData((float) configurationSection.getDouble("radius"));
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset) {
-        double radius = getData(0);
+        float radius = getData(0);
         ParticleShapes.fillSphere(location, particle, radius, amount, amounty, dustOptions, false, 0, 0, offset);
     }
 
     @Override
     public void play(Location location, @Nullable Vector offset, float yaw, float pitch) {
-        double radius = getData(0);
+        float radius = getData(0);
         ParticleShapes.fillSphere(location, particle, radius, amount, amounty, dustOptions, true, yaw, pitch, offset);
     }
 }

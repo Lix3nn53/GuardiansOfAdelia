@@ -15,7 +15,7 @@ public class MMMechanicElementResistance extends SkillMechanic implements ITarge
 
     protected final String internalName;
     protected final ElementType elementType;
-    protected final double resistance;
+    protected final float resistance;
 
     public MMMechanicElementResistance(MythicLineConfig config) {
         super(config.getLine(), config);
@@ -26,7 +26,7 @@ public class MMMechanicElementResistance extends SkillMechanic implements ITarge
         this.setTargetsCreativePlayers(false);
 
         this.elementType = ElementType.valueOf(config.getString(new String[]{"element", "e"}, "FIRE"));
-        this.resistance = config.getDouble(new String[]{"resistance", "r"}, 1.0);
+        this.resistance = config.getFloat(new String[]{"resistance", "r"}, 1.0f);
     }
 
     @Override

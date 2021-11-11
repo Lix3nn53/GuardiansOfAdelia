@@ -23,7 +23,7 @@ public class LocationTarget extends TargetComponent {
 
     private final List<Integer> range;
     // PARTICLE
-    private final double gap;
+    private final float gap;
     private final ArrangementSingle arrangementSingle;
 
     public LocationTarget(ConfigurationSection configurationSection) {
@@ -43,7 +43,7 @@ public class LocationTarget extends TargetComponent {
         ConfigurationSection particleSection = configurationSection.getConfigurationSection("particle");
 
         this.arrangementSingle = new ArrangementSingle(particleSection);
-        this.gap = particleSection.contains("gap") ? particleSection.getDouble("gap") : 0;
+        this.gap = particleSection.contains("gap") ? (float) particleSection.getDouble("gap") : 0;
     }
 
     @Override

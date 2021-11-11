@@ -30,7 +30,7 @@ public class Shield implements RPGGear {
             gearSetExist = true;
         }
 
-        double bonusPercent = tier.getBonusMultiplier();
+        float bonusPercent = tier.getBonusMultiplier();
 
         health = (int) ((health * bonusPercent) + 0.5);
 

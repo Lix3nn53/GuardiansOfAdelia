@@ -47,7 +47,7 @@ public class PetManager {
     // Companions Only
     private static final HashMap<Player, List<LivingEntity>> ownerToCompanions = new HashMap<>();
     protected final static List<Player> companionLogicRunnerActive = new ArrayList<>();
-    private static final double COMPANION_ATTACK_RADIUS = 16;
+    private static final float COMPANION_ATTACK_RADIUS = 16;
 
     public static Player getOwner(LivingEntity entity) {
         return companionToOwner.get(entity);
@@ -134,8 +134,8 @@ public class PetManager {
 
         // health
         int maxHP = getHealth(petCode, petLevel);
-        double attackDamage = getDamage(petCode, petLevel);
-        double movementSpeed = pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
+        float attackDamage = getDamage(petCode, petLevel);
+        float movementSpeed = (float) pet.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
 
         if (pet instanceof Tameable) {
             Tameable tameable = (Tameable) pet;
@@ -247,7 +247,7 @@ public class PetManager {
         return deathPetPlayerList.contains(player);
     }
 
-    public static void onTakeDamage(LivingEntity livingEntity, double currentHealth, double finalDamage) {
+    public static void onTakeDamage(LivingEntity livingEntity, float currentHealth, float finalDamage) {
         if (!livingEntity.isDead()) {
             if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
@@ -262,7 +262,7 @@ public class PetManager {
         }
     }
 
-    public static void onPetSetHealth(LivingEntity livingEntity, double currentHealth, int setHealth) {
+    public static void onPetSetHealth(LivingEntity livingEntity, float currentHealth, int setHealth) {
         if (!livingEntity.isDead()) {
             if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
@@ -276,7 +276,7 @@ public class PetManager {
         }
     }
 
-    public static void onHeal(LivingEntity livingEntity, double currentHealth, double healAmount) {
+    public static void onHeal(LivingEntity livingEntity, float currentHealth, float healAmount) {
         if (!livingEntity.isDead()) {
             if (isCompanion(livingEntity)) {
                 int currentHealthInteger = (int) (currentHealth + 0.5);
@@ -517,7 +517,7 @@ public class PetManager {
                     return;
                 }
 
-                final double distance = playerLocation.distanceSquared(companion.getLocation());
+                final float distance = (float) playerLocation.distanceSquared(companion.getLocation());
                 if (distance > 400) {
                     PetManager.teleportPet(player, companion, playerLocation);
 
@@ -564,8 +564,8 @@ public class PetManager {
     public static int getDamage(String key, int petLevel) {
         MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
 
-        double base = mythicMob.getDamage().get();
-        double perLevel = mythicMob.getPerLevelDamage();
+        float base = (float) mythicMob.getDamage().get();
+        float perLevel = (float) mythicMob.getPerLevelDamage();
 
         //GuardiansOfAdelia.getInstance().getLogger().info("base damage: " + base);
         //GuardiansOfAdelia.getInstance().getLogger().info("perLevel damage: " + perLevel);
@@ -576,8 +576,8 @@ public class PetManager {
     public static int getHealth(String key, int petLevel) {
         MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
 
-        double base = mythicMob.getHealth().get();
-        double perLevel = mythicMob.getPerLevelHealth();
+        float base = (float) mythicMob.getHealth().get();
+        float perLevel = (float) mythicMob.getPerLevelHealth();
 
         //GuardiansOfAdelia.getInstance().getLogger().info("base health: " + base);
         //GuardiansOfAdelia.getInstance().getLogger().info("perLevel health: " + perLevel);
@@ -585,13 +585,13 @@ public class PetManager {
         return (int) (base + (perLevel * (petLevel - 1)) + 0.5);
     }
 
-    public static double getMovementSpeed(String key, int petLevel) {
+    public static float getMovementSpeed(String key, int petLevel) {
         MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
 
         MythicConfig config = mythicMob.getConfig();
 
-        double base = config.getPlaceholderDouble("Options.MovementSpeed", "0").get();
-        double perLevel = config.getDouble("LevelModifiers.MovementSpeed", -1.0D);
+        float base = (float) config.getPlaceholderDouble("Options.MovementSpeed", "0").get();
+        float perLevel = (float) config.getDouble("LevelModifiers.MovementSpeed", -1.0D);
 
         GuardiansOfAdelia.getInstance().getLogger().info("base movement speed: " + base);
         GuardiansOfAdelia.getInstance().getLogger().info("perLevel movement speed: " + perLevel);

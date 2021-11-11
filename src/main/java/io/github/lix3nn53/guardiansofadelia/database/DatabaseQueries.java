@@ -42,90 +42,98 @@ public class DatabaseQueries {
     public static void createTables() {
         try (Connection connection = ConnectionPool.getConnection();
              Statement statement = connection.createStatement()) {
-            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_guild`\n" +
-                    "(\n" +
-                    " `name`         varchar(20) NOT NULL ,\n" +
-                    " `tag`          varchar(5) NOT NULL ,\n" +
-                    " `war_point`    smallint NULL ,\n" +
-                    " `announcement` tinytext NULL ,\n" +
-                    " `hall_level`   smallint NOT NULL ,\n" +
-                    " `bank_level`   smallint NOT NULL ,\n" +
-                    " `lab_level`    smallint NOT NULL ,\n" +
-                    " `storage`      text NULL ,\n" +
-                    "\n" +
-                    "PRIMARY KEY (`name`)\n" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player` (\n" +
+                    "     `uuid`              varchar(40) NOT NULL ,\n" +
+                    "     `daily_last_date`   date NULL ,\n" +
+                    "     `staff_rank`        varchar(20) NULL ,\n" +
+                    "     `premium_rank`      varchar(20) NULL ,\n" +
+                    "     `premium_rank_date` date NULL ,\n" +
+                    "     `storage_personal`  mediumtext NULL ,\n" +
+                    "     `storage_bazaar`    mediumtext NULL ,\n" +
+                    "     `storage_premium`   mediumtext NULL ,\n" +
+                    "     `lang`              varchar(20) NULL ,\n" +
+                    "     \n" +
+                    "     PRIMARY KEY (`uuid`)\n" +
                     ");");
-            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player`\n" +
-                    "(\n" +
-                    " `uuid`              varchar(40) NOT NULL ,\n" +
-                    " `daily_last_date`   date NULL ,\n" +
-                    " `staff_rank`        varchar(20) NULL ,\n" +
-                    " `premium_rank`      varchar(20) NULL ,\n" +
-                    " `premium_rank_date` date NULL ,\n" +
-                    " `storage_personal`  mediumtext NULL ,\n" +
-                    " `storage_bazaar`    mediumtext NULL ,\n" +
-                    " `storage_premium`   mediumtext NULL ,\n" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_character` (\n" +
+                    "     `character_no`         smallint NOT NULL ,\n" +
+                    "     `uuid`                 varchar(40) NOT NULL ,\n" +
+                    "     `off_hand`             text NULL ,\n" +
+                    "     `slot_parrot`          text NULL ,\n" +
+                    "     `slot_necklace`        text NULL ,\n" +
+                    "     `slot_ring`            text NULL ,\n" +
+                    "     `slot_earring`         text NULL ,\n" +
+                    "     `slot_glove`           text NULL ,\n" +
+                    "     `slot_pet`             text NULL ,\n" +
+                    "     `chat_tag`             varchar(45) NULL ,\n" +
+                    "     `crafting_experiences` text NOT NULL ,\n" +
+                    "     `inventory`            mediumtext NOT NULL ,\n" +
+                    "     `turnedinquests`       text NULL ,\n" +
+                    "     `activequests`         text NULL ,\n" +
+                    "     `location`             text NOT NULL ,\n" +
+                    "     `armor_content`        text NOT NULL ,\n" +
+                    "     `rpg_class`            varchar(45) NOT NULL ,\n" +
+                    "     `unlocked_classes`     mediumtext NULL ,\n" +
+                    "     `totalexp`             int NOT NULL ,\n" +
+                    "     `attr_one`             smallint NOT NULL ,\n" +
+                    "     `attr_two`             smallint NOT NULL ,\n" +
+                    "     `attr_three`           smallint NOT NULL ,\n" +
+                    "     `attr_four`            smallint NOT NULL ,\n" +
+                    "     `attr_five`            smallint NOT NULL ,\n" +
+                    "     `skill_one`            smallint NOT NULL ,\n" +
+                    "     `skill_two`            smallint NOT NULL ,\n" +
+                    "     `skill_three`          smallint NOT NULL ,\n" +
+                    "     `skill_passive`        smallint NOT NULL ,\n" +
+                    "     `skill_ultimate`       smallint NOT NULL ,\n" +
                     "\n" +
-                    "PRIMARY KEY (`uuid`)\n" +
+                    "     UNIQUE KEY `Ind_88` (`uuid`, `character_no`),\n" +
+                    "     KEY `fkIdx_55` (`uuid`),\n" +
+                    "     CONSTRAINT `FK_55` FOREIGN KEY `fkIdx_55` (`uuid`) REFERENCES `goa_player` (`uuid`)\n" +
                     ");");
-            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_character`\n" +
-                    "(\n" +
-                    " `character_no`         smallint NOT NULL ,\n" +
-                    " `uuid`                 varchar(40) NOT NULL ,\n" +
-                    " `off_hand`             text NULL ,\n" +
-                    " `slot_parrot`          text NULL ,\n" +
-                    " `slot_necklace`        text NULL ,\n" +
-                    " `slot_ring`            text NULL ,\n" +
-                    " `slot_earring`         text NULL ,\n" +
-                    " `slot_glove`           text NULL ,\n" +
-                    " `slot_pet`             text NULL ,\n" +
-                    " `chat_tag`             varchar(45) NULL ,\n" +
-                    " `crafting_experiences` text NOT NULL ,\n" +
-                    " `inventory`            mediumtext NOT NULL ,\n" +
-                    " `turnedinquests`       text NULL ,\n" +
-                    " `activequests`         text NULL ,\n" +
-                    " `location`             text NOT NULL ,\n" +
-                    " `armor_content`        text NOT NULL ,\n" +
-                    " `rpg_class`            varchar(45) NOT NULL ,\n" +
-                    " `class_skills`     mediumtext NULL ,\n" +
-                    " `totalexp`             int NOT NULL ,\n" +
-                    " `attr_one`             smallint NOT NULL ,\n" +
-                    " `attr_two`             smallint NOT NULL ,\n" +
-                    " `attr_three`           smallint NOT NULL ,\n" +
-                    " `attr_four`            smallint NOT NULL ,\n" +
-                    " `attr_five`            smallint NOT NULL ,\n" +
-                    " `skill_one`            smallint NOT NULL ,\n" +
-                    " `skill_two`            smallint NOT NULL ,\n" +
-                    " `skill_three`          smallint NOT NULL ,\n" +
-                    " `skill_passive`        smallint NOT NULL ,\n" +
-                    " `skill_ultimate`       smallint NOT NULL ,\n" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_friend` (\n" +
+                    "     `uuid`        varchar(40) NOT NULL ,\n" +
+                    "     `friend_uuid` varchar(40) NOT NULL ,\n" +
                     "\n" +
-                    "UNIQUE KEY `Ind_88` (`uuid`, `character_no`),\n" +
-                    "KEY `fkIdx_55` (`uuid`),\n" +
-                    "CONSTRAINT `FK_55` FOREIGN KEY `fkIdx_55` (`uuid`) REFERENCES `goa_player` (`uuid`)\n" +
+                    "     UNIQUE KEY `Ind_89` (`friend_uuid`, `uuid`),\n" +
+                    "     KEY `fkIdx_22` (`uuid`),\n" +
+                    "     CONSTRAINT `FK_22` FOREIGN KEY `fkIdx_22` (`uuid`) REFERENCES `goa_player` (`uuid`),\n" +
+                    "     KEY `fkIdx_25` (`friend_uuid`),\n" +
+                    "     CONSTRAINT `FK_25` FOREIGN KEY `fkIdx_25` (`friend_uuid`) REFERENCES `goa_player` (`uuid`)\n" +
                     ");");
-            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_friend`\n" +
-                    "(\n" +
-                    " `uuid`        varchar(40) NOT NULL ,\n" +
-                    " `friend_uuid` varchar(40) NOT NULL ,\n" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_web` (\n" +
+                    "     `uuid`        varchar(40) NULL ,\n" +
+                    "     `google_id`      varchar(40) NULL UNIQUE,\n" +
+                    "     `twitch_id`      varchar(40) NULL UNIQUE,\n" +
+                    "     `discord_id`      varchar(40) NULL UNIQUE,\n" +
+                    "     `email`       varchar(45) NULL UNIQUE,\n" +
+                    "     `credits`     smallint DEFAULT 0,\n" +
+                    "     `sessions`    text NULL ,\n" +
                     "\n" +
-                    "UNIQUE KEY `Ind_89` (`friend_uuid`, `uuid`),\n" +
-                    "KEY `fkIdx_22` (`uuid`),\n" +
-                    "CONSTRAINT `FK_22` FOREIGN KEY `fkIdx_22` (`uuid`) REFERENCES `goa_player` (`uuid`),\n" +
-                    "KEY `fkIdx_25` (`friend_uuid`),\n" +
-                    "CONSTRAINT `FK_25` FOREIGN KEY `fkIdx_25` (`friend_uuid`) REFERENCES `goa_player` (`uuid`)\n" +
+                    "     KEY `fkIdx_188` (`uuid`),\n" +
+                    "     CONSTRAINT `FK_187` FOREIGN KEY `fkIdx_188` (`uuid`) REFERENCES `goa_player` (`uuid`)\n" +
                     ");");
-            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_guild`\n" +
-                    "(\n" +
-                    " `uuid` varchar(40) NOT NULL ,\n" +
-                    " `name` varchar(20) NOT NULL ,\n" +
-                    " `rank` varchar(20) NOT NULL ,\n" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_guild` (\n" +
+                    "     `name`         varchar(20) NOT NULL ,\n" +
+                    "     `tag`          varchar(5) NOT NULL ,\n" +
+                    "     `war_point`    smallint NULL ,\n" +
+                    "     `announcement` tinytext NULL ,\n" +
+                    "     `hall_level`   smallint NOT NULL ,\n" +
+                    "     `bank_level`   smallint NOT NULL ,\n" +
+                    "     `lab_level`    smallint NOT NULL ,\n" +
+                    "     `storage`      mediumtext NULL ,\n" +
                     "\n" +
-                    "PRIMARY KEY (`uuid`),\n" +
-                    "KEY `fkIdx_38` (`uuid`),\n" +
-                    "CONSTRAINT `FK_38` FOREIGN KEY `fkIdx_38` (`uuid`) REFERENCES `goa_player` (`uuid`),\n" +
-                    "KEY `fkIdx_41` (`name`),\n" +
-                    "CONSTRAINT `FK_41` FOREIGN KEY `fkIdx_41` (`name`) REFERENCES `goa_guild` (`name`)\n" +
+                    "     PRIMARY KEY (`name`)\n" +
+                    ");");
+            statement.addBatch("CREATE TABLE IF NOT EXISTS `goa_player_guild` (\n" +
+                    "     `uuid` varchar(40) NOT NULL ,\n" +
+                    "     `name` varchar(20) NOT NULL ,\n" +
+                    "     `rank` varchar(20) NOT NULL ,\n" +
+                    "     \n" +
+                    "     PRIMARY KEY (`uuid`),\n" +
+                    "     KEY `fkIdx_38` (`uuid`),\n" +
+                    "     CONSTRAINT `FK_38` FOREIGN KEY `fkIdx_38` (`uuid`) REFERENCES `goa_player` (`uuid`),\n" +
+                    "     KEY `fkIdx_41` (`name`),\n" +
+                    "     CONSTRAINT `FK_41` FOREIGN KEY `fkIdx_41` (`name`) REFERENCES `goa_guild` (`name`)\n" +
                     ");");
 
             statement.executeBatch();
@@ -255,6 +263,11 @@ public class DatabaseQueries {
                 LocalDate dailyLastDate = resultSet.getObject("daily_last_date", LocalDate.class);
                 if (!resultSet.wasNull()) {
                     guardianData.getDailyRewardInfo().setLastObtainDate(dailyLastDate);
+                }
+
+                String lang = resultSet.getString("lang");
+                if (!resultSet.wasNull()) {
+                    guardianData.setLanguage(lang);
                 }
             }
             resultSet.close();
@@ -659,11 +672,13 @@ public class DatabaseQueries {
         }
     }
 
-    public static int setGuardianData(UUID uuid, LocalDate lastPrizeDate, StaffRank staffRank, PremiumRank premiumRank, ItemStack[] personalStorage, ItemStack[] bazaarStorage, ItemStack[] premiumStorage) throws SQLException {
+    public static int setGuardianData(UUID uuid, LocalDate lastPrizeDate, StaffRank staffRank, PremiumRank premiumRank,
+                                      ItemStack[] personalStorage, ItemStack[] bazaarStorage,
+                                      ItemStack[] premiumStorage, String language) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player \n" +
                 "\t(uuid, daily_last_date, staff_rank, premium_rank, storage_personal, storage_bazaar, storage_premium) \n" +
                 "VALUES \n" +
-                "\t(?, ?, ?, ?, ?, ?, ?)\n" +
+                "\t(?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
                 "\tdaily_last_date = VALUES(daily_last_date),\n" +
@@ -671,7 +686,8 @@ public class DatabaseQueries {
                 "\tpremium_rank = VALUES(premium_rank),\n" +
                 "\tstorage_personal = VALUES(storage_personal),\n" +
                 "\tstorage_bazaar = VALUES(storage_bazaar),\n" +
-                "\tstorage_premium = VALUES(storage_premium);";
+                "\tstorage_premium = VALUES(storage_premium),\n" +
+                "\tlang = VALUES(lang);";
         try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
@@ -685,6 +701,7 @@ public class DatabaseQueries {
             pst.setString(6, bazaarStorageString);
             String premiumStorageString = ItemSerializer.itemStackArrayToBase64(premiumStorage);
             pst.setString(7, premiumStorageString);
+            pst.setString(8, language);
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

@@ -10,10 +10,10 @@ import javax.annotation.Nullable;
 
 public class ArrangementDrawLine extends ArrangementSingle {
 
-    private final double length;
-    private final double gap;
+    private final float length;
+    private final float gap;
 
-    public ArrangementDrawLine(Particle particle, Particle.DustOptions dustOptions, double length, double gap, double singleMinHeight, double singleMaxHeight, double singleGap) {
+    public ArrangementDrawLine(Particle particle, Particle.DustOptions dustOptions, float length, float gap, float singleMinHeight, float singleMaxHeight, float singleGap) {
         super(particle, dustOptions, singleMinHeight, singleMaxHeight, singleGap);
         this.length = length;
         this.gap = gap;
@@ -30,8 +30,8 @@ public class ArrangementDrawLine extends ArrangementSingle {
             configLoadError("gap");
         }
 
-        this.length = configurationSection.getDouble("length");
-        this.gap = configurationSection.getDouble("gap");
+        this.length = (float) configurationSection.getDouble("length");
+        this.gap = (float) configurationSection.getDouble("gap");
     }
 
     @Override

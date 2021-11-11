@@ -81,12 +81,12 @@ public class DungeonConfiguration {
                     String materialStr = section.getString("room" + roomIndex + ".door" + doorIndex + ".material");
                     Material doorMaterial = Material.valueOf(materialStr);
 
-                    double x1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".x1");
-                    double y1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".y1");
-                    double z1 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".z1");
-                    double x2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".x2");
-                    double y2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".y2");
-                    double z2 = section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".z2");
+                    float x1 = (float) section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".x1");
+                    float y1 = (float) section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".y1");
+                    float z1 = (float) section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".z1");
+                    float x2 = (float) section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".x2");
+                    float y2 = (float) section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".y2");
+                    float z2 = (float) section.getDouble("room" + roomIndex + ".door" + doorIndex + ".box" + ".z2");
 
                     BoundingBox boundingBox = new BoundingBox(x1, y1, z1, x2, y2, z2);
 
@@ -108,9 +108,9 @@ public class DungeonConfiguration {
 
                         int amount = section.getInt("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".amount");
 
-                        double x = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".x");
-                        double y = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".y");
-                        double z = section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".z");
+                        float x = (float) section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".x");
+                        float y = (float) section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".y");
+                        float z = (float) section.getDouble("room" + roomIndex + ".wave" + waveIndex + ".spawner" + spawnerIndex + ".offset" + ".z");
 
                         Vector offset = new Vector(x, y, z);
 
@@ -125,9 +125,9 @@ public class DungeonConfiguration {
                 for (int groundIndex = 1; groundIndex <= 999; groundIndex++) {
                     if (!section.contains("room" + roomIndex + ".skillOnGround" + groundIndex)) break;
 
-                    double x = section.getDouble("room" + roomIndex + ".skillOnGround" + groundIndex + ".loc" + ".x");
-                    double y = section.getDouble("room" + roomIndex + ".skillOnGround" + groundIndex + ".loc" + ".y");
-                    double z = section.getDouble("room" + roomIndex + ".skillOnGround" + groundIndex + ".loc" + ".z");
+                    float x = (float) section.getDouble("room" + roomIndex + ".skillOnGround" + groundIndex + ".loc" + ".x");
+                    float y = (float) section.getDouble("room" + roomIndex + ".skillOnGround" + groundIndex + ".loc" + ".y");
+                    float z = (float) section.getDouble("room" + roomIndex + ".skillOnGround" + groundIndex + ".loc" + ".z");
 
                     Vector vector = new Vector(x, y, z);
 
@@ -158,9 +158,9 @@ public class DungeonConfiguration {
             int checkpointCount = section.getInt("checkpoints.count");
             for (int checkpointNumber = 1; checkpointNumber <= checkpointCount; checkpointNumber++) {
 
-                double xC = section.getDouble("checkpoints.loc" + checkpointNumber + ".x");
-                double yC = section.getDouble("checkpoints.loc" + checkpointNumber + ".y");
-                double zC = section.getDouble("checkpoints.loc" + checkpointNumber + ".z");
+                float xC = (float) section.getDouble("checkpoints.loc" + checkpointNumber + ".x");
+                float yC = (float) section.getDouble("checkpoints.loc" + checkpointNumber + ".y");
+                float zC = (float) section.getDouble("checkpoints.loc" + checkpointNumber + ".z");
 
                 Vector vector = new Vector(xC, yC, zC);
 
@@ -169,9 +169,9 @@ public class DungeonConfiguration {
 
             Vector prizeChestCenterOffset = new Vector(0, 0, 0);
             if (section.contains("prizeChestCenter.x")) {
-                double x = section.getDouble("prizeChestCenter.x");
-                double y = section.getDouble("prizeChestCenter.y");
-                double z = section.getDouble("prizeChestCenter.z");
+                float x = (float) section.getDouble("prizeChestCenter.x");
+                float y = (float) section.getDouble("prizeChestCenter.y");
+                float z = (float) section.getDouble("prizeChestCenter.z");
                 prizeChestCenterOffset = new Vector(x, y, z);
             }
 
@@ -179,9 +179,9 @@ public class DungeonConfiguration {
             for (int groundIndex = 1; groundIndex <= 999; groundIndex++) {
                 if (!section.contains("skillOnGround" + groundIndex)) break;
 
-                double x = section.getDouble("skillOnGround" + groundIndex + ".loc" + ".x");
-                double y = section.getDouble("skillOnGround" + groundIndex + ".loc" + ".y");
-                double z = section.getDouble("skillOnGround" + groundIndex + ".loc" + ".z");
+                float x = (float) section.getDouble("skillOnGround" + groundIndex + ".loc" + ".x");
+                float y = (float) section.getDouble("skillOnGround" + groundIndex + ".loc" + ".y");
+                float z = (float) section.getDouble("skillOnGround" + groundIndex + ".loc" + ".z");
 
                 Vector vector = new Vector(x, y, z);
 
@@ -198,12 +198,12 @@ public class DungeonConfiguration {
                 skillsOnGround.add(skillOnGroundWithOffset);
             }
 
-            double x1 = section.getDouble("bossRoom" + ".x1");
-            double y1 = section.getDouble("bossRoom" + ".y1");
-            double z1 = section.getDouble("bossRoom" + ".z1");
-            double x2 = section.getDouble("bossRoom" + ".x2");
-            double y2 = section.getDouble("bossRoom" + ".y2");
-            double z2 = section.getDouble("bossRoom" + ".z2");
+            float x1 = (float) section.getDouble("bossRoom" + ".x1");
+            float y1 = (float) section.getDouble("bossRoom" + ".y1");
+            float z1 = (float) section.getDouble("bossRoom" + ".z1");
+            float x2 = (float) section.getDouble("bossRoom" + ".x2");
+            float y2 = (float) section.getDouble("bossRoom" + ".y2");
+            float z2 = (float) section.getDouble("bossRoom" + ".z2");
 
             BoundingBox bossRoomBox = new BoundingBox(x1, y1, z1, x2, y2, z2);
 
@@ -343,9 +343,9 @@ public class DungeonConfiguration {
         for (String code : dungeonThemes.keySet()) {
             String worldString = dungeonGatesConfig.getString(code + ".world");
             World world = Bukkit.getWorld(worldString);
-            double x = dungeonGatesConfig.getDouble(code + ".x");
-            double y = dungeonGatesConfig.getDouble(code + ".y");
-            double z = dungeonGatesConfig.getDouble(code + ".z");
+            float x = (float) dungeonGatesConfig.getDouble(code + ".x");
+            float y = (float) dungeonGatesConfig.getDouble(code + ".y");
+            float z = (float) dungeonGatesConfig.getDouble(code + ".z");
             float yaw = (float) dungeonGatesConfig.getDouble(code + ".yaw");
             float pitch = (float) dungeonGatesConfig.getDouble(code + ".pitch");
             Location location = new Location(world, x, y, z, yaw, pitch);
@@ -362,9 +362,9 @@ public class DungeonConfiguration {
                 String code = themeCode + i;
                 String worldString = dungeonInstancesConfig.getString(code + ".start.world");
                 World world = Bukkit.getWorld(worldString);
-                double x = dungeonInstancesConfig.getDouble(code + ".start.x");
-                double y = dungeonInstancesConfig.getDouble(code + ".start.y");
-                double z = dungeonInstancesConfig.getDouble(code + ".start.z");
+                float x = (float) dungeonInstancesConfig.getDouble(code + ".start.x");
+                float y = (float) dungeonInstancesConfig.getDouble(code + ".start.y");
+                float z = (float) dungeonInstancesConfig.getDouble(code + ".start.z");
                 float yaw = (float) dungeonInstancesConfig.getDouble(code + ".start.yaw");
                 float pitch = (float) dungeonInstancesConfig.getDouble(code + ".start.pitch");
                 Location start = new Location(world, x, y, z, yaw, pitch);

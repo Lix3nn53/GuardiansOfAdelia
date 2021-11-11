@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class MMManager {
 
     private static final HashMap<String, ElementType> internalNameToElement = new HashMap<>();
-    private static final HashMap<String, HashMap<ElementType, Double>> internalNameToElementResistances = new HashMap<>();
+    private static final HashMap<String, HashMap<ElementType, Float>> internalNameToElementResistances = new HashMap<>();
 
     public static void addElement(String internalName, ElementType elementType) {
         internalNameToElement.put(internalName, elementType);
@@ -23,8 +23,8 @@ public class MMManager {
         return internalNameToElement.get(internalName);
     }
 
-    public static void addElementResistance(String internalName, ElementType elementType, double resistance) {
-        HashMap<ElementType, Double> resistances = new HashMap<>();
+    public static void addElementResistance(String internalName, ElementType elementType, float resistance) {
+        HashMap<ElementType, Float> resistances = new HashMap<>();
 
         if (internalNameToElementResistances.containsKey(internalName)) {
             resistances = internalNameToElementResistances.get(internalName);
@@ -37,7 +37,7 @@ public class MMManager {
 
     public static boolean hasElementResistance(String internalName, ElementType elementType) {
         if (internalNameToElementResistances.containsKey(internalName)) {
-            HashMap<ElementType, Double> resistances = internalNameToElementResistances.get(internalName);
+            HashMap<ElementType, Float> resistances = internalNameToElementResistances.get(internalName);
 
             return resistances.containsKey(elementType);
         }
@@ -45,8 +45,8 @@ public class MMManager {
         return false;
     }
 
-    public static double getElementResistance(String internalName, ElementType elementType) {
-        HashMap<ElementType, Double> resistances = internalNameToElementResistances.get(internalName);
+    public static float getElementResistance(String internalName, ElementType elementType) {
+        HashMap<ElementType, Float> resistances = internalNameToElementResistances.get(internalName);
 
         return resistances.get(elementType);
     }

@@ -18,10 +18,10 @@ public enum LootChestTier {
         List<ItemStack> list = new ArrayList<>();
 
         Random rand = new Random();
-        double random = Math.random();
+        float random = (float) Math.random();
 
         //CONSUMABLES
-        double consumableChance = 0.7;
+        float consumableChance = 0.7f;
         if (random < consumableChance) {
             int minSkillLevel = getMinSkillLevel();
             int maxSkillLevel = getMaxSkillLevel();
@@ -42,8 +42,8 @@ public enum LootChestTier {
         }
 
         //ENCHANT_STONES
-        double enchStoneChance = 0.4;
-        random = Math.random();
+        float enchStoneChance = 0.4f;
+        random = (float) Math.random();
         if (random < enchStoneChance) {
             int minTierIndex = getMinTierIndex();
             int maxTierIndex = getMaxTierIndex();

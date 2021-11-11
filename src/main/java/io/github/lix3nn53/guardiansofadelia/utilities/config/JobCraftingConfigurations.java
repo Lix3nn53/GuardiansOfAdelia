@@ -114,11 +114,11 @@ public class JobCraftingConfigurations {
                                 continue;
                             }
 
-                            double multiplier = 1;
+                            float multiplier = 1;
                             if (armorSlot.equals(ArmorSlot.LEGGINGS)) {
-                                multiplier = 0.75;
+                                multiplier = 0.75f;
                             } else if (armorSlot.equals(ArmorSlot.BOOTS) || armorSlot.equals(ArmorSlot.HELMET)) {
-                                multiplier = 0.5;
+                                multiplier = 0.5f;
                             }
 
                             List<Integer> newList = multipleListWith(ingredientAmounts, multiplier);
@@ -131,7 +131,7 @@ public class JobCraftingConfigurations {
                     if (craftingType.equals(CraftingType.ARMOR_HEAVY)) {
                         ShieldGearType shieldGear = ShieldGearType.SHIELD;
                         ItemStack shield = ShieldManager.get(shieldGear, gearLevel, itemTier, true, gearSet).get(index);
-                        double multiplier = 1;
+                        float multiplier = 1;
 
                         List<Integer> newList = multipleListWith(ingredientAmounts, multiplier);
 
@@ -142,7 +142,7 @@ public class JobCraftingConfigurations {
         }
     }
 
-    private static List<Integer> multipleListWith(List<Integer> list, double multiplier) {
+    private static List<Integer> multipleListWith(List<Integer> list, float multiplier) {
         if (multiplier == 1) return list;
 
         List<Integer> newList = new ArrayList<>();

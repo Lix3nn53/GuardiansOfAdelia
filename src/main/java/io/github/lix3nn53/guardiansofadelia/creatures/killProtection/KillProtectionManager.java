@@ -27,7 +27,7 @@ public class KillProtectionManager {
 
     private static final HashMap<LivingEntity, PlayerDamage> livingEntityToDamages = new HashMap<>();
 
-    public static void onPlayerDealDamageToLivingEntity(Player attacker, LivingEntity damaged, double damage) {
+    public static void onPlayerDealDamageToLivingEntity(Player attacker, LivingEntity damaged, float damage) {
         if (livingEntityToDamages.containsKey(damaged)) {
             PlayerDamage playerDamage = livingEntityToDamages.get(damaged);
             playerDamage.dealDamage(attacker, damage);
@@ -141,7 +141,7 @@ public class KillProtectionManager {
 
         //Share
         if (shareCount > 1) {
-            double expMultiplier = 1 - (0.1 * shareCount);
+            float expMultiplier = 1 - (0.1f * shareCount);
 
             exp = (int) (exp * expMultiplier + 0.5);
         }

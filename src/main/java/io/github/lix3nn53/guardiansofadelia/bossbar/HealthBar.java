@@ -19,7 +19,7 @@ public class HealthBar {
     private final BossBar bar;
     private final HashMap<Player, BukkitTask> playerToCooldown = new HashMap<>();
 
-    /*public HealthBar(String title, double progress) {
+    /*public HealthBar(String title, float progress) {
         BarColor color = BarColor.GREEN;
 
         if (progress < 0.6 && progress > 0.25) {
@@ -35,10 +35,10 @@ public class HealthBar {
     }*/
 
     public HealthBar(LivingEntity livingTarget, int damage, ChatPalette damageColor, String damageIcon) {
-        double maxHealth = livingTarget.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-        double currentHealth = livingTarget.getHealth() - damage;
+        float maxHealth = (float) livingTarget.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        float currentHealth = (float) (livingTarget.getHealth() - damage);
 
-        double progress = getProgress(maxHealth, currentHealth);
+        float progress = getProgress(maxHealth, currentHealth);
         BarColor color = getColor(progress);
         String title = getTitle(livingTarget, damage, damageColor, damageIcon, maxHealth, currentHealth);
 
@@ -70,8 +70,8 @@ public class HealthBar {
         this.bar.removeAll();
     }
 
-    private double getProgress(double maxHealth, double currentHealth) {
-        double progress = 0;
+    private float getProgress(float maxHealth, float currentHealth) {
+        float progress = 0;
         if (!(currentHealth <= 0)) {
             progress = currentHealth / maxHealth;
         }
@@ -88,7 +88,7 @@ public class HealthBar {
         return targetName;
     }
 
-    private BarColor getColor(double progress) {
+    private BarColor getColor(float progress) {
         BarColor color = BarColor.GREEN;
 
         if (progress < 0.6 && progress > 0.25) {
@@ -101,7 +101,7 @@ public class HealthBar {
     }
 
     private String getTitle(LivingEntity livingTarget, int damage, ChatPalette damageColor, String damageIcon,
-                            double maxHealth, double currentHealth) {
+                            float maxHealth, float currentHealth) {
         String targetName = getName(livingTarget);
 
         return (damageColor.toString() + damage + damageColor + damageIcon + " " + targetName + " " + ChatPalette.GREEN_DARK + (int) (currentHealth + 0.5) +
@@ -109,10 +109,10 @@ public class HealthBar {
     }
 
     public void update(LivingEntity livingTarget, int damage, ChatPalette damageColor, String damageIcon) {
-        double maxHealth = livingTarget.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-        double currentHealth = livingTarget.getHealth() - damage;
+        float maxHealth = (float) livingTarget.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        float currentHealth = (float) (livingTarget.getHealth() - damage);
 
-        double progress = getProgress(maxHealth, currentHealth);
+        float progress = getProgress(maxHealth, currentHealth);
         BarColor color = getColor(progress);
         String title = getTitle(livingTarget, damage, damageColor, damageIcon, maxHealth, currentHealth);
 

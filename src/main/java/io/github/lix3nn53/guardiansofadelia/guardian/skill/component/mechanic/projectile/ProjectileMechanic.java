@@ -31,18 +31,18 @@ public class ProjectileMechanic extends MechanicComponent implements ProjectileC
         Class<? extends Projectile> projectileType = (Class<? extends Projectile>) Class.forName("org.bukkit.entity." + projectileClass);
 
         SpreadType spreadType = SpreadType.valueOf(configurationSection.getString("spreadType"));
-        double speed = configurationSection.getDouble("speed");
+        float speed = (float) configurationSection.getDouble("speed");
         List<Integer> amountList = configurationSection.getIntegerList("amountList");
         String amountValueKey = configurationSection.getString("amountValueKey");
-        double angle = configurationSection.getDouble("angle");
-        double range = configurationSection.getDouble("range");
+        float angle = (float) configurationSection.getDouble("angle");
+        float range = (float) configurationSection.getDouble("range");
         boolean mustHitToWork = configurationSection.getBoolean("mustHitToWork");
 
-        double radius;
-        double height;
+        float radius;
+        float height;
         if (spreadType.equals(SpreadType.RAIN)) {
-            radius = configurationSection.getDouble("radius");
-            height = configurationSection.getDouble("height");
+            radius = (float) configurationSection.getDouble("radius");
+            height = (float) configurationSection.getDouble("height");
         } else {
             radius = 0;
             height = 0;
@@ -57,9 +57,9 @@ public class ProjectileMechanic extends MechanicComponent implements ProjectileC
             particleArrangement = null;
         }
 
-        double upward;
+        float upward;
         if (configurationSection.contains("upward")) {
-            upward = configurationSection.getDouble("upward");
+            upward = (float) configurationSection.getDouble("upward");
         } else {
             upward = 0;
         }

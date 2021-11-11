@@ -15,12 +15,12 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
 
     private final float yawIncrease;
     private final float pitchIncrease;
-    private final double upwardIncrease;
+    private final float upwardIncrease;
 
     private final long frequency;
     private final List<Integer> repeatAmount;
 
-    private final List<Double> dataIncreaseList = new ArrayList<>();
+    private final List<Float> dataIncreaseList = new ArrayList<>();
 
     //conditions
     private final String valueConditionKey;
@@ -39,14 +39,14 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
 
         for (int i = 1; i < 10; i++) {
             if (!configurationSection.contains("dataIncrease" + i)) break;
-            this.dataIncreaseList.add(configurationSection.getDouble("dataIncrease" + i));
+            this.dataIncreaseList.add((float) configurationSection.getDouble("dataIncrease" + i));
         }
 
         this.playback = configurationSection.contains("playback") && configurationSection.getBoolean("playback");
 
-        this.yawIncrease = configurationSection.contains("yawIncrease") ? (float) configurationSection.getDouble("yawIncrease") : 0;
-        this.pitchIncrease = configurationSection.contains("pitchIncrease") ? (float) configurationSection.getDouble("pitchIncrease") : 0;
-        this.upwardIncrease = configurationSection.contains("upwardIncrease") ? configurationSection.getDouble("upwardIncrease") : 0;
+        this.yawIncrease = configurationSection.contains("yawIncrease") ? (float) (float) configurationSection.getDouble("yawIncrease") : 0;
+        this.pitchIncrease = configurationSection.contains("pitchIncrease") ? (float) (float) configurationSection.getDouble("pitchIncrease") : 0;
+        this.upwardIncrease = configurationSection.contains("upwardIncrease") ? (float) configurationSection.getDouble("upwardIncrease") : 0;
 
         this.frequency = configurationSection.getInt("frequency");
         this.repeatAmount = configurationSection.getIntegerList("repeatAmount");
@@ -83,7 +83,7 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
                     float currentYaw = yaw + (yawIncrease * counter);
                     float currentPitch = pitch + (pitchIncrease * counter);
 
-                    double currentUpward = upward + (upwardIncrease * counter);
+                    float currentUpward = upward + (upwardIncrease * counter);
 
                     // Play particle
                     playParticle(target, skillLevel, centerEye, resetY, forwardList, currentUpward, right, dataIndexToDataList, particleArrangement, rotation,

@@ -49,7 +49,7 @@ public class PartyManager {
 
     //QUEST PROGRESSES
 
-    public static void progressDealDamageTasksOfOtherMembers(Player player, String internalName, double finalDamage) {
+    public static void progressDealDamageTasksOfOtherMembers(Player player, String internalName, float finalDamage) {
         if (inParty(player)) {
             Party party = PartyManager.getParty(player);
             List<Player> members = party.getMembers();

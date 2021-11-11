@@ -109,8 +109,8 @@ public class ItemReferenceLoader {
             int x = configurationSection.getInt("x");
             int y = configurationSection.getInt("y");
             int z = configurationSection.getInt("z");
-            float yaw = (float) configurationSection.getDouble("yaw");
-            float pitch = (float) configurationSection.getDouble("pitch");
+            float yaw = (float) (float) configurationSection.getDouble("yaw");
+            float pitch = (float) (float) configurationSection.getDouble("pitch");
 
             Location location = new Location(world, x, y, z, yaw, pitch);
             String name = configurationSection.getString("name");

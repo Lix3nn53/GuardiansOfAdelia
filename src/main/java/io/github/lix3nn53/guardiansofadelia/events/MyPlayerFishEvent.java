@@ -42,7 +42,7 @@ public class MyPlayerFishEvent implements Listener {
             }
             if (!b) {
                 event.setCancelled(true);
-                player.sendMessage(ChatPalette.RED + "You are not in a fishing area");
+                player.sendMessage(ChatPalette.RED + "You are not in a fishing spot");
             }
         } else if (state.equals(PlayerFishEvent.State.CAUGHT_FISH)) {
             event.setExpToDrop(0);
@@ -70,7 +70,7 @@ public class MyPlayerFishEvent implements Listener {
             }
             if (!b) {
                 event.setCancelled(true);
-                player.sendMessage(ChatPalette.RED + "You are not in a fishing area");
+                player.sendMessage(ChatPalette.RED + "You are not in a fishing spot");
                 return;
             }
 

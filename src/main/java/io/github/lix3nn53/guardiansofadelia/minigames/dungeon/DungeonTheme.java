@@ -198,7 +198,7 @@ public class DungeonTheme {
         List<String> weakness = new ArrayList<>();
         for (ElementType type : ElementType.values()) {
             if (MMManager.hasElementResistance(bossInternalName, type)) {
-                double resistance = MMManager.getElementResistance(bossInternalName, type);
+                float resistance = MMManager.getElementResistance(bossInternalName, type);
 
                 if (resistance < 1) {
                     int percent = (int) (100 * (-(1d - resistance)));
@@ -276,21 +276,21 @@ public class DungeonTheme {
         }
 
         int size = monsterPool.size();
-        double darknessPercent = darkness / 100d;
+        float darknessPercent = darkness / 100f;
 
         int totalWeight = 0;
         List<Integer> weights = new ArrayList<>();
         for (int i = 1; i <= size; i++) { // start from 1 so first index has a percent and last one is 100
-            double indexPercent = i / (double) size;
-            double diff = Math.abs(indexPercent - darknessPercent);
-            double diffReverse = 1 - diff;
+            float indexPercent = i / (float) size;
+            float diff = Math.abs(indexPercent - darknessPercent);
+            float diffReverse = 1 - diff;
 
             int weight = (int) (10 * diffReverse * diffReverse * diffReverse + 0.5); // to make differences between indexes larger
             totalWeight += weight;
             weights.add(weight);
         }
 
-        double randomWeight = Math.random() * totalWeight;
+        float randomWeight = (float) (Math.random()) * totalWeight;
 
         int weightCounter = 0;
         for (int i = 0; i <= size; i++) {
