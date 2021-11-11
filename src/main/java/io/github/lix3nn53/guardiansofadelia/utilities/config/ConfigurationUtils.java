@@ -7,7 +7,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ConfigurationUtils {
 
@@ -54,6 +56,8 @@ public class ConfigurationUtils {
 
         for (File file : files) {
             if (file.isFile()) {
+                GuardiansOfAdelia.getInstance().getLogger().info("File: " + file.getName());
+
                 String fileName = file.getName();
                 String[] split = fileName.split("\\.");
                 String nameWithoutType = split[0];
@@ -66,6 +70,27 @@ public class ConfigurationUtils {
                 } catch (IOException | InvalidConfigurationException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+
+        return result;
+    }
+
+    public static List<String> getAllDirectoriesInFile(String filePath) {
+        List<String> result = new ArrayList<>();
+
+        File customConfigFile = new File(filePath);
+        File[] files = customConfigFile.listFiles();
+
+        if (files == null) return result;
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                GuardiansOfAdelia.getInstance().getLogger().info("Directory: " + file.getName());
+
+                String fileName = file.getName();
+
+                result.add(fileName);
             }
         }
 

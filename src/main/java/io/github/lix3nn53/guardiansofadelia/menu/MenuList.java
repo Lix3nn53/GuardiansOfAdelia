@@ -17,6 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -49,7 +50,7 @@ import java.util.List;
 
 public class MenuList {
 
-    public static GuiGeneric mainMenu() {
+    public static GuiGeneric mainMenu(GuardianData guardianData) {
         GuiGeneric guiGeneric = new GuiGeneric(54, ChatPalette.GRAY_DARK + "Guardians of Adelia", 0);
 
         ItemStack compass = new ItemStack(Material.WOODEN_PICKAXE);
@@ -78,7 +79,7 @@ public class MenuList {
 
         ItemStack character = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(2);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Character");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "class.character"));
         lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatPalette.GRAY + "Manage your character");

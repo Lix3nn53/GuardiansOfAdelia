@@ -237,7 +237,7 @@ public class GuardianData {
             language = Translation.DEFAULT_LANG;
             player.sendMessage(ChatPalette.RED + "This language does not exist, using default: " + language);
         } else {
-            player.sendMessage(ChatPalette.GREEN + "Successfully changed to " + language);
+            player.sendMessage(ChatPalette.GREEN_DARK + "Successfully changed to " + language);
         }
         this.language = language;
     }

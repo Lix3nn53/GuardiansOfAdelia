@@ -366,11 +366,12 @@ public class MyInventoryClickEvent implements Listener {
                 return;
             }
 
+            final GuardianData guardianDataCopy = guardianData;
             new BukkitRunnable() {
 
                 @Override
                 public void run() {
-                    GuiGeneric guiGeneric = MenuList.mainMenu();
+                    GuiGeneric guiGeneric = MenuList.mainMenu(guardianDataCopy);
                     guiGeneric.openInventory(player);
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 1);

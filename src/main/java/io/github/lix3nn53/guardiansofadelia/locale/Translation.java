@@ -3,22 +3,15 @@ package io.github.lix3nn53.guardiansofadelia.locale;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class Translation {
 
     public static final String DEFAULT_LANG = "en_us";
     private static final HashMap<String, TranslationStorage> languageTranslation = new HashMap<>();
 
-    public static void add(String language, String filename, String path, String t) {
-        TranslationStorage translationStorage;
-        if (languageTranslation.containsKey(language)) {
-            translationStorage = languageTranslation.get(language);
-        } else {
-            translationStorage = new TranslationStorage(language);
-            languageTranslation.put(language, translationStorage);
-        }
-
-        translationStorage.add(filename, path, t);
+    public static void put(String language, TranslationStorage translationStorage) {
+        languageTranslation.put(language, translationStorage);
     }
 
     public static String t(GuardianData guardianData, String path) {
@@ -29,5 +22,9 @@ public class Translation {
 
     public static boolean exists(String language) {
         return languageTranslation.containsKey(language);
+    }
+
+    public static Set<String> getLanguages() {
+        return languageTranslation.keySet();
     }
 }

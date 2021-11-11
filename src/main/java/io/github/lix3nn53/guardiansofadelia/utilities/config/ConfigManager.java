@@ -59,6 +59,7 @@ public class ConfigManager {
         GearSetConfiguration.createConfigs();
         MobConfigurations.createConfigs();
         MerchantConfiguration.createConfigs();
+        TranslationConfigurations.createConfigs();
     }
 
     public static void loadConfigALL() {
@@ -85,6 +86,7 @@ public class ConfigManager {
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();
         MerchantConfiguration.loadConfigs();
+        TranslationConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {

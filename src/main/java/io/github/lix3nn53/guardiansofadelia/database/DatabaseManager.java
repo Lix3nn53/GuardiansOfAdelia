@@ -88,6 +88,8 @@ public class DatabaseManager {
                     player.sendMessage(ChatPalette.YELLOW + "Changing to client language...");
                     String locale = player.getLocale();
                     guardianData.setLanguage(player, locale);
+                } else {
+                    player.sendMessage(ChatPalette.GREEN_DARK + "Changed to saved language: " + guardianData.getLanguage());
                 }
 
                 List<Player> friendsOfPlayer = DatabaseQueries.getFriendsOfPlayer(uuid);

@@ -73,7 +73,7 @@ public class DatabaseQueries {
                     "     `location`             text NOT NULL ,\n" +
                     "     `armor_content`        text NOT NULL ,\n" +
                     "     `rpg_class`            varchar(45) NOT NULL ,\n" +
-                    "     `unlocked_classes`     mediumtext NULL ,\n" +
+                    "     `class_skills`         mediumtext NULL ,\n" +
                     "     `totalexp`             int NOT NULL ,\n" +
                     "     `attr_one`             smallint NOT NULL ,\n" +
                     "     `attr_two`             smallint NOT NULL ,\n" +
@@ -676,7 +676,7 @@ public class DatabaseQueries {
                                       ItemStack[] personalStorage, ItemStack[] bazaarStorage,
                                       ItemStack[] premiumStorage, String language) throws SQLException {
         String SQL_QUERY = "INSERT INTO goa_player \n" +
-                "\t(uuid, daily_last_date, staff_rank, premium_rank, storage_personal, storage_bazaar, storage_premium) \n" +
+                "\t(uuid, daily_last_date, staff_rank, premium_rank, storage_personal, storage_bazaar, storage_premium, lang) \n" +
                 "VALUES \n" +
                 "\t(?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +

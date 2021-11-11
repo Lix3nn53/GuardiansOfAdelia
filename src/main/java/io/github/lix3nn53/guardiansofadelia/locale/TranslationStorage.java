@@ -24,7 +24,7 @@ public class TranslationStorage {
         return "";
     }
 
-    public void add(String filename, String path, String t) {
-        pathToTranslation.put(filename + "." + path, t);
+    public void add(String ymlName, String path, String t) {
+        pathToTranslation.put(ymlName + "." + path, t);
     }
 }
