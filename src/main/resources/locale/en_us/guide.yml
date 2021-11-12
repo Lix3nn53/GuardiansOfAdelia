@@ -1,0 +1,33 @@
+server-ip: play.guardiansofadelia.com
+introduction:
+  subject: Introduction
+  p0: >-
+    Guardians of Adelia is a MMORPG minecraft server. Gameplay focuses on
+    beating dungeons while exploring a huge open world. Currently there are 12
+    playable classes with unique skill sets. And you can unlock all classes in
+    one chracter. There are lots of other features like quests, pets, crafting
+    etc. which you can explore in this guide!
+  p1:
+    text1: 'You can learn how to jump into the server in '
+    link1: 'How to Play? '
+    text2: 'or continue to read more about '
+    link2: Classes
+how-to-play:
+  subject: How to play?
+  p0: >-
+    Server resource pack is required to play or you will see a lot of visual
+    errors. To join server with server resource pack follow these steps: 
+  step1:
+    text1: 'Add '
+    text2: ' to your server list'
+  step2: Enable the server resource packs in the Edit Server Info menu
+  step3: >-
+    Join the server and wait for the resource pack to load. If you are having
+    problems in this step see below.
+  h1: Having problems?
+  p1:
+    step1: Update your Minecraft launcher.
+    step2: >-
+      Go to your %appdata% folder and click on .minecraft. Then go to
+      server-resource-packs and delete 'legacy' or anything Guardians of Adelia
+      related.

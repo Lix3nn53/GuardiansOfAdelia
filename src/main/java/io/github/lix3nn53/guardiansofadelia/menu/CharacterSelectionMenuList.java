@@ -48,27 +48,4 @@ public class CharacterSelectionMenuList {
 
         return guiGeneric;
     }
-
-    public static GuiGeneric tutorialSkipMenu(int charNo) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Play Tutorial? #" + charNo, 0);
-
-        ItemStack yes = new ItemStack(Material.LIME_WOOL);
-        ItemMeta itemMeta = yes.getItemMeta();
-        itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Yes, play tutorial.");
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        yes.setItemMeta(itemMeta);
-        guiGeneric.setItem(11, yes);
-
-        ItemStack no = new ItemStack(Material.RED_WOOL);
-        itemMeta.setDisplayName(ChatPalette.RED + "No, skip tutorial");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatPalette.YELLOW + "Required level: 1");
-        itemMeta.setLore(lore);
-        no.setItemMeta(itemMeta);
-        guiGeneric.setItem(15, no);
-
-        return guiGeneric;
-    }
 }

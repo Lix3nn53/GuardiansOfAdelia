@@ -119,4 +119,9 @@ public class GuiGeneric implements Gui {
     public int getResourceNPC() {
         return resourceNpcNo;
     }
+
+    @Override
+    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
+
+    }
 }

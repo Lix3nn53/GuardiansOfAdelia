@@ -7,8 +7,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestHologram;
 import io.github.lix3nn53.guardiansofadelia.quests.QuestIconType;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
@@ -20,46 +18,11 @@ import java.util.*;
 
 public class QuestNPCManager {
 
-    private final static HashMap<Integer, List<Quest>> npcNoToCanGiveQuests = new HashMap<>();
-    private final static HashMap<Integer, List<Quest>> npcNoToCanCompleteQuests = new HashMap<>();
+    public final static HashMap<Integer, List<Quest>> npcNoToCanGiveQuests = new HashMap<>();
+    public final static HashMap<Integer, List<Quest>> npcNoToCanCompleteQuests = new HashMap<>();
+
     private final static HashMap<Integer, QuestHologram> npcNoToHologram = new HashMap<>();
     private final static Set<ArmorStand> questHologramArmorStands = new HashSet<>(); //only for chunk events, weirdly, they don't work fine with npcNoToHologram
-
-    public static GuiGeneric getQuestGui(Player player, int npcId) {
-        NPC npc = CitizensAPI.getNPCRegistry().getById(npcId);
-
-        if (npc != null) {
-            GuiGeneric questMenu = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Quest List of " + npc.getName(), npcId);
-
-            if (GuardianDataManager.hasGuardianData(player)) {
-                List<Quest> npcQuestList = new ArrayList<>();
-
-                if (npcNoToCanGiveQuests.containsKey(npcId)) {
-                    List<Quest> canGiveQuests = npcNoToCanGiveQuests.get(npcId);
-                    npcQuestList.addAll(canGiveQuests);
-                }
-
-                if (npcNoToCanCompleteQuests.containsKey(npcId)) {
-                    List<Quest> canCompleteQuests = npcNoToCanCompleteQuests.get(npcId);
-                    for (Quest npcCanCompleteQuest : canCompleteQuests) {
-                        boolean alreadyInList = npcQuestList.stream()
-                                .anyMatch(questInList -> questInList.getQuestID() == npcCanCompleteQuest.getQuestID());
-                        if (!alreadyInList) {
-                            npcQuestList.add(npcCanCompleteQuest);
-                        }
-                    }
-                }
-
-                npcQuestList.sort(Comparator.comparingInt(Quest::getQuestID));
-
-                for (Quest quest : npcQuestList) {
-                    questMenu.addItem(quest.getGuiItem(player));
-                }
-            }
-            return questMenu;
-        }
-        return null;
-    }
 
     public static void addQuest(Quest quest, int npcToTakeFrom, int npcToComplete) {
         if (npcNoToCanGiveQuests.containsKey(npcToTakeFrom)) {

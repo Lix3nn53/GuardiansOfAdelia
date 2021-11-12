@@ -1,0 +1,189 @@
+subject: Items
+weapons: Silahlar
+armors: Zırhlar
+offhand: Sol El
+enchanting: Efsun
+accessory: Takılar
+guide:
+  p0: >-
+    Eşyalar kısmının temelini ekipmanlar oluşturur. Ekipmanlar, karakterinizin
+    nitelikleri ve elementleri üzerinde en büyük etkiye sahiptir.
+  h1: Eşya Kademeleri
+  p1:
+    part1: >-
+      Eşyalar 4 kademeden oluşur, zayıftan güçlüye: Sıradan, nadir, mistik,
+      efsanevi. Daha yüksek eşya kademeleri daha iyi temel istatistiklere
+      sahiptir ve bonus özellik alma ihtimalleri daha yüksektir.
+    part2: 'Sıradan ve nadir eşyalar normal yaratıklardan düşebilir. '
+    part3: >-
+      Mistik eşyalar zindanlardan düşebilir veya oyuncular tarafından
+      üretilebilir.
+    part4: Efsanevi eşyalar sadece zindanlardan düşebilir.
+  h2: Eşya Modelleri
+  p2: >-
+    Her silahın özel 3 boyutlu modeli bulunur. Bazılarını sketchfab üzerinden 3
+    boyutlu olarak inceleyebilirsin: 
+  weapon:
+    p0: Her sınıf birden fazla silah türü kullanabilir. (2~4 sınıfa bağlı)
+    h1: Silah Türleri
+    p1: Guardians of Adelia'da 10 farklı silah türü bulunur.
+    type: Silah Türü
+    speed: Saldırı Hızı
+    range: Menzil
+    bonus: Bonus özellik
+    sword:
+      h: Kılıç
+      damage: Normal
+      type: Tek Elli
+      speed: Normal
+      range: Yakın Menzilli
+      bonus: '-'
+      crit_chance: +7%
+    dagger:
+      h: Hançer
+      damage: Düşük
+      type: Tek Elli
+      speed: Hızlı
+      range: Yakın Menzilli
+      bonus: '-'
+      crit_chance: +5%
+    battle_axe:
+      h: Savaş Baltası
+      damage: Çok Yüksek
+      type: Çift Elli
+      speed: Yavaş
+      range: Yakın Menzilli
+      bonus: '-'
+      crit_chance: +9%
+    war_hammer:
+      h: Savaş Çekici
+      damage: Normal
+      type: Çift Elli
+      speed: Yavaş
+      range: Yakın Menzilli
+      bonus: Alan Etkili Saldırı
+      crit_chance: +9%
+    great_sword:
+      h: Büyük Kılıç
+      damage: Yüksek
+      type: Çift Elli
+      speed: Normal
+      range: Yakın Menzilli
+      bonus: '-'
+      crit_chance: +7%
+    spear:
+      h: Mızrak
+      damage: Normal
+      type: Çift Elli
+      speed: Normal
+      range: Hibrit
+      bonus: '-'
+      crit_chance: +7%
+    bow:
+      h: Yay
+      damage: Normal
+      type: Çift Elli
+      speed: Normal
+      range: Menzilli
+      bonus: '-'
+      crit_chance: +7%
+    crossbow:
+      h: Tatar Yayı
+      damage: Yüksek
+      type: Çift Elli
+      speed: Yavaş
+      range: Menzilli
+      bonus: '-'
+      crit_chance: +9%
+    staff:
+      h: Asa
+      damage: Normal
+      type: Çift Elli
+      speed: Hızlı
+      range: Büyü
+      bonus: 'Yetenek Hızı: +20'
+      crit_chance: +5%
+    wand:
+      h: Asa
+      damage: Çok Yüksek
+      type: Tek Elli
+      speed: Normal
+      range: Büyü
+      bonus: '-'
+      crit_chance: +7%
+  armor:
+    p0: Her sınıf birden fazla zırh türü kullanabilir. (2~3 sınıfa bağlı)
+    h1: Set Özellikleri
+    p1: >-
+      Aynı zırh türünden 4 parça giymek, bonus özelliği etkinleştirir. (Kask,
+      göğüslük, pantolon, bot)
+    h2: Zırh Türleri
+    p2: Guardians of Adelia'da 5 zırh türü vardır.
+    h3: Kalkanlar
+    p3: >-
+      Kalkanlar, zırhlarla aynı istatistikleri verir ancak önden gelen
+      saldırıları da engelleyebilir
+    type: Zırh Türü
+    material: Materyal
+    weight: Ağırlık
+    set_effect: Set Özelliği
+    heavy:
+      h: Ağır
+      health: Yüksek
+      defense: Yüksek
+      material: Netherite
+      weight: Ağır
+      set_effect: + Geri Tepme Direnci
+    plate:
+      h: Plaka
+      health: Normal
+      defense: Normal
+      material: Elmas
+      weight: Ağır
+      set_effect: + Kritik Hasarı
+    light:
+      h: Hafif
+      health: Düşük
+      defense: Düşük
+      material: Demir
+      weight: Hafif
+      set_effect: + Kritik Şansı
+    feather:
+      h: Tüy
+      health: Düşük
+      defense: Düşük
+      material: Zincir
+      weight: Hafif
+      set_effect: + Hareket Hızı
+    cloth:
+      h: Kumaş
+      health: Düşük
+      defense: Düşük
+      material: Altın
+      weight: Hafif
+      set_effect: + Yetenek Hızı
+  accessory:
+    p0: Aksesuarlar herhangi bir sınıf gerektirmez.
+    h1: Aksesuar Türleri
+    p1: >-
+      5 farklı aksesuar türü bulunur; küpeler, kolyeler, yüzükler, eldivenler
+      and papağanlar. Aksesuarlar rastgele bonus nitelikler ve element puanları
+      verir. Aksesuar türleri aynıdır ancak her birinin farklı yuvası vardır.
+    h2: Nasıl kuşanılır?
+    p2: Aksesuarları RPG Envanterinizden kuşanabilirsiniz.
+  enchanting:
+    p0: >-
+      Bir eşyayı efsunlamak, basitçe fazladan nitelik ekleyerek yükseltmektir.
+      Hasarı arttırmak için silahını, maksimum canını arttırmak için kalkan ve
+      zırhlarını efsunlayabilirsin.
+    h1: Efsun Taşları
+    p1: >-
+      Efsunlamak için bir adet efsun taşı gerekir. Efsun taşları 4 kademeden
+      oluşur. Her kademe 3 seviye için kullanılır. Yani 4 * 3, eşyaların en çok
+      +12 efsun seviyesine yükseltilebilir.
+    h2: Nasıl efsunlanır?
+    p2: >-
+      Efsunlamak için, efsun taşına ve efsunlamak istediğin bir ekipman
+      parçasına ihtiyacın var. Bu bir silah, bir kalkan veya bir zırh parçası
+      olmalı. Ekipmanını efsunlamak için bir silah veya zırh ustasına
+      gitmelisin.

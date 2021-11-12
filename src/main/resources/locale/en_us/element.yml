@@ -1,6 +1,6 @@
 main: Main Element
-fire: "\U0001F525 Fire"
-water: "\U0001F30A Water"
-earth: "◎ Earth"
+fire: 🔥 Fire
+water: 🌊 Water
+earth: ◎ Earth
 air: ๑ Air
-lightning: "⚡ Lightning"
+lightning: ⚡ Lightning

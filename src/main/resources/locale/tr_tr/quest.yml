@@ -1,0 +1,17 @@
+subject: Quests
+turnedin: Turned in
+active: Active
+guide:
+  p0: >-
+    A quest is a task given to a player character that yields a reward when
+    completed.
+  h1: Quest Icons
+  p1: >-
+    There are three types of icons. '?' = This npc has a new quest, '!' = You
+    have an active quest, 'Q' = You have a completed quest
+  h2: Quest Gui
+  p2: >-
+    When you right click a NPC which has a quest, the quest gui opens. Each wool
+    represents a quests, wool color changes according to quest state.
+  h3: Tablist
+  p3: You can see your current quests and their status on tablist.

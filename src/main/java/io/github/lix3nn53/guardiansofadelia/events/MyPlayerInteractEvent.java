@@ -15,7 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
-import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompass;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
@@ -80,8 +80,8 @@ public class MyPlayerInteractEvent implements Listener {
                     }
                 }
             } else if (itemInMainHandType.equals(Material.COMPASS)) {
-                GuiGeneric compass = MenuList.compass();
-                compass.openInventory(player);
+                GuiCompass guiCompass = new GuiCompass();
+                guiCompass.openInventory(player);
             } else if (itemInMainHandType.equals(Material.PAPER)) {
                 if (PersistentDataContainerUtil.hasString(itemInMainHand, "teleportScroll")) {
                     if (!player.getLocation().getWorld().getName().equals("world")) {

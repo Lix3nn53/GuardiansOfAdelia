@@ -1,231 +1,316 @@
-character: Karakter
-subject: Classes
-tier: Class Tier
-playstyle: Playstyle
-skills: Skills
+subject: Sınıflar
+tier: Sınıf kademesi
+playstyle: Oynanış tarzı
+skills: Yetenekler
 total_exp: Total Exp
 unlocked: Unlocked Classes
 guide:
-  p0: In Guardians of Adelia classes determine your playstyle. You do not need to
-    change your character to change your class. There are lots of classes you can
-    select but you have to unlock them first.
-  h1: Changing your class from Menu
-  p1: You can open menu by clicking the Menu Book in your inventory. (Open your inventory
-    with E key) At the menu click Character and then Class. Here you can select from
-    tier 1, 2 or 3. And finally select the class you want.
-  h2: Unlocking classes
-  p2: All classes at a tier are unlocked when you reach a certain level. So all of
+  p0: >-
+    Adelianın Koruyucularında sınıflar senin oynama tarzını belirler. Sınıfını
+    değiştirmek için karakterini değiştirmen gerekmez. Seçebileceğin bir sürü
+    sınıf vardır ama önce onları açman gerekir.
+  h1: Menüden sınıf değiştirme
+  p1: >-
+    Envanterindeki menü kitabına tıklayarak menüyü açabilirsin. (Envanterini E
+    tuşuna basarak aç) Menüden karakter ve sınıfı seçin. Buradan 1,2 ve 3.
+    Kademe sınıflar arasından istediğini seçebilirsin.
+  h2: Sınıfların Kilidini açma
+  p2: >-
+    All classes at a tier are unlocked when you reach a certain level. So all of
     the tier-1 classes are unlocked at the start.
   h3: Class levels
-  p3: 'Each class has it''s own experience point, which can only be earned by killing
-    monsters. When your class level ups, you will gain a skill point. You can fine
-    more about skills here: '
+  p3: >-
+    Each class has it's own experience point, which can only be earned by
+    killing monsters. When your class level ups, you will gain a skill point.
+    You can fine more about skills here: 
 tier1:
-  description: Tier 1 classes are unlocked at level 1. Class tiers does not show their
-    their power.
-  fire_mage:
-    intro: Fire Mage is a tier 1 class in Guardians of Adelia.
-    playstyle: Fire Mage has very high area damage at the cost of defense and mobility.
-    skill_one: Shoot a fireball that deals damage to targets in area if it hits a
-      target.
-    skill_two: Deal damage to enemies in front of you in cone area.
-    skill_three: Warp forward in location you are facing. After a small delay cause
-      a explosion in your old location, dealing damage to enemies.
-    skill_passive: Every time you cast a spell gain a fire spirit stack. If you have
-      4 stacks your next skill that deals damage to targets will also burn them.
-    skill_ultimate: Summon a meteor from sky that damages and launches nearby enemies
-      upwards.
-  monk:
-    intro: Monk is a tier 1 class in Guardians of Adelia.
-    playstyle: With their special weapon Spears, Monks can put up a fight from any
-      distance.
-    skill_one: Throw 5 punches in a second. The last punch also pushes the target
-      away.
-    skill_two: Jump back towards a side. Which side you will jump to changes each
-      cast.
-    skill_three: Stun yourself but heal yourself and nearby allies overtime.
-    skill_passive: Dealing damage with melee attack after dealing damage with ranged
-      attack will stun the target.
-    skill_ultimate: Imprison nearby enemies in water bubble. Enemies in bubble are
-      stunned and goes up into the sky slowly.
-  paladin:
-    intro: Paladin is a tier 1 class in Guardians of Adelia.
-    playstyle: Paladin's skills focuses on protecting and buffing his/her allies.
-    skill_one: Deal damage to targets in front of you and push them away.
-    skill_two: Give barrier to yourself and nearby allies. A stack of barrier absorbs
-      a damage completely.
-    skill_three: Give bonus movement speed to yourself and nearby allies.
-    skill_passive: 'After taking damage, if you have less health than 20% of your
-      maximum health: You will get stunned and start flying like an angel. While flying
-      heal yourself overtime and don''t take fall damage on land.'
-    skill_ultimate: Spawn a victory flag which gives damage buff to nearby allies.
+  description: Adelianın Koruyucularında kademe 1 sınıflar en zayıf sınıflardır
   ranger:
-    intro: Ranger is a tier 1 class in Guardians of Adelia.
-    playstyle: Ranger's deal avarage damage but have lots of mobility skills. The
-      best class to utilize hit-and-run strategy.
-    skill_one: Shoot an arrow that poisons target.
-    skill_two: Gain movement speed.
-    skill_three: Jump backwards into the sky and gain resistance to fall damage.
-    skill_passive: Your every 2nd successful projectile hit gives you bonus critical
-      chance. (This can exceed the critical chance cap)
-    skill_ultimate: Reveal an area with a flurry of arrows, dealing waves of damage
-      to opponents.
+    intro: Okçu Adelianın Koruyucularında 2. Kademe bir sınıftır.
+    playstyle: >-
+      Okçunun ortalama bir hasarı vardır ama çok fazla hareketlilik yeteneği
+      vardır. Vur ve kaç taktiğini uygulamak için en uygun sınıftır.
+    skill_one: Hedefe zehirli bir ok fırlatır.
+    skill_two: Kullanıcıya hareket hızı verir.
+    skill_three: Geriye doğru hava atılır ve düşerken düşüş hasarından etkilenmez.
+    skill_passive: >-
+      Hedefe tutturduğun her 2. vuruşun için kritik şansı kazanırsın. (Bununla
+      kritik şansı sınırını aşabilirsin)
+    skill_ultimate: Alevli oklar ortaya çıkarır, rakibe dalgalar halinde hasar verir.
+  monk:
+    intro: Keşiş Adelianın Koruyucularında 2. Kademe bir sınıftır.
+    playstyle: >-
+      Özel silahı olan mızrak ile keşiş mesafe fark etmeksizin savaş
+      başlatabilir
+    skill_one: 1 saniye içinde 5 yumruk savurur. Son yumruk hedefi geri savurur.
+    skill_two: >-
+      Yana doğru atılır. Ne tarafa atılacağın yeteneği her kullanışında
+      değişebilir.
+    skill_three: >-
+      Yeteneği kullandığında hareket edemezsin, kendini ve yakındaki dostları
+      iyileştirmeye başlarsın.
+    skill_passive: >-
+      Uzun menzilli bir hasar verdikten sonra yakın menzilli bir saldırı yapmak
+      hedefi hareketsiz bırakır
+    skill_ultimate: >-
+      Yakındaki düşmanları su topu içine hapseder. Balona hapsolmuş düşmanlar
+      hareketsiz kalır ve yavaşça hava doğru yükselir.
+  paladin:
+    intro: Paladin Adelianın Koruyucularında 2. Kademe bir sınıftır.
+    playstyle: Paladinin yetenekleri dostlarını güçlendirmek ve korumaya odaklanır.
+    skill_one: Önündeki hedeflere hasar verir ve geri iter.
+    skill_two: >-
+      Kendine ve yakındaki dostlara bir bariyer sağlar. Bariyer sıradaki gelecek
+      hasarın tamamını emebilir.
+    skill_three: Kendine ve yakınındaki dostlara hareket hızı verir.
+    skill_passive: >-
+      Hasar aldıktan sonra, eğer canın toplam canının %20'nin altındaysa:
+      Hareket edemezsin ve bir melek gibi havaya yükselirsin. Havadayken zamanla
+      iyileşirsin ve yere inerken düşüş hasarı almazsın.
+    skill_ultimate: >-
+      Zemine bir zafer sancağı yerleştirirsin ve yakındaki dostların verdiği
+      hasarı arttırırsın.
   fighter:
     intro: Fighter is a tier 1 class in Guardians of Adelia.
-    playstyle: Fighter's skills has low cooldown. Gain combo stacks with your skills
-      and use your ulti to get into the zone!
-    skill_one: Leap forward and deal moderate damage. If you are in the zone, gain
+    playstyle: >-
+      Fighter's skills has low cooldown. Gain combo stacks with your skills and
+      use your ulti to get into the zone!
+    skill_one: >-
+      Leap forward and deal moderate damage. If you are in the zone, gain
       lifesteal buff.
-    skill_two: Throw a heavy punch and launch your target into the air. If you are
-      in the zone, also stun the target.
-    skill_three: Jump backwards and gain resistance to fall damage. If you are in
-      the zone gain barrier. A stack of barrier absorbs a damage completely.
-    skill_passive: When you cast a skill gain a combo stack. Your ultimate skill consumes
-      stacks to increases effect duration. Level up this skill to increase combo capacity.
-    skill_ultimate: Get in the zone! You gain bonus movement speed and your other
-      skills gains bonus effects.
+    skill_two: >-
+      Throw a heavy punch and launch your target into the air. If you are in the
+      zone, also stun the target.
+    skill_three: >-
+      Jump backwards and gain resistance to fall damage. If you are in the zone
+      gain barrier. A stack of barrier absorbs a damage completely.
+    skill_passive: >-
+      When you cast a skill gain a combo stack. Your ultimate skill consumes
+      stacks to increases effect duration. Level up this skill to increase combo
+      capacity.
+    skill_ultimate: >-
+      Get in the zone! You gain bonus movement speed and your other skills gains
+      bonus effects.
+  fire_mage:
+    intro: Ateş Büyücüsü Adelianın Koruyucularında 2. Kademe bir sınıftır.
+    playstyle: >-
+      Ateş büyücüsü hareketliliği ve zırhının az olmasına karşın yüksek alan
+      hasarları verebilir.
+    skill_one: >-
+      Hedefe doğru bir ateş topu atar eğer isabet ederse hedefin etrafındaki
+      rakiplere hasar verir
+    skill_two: Önündeki koni şeklindeki alana ateş hasarı verir.
+    skill_three: >-
+      Baktığın yöne doğru ışınlanır. Kısa bir süre sonra eski bulunduğun noktada
+      küçük bir patlama ortaya çıkarır, patlama düşmanlara hasar verir
+    skill_passive: >-
+      Her yetenek kullanışında Ateş Ruhu yükü biriktirirsin. Eğer 4 yükün varsa
+      sıradaki yeteneğin hedefe daha fazla hasar verir ve onları yakar.
+    skill_ultimate: >-
+      Gökyüzünde bir meteor oluşturur ve düştüğü yerin yakınındaki düşmanlara
+      hasar verir ve havaya savurur.
 tier2:
-  description: Tier 2 classes are average in terms of total power.
+  description: Kademe 2 sınıflar güç bakımından ortalama güçtedir.
   hunter:
-    intro: Hunter is a tier 2 class in Guardians of Adelia.
-    playstyle: Hunter's main weapon is crossbow. It is slow but deals huge amount
-      of damage. And with your Bear Traps placed carefully, your arrows will always
-      find its target!
-    skill_one: Shoot an arrow that deals area damage and pushes targets away on hit.
-    skill_two: Fire multiple arrows in a cone.
-    skill_three: Fire a grapple projectile. If it collides with terrain dash towards
-      it, if it hits a target pull the target.
-    skill_passive: Your arrows shot from crossbows pierces through targets.
-    skill_ultimate: Place a trap that triggers when an enemy steps on it. Stuns the
-      target when triggered. You can have multiple active traps at a time.
+    intro: Avcı Adelianın Koruyucularında 2. Kademe bir sınıftır.
+    playstyle: >-
+      Avcının ana silahı arbalettir. Okları yerleştirmesi uzun sürer ama fazla
+      hasar verir. Ve dikkatli koyulmuş tuzakların ile, attığın oklar her zaman
+      hedefini bulur!
+    skill_one: Alan hasarı veren bir ok fırlatır ve hedefi geri iter
+    skill_two: Koni şeklinde alana birden çok ok fırlatır
+    skill_three: >-
+      hedef yöne kanca fırlatır. Eğer kanca bir yüzeye çarparsa ileri doğru
+      atılır, eğer kanca bir hedefe çarparsa hedefi kendine çeker.
+    skill_passive: Arbalet ile attığın oklar hedefleri delip geçer.
+    skill_ultimate: >-
+      Düşmanlar basınca harekete geçen bir tuzak yerleştirir. Harekete
+      geçtiğinde üstündeki düşmanı hareketsiz kılar. Aynı zamanda birden çok
+      tuzak yerleştirebilirsin.
   frost_mage:
-    intro: Frost Mage is a tier 2 class in Guardians of Adelia.
-    playstyle: Frost Mage has high area damage and crowd control at the cost of defense
-      and mobility.
-    skill_one: Shoot a frostball that deals damage and slows enemies in area if it
-      hits a target.
-    skill_two: Summon a small ice meteor from the sky that deals damage and slows
-      enemies in area.
-    skill_three: Freeze yourself but restore health overtime.
-    skill_passive: Every time you cast a spell gain a ice spirit stack. If you have
-      4 stacks your next skill that deals damage to targets will also freeze them.
-    skill_ultimate: Summon a blizzard that deals damage to nearby enemies and slows
-      them every second.
-  doom_knight:
-    intro: Doom Knight is a tier 2 class in Guardians of Adelia.
-    playstyle: 'Doom Knight has high defense but lacks ranged and mobility skills. '
-    skill_one: Deal damage to enemies in front of you, cone area.
-    skill_two: Shoot a projectile that pulls the target to you. If target gets close
-      enough to you, also launch target upwards.
-    skill_three: Start flying very slowly and gain fall damage resistance. When you
-      land to the ground, deal damage to nearby enemies and stun them.
-    skill_passive: When you deal damage with normal attack gain a darkness stack.
-      If you have more than 4 stacks, you will gain have area that deals damage to
-      nearby enemies every second. You can gain up to 10 darkness stacks. You will
-      lose darkness seconds overtime.
-    skill_ultimate: Spawn a darkhole that pulls the targets in area to the center.
-  vampire:
-    intro: Vampire is a tier 2 class in Guardians of Adelia.
-    playstyle: Vampire has a special passive which effects all of other skills. While
-      standing in dark areas, you will gain a blood reserve. What you want to do is
-      collect enough blood reserves before using your skills to get powerful effects.
-    skill_one: Leap forward and bite an enemy near your landing. Consumes blood reserves
-      to increase leap range. Refreshes 2 blood reserves on successful hit.
-    skill_two: Focus for 2.5 seconds to form a bubble of blood. You are invincible
-      and stunned while focusing. After 2.5 seconds pop the bubble and deal damage
-      to nearby enemies. Consumes blood reserves to increase radius. Refreshes 1 blood
-      reserve for each enemy hit.
-    skill_three: Transform into a bat with the ability to fly. Effect is canceled
-      if you cast spell or attack an enemy. Consumes souls to increase effect duration.
-    skill_passive: Gain lifesteal buff which heals you when you deal damage equal
-      to a percentage of the damage dealt. Gain blood reserves while standing on blocks
-      that has less than 5 light level. Your active skills consumes blood reserves
-      for bonus effects. Level up this skill to increase max blood reserve capacity.
-    skill_ultimate: Start floating upwards into the sky. Create blood bolts on top
-      of your head and fire. Consumes blood reserves to increase float duration and
-      repeat firing blood bolts. Blood bolts explodes on hit dealing damage and pushing
-      enemies on area.
+    intro: Büz Büyücüsü Adelianın Koruyucularında 2. Kademe bir sınıftır.
+    playstyle: >-
+      Buz büyücüsü hareketliliği ve zırhının az olması karşılığında yüksek alan
+      hasarı ve kitle kontrolü vardır 
+    skill_one: >-
+      Buz topu fırlatır ve hedefi yavaşlatır ve hasar verir eğer hedefe isabet
+      ederse etrafındaki düşmanlara hasar verir
+    skill_two: >-
+      Gökyüzünde küçük bir buz meteoru oluşturur. Meteor düştüğü alandaki
+      düşmanlara hasar verir ve yavaşlatır
+    skill_three: Kendini dondurursun ve zamanla can yenilersin.
+    skill_passive: >-
+      Her yetenek kullanışında Buz Ruhu yükü biriktirirsin. Eğer 4 yükün varsa
+      sıradaki yeteneğin hedefe daha fazla hasar verir ve onları dondurur.
+    skill_ultimate: >-
+      Bir fırtına yaratırsın ve alan içindeki düşmanlara zamanla hasar alır ve
+      yavaşlar.
   witch_doctor:
     intro: Witch doctor is a tier 2 class in Guardians of Adelia.
-    playstyle: Ranger's deal avarage damage but have lots of mobility skills. The
-      best class to utilize hit-and-run strategy.
-    skill_one: Throw a potion which explode on impact and create a cloud. The cloud
-      deals damage to enemies every second.
-    skill_two: Throw a potion which explode on impact. The explosion heals allies
-      and gives life steal to allies.
-    skill_three: Throw a potion which explode on impact. The explosion gives defense
-      buff to allies and defense debuff to enemies.
-    skill_passive: Every time you cast a skill gain a stack. If you have 4 stacks
-      next time you cast a skill, drink a potion to gain bonus movement speed.
-    skill_ultimate: Throw a potion which explode on impact. The explosion deals damage,
+    playstyle: >-
+      Ranger's deal avarage damage but have lots of mobility skills. The best
+      class to utilize hit-and-run strategy.
+    skill_one: >-
+      Throw a potion which explode on impact and create a cloud. The cloud deals
+      damage to enemies every second.
+    skill_two: >-
+      Throw a potion which explode on impact. The explosion heals allies and
+      gives life steal to allies.
+    skill_three: >-
+      Throw a potion which explode on impact. The explosion gives defense buff
+      to allies and defense debuff to enemies.
+    skill_passive: >-
+      Every time you cast a skill gain a stack. If you have 4 stacks next time
+      you cast a skill, drink a potion to gain bonus movement speed.
+    skill_ultimate: >-
+      Throw a potion which explode on impact. The explosion deals damage,
       ignites and pushes enemies away.
+  vampire:
+    intro: Vampire is a tier 3 class in Guardians of Adelia.
+    playstyle: >-
+      Vampire has a special passive which effects all of other skills. While
+      standing in dark areas, you will gain a blood reserve. What you want to do
+      is collect enough souls before using your skills to get powerful effects.
+    skill_one: >-
+      Leap forward and bite an enemy near your landing. Consumes blood reserves
+      to increase leap range. Refreshes 2 blood reserves on successful hit.
+    skill_two: >-
+      Focus for 2.5 seconds to form a bubble of blood. You are invincible and
+      stunned while focusing. After 2.5 seconds pop the bubble and deal damage
+      to nearby enemies. Consumes blood reserves to increase radius. Refreshes 1
+      blood reserve for each enemy hit.
+    skill_three: >-
+      Transform into a bat with the ability to fly. Effect is canceled if you
+      cast spell or attack an enemy. Consumes souls to increase effect duration.
+    skill_passive: >-
+      Gain lifesteal buff which heals you when you deal damage equal to a
+      percentage of the damage dealt. Gain blood reserves while standing on
+      blocks that has less than 5 light level. Your active skills consumes blood
+      reserves for bonus effects. Level up this skill to increase max blood
+      reserve capacity.
+    skill_ultimate: >-
+      Start floating upwards into the sky. Create blood bolts on top of your
+      head and fire. Consumes blood reserves to increase float duration and
+      repeat firing blood bolts. Blood bolts explodes on hit dealing damage and
+      pushing enemies on area.
+  doom_knight:
+    intro: Kıyamet Şovalyesi Adelianın Koruyucularında 3. Kademe bir sınıftır.
+    playstyle: >-
+      Kıyamet şovalyesi yüksek zırha sahiptir ama menzil ve hareketlilikten
+      mahrumdur.
+    skill_one: Önündeki koni şeklindeki alana hasar verir.
+    skill_two: >-
+      Hedefi kendine çeken bir kanca fırlatırsın. Eğer hedef yeteri kadar
+      yaklaşırsa ayrıca havaya savrulur.
+    skill_three: >-
+      Yavaşça havada süzülmeye başlar ve düşüş hasarından etkilenmez hale gelir.
+      Yere indiğinde, Yakındaki düşmanlara hasar verir ve onları hareketsiz
+      bırakır.
+    skill_passive: >-
+      Düz saldırı yaptığında Karanlık yükü biriktirirsin. Eğer 4'ten fazla yükün
+      varsa, Etrafındaki düşmanlara her saniye hasar veren bir alan kazanırsın.
+      Karanlık yükü 10 yüke kadar birikebilir. Her saniye 1 Karanlık yükü
+      kaybedersin.
+    skill_ultimate: Bir karadelik oluşturursun düşmanları içine doğru çeker.
 tier3:
-  description: Tier 3 classes are the strongest in Guardians of Adelia.
+  description: Kademe 3 sınıflar en güçlü sınıflardır.
   dragonslayer:
-    intro: Dragonslayer is a tier 3 class in Guardians of Adelia.
-    playstyle: Dragonslayer's skills and passive focuses around hitting multiple enemies
-      at once. So bring monsters together and crush them all at once!
-    skill_one: Deal damage to targets in cube area.
-    skill_two: Shoot a flame-burst that launches a target into the sky.
-    skill_three: Cover yourself with flames and start charging. Deal damage and push
-      enemies got close to you.
-    skill_passive: If your area of target skills hit 3 or more targets at a time heal
-      yourself.
-    skill_ultimate: Launch youreself into the air. When you land deal massive damage
-      to nearby enemies.
+    intro: EjderKatili Adelianın Koruyucularında 3. Kademe bir sınıftır.
+    playstyle: >-
+      Ejderkatilinin yetenekleri ve pasifi birden çok hedefe aynı anda vurmaya
+      odaklanır. Yani bütün düşmanları bir araya getir ve hepsini tek darbede
+      indir!
+    skill_one: Seçilen kare bir alana hasar verir
+    skill_two: Alev patlaması oluşturur ve hedefi havaya savurur
+    skill_three: >-
+      Kullanan kişiyi ateşle kaplar ve hücum yapmak için hazırlanır. Hücum hasar
+      verir ve yakındaki düşmanları iter
+    skill_passive: >-
+      Eğer alan hasarı yeteneklerin 3 veya daha fazla hedefe aynı anda vurursa
+      can yenilersin
+    skill_ultimate: >-
+      Kullanan kişiyi havaya fırlatır. Kullanıcı yere indiğinde yakındakilere
+      büyük ölçüde hasar verir
   engineer:
-    intro: Engineer is a tier 3 class in Guardians of Adelia.
-    playstyle: Engineer's main ability is Turret. Spawn a turret and play around it
-      with your other skills.
-    skill_one: Summon a turret that fires arrows. Turret changes it's head rotation
-      to nearest enemy.
-    skill_two: 'Launch a bomb that deals damage and pushes enemies. Bonus effect:
-      it also pushes you but you don''t take damage and fall damage.'
-    skill_three: Throw oil in to the ground. Enemies in the oil are slowed and silenced.
-    skill_passive: After using a skill, gain barrier. A stack of barrier absorbs a
-      damage completely.
-    skill_ultimate: Launch a missile that follows the target. Deals area damage and
-      stuns the enemies on hit.
+    intro: Mühendis Adelianın Koruyucularında 3. Kademe bir sınıftır.
+    playstyle: >-
+      Mühendisin ana yeteneği taret kurabilmesidir. Taretini kur ve diğer
+      yeteneklerini kullanarak onları yönet.
+    skill_one: Ok fırlatan bir taret kur. Taret en yakındaki düşmanı hedef alır.
+    skill_two: >-
+      Düşmanı iten ve hasar veren bir bomba ateşle. Ayrıca bu yetenek ile
+      kendini fırlatabilir ve düşerken hasar almazsın.
+    skill_three: >-
+      Zemine petrol dökersin. Petrolün içindeki düşmanlar susturulur ve
+      yavaşlar.
+    skill_passive: >-
+      Bir yetenek kullandıktan sonra bariyer kazanırsın. Yeterince bariyer gelen
+      hasarın tamamını emebilir.
+    skill_ultimate: >-
+      Hedefi takip eden bir füze fırlatırsın. Düşmana isabet ettiğinde onu
+      hareketsiz bırakır ve alan hasarı verir.
   necromancer:
-    intro: Necromancer is a tier 3 class in Guardians of Adelia.
-    playstyle: Necromancer playstyle focuses around summons. Your passive makes sure
-      enemies have to focus your summons before you. But your summons are not so easy
-      to deal with. And if things go wrong, you can make a decision to kill your summons
-      to heal yourself with your 3rd skill.
-    skill_one: Spawn skeletons.
-    skill_two: Shoot a skull that deals damage and slows enemies in a small area.
-      Makes your summons run with movement speed boost towards target.
-    skill_three: Deal damage to all of your summons, heal yourself for each damaged
-      summon.
-    skill_passive: For each active summon gain element defense. Also increases the
-      max amount of summons you can have at a time.
-    skill_ultimate: 'This skill has 2 states. If you don''t have any Frozen Colossus:
-      Summons Frozen Colossuses which casts Freeze on summon. If at least one Frozen
-      Colossus is alive: make them cast Freeze. Freeze: Stuns nearby enemies.'
+    intro: Adelianın Koruyucularında Ölüm Büyücüsü 3. kademe bir sınıftır.
+    playstyle: >-
+      Ölüm büyücüsü olarak ölüme hükmedebilir ve yer altından ölüleri kaldırıp
+      kendi ordunu kurabilirsin. Pasifin düşmanlarının çağırdığın ölüleri
+      hedeflemesini sağlar. Ama ölülerini kontrol etmek zor olabilir. İşler
+      doğru gitmezse 3. yeteneğini kullanarak fedailerini feda ederek kendini
+      iyileştirebilirsin.
+    skill_one: İskelet çağır.
+    skill_two: >-
+      Kurukafa fırlat, isabet halinde ufak bir alana hasar verir ve hedefleri
+      yavaşlatır. Çağrıların isabet alan düşmanı hedef alır ve bonus koşu hızı
+      kazanır.
+    skill_three: >-
+      Ölü fedailerinin hepsi hasar alır. Hasar alan her fedain için canın
+      yenilenir.
+    skill_passive: >-
+      Her canlanmış olan ölü fedain için element koruması kazanırsın. Ayrıca bu
+      yeteneğe puan harcarsan canlandırabileceğin ölü fedai sayısı artar.
+    skill_ultimate: >-
+      Bu yeteneğin 2 aşaması vardır. Eğer çağrılmış bir donmuş devin yoksa:
+      Doğduğu anda tipi yeteneği kullanan bir donmuş dev çağırır. Eğer yaşayan
+      en az 1 donmuş dev varsa: Onların tipi yeteneğini kullanmasını sağlar.
+      Tipi: Yakındaki düşmanları dondurur.
   reaper:
-    intro: Reaper is a tier 3 class in Guardians of Adelia.
-    playstyle: Reaper has a special passive which effects all of other skills. Each
-      time you deal damage with normal attack, you will gain a soul. What you want
-      to do is collect enough souls before using your skills to get powerful effects.
-    skill_one: Deal damage to a single enemy and heal yourself. Consumes souls to
-      increase heal amount.
-    skill_two: Shoot a projectile that damages and roots target on hit. Gain 2 soul
-      stacks per hit. Consumes souls to increase amount of projectiles.
-    skill_three: Become invincible and gain movement speed bonus. Effect is canceled
-      if you cast spell or attack an enemy. Consumes souls to increase effect duration.
-    skill_passive: Gain soul stack on normal attack to enemies. Your active skills
-      consumes souls for bonus effects. Level up this skill to increase max soul capacity.
-    skill_ultimate: Stun yourself and a single enemy. After the duration of stun end,
-      deal damage to enemy. Consumes souls to increase damage.
+    intro: Ölüm Meleği Adelianın Koruyucularında 3. Kademe bir sınıftır.
+    playstyle: >-
+      Ölüm meleğinin pasifi diğer bütün yeteneklerini etkiler. Her düz saldırını
+      kullandığında, bir ruh kazanırsın. Yeteneklerini kullanmadan önce yeteri
+      kadar ruh topladıysan yeteneğin güçlenir.
+    skill_one: >-
+      Tek bir hedefe hasar verir ve can yeniler. Can yenilemek için ruh
+      kullanır.
+    skill_two: >-
+      Hedefe büyülü bir top atar ve hedef hasar alır aynı zamanda karanlığın
+      kökleri ile sarılır. her vuruşta karanlık kökleri parçalarsın ve 2 ruh
+      toplarsın. Atılan büyülü topların sayısı topladığın ruh miktarına göre
+      artar.
+    skill_three: >-
+      Görünmez olursun ve hareket hızı kazanırsın. Herhangi bir yetenek kullanır
+      yada düşmana saldırırsan etki sona erer. Topladığın ruh sayısına göre
+      etkinin süresi artar
+    skill_passive: >-
+      Düşmanlara düz saldırı yaptığında ruh toplarsın. Aktif yeteneklerin
+      fazladan güçlendirmeler için ruhları tüketir. Bu yeteneğe puan verdiğinde
+      toplayabileceğin ruhların sınırını arttırırsın.
+    skill_ultimate: >-
+      Kendini ve seçtiğin bir düşmanı hareketsiz bırakırsın. Hareketsiz bırakma
+      etkisi bittiğinde, düşman hasar yer. Hasarın artması için ruh tüketir.
   shaman:
-    intro: Shaman is a tier 3 class in Guardians of Adelia.
-    playstyle: Shaman must play around his/her Totem skill. Every other skill requires
-      an active Totem.
-    skill_one: Spawn a totem.
-    skill_two: Create a storm around your totem that deals damage to nearby enemies
-      every 2 seconds.
-    skill_three: Transform enemies nearby your totem to sheeps.
-    skill_passive: Each time you spawn a new totem, it will create an aura which heals
-      nearby allies every 2 seconds.
-    skill_ultimate: Push your totem if it is nearby. After a small delay push yourself
-      and enemies around you to your totem.
+    intro: Şaman Adelianın Koruyucularında 3. Kademe bir sınıftır.
+    playstyle: >-
+      Şaman bir totem çağırır ve yetenekleri ile onu hareket ettirebilir.
+      Yetenekleri ile totemlerinin nasıl etkiler uygulayacağını seçebilir.
+    skill_one: Bir totem çağırır.
+    skill_two: >-
+      Totemin etrafında her 2 saniyede bir düşmanlara hasar veren bir fırtına
+      oluşturur.
+    skill_three: Totemin yakınındaki düşmanları koyuna dönüştürür.
+    skill_passive: >-
+      Her yeni bir totem çağırdığında etrafındaki dostları her 2 saniyede bir
+      yeniler.
+    skill_ultimate: >-
+      Eğer totem yakınındaysa totemi ileri iter. Bir süre sonra kendin ve
+      yakındaki düşmanlar toteme çekilir

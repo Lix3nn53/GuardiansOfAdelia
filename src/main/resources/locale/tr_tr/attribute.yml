@@ -1,0 +1,41 @@
+subject: Attributes
+health: Can
+mana: Mana
+damage: Hasar
+defense: Defans
+crit_chance: Kritik Şansı
+crit_damage: Kritik Hasarı
+ability_haste: Yetenek Hızı
+guide:
+  p0: >-
+    Guardians of Adelia'daki nitelikler, birincil niteliklerden ve elementlerden
+    oluşur.
+  h1: Birincil Nitelikler
+  table:
+    health: Maksimum sağlık
+    mana: Maksimum mana, yetenekleri kullanmaya yarar
+    damage: Temel hasar, elementleri eklemeden önce
+    defense: Temel savunma, elementleri eklemeden önce
+    crit_chance: Hasarınızı kritik hasarla katlama şansı
+    crit_damage: Temel değer 150%, bazı yetenekler ve setler ile arttırılabilir.
+    ability_haste: >-
+      Yeteneklerinizin bekleme süresini azaltır. Formül: 100 / (100 +
+      yetenekBeklemeSüresi)
+  h2: Elementler
+  p2: >-
+    Guardians of Adelia'daki her hasarın bir element tipi vardır ve bunlar
+    toplam hasar ve defansını etkilerler. Guardians of Adelia'da 5 element
+    vardır.
+  h3: Hasar & Defans Hesaplaması
+  p3:
+    text1: 'Örnek olarak eğer bir saldırının elementi bu ise '
+    text2:
+      part1: Toplam hasar =
+      part2: 'saldıranın temel hasarı + '
+      part3: ' saldıranın puanı'
+    text3:
+      part1: Toplam defans =
+      part2: 'hedefin temel defansı + '
+      part3: ' hedefin puanı'
+  h4: Niteliklerinizi oyunda görün
+  p4: Karakterinizin niteliklerini RPG Envanterinden görebilirsiniz.

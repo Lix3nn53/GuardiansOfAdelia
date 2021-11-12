@@ -1,0 +1,82 @@
+subject: Crafting
+gathering: Gathering
+types: Crafting Types
+guide:
+  p0: >-
+    Crafting is a core gameplay element in Guardians of Adelia. There are 8
+    types of crafting types: melee & ranged weaponsmith, heavy & light
+    armorsmith, potion brewing, cooking, jewelsmith, enchant stones. You can use
+    all types of craftings at the same time, but each has its own experience.
+  h1: How to start crafting?
+  p1: >-
+    To start crafting you need to open a crafting gui by interracting with(right
+    click) a crafting block. Each crafting type has a different crafting block.
+  h2: Crafting Gui
+  p2: >-
+    First, you have to choose a crafting level to open the gui where you will
+    actually craft items. After choosing a level, you will see the items you can
+    craft and the materials they need. Each row represents an item you can
+    craft, you will see required materials on the left and the item on the right
+    of the yellow pane.
+  h3: Crafting Experience
+  p3: >-
+    Each crafting type has it's own experience which you can gain by crafting
+    items. You will need to level up your crafting before you can create higher
+    level items. You can see your information about crafting in your character's
+    menu.
+  types:
+    p0: There are 8 types of crafting in Guardians of Adelia.
+    h1: Melee Weaponsmith
+    p1: >-
+      Crafts Sword, Great Sword, WarHammer, BattleAxe, Dagger. To start crafting
+      right click a GRINDSTONE block.
+    h2: Ranged Weaponsmith
+    p2: >-
+      Crafts Spear, Wand, Staff, Bow, Crossbow. To start crafting right click a
+      FLETCHING_TABLE block.
+    h3: Heavy Armorsmith
+    p3: >-
+      Crafts Heavy & Plate armor and Shield. To start crafting right click a
+      ANVIL block.
+    h4: Light Armorsmith
+    p4: >-
+      Crafts Light, Feather and Cloth armor. To start crafting right click a
+      LOOM block.
+    h5: Potion Brewing
+    p5: >-
+      Crafts potions which are usually for healing. To start crafting right
+      click a BREWING_STAND block.
+    h6: Cooking
+    p6: >-
+      Crafts foods which are usually for buffs that last 15 minutes. To start
+      crafting right click a CAMPFIRE block.
+    h7: Jewelsmith
+    p7: >-
+      Crafts rings, earrings, necklaces and gloves. To start crafting right
+      click a SMITHING_TABLE block.
+    h8: Enchant-Stone Crafting
+    p8: >-
+      Crafts enchant stones. To start crafting right click a ENCHANTING_TABLE
+      block.
+  gathering:
+    p0: >-
+      There are ingredients/resources all over the world. To gather an
+      ingredient you need to left click with the right gathering tool.
+    h1: Gathering Tools
+    p1: >-
+      You can buy gathering tools from Tool Merchants. Tools has tier and
+      durability. Tool tiers are wooden, stone, iron, golden and diamond.
+    tools:
+      h1: Pickaxe
+      p1: Pickaxes are used for mining ores.
+      h2: Axe
+      p2: Axes are used for chopping trees.
+      h3: Hoe
+      p3: Hoes are used for harvesting flowers, herbs.
+      h4: Bottle
+      p4: Empty bottle is used for storing magic sources.
+      h5: Fishing Rod
+      p5: >-
+        Fishing is different from other types of gathering where you interract
+        with an ingredient, vanilla minecraft fishing is used instead. To start
+        fishing, you must be in a fishing spot. 

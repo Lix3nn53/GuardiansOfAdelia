@@ -1,0 +1,14 @@
+subject: Social
+guide:
+  p0: >-
+    You can SHIFT + RIGHT click a player to interract. On interract gui you can
+    see player's character info or send them party/guild/trade invite.
+  h1: Party
+  p1: >-
+    Parties are teams of players you can create/join. All party members and
+    their healths are displayed on the scoreboard. Party members share monster
+    kills, which means when your party gets a kill the experience is shared, any
+    member can pick up dropped items and quest objectives progress for all
+    members.
+  h2: Guild
+  p2: TODO

@@ -4,8 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
+import io.github.lix3nn53.guardiansofadelia.menu.quest.GuiQuestTaskPrizeSelect;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -59,23 +59,9 @@ public class ArmorSelectOneOfAction implements Action {
                 slotsToUse.add(32);
                 slotsToUse.add(34);
 
-                // CREATE GUI
-                // Task Item Prize Selection #12&1
-                GuiGeneric guiGeneric = new GuiGeneric(guiSize, ChatPalette.BLACK + "Task Item Prize Selection #" + questNo + "&" + taskIndex, 0);
-
-                // PLACE ITEMS
-                int index = 0;
-
-                if (armorReferenceData != null) {
-                    List<ItemStack> items = armorReferenceData.getItems(rpgCharacter.getRpgClassStr());
-                    for (ItemStack itemStack : items) {
-                        Integer slotNo = slotsToUse.get(index);
-                        guiGeneric.setItem(slotNo, itemStack);
-                        index++;
-                    }
-                }
-
-                guiGeneric.openInventory(player);
+                List<ItemStack> items = armorReferenceData.getItems(rpgCharacter.getRpgClassStr());
+                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guiSize, questNo, 0, taskIndex, items);
+                gui.openInventory(player);
             }
         }
     }

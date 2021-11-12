@@ -1,0 +1,39 @@
+subject: Attributes
+health: Health
+mana: Mana
+damage: Damage
+defense: Defense
+crit_chance: Critical Chance
+crit_damage: Critical Damage
+ability_haste: Ability Haste
+guide:
+  p0: >-
+    Attributes in Guardians of Adelia consists of primary attributes and
+    elements.
+  h1: Primary Attributes
+  table:
+    health: Maximum health
+    mana: Maximum mana, used for casting skills
+    damage: Base damage, before adding elements
+    defense: Base defense, before adding elements
+    crit_chance: Chance to multiply your damage with critical damage
+    crit_damage: Base value is 150%, can be increased with some skills or gear sets.
+    ability_haste: 'Reduces cooldown of your skills. Formula: 100 / (100 + abilityHaste)'
+  h2: Elements
+  p2: >-
+    Every damage in Guardians of Adelia has an element type and they effect the
+    calculation of total damage and defense. There are 5 types of elements in
+    Guardians of Adelia.
+  h3: Damage & Defense Calculation
+  p3:
+    text1: 'For example if a damage''s element is '
+    text2:
+      part1: Total damage =
+      part2: 'base damage of attacker + '
+      part3: ' points of attacker'
+    text3:
+      part1: Total defense =
+      part2: 'base defense of target + '
+      part3: ' points of target'
+  h4: See your attributes in game
+  p4: You can see your character's attributes from RPG Inventory.

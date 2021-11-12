@@ -1,0 +1,33 @@
+server-ip: play.guardiansofadelia.com
+introduction:
+  subject: Ön Söz
+  p0: >-
+    Guardians of Adelia bir MMORPG minecraft sunucusudur. Oynanışın ana odağı
+    devasa bir açık dünyada zindanları keşfedip yağmalama üzerinedir. Şu anda
+    benzersiz yetenek setlerine sahip 12 oynanabilir sınıf mevcut ve tek bir
+    karakterde tüm sınıfların kilidini açabilirsiniz. Bu rehberde görevler,
+    evcil hayvanlar, meslekler vb. gibi keşfedebileceğiniz birçok özellik var!
+  p1:
+    text1: 'Buradan nasıl sunucuya girebileceğinizi görebilirsiniz '
+    link1: 'Nasıl oynanır? '
+    text2: 'veya sınıflar hakkında daha fazla bilgi edinmek için tıklayın '
+    link2: Sınıflar
+how-to-play:
+  subject: Nasıl oynanır?
+  p0: >-
+    Oynamak için sunucuya özel kaynak paketini yüklemeniz gerekir, aksi takdirde
+    çok fazla görsel hata ile karşılaşırsınız. Sunucu kaynak paketiyle sunucuya
+    katılmak için şu adımları izleyin: 
+  step1:
+    text1: ' '
+    text2: '''u sunucu listenize ekleyin'
+  step2: Sunucu Bilgilerini Düzenle menüsünde sunucu kaynak paketlerini etkinleştirin
+  step3: >-
+    Sunucuya katılın ve kaynak paketinin yüklenmesini bekleyin. Bu adımda sorun
+    yaşıyorsanız aşağıya bakın.
+  h1: Problem nedir?
+  p1:
+    step1: Minecraft Launcher'inizi güncelleyin.
+    step2: >-
+      %Appdata% klasörünüze gidin ve .minecraft'a tıklayın. Sonra sunucu-kaynak
+      paketlerine gidin ve Guardians of Adelia ile ilgili eski dosyaları silin.

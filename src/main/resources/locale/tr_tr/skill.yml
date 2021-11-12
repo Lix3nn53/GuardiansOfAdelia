@@ -1,0 +1,19 @@
+subject: Yetenekler
+guide:
+  p0: >-
+    Yetenekler, oyun tarzınızda büyük rol oynar ve sınıfınıza göre değişir. Her
+    sınıfın 3 aktif, 1 pasif ve 1 ulti yeteneği vardır.
+  h1: Yetenek Çubuğu
+  p1: >-
+    Varsayılan minecraft eşya Çubuğunun ilk 4 yuvası yetenekler için
+    ayrılmıştır. Her sınıfın 5 yeteneği vardır, ancak bunlardan 1'i pasiftir. Bu
+    nedenle yetenek çubuğunuzda 3 aktif ve 1 ulti yeteneği görürsünüz.
+    Yetenekleri kullanmak için 1-2-3-4 tuşlarına basın. Bir yetenek kullandıktan
+    sonra bekleme süresini görebilirsiniz.
+  h2: Yetenek Öğrenme
+  p2: >-
+    Envanterinizdeki Menü Kitabına tıklayarak menüyü
+    açabilirsiniz.(Envanterinizi E tuşuyla açın) Menüde Karakter'e ve ardından
+    Yetenekler'e tıklayın. Burada GUI başlığında mevcut yetenek puanınızı
+    görebilirsiniz. Yetenek puanınızı harcamak için bir yeteneğe sol tıklayın
+    veya puanlarınızı geri almak için sağ tıklayın.

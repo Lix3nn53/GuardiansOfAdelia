@@ -5,8 +5,6 @@ import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.HelmetSkinApplyGu
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.gui.WeaponOrShieldSkinApplyGui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
-import io.github.lix3nn53.guardiansofadelia.economy.Coin;
-import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
@@ -27,17 +25,14 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
-import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantGui;
 import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
-import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingGuiManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiMain;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
-import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantPageType;
@@ -49,8 +44,6 @@ import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.towns.Town;
-import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
@@ -61,14 +54,8 @@ import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.signmenu.SignMenuFactory;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.npc.NPCRegistry;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
@@ -371,383 +358,12 @@ public class MyInventoryClickEvent implements Listener {
 
                 @Override
                 public void run() {
-                    GuiGeneric guiGeneric = MenuList.mainMenu(guardianDataCopy);
-                    guiGeneric.openInventory(player);
+                    GuiMain mainMenu = new GuiMain(guardianDataCopy);
+                    mainMenu.openInventory(player);
                 }
             }.runTaskLater(GuardiansOfAdelia.getInstance(), 1);
         } else if (currentType.equals(Material.ARROW)) {
             event.setCancelled(true);
-        } else if (title.equals(ChatPalette.GRAY_DARK + "Guardians of Adelia")) {
-            if (currentName.equals(ChatPalette.GREEN_DARK + "Guides")) {
-                GuiGeneric guide = MenuList.guide();
-                guide.openInventory(player);
-            } else if (currentName.equals(ChatPalette.BLUE + "Compass")) {
-                GuiGeneric compass = MenuList.compass();
-                compass.openInventory(player);
-            } else if (currentName.equals(ChatPalette.GREEN_DARK + "Maps")) {
-                player.closeInventory();
-                TextComponent message = new TextComponent(" Maps ! (Click Me)");
-                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://guardiansofadelia.com/#t5"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.BLUE_LIGHT + "Click to see Maps from our website")));
-                message.setColor(ChatPalette.GREEN_DARK.toChatColor());
-                message.setBold(true);
-                player.spigot().sendMessage(message);
-            } else if (currentName.equals(ChatPalette.GREEN_DARK + "Character")) {
-                GuiGeneric character = MenuList.character(guardianData);
-                character.openInventory(player);
-            } else if (currentName.equals(ChatPalette.PURPLE + "Guild")) {
-                if (GuildManager.inGuild(player)) {
-                    MenuList.guild().openInventory(player);
-                }
-            } else if (currentName.equals(ChatPalette.PURPLE + "Minigames")) {
-                GuiGeneric minigames = MenuList.minigames();
-                minigames.openInventory(player);
-            } else if (currentName.equals(ChatPalette.GOLD + "Bazaar")) {
-                GuiGeneric bazaar = MenuList.bazaar(player);
-                bazaar.openInventory(player);
-            } else if (currentName.equals(ChatPalette.PURPLE_LIGHT + "WebStore ♥")) {
-                player.closeInventory();
-                TextComponent message = new TextComponent(" Donation ♥ ! (Click Me)");
-                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://guardiansofadelia.com/store"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.PURPLE_LIGHT + "Click to donate ♥")));
-                message.setColor(ChatPalette.PURPLE_LIGHT.toChatColor());
-                message.setBold(true);
-                player.spigot().sendMessage(message);
-            } else if (currentName.equals(ChatPalette.GOLD + "Server Boosts")) {
-                GuiGeneric serverBoostMenu = MenuList.serverBoostMenu();
-                serverBoostMenu.openInventory(player);
-            } else if (currentName.equals(ChatPalette.PURPLE_LIGHT + "Instant Teleportation")) {
-                GuiBookGeneric guiBook = InstantTeleportGuiManager.getGuiBook(guardianData);
-                guiBook.openInventory(player);
-            } else if (currentName.equals(ChatPalette.GOLD + "Daily Rewards")) {
-                GuiGeneric dailyRewardsMenu = MenuList.dailyRewardsMenu(player);
-                dailyRewardsMenu.openInventory(player);
-            }
-        } else if (title.contains("Play Tutorial?")) {
-            //Play Tutorial? ClassName CharNo
-            String[] split = title.split("#");
-
-            int charNo = Integer.parseInt(split[1]);
-
-            if (currentType.equals(Material.LIME_WOOL)) {
-                CharacterSelectionScreenManager.createCharacter(player, charNo);
-            } else if (currentType.equals(Material.RED_WOOL)) {
-                CharacterSelectionScreenManager.createCharacterWithoutTutorial(player, charNo);
-            }
-        } else if (title.contains("Character")) {
-            if (title.contains("Selection")) {
-                String charNoString = title.replace(ChatPalette.GRAY_DARK + "Character ", "");
-                charNoString = charNoString.replace(" Selection", "");
-                int charNo = Integer.parseInt(charNoString);
-
-                if (currentName.contains("last location")) {
-                    Location charLocation = CharacterSelectionScreenManager.getCharLocation(player, charNo);
-                    if (charLocation != null) {
-                        CharacterSelectionScreenManager.selectCharacter(player, charNo, charLocation);
-                    } else {
-                        player.sendMessage(ChatPalette.RED + "Your saved last location is not valid");
-                    }
-                } else if (currentName.contains("#")) {
-                    String[] split = currentName.split("#");
-                    int townNo = Integer.parseInt(split[1]);
-
-                    Town town = TownManager.getTown(townNo);
-
-                    int charLevel = CharacterSelectionScreenManager.getCharLevel(player, charNo);
-                    if (charLevel < town.getLevel()) return;
-
-                    Location location = town.getLocation();
-
-                    CharacterSelectionScreenManager.selectCharacter(player, charNo, location);
-                }
-            } else {
-                if (currentName.equals(ChatPalette.YELLOW + "Class")) {
-                    GuiGeneric classManage = MenuList.classManager(player);
-                    classManage.openInventory(player);
-                } else if (currentName.equals(ChatPalette.PURPLE_LIGHT + "Skills")) {
-                    GuiGeneric skill = MenuList.skill(player);
-                    skill.openInventory(player);
-                } else if (currentName.equals(ChatPalette.GREEN_DARK + "Stat Points")) {
-                    GuiGeneric statPoints = MenuList.statPoints(player);
-                    statPoints.openInventory(player);
-                } else if (currentName.equals(ChatPalette.YELLOW + "Crafting")) {
-                    GuiGeneric crafting = MenuList.crafting(player);
-                    crafting.openInventory(player);
-                } else if (currentName.equals(ChatPalette.BLUE_LIGHT + "Chat Tag")) {
-                    GuiGeneric chatTag = MenuList.chatTagQuests(player);
-                    chatTag.openInventory(player);
-                }
-            }
-        } else if (title.contains(ChatPalette.GRAY_DARK + "Quest List of ")) {
-            if (rpgCharacter != null) {
-                if (activeGui != null) {
-                    int resourceNPC = activeGui.getResourceNPC();
-                    if (resourceNPC != 0) {
-                        Material type = currentType;
-                        if (type.equals(Material.MAGENTA_WOOL)) {
-                            String[] split = currentName.split("#");
-                            int questNo = Integer.parseInt(split[1]);
-                            int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(questNo);
-                            if (whoCanCompleteThisQuest == resourceNPC) {
-                                List<Quest> questList = rpgCharacter.getQuestList();
-                                Quest quest = null;
-                                for (Quest q : questList) {
-                                    if (q.getQuestID() == questNo) {
-                                        quest = q;
-                                        break;
-                                    }
-                                }
-                                List<ItemStack> itemPrizesSelectOneOf = quest.getItemPrizesSelectOneOf();
-                                WeaponReferenceData weaponPrizesSelectOneOf = quest.getWeaponPrizesSelectOneOf();
-                                ArmorReferenceData armorPrizesSelectOneOf = quest.getArmorPrizesSelectOneOf();
-                                if (itemPrizesSelectOneOf.isEmpty() &&
-                                        weaponPrizesSelectOneOf == null &&
-                                        armorPrizesSelectOneOf == null) {
-                                    //turnin quest
-                                    boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player, false);
-                                    if (didTurnIn) {
-                                        GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
-                                        questGui.openInventory(player);
-                                    } else {
-                                        player.sendMessage(ChatPalette.RED + "Couldn't turn in the quest ERROR report pls");
-                                    }
-                                } else {
-                                    // GUISIZE
-                                    int guiSize = 18;
-                                    if (weaponPrizesSelectOneOf != null) {
-                                        guiSize += 9;
-                                    }
-                                    if (armorPrizesSelectOneOf != null) {
-                                        guiSize += 9;
-                                    }
-                                    int normalSelectOneOfSize = itemPrizesSelectOneOf.size();
-                                    if (normalSelectOneOfSize > 4) {
-                                        guiSize += 9;
-                                    } else if (normalSelectOneOfSize > 8) {
-                                        guiSize += 18;
-                                    } else if (normalSelectOneOfSize > 8) {
-                                        guiSize += 18;
-                                    }
-
-                                    // ITEM SLOTS
-                                    List<Integer> slotsToUse = new ArrayList<>();
-                                    slotsToUse.add(10);
-                                    slotsToUse.add(12);
-                                    slotsToUse.add(14);
-                                    slotsToUse.add(16);
-
-                                    slotsToUse.add(19);
-                                    slotsToUse.add(21);
-                                    slotsToUse.add(23);
-                                    slotsToUse.add(25);
-
-                                    slotsToUse.add(28);
-                                    slotsToUse.add(30);
-                                    slotsToUse.add(32);
-                                    slotsToUse.add(34);
-
-                                    slotsToUse.add(28);
-                                    slotsToUse.add(30);
-                                    slotsToUse.add(32);
-                                    slotsToUse.add(34);
-
-                                    // CREATE GUI
-                                    GuiGeneric guiGeneric = new GuiGeneric(guiSize, ChatPalette.BLACK + "Quest Item Prize Selection #" + questNo, resourceNPC);
-
-                                    // PLACE ITEMS
-                                    int index = 0;
-                                    for (int i = index; i < normalSelectOneOfSize; i++) {
-                                        ItemStack itemStack = itemPrizesSelectOneOf.get(i);
-                                        Integer slotNo = slotsToUse.get(i);
-                                        guiGeneric.setItem(slotNo, itemStack);
-                                        index++;
-                                    }
-
-                                    if (weaponPrizesSelectOneOf != null) {
-                                        List<ItemStack> items = weaponPrizesSelectOneOf.getItems(rpgCharacter.getRpgClassStr());
-                                        for (ItemStack itemStack : items) {
-                                            Integer slotNo = slotsToUse.get(index);
-                                            guiGeneric.setItem(slotNo, itemStack);
-                                            index++;
-                                        }
-                                    }
-
-                                    if (armorPrizesSelectOneOf != null) {
-                                        List<ItemStack> items = armorPrizesSelectOneOf.getItems(rpgCharacter.getRpgClassStr());
-                                        for (ItemStack itemStack : items) {
-                                            Integer slotNo = slotsToUse.get(index);
-                                            guiGeneric.setItem(slotNo, itemStack);
-                                            index++;
-                                        }
-                                    }
-
-                                    guiGeneric.openInventory(player);
-                                }
-                            } else {
-                                NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-                                NPC byId = npcRegistry.getById(whoCanCompleteThisQuest);
-                                player.sendMessage(ChatPalette.RED + "You can't turn in this quest from this NPC. You need to talk with " + ChatPalette.WHITE + byId.getName());
-                            }
-                        } else if (type.equals(Material.LIME_WOOL)) {
-                            String[] split = currentName.split("#");
-                            int questNo = Integer.parseInt(split[1]);
-                            int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(questNo);
-                            if (whoCanGiveThisQuest == resourceNPC) {
-                                //give quest
-                                Quest questCopyById = QuestNPCManager.getQuestCopyById(questNo);
-
-                                boolean questListIsNotFull = rpgCharacter.acceptQuest(questCopyById, player);
-                                if (questListIsNotFull) {
-                                    GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
-                                    questGui.openInventory(player);
-                                } else {
-                                    player.sendMessage(ChatPalette.RED + "Your quest list is full");
-                                }
-                            } else {
-                                NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-                                NPC byId = npcRegistry.getById(whoCanGiveThisQuest);
-                                player.sendMessage(ChatPalette.RED + "You can't take this quest from this NPC. You need to talk with " + ChatPalette.WHITE + byId.getName());
-                            }
-                        }
-                    }
-                }
-            }
-        } else if (title.contains(ChatPalette.BLACK + "Quest Item Prize Selection #")) {
-            if (clickedInventory.getType().equals(InventoryType.CHEST) && !currentType.equals(Material.AIR)) {
-                int resourceNPC = activeGui.getResourceNPC();
-
-                String[] split = title.split("#");
-                int questNo = Integer.parseInt(split[1]);
-
-                //give item
-                GearStatType gearStatType = StatUtils.getStatType(currentType);
-                if (gearStatType != null) {
-                    GearLevel gearLevel = GearLevel.getGearLevel(current);
-                    ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
-                    StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
-                }
-                InventoryUtils.giveItemToPlayer(player, current);
-
-                //turnin quest
-                boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player, false);
-                if (didTurnIn) {
-                    GuiGeneric questGui = QuestNPCManager.getQuestGui(player, resourceNPC);
-                    questGui.openInventory(player);
-                } else {
-                    player.sendMessage(ChatPalette.RED + "Couldn't turn in the quest ERROR report pls");
-                }
-            }
-        } else if (title.contains(ChatPalette.BLACK + "Task Item Prize Selection #")) {
-            if (clickedInventory.getType().equals(InventoryType.CHEST) && !currentType.equals(Material.AIR)) {
-                int resourceNPC = activeGui.getResourceNPC();
-
-                // Task Item Prize Selection #12&1
-                String[] split = title.split("&");
-                int taskNo = Integer.parseInt(split[1]);
-
-                String[] split2 = split[0].split("#");
-                int questNo = Integer.parseInt(split2[1]);
-
-                //give item
-                GearStatType gearStatType = StatUtils.getStatType(currentType);
-                if (gearStatType != null) {
-                    GearLevel gearLevel = GearLevel.getGearLevel(current);
-                    ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
-                    StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
-                }
-                InventoryUtils.giveItemToPlayer(player, current);
-
-                //complete task
-                boolean didComplete = rpgCharacter.progressTaskOfQuestWithIndex(player, questNo, taskNo);
-                if (didComplete) {
-                    player.closeInventory();
-                    MessageUtils.sendCenteredMessage(player, ChatPalette.GOLD + "Obtained " + currentName);
-                } else {
-                    player.sendMessage(ChatPalette.RED + "Couldn't complete the task ERROR report pls");
-                }
-            }
-        } else if (title.equals(ChatPalette.GOLD + "Coin Converter")) {
-            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-                PlayerInventory playerInventory = player.getInventory();
-                if (currentType.equals(Material.IRON_INGOT)) {
-                    if (InventoryUtils.inventoryContains(playerInventory, Material.GOLD_INGOT, 1)) {
-                        InventoryUtils.removeMaterialFromInventory(playerInventory, Material.GOLD_INGOT, 1);
-                        InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.COPPER, 64).getCoin());
-                    }
-                } else if (currentType.equals(Material.GOLD_INGOT)) {
-                    if (current.getAmount() == 1) {
-                        if (InventoryUtils.inventoryContains(playerInventory, Material.IRON_INGOT, 64)) {
-                            InventoryUtils.removeMaterialFromInventory(playerInventory, Material.IRON_INGOT, 64);
-                            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, 1).getCoin());
-                        }
-                    } else if (current.getAmount() == 64) {
-                        if (InventoryUtils.inventoryContains(playerInventory, Material.DIAMOND, 1)) {
-                            InventoryUtils.removeMaterialFromInventory(playerInventory, Material.DIAMOND, 1);
-                            InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.SILVER, 64).getCoin());
-                        }
-                    }
-                } else if (currentType.equals(Material.DIAMOND)) {
-                    if (InventoryUtils.inventoryContains(playerInventory, Material.GOLD_INGOT, 64)) {
-                        InventoryUtils.removeMaterialFromInventory(playerInventory, Material.GOLD_INGOT, 64);
-                        InventoryUtils.giveItemToPlayer(player, new Coin(CoinType.GOLD, 1).getCoin());
-                    }
-                }
-            }
-        } else if (title.contains(ChatPalette.GRAY_DARK + "Compass")) {
-            if (title.contains("Towns")) {
-                String displayName = itemMeta.getDisplayName();
-                String[] split = displayName.split("#");
-                int i = Integer.parseInt(split[1]);
-
-                Town town = TownManager.getTown(i);
-                CompassManager.setCompassItemLocation(player, ChatPalette.BLUE_LIGHT + town.getName(), town.getLocation());
-                player.closeInventory();
-            } else if (title.contains("Dungeon Gates")) {
-                String displayName = itemMeta.getDisplayName();
-                String[] split = displayName.split("#");
-                Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(split[1]);
-                CompassManager.setCompassItemLocation(player, split[0], portalLocationOfDungeonTheme);
-                player.closeInventory();
-            } else if (title.contains("NPCs")) {
-                String displayName = itemMeta.getDisplayName();
-                String[] split = displayName.split("#");
-                int i = Integer.parseInt(split[1]);
-                CompassManager.setCompassItemNPC(player, i);
-                player.closeInventory();
-            } else if (title.contains("Active Quests")) {
-                if (currentType.equals(Material.LIME_WOOL)) {
-                    String displayName = itemMeta.getDisplayName();
-                    String[] split = displayName.split("#");
-                    int i = Integer.parseInt(split[1]);
-                    CompassManager.setCompassItemNPC(player, i);
-                    player.closeInventory();
-                } else if (currentType.equals(Material.MAGENTA_WOOL)) {
-                    String displayName = itemMeta.getDisplayName();
-                    String[] split = displayName.split("#");
-
-                    String[] splitSecond = split[1].split("-");
-
-                    Location location = new Location(Bukkit.getWorld(splitSecond[0]), Float.parseFloat(splitSecond[1]),
-                            Float.parseFloat(splitSecond[2]), Float.parseFloat(splitSecond[3]));
-
-                    CompassManager.setCompassItemLocation(player, split[0], location);
-                    player.closeInventory();
-                }
-            } else {
-                if (currentType.equals(Material.LIGHT_BLUE_WOOL)) { //towns
-                    GuiBookGeneric guiBookGeneric = MenuList.compassTowns();
-                    guiBookGeneric.openInventory(player);
-                } else if (currentType.equals(Material.PURPLE_WOOL)) { //dungeon gates
-                    GuiBookGeneric guiBookGeneric = MenuList.compassDungeonGates();
-                    guiBookGeneric.openInventory(player);
-                } else if (currentType.equals(Material.LIME_WOOL)) { //npcs
-                    GuiBookGeneric guiBookGeneric = MenuList.compassNPCs();
-                    guiBookGeneric.openInventory(player);
-                } else if (currentType.equals(Material.MAGENTA_WOOL)) { //quests
-                    GuiBookGeneric guiBookGeneric = MenuList.compassActiveQuests(guardianData);
-                    guiBookGeneric.openInventory(player);
-                }
-            }
         } else if (title.contains(ChatPalette.GRAY_DARK + "Stat Points (Points:")) {
             if (rpgCharacter != null) {
                 RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();

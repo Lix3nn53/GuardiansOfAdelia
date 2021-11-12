@@ -1,0 +1,41 @@
+subject: Dungeons
+guide:
+  p0: >-
+    Dungeons are 4 players instances that will take players to the darkest
+    corners of Adelia. They always contain one or more bosses, large amounts of
+    enemies and loot.
+  h1: Portals
+  p1: >-
+    Each dungeon has a portal which you can interract with LEFT click. Dungeon
+    join gui will open on interract.
+  h2: Join Gui
+  p2: >-
+    Each dungeon has 4 instances which you can join if it hasn't started yet.
+    You can see info about dungeon like required level, time limit and
+    weaknesses & resistances of boss. A countdown will start when first player
+    joins a dungeon instance, 3 more players can join during the countdown.
+    Dungeon starts when the countdown finishes if there is at least one player.
+  h3: Scoreboard
+  p3: >-
+    A scoreboard will show up on dungeon start. You can see boss name, remaining
+    time in seconds, darkness, rooms left and remaining healths of party
+    members.
+  h4: Darkness
+  p4: >-
+    While you stay in the dungeon, the darkness overwhelms you. As darkness
+    rises you deal less damage, take more damage, and the monsters get stronger.
+    So it is better to reach the boss room as soon as possible.
+  h5: Rooms
+  p5: >-
+    A dungeon room has spawners and waves. When you kill all the monsters in a
+    wave, the next wave starts. When you complete all the waves in a room, the
+    room is complete and the doors open.
+  h6: Prizes
+  p6: >-
+    When you kill the boss the dungeon is completed and 4 prize chests will
+    spawn. You need keys to get prize chests. First key is earned with defating
+    the boss, second key is earned if darkness is less than 70%, third key is
+    earned if all rooms are completed. When you LEFT click a chest you will get
+    it if you have a key. If you RIGHT click while holding the chest, you will
+    gain a random item. There are 6 types of prize chests: melee & ranged
+    weapons, heavy & light armor, jewelry and pet.

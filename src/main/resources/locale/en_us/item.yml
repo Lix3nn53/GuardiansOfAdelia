@@ -1,0 +1,187 @@
+subject: Items
+weapons: Weapons
+armors: Armors
+offhand: Offhand
+enchanting: Enchanting
+accessory: Accessories
+guide:
+  p0: >-
+    Items section focuses on equipments. Equipments have the biggest impact on
+    your character's attributes and elements.
+  h1: Item Tiers
+  p1:
+    part1: >-
+      There are 4 item tiers, from weak to strong: Common, rare, mystic,
+      legendary. Higher item tiers has better base stats and better chance get
+      more bonus stats.
+    part2: 'Common and rare items can drop from regular monsters. '
+    part3: Mystic items can drop from dungeons or be crafted by players.
+    part4: Legendary items only drop from dungeons.
+  h2: Item Models
+  p2: >-
+    Each weapon has custom 3D model. You can see some of them in 3D view on
+    sketchfab: 
+  weapon:
+    p0: Each class can use multiple weapon type. (2~4 depending on class)
+    h1: Weapon Types
+    p1: There are 10 weapon types in Guardians of Adelia.
+    type: Weapon Type
+    speed: Attack Speed
+    range: Range
+    bonus: Bonus effect
+    sword:
+      h: Sword
+      damage: Normal
+      type: One Handed
+      speed: Normal
+      range: Melee
+      bonus: '-'
+      crit_chance: +7%
+    dagger:
+      h: Dagger
+      damage: Low
+      type: One Handed
+      speed: Fast
+      range: Melee
+      bonus: '-'
+      crit_chance: +5%
+    battle_axe:
+      h: Battle Axe
+      damage: Very High
+      type: One Handed
+      speed: Slow
+      range: Melee
+      bonus: '-'
+      crit_chance: +9%
+    war_hammer:
+      h: War Hammer
+      damage: Normal
+      type: One Handed
+      speed: Slow
+      range: Melee
+      bonus: Sweep Attack
+      crit_chance: +9%
+    great_sword:
+      h: Great Sword
+      damage: High
+      type: One Handed
+      speed: Normal
+      range: Melee
+      bonus: '-'
+      crit_chance: +7%
+    spear:
+      h: Spear
+      damage: Normal
+      type: One Handed
+      speed: Normal
+      range: Hybrid
+      bonus: '-'
+      crit_chance: +7%
+    bow:
+      h: Bow
+      damage: Normal
+      type: One Handed
+      speed: Normal
+      range: Ranged
+      bonus: '-'
+      crit_chance: +7%
+    crossbow:
+      h: Crossbow
+      damage: High
+      type: One Handed
+      speed: Slow
+      range: Ranged
+      bonus: '-'
+      crit_chance: +9%
+    staff:
+      h: Staff
+      damage: Normal
+      type: One Handed
+      speed: Fast
+      range: Magic
+      bonus: 'Ability Haste: +20'
+      crit_chance: +5%
+    wand:
+      h: Wand
+      damage: Very High
+      type: One Handed
+      speed: Normal
+      range: Magic
+      bonus: '-'
+      crit_chance: +7%
+  armor:
+    p0: Each class can use multiple armor type. (2~3 depending on class)
+    h1: Set Effects
+    p1: >-
+      Wearing 4 pieces of same armor type activates a bonus effect. (Helmet,
+      chestplate, leggings, boots)
+    h2: Armor Types
+    p2: There are 5 armor types in Guardians of Adelia.
+    h3: Shields
+    p3: >-
+      Shield give the same stats as armors but they can also block attacks
+      coming from front.
+    type: Armor Type
+    material: Material
+    weight: Weight
+    set_effect: Set Effect
+    heavy:
+      h: Heavy
+      health: High
+      defense: High
+      material: Netherite
+      weight: Heavy
+      set_effect: + Knockback Resistance
+    plate:
+      h: Plate
+      health: Normal
+      defense: Normal
+      material: Diamond
+      weight: Heavy
+      set_effect: + Critical Damage
+    light:
+      h: Light
+      health: Low
+      defense: Low
+      material: Iron
+      weight: Light
+      set_effect: + Critical Chance
+    feather:
+      h: Feather
+      health: Low
+      defense: Low
+      material: Chainmail
+      weight: Light
+      set_effect: + Movement Speed
+    cloth:
+      h: Cloth
+      health: Low
+      defense: Low
+      material: Gold
+      weight: Light
+      set_effect: + Ability Haste
+  accessory:
+    p0: Accessories does not require any class.
+    h1: Accessory Types
+    p1: >-
+      There are 5 types of accessories; earrings, necklaces, rings, gloves and
+      parrots. Accessories give bonus attributes and element points at random.
+      Accessory types are identical but they fit into different slots.
+    h2: How to equip?
+    p2: You can equip accessories from RPG Inventory.
+  enchanting:
+    p0: >-
+      Enhancing an item is simply upgrading it by adding extra attribute. You
+      can enchant weapons to increase damage, armors and shields to increase
+      maximum health.
+    h1: Enchant Stones
+    p1: >-
+      An enchant stone is required for enchanting. There are 4 levels of enchant
+      stones. Each tier is used for 3 enchantment levels. So 4 x 3, your items
+      can be upgraded to +12 enchantment level.
+    h2: How to enchant?
+    p2: >-
+      To enhance an item, you need enhancement stones, and a piece of equipment
+      that you wish to enhance. This must be either a weapon, a shield, or a
+      piece of armor. To enhance something you must go to a weapon or armor
+      smith.

@@ -18,15 +18,13 @@ import io.github.lix3nn53.guardiansofadelia.items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.menu.merchant.GuiCoinConverter;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +50,7 @@ public enum MerchantPageType {
             case SELL:
                 return getSellGui(resourceNpc);
             case CONVERT:
-                return getConvertGui(resourceNpc);
+                return new GuiCoinConverter(resourceNpc);
             case PERSONAL_STORAGE:
                 return getPersonalStorageGui(player, resourceNpc);
             case GUILD_STORAGE:
@@ -89,38 +87,6 @@ public enum MerchantPageType {
 
     private SellGui getSellGui(int shopNpc) {
         return new SellGui(shopNpc);
-    }
-
-    private GuiGeneric getConvertGui(int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GOLD + "Coin Converter", shopNpc);
-
-        ItemStack silverToBronze = new ItemStack(Material.IRON_INGOT, 64);
-        ItemMeta itemMeta = silverToBronze.getItemMeta();
-        itemMeta.setDisplayName(ChatPalette.BROWN + "Bronze Coin");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatPalette.BROWN + "64 Bronze = " + ChatPalette.GRAY + "1 Silver");
-        lore.add(ChatPalette.GRAY + "64 Silver = " + ChatPalette.GOLD + "1 Gold");
-        itemMeta.setLore(lore);
-        silverToBronze.setItemMeta(itemMeta);
-        guiGeneric.setItem(0, silverToBronze);
-
-        ItemStack bronzeToSilver = new ItemStack(Material.GOLD_INGOT, 1);
-        itemMeta.setDisplayName(ChatPalette.GRAY + "Silver Coin");
-        bronzeToSilver.setItemMeta(itemMeta);
-        guiGeneric.setItem(9, bronzeToSilver);
-
-        ItemStack goldToSilver = new ItemStack(Material.GOLD_INGOT, 64);
-        itemMeta.setDisplayName(ChatPalette.GRAY + "Silver Coin");
-        goldToSilver.setItemMeta(itemMeta);
-        guiGeneric.setItem(10, goldToSilver);
-
-        ItemStack silverToGold = new ItemStack(Material.DIAMOND, 1);
-        itemMeta.setDisplayName(ChatPalette.GOLD + "Gold Coin");
-        silverToGold.setItemMeta(itemMeta);
-        guiGeneric.setItem(18, silverToGold);
-
-        return guiGeneric;
     }
 
     private GuiGeneric getPersonalStorageGui(Player player, int shopNpc) {

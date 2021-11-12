@@ -1,0 +1,15 @@
+subject: Pets
+guide:
+  p0: >-
+    Pet's main feature is the movement speed bonus. This bonus is only active on
+    open world. Some pets also have their own level and skills which can be
+    really useful.
+  h1: Eggs
+  p1: >-
+    Eggs are the items you equip to spawn the pet. You can see pet's experience,
+    speed bonus and skills. You can get eggs from dungeon prize chests or
+    quests.
+  h2: Skills
+  p2: >-
+    Pets automatically cast their skills when there is a target. Some skills get
+    stronger or gain bonus effects at higher levels.

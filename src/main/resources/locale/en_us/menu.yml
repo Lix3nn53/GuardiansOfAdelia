@@ -1,0 +1,35 @@
+character:
+  name: Character
+  l1: Manage your character
+compass:
+  name: Compass
+  l1: Choose where you want to go and
+  l2: let the compass lead you.
+map:
+  name: Map
+  l1: Explore the Adelia
+guild:
+  name: Guild
+  l1: United we stand divided we fall!
+bazaar:
+  name: Bazaar
+  l1: Manage your bazaar
+minigames:
+  name: Minigames
+  l1: Have fun in different game modes!
+teleportation:
+  name: Teleportation
+  l1: Teleport to locations you have unlocked
+boost:
+  name: Server Boosts
+  l1: See server boost status
+store:
+  name: WebStore ♥
+  l1: You can purchase premium items from webstore.
+  l2: Web store is the only income source to
+  l3: keep the servers running.
+  l4: It is not necessary but it helps a lot so
+  l5: I can keep working on this project. Thanks <3
+daily:
+  name: Daily Rewards
+  l1: Gain rewards for visiting every day.

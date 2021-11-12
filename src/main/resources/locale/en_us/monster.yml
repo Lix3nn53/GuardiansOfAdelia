@@ -1,0 +1,22 @@
+subject: Monsters
+guide:
+  p0: >-
+    A mob (short for 'Monster Or Beast') is a generic term for any non-player
+    entity whose primary purpose is to be killed for experience, quest
+    objective, or loot. They tend to be aggressive to all players.
+  h1: Loot Protection
+  p1: >-
+    When a monster dies, the killer is determined by most damage dealt instead
+    of the last hit. If you're at a party, your damages add up. Killers gain
+    experience, quest objective, and 30 seconds of protection on item drops if
+    any.
+  h2: Skills
+  p2: >-
+    Monsters can cast skills just like players. Basic monsters usually have only
+    1 skill or no skill at all, while boss monsters have more than 5 skills.
+  h3: Boss Monster
+  p3: >-
+    Boss type monsters are the hardest to kill. A common characteristic for all
+    bosses is that they have a unique name and appear once at a time. Dungeons
+    usually have a boss in the last room that you must defeat to complete the
+    dungeon.

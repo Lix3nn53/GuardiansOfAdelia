@@ -3,10 +3,13 @@ package io.github.lix3nn53.guardiansofadelia.commands.admin;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.menu.quest.GuiQuestList;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -65,8 +68,10 @@ public class CommandAdminQuest implements CommandExecutor {
                 if (GuardianDataManager.hasGuardianData(player)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                     if (guardianData.hasActiveCharacter()) {
-                        GuiGeneric questGui = QuestNPCManager.getQuestGui(player, Integer.parseInt(args[1]));
-                        questGui.openInventory(player);
+                        NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+                        NPC byId = npcRegistry.getById(Integer.parseInt(args[1]));
+                        GuiQuestList gui = new GuiQuestList(byId, player);
+                        gui.openInventory(player);
                     }
                 }
             }

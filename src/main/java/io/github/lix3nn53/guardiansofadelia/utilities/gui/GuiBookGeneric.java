@@ -154,4 +154,16 @@ public class GuiBookGeneric implements GuiBook {
     public int getResourceNPC() {
         return resourceNpcNo;
     }
+
+    @Override
+    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
+
+    }
+
+    public int getPageIndex(String title) {
+        String[] split = title.split(" Page-");
+        String iStr = split[1];
+
+        return Integer.parseInt(iStr);
+    }
 }

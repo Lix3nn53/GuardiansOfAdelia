@@ -1,0 +1,40 @@
+subject: NPCs
+merchants: Merchants
+guide:
+  p0: >-
+    An NPC (Non-Player Character) is any character you encounter and interact
+    with that is not controlled by other human players — they are generated and
+    controlled by the game server.
+  p1: >-
+    Player type NPCs are often gives quests while villager type NPCs are
+    merchants. You can interract with them with right click.
+  merchant:
+    p0: >-
+      Merchants are NPCs which you can buy and sell items from. There are 5
+      types of merchants: weaponsmith, armorsmith, storage keeper, tool merchant
+      and magical item merchant. You can sell items to and convert coins from
+      all types of merchants.
+    h1: Weaponsmith
+    p1:
+      part1: >-
+        Apart from the basic sell and convert coin operations, you can buy
+        weapons and enchant items. See 
+      part2: ' for more information.'
+    h2: Armorsmith
+    p2:
+      part1: >-
+        Apart from the basic sell and convert coin operations, you can buy
+        armors & shields and enchant items. See 
+      part2: ' for more information.'
+    h3: Storage Keeper
+    p3: >-
+      Apart from the basic sell and convert coin operations, you can open your
+      storages. There are 4 types of storages: personal, guild, bazaar, premium.
+    h4: Tool Merchant
+    p4: >-
+      Apart from the basic sell and convert coin operations, you can buy
+      gathering tools and utility items.
+    h5: Magical Item Merchant
+    p5: >-
+      Apart from the basic sell and convert coin operations, you can buy
+      potions.

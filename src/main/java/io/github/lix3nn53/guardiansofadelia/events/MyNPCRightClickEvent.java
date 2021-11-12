@@ -6,7 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.menu.CharacterSelectionMenuList;
-import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.menu.quest.GuiQuestList;
+import io.github.lix3nn53.guardiansofadelia.menu.start.GuiTutorialSkip;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
@@ -55,8 +56,8 @@ public class MyNPCRightClickEvent implements Listener {
                 GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
                 characterTeleportationMenu.openInventory(player);
             } else {
-                GuiGeneric characterCreationMenu = CharacterSelectionMenuList.tutorialSkipMenu(id);
-                characterCreationMenu.openInventory(player);
+                GuiTutorialSkip gui = new GuiTutorialSkip(id);
+                gui.openInventory(player);
             }
         } else {
             if (GuardianDataManager.hasGuardianData(player)) {
@@ -78,8 +79,8 @@ public class MyNPCRightClickEvent implements Listener {
                 MerchantMenu merchantMenu = MerchantManager.getMerchantMenu(id);
                 merchantMenu.openInventory(player);
             } else {
-                GuiGeneric questGui = QuestNPCManager.getQuestGui(player, id);
-                questGui.openInventory(player);
+                GuiQuestList gui = new GuiQuestList(npc, player);
+                gui.openInventory(player);
             }
         }
     }
