@@ -2,15 +2,18 @@ package io.github.lix3nn53.guardiansofadelia.economy.bazaar;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.menu.GuiGenericBuy;
+import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class BazaarCustomerGui extends GuiGeneric {
+public class BazaarCustomerGui extends GuiGenericBuy {
 
     private final Player owner;
 
@@ -42,6 +45,23 @@ public class BazaarCustomerGui extends GuiGeneric {
             }
         }
         return null;
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        ItemStack current = event.getCurrentItem();
+        if (PersistentDataContainerUtil.hasInteger(current, "shopPrice")) {
+            Player player = (Player) event.getWhoClicked();
+            int slot = event.getSlot();
+
+            boolean didClickBefore = MerchantManager.onSellItemClick(player, slot);
+            if (didClickBefore) {
+                Bazaar bazaar = this.getBazaar();
+                if (bazaar != null) {
+                    bazaar.buyItem(player, current);
+                }
+            }
+        }
     }
 
     @Override

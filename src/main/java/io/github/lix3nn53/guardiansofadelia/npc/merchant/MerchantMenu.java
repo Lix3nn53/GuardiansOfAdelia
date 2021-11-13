@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -18,10 +20,12 @@ import java.util.List;
 
 public class MerchantMenu extends GuiGeneric {
 
+    private final int merchantLevel;
     private final HashMap<ItemStack, MerchantPageType> itemToButton = new HashMap<>();
 
     public MerchantMenu(MerchantType merchantType, int merchantLevel, int npcNo) {
         super(27, merchantType.getName() + " #" + merchantLevel, npcNo);
+        this.merchantLevel = merchantLevel;
 
         int nextSlotNo = 0;
         if (merchantType.canSell()) {
@@ -200,15 +204,19 @@ public class MerchantMenu extends GuiGeneric {
 
     @Override
     public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        GuardianData guardianData;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
+        } else {
+            return;
+        }
         ItemStack current = this.getItem(event.getSlot());
 
         if (this.isButton(current)) {
             MerchantPageType buttonShop = this.getButtonShop(current);
-            String[] split = event.getView().getTitle().split("#");
-            int shopLevel = Integer.parseInt(split[1]);
 
-            Player player = (Player) event.getWhoClicked();
-            Gui gui = buttonShop.getGui(this.getResourceNPC(), player, shopLevel);
+            Gui gui = buttonShop.getGui(player, guardianData, this.getResourceNPC(), merchantLevel);
             if (gui != null) {
                 gui.openInventory(player);
             }

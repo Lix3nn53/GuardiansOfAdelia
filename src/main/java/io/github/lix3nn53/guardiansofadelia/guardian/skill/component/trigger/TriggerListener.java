@@ -316,7 +316,7 @@ public class TriggerListener {
                 toRemove.add(trigger);
             }
 
-            // TODO trigger clear
+            // TODO trigger clear?
             // trigger.stopEffects(player);
             // SkillDataManager.onPlayerQuit(player); // stop effects
 

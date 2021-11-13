@@ -2,21 +2,15 @@ package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
-import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
-import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
-import io.github.lix3nn53.guardiansofadelia.economy.bazaar.BazaarCustomerGui;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.menu.ActiveGuiManager;
 import io.github.lix3nn53.guardiansofadelia.menu.main.GuiMain;
-import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiBazaarStorage;
-import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import org.bukkit.Material;
@@ -122,28 +116,6 @@ public class MyInventoryClickEvent implements Listener {
                     int pageIndex = Integer.parseInt(split[1]) - 1;
                     pageIndex--;
                     guiBookGeneric.openInventoryPage(player, pageIndex);
-                    return;
-                }
-            }
-
-            if (!(activeGui instanceof GuiBazaarStorage)) {
-                if (PersistentDataContainerUtil.hasInteger(current, "shopPrice")) {
-                    boolean didClickBefore = MerchantManager.onSellItemClick(player, slot);
-                    if (didClickBefore) {
-                        if (activeGui instanceof BazaarCustomerGui) {
-                            BazaarCustomerGui bazaarCustomerGui = (BazaarCustomerGui) activeGui;
-                            Bazaar bazaar = bazaarCustomerGui.getBazaar();
-                            if (bazaar != null) {
-                                bazaar.buyItem(player, current);
-                            }
-                        } else {
-                            boolean pay = EconomyUtils.pay(player, current);
-                            if (pay) {
-                                ItemStack itemStack = EconomyUtils.removeShopPrice(current);
-                                InventoryUtils.giveItemToPlayer(player, itemStack);
-                            }
-                        }
-                    }
                     return;
                 }
             }

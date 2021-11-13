@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guild;
 
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseManager;
+import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiGuildStorage;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class Guild {
 
-    private final GuiGeneric guildStorage = new GuiGeneric(54, "Guild Storage", 0);
+    private final GuiGuildStorage guildStorage = new GuiGuildStorage();
     private HashMap<UUID, PlayerRankInGuild> members = new HashMap<UUID, PlayerRankInGuild>();
     private String name;
     private String tag;
@@ -27,7 +27,6 @@ public class Guild {
     public Guild(String name, String tag) {
         this.tag = tag;
         this.name = name;
-        guildStorage.setLocked(false);
     }
 
     public Set<UUID> getMembers() {
@@ -193,7 +192,7 @@ public class Guild {
     }
 
 
-    public GuiGeneric getGuildStorageGui() {
+    public GuiGuildStorage getGuildStorageGui() {
         return this.guildStorage;
     }
 

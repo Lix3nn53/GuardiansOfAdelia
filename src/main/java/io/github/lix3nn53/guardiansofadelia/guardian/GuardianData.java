@@ -11,7 +11,6 @@ import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiPersonalSto
 import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiPremiumStorage;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -23,9 +22,9 @@ import java.util.List;
 
 public class GuardianData {
 
-    private final GuiGeneric personalStorage = new GuiPersonalStorage();
-    private final GuiGeneric bazaarStorage = new GuiBazaarStorage();
-    private final GuiGeneric premiumStorage = new GuiPremiumStorage();
+    private final GuiPersonalStorage personalStorage = new GuiPersonalStorage();
+    private final GuiBazaarStorage bazaarStorage = new GuiBazaarStorage();
+    private final GuiPremiumStorage premiumStorage = new GuiPremiumStorage();
 
     private RPGCharacter activeCharacter;
     private int activeCharacterNo = 0;
@@ -46,10 +45,6 @@ public class GuardianData {
     private final DailyRewardInfo dailyRewardInfo = new DailyRewardInfo();
 
     private String language = null;
-
-    public GuardianData() {
-        personalStorage.setLocked(false);
-    }
 
     public RPGCharacter getActiveCharacter() {
         return activeCharacter;
@@ -129,15 +124,15 @@ public class GuardianData {
         this.premiumStorage.setContents(premiumStorage);
     }
 
-    public GuiGeneric getPersonalStorageGui() {
+    public GuiPersonalStorage getPersonalStorageGui() {
         return this.personalStorage;
     }
 
-    public GuiGeneric getBazaarStorageGui() {
+    public GuiBazaarStorage getBazaarStorageGui() {
         return this.bazaarStorage;
     }
 
-    public GuiGeneric getPremiumStorageGui() {
+    public GuiPremiumStorage getPremiumStorageGui() {
         return this.premiumStorage;
     }
 

@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.items.Consumable;
@@ -18,9 +17,9 @@ import io.github.lix3nn53.guardiansofadelia.items.list.shields.ShieldManager;
 import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolTier;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
+import io.github.lix3nn53.guardiansofadelia.menu.GuiGenericBuyBook;
 import io.github.lix3nn53.guardiansofadelia.menu.merchant.GuiCoinConverter;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiPage;
 import org.bukkit.entity.Player;
@@ -42,27 +41,26 @@ public enum MerchantPageType {
     ENCHANT,
     TOOL,
     UTILITY,
-    POTIONS,
-    TP_SCROLL;
+    POTIONS;
 
-    public Gui getGui(int resourceNpc, Player player, int shopLevel) {
+    public Gui getGui(Player player, GuardianData guardianData, int resourceNpc, int shopLevel) {
         switch (this) {
             case SELL:
-                return getSellGui(resourceNpc);
+                return new SellGui(resourceNpc);
             case CONVERT:
                 return new GuiCoinConverter(resourceNpc);
             case PERSONAL_STORAGE:
-                return getPersonalStorageGui(player);
+                return guardianData.getPersonalStorageGui();
             case GUILD_STORAGE:
                 if (GuildManager.inGuild(player)) {
                     Guild guild = GuildManager.getGuild(player);
-                    return getGuildStorageGui(guild);
+                    return guild.getGuildStorageGui();
                 }
                 return null;
             case BAZAAR_STORAGE:
-                return getBazaarStorageGui(player);
+                return guardianData.getBazaarStorageGui();
             case PREMIUM_STORAGE:
-                return getPremiumStorageGui(player);
+                return guardianData.getPremiumStorageGui();
             case WEAPON:
                 return getWeaponShop(shopLevel, resourceNpc);
             case ARMOR:
@@ -70,49 +68,18 @@ public enum MerchantPageType {
             case SHIELD:
                 return getShieldShop(shopLevel, resourceNpc);
             case ENCHANT:
-                return getEnchantGui(player, resourceNpc);
-            /*case EGG:
-                return getEggShop(shopLevel, resourceNpc);*/
+                return new EnchantGui(player);
             case TOOL:
                 return getToolShop(shopLevel, resourceNpc);
             case UTILITY:
                 return getUtilityShop(shopLevel, resourceNpc);
             case POTIONS:
                 return getPotionShop(shopLevel, resourceNpc);
-            case TP_SCROLL:
-                return getTeleportScrollShop(shopLevel, resourceNpc);
         }
         return new GuiGeneric(9, "ERROR", resourceNpc);
     }
 
-    private SellGui getSellGui(int shopNpc) {
-        return new SellGui(shopNpc);
-    }
-
-    private GuiGeneric getPersonalStorageGui(Player player) {
-        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-        return guardianData.getPersonalStorageGui();
-    }
-
-    private GuiGeneric getGuildStorageGui(Guild guild) {
-        return guild.getGuildStorageGui();
-    }
-
-    private GuiGeneric getBazaarStorageGui(Player player) {
-        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-        return guardianData.getBazaarStorageGui();
-    }
-
-    private GuiGeneric getPremiumStorageGui(Player player) {
-        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-        return guardianData.getPremiumStorageGui();
-    }
-
-    private GuiGeneric getEnchantGui(Player player, int shopNpc) {
-        return new EnchantGui(player);
-    }
-
-    private GuiBookGeneric getWeaponShop(int shopLevel, int shopNpc) {
+    private GuiGenericBuyBook getWeaponShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
 
@@ -153,14 +120,14 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric merchantShop = new GuiBookGeneric("Weapon Shop", shopNpc);
+        GuiGenericBuyBook merchantShop = new GuiGenericBuyBook("Weapon Shop", shopNpc);
         for (GuiPage page : guiPages) {
             merchantShop.addPage(page);
         }
         return merchantShop;
     }
 
-    private GuiBookGeneric getArmorShop(int shopLevel, int shopNpc) {
+    private GuiGenericBuyBook getArmorShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
 
         ItemTier tier = ItemTier.COMMON;
@@ -203,14 +170,14 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric merchantShop = new GuiBookGeneric("Armor Shop", shopNpc);
+        GuiGenericBuyBook merchantShop = new GuiGenericBuyBook("Armor Shop", shopNpc);
         for (GuiPage page : guiPages) {
             merchantShop.addPage(page);
         }
         return merchantShop;
     }
 
-    private GuiBookGeneric getShieldShop(int shopLevel, int shopNpc) {
+    private GuiGenericBuyBook getShieldShop(int shopLevel, int shopNpc) {
         List<MerchantGuiLine> lines = new ArrayList<>();
         lines.add(new MerchantGuiLine());
 
@@ -250,14 +217,14 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric merchantShop = new GuiBookGeneric("Shield Shop", shopNpc);
+        GuiGenericBuyBook merchantShop = new GuiGenericBuyBook("Shield Shop", shopNpc);
         for (GuiPage page : guiPages) {
             merchantShop.addPage(page);
         }
         return merchantShop;
     }
 
-    private GuiBookGeneric getPotionShop(int shopLevel, int shopNpc) {
+    private GuiGenericBuyBook getPotionShop(int shopLevel, int shopNpc) {
         GuiPage guiPage = new GuiPage();
 
         MerchantGuiLine line1 = new MerchantGuiLine();
@@ -300,38 +267,12 @@ public enum MerchantPageType {
             }
         }
 
-        GuiBookGeneric potion_shop = new GuiBookGeneric("Potion Shop", shopNpc);
+        GuiGenericBuyBook potion_shop = new GuiGenericBuyBook("Potion Shop", shopNpc);
         potion_shop.addPage(guiPage);
         return potion_shop;
     }
 
-    private GuiBookGeneric getTeleportScrollShop(int shopLevel, int shopNpc) {
-        MerchantGuiLine line1 = new MerchantGuiLine();
-
-        // TODO create scrolls for npc shop
-        /*line1.addWord(TeleportScroll.ROUMEN.getScroll(1, 1), 4);
-
-        line1.addWord(TeleportScroll.PORT_VELOA.getScroll(1, 5), 4);
-
-        if (shopLevel >= 2) {
-            line1.addWord(TeleportScroll.ELDERINE.getScroll(1, 20), 6);
-            if (shopLevel >= 3) {
-                line1.addWord(TeleportScroll.URUGA.getScroll(1, 40), 9);
-                if (shopLevel >= 4) {
-                    line1.addWord(TeleportScroll.ALBERSTOL_RUINS.getScroll(1, 70), 14);
-                }
-            }
-        }*/
-
-        GuiPage guiPage = new GuiPage();
-        guiPage.addLine(line1);
-
-        GuiBookGeneric potion_shop = new GuiBookGeneric("Teleport-Scroll Shop", shopNpc);
-        potion_shop.addPage(guiPage);
-        return potion_shop;
-    }
-
-    private GuiBookGeneric getUtilityShop(int shopLevel, int shopNpc) {
+    private GuiGenericBuyBook getUtilityShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
         ItemStack boat = OtherItems.getBoat();
@@ -340,12 +281,12 @@ public enum MerchantPageType {
         GuiPage guiPage = new GuiPage();
         guiPage.addLine(line1);
 
-        GuiBookGeneric potion_shop = new GuiBookGeneric("Utility Shop", shopNpc);
+        GuiGenericBuyBook potion_shop = new GuiGenericBuyBook("Utility Shop", shopNpc);
         potion_shop.addPage(guiPage);
         return potion_shop;
     }
 
-    private GuiBookGeneric getToolShop(int shopLevel, int shopNpc) {
+    private GuiGenericBuyBook getToolShop(int shopLevel, int shopNpc) {
         MerchantGuiLine line1 = new MerchantGuiLine();
 
         ItemStack axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.WOODEN);
@@ -394,7 +335,7 @@ public enum MerchantPageType {
         GuiPage guiPage = new GuiPage();
         guiPage.addLine(line1);
 
-        GuiBookGeneric potion_shop = new GuiBookGeneric("Tool Shop", shopNpc);
+        GuiGenericBuyBook potion_shop = new GuiGenericBuyBook("Tool Shop", shopNpc);
         potion_shop.addPage(guiPage);
         return potion_shop;
     }

@@ -14,7 +14,6 @@ import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -122,18 +121,14 @@ public class RequestHandler {
             Player player = Bukkit.getPlayer(minecraftUuid);
             if (player != null) {
                 minecraftUsername = player.getName();
-                InventoryView openInventory = player.getOpenInventory();
-                String title = openInventory.getTitle();
 
-                // TODO fix string check
-                if (title.contains("Premium Storage")) {
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            player.closeInventory();
-                        }
-                    }.runTask(GuardiansOfAdelia.getInstance());
-                }
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        player.sendMessage(ChatPalette.RED + "Closing your inventory for security to complete your web purchase.");
+                        player.closeInventory();
+                    }
+                }.runTask(GuardiansOfAdelia.getInstance());
 
                 if (GuardianDataManager.hasGuardianData(player)) {
                     GuardianData guardianData = GuardianDataManager.getGuardianData(player);
@@ -241,19 +236,13 @@ public class RequestHandler {
         if (type.equals(WebProductType.ITEM)) {
             ItemStack itemStack = webProduct.getItemStack();
 
-
-            InventoryView openInventory = player.getOpenInventory();
-            String title = openInventory.getTitle();
-
-            // TODO fix string check
-            if (title.contains("Premium Storage")) {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        player.closeInventory();
-                    }
-                }.runTask(GuardiansOfAdelia.getInstance());
-            }
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendMessage(ChatPalette.RED + "Closing your inventory for security to complete your web purchase.");
+                    player.closeInventory();
+                }
+            }.runTask(GuardiansOfAdelia.getInstance());
 
             if (GuardianDataManager.hasGuardianData(player)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(player);
