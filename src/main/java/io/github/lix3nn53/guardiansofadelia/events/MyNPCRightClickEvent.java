@@ -15,11 +15,11 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -53,19 +53,19 @@ public class MyNPCRightClickEvent implements Listener {
                 }
             }
 
-            new BukkitRunnable() {
-
-                @Override
-                public void run() {
-                    if (DatabaseQueries.characterExists(player.getUniqueId(), id)) {
+            Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
+                if (DatabaseQueries.characterExists(player.getUniqueId(), id)) {
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
                         GuiCharacterSelect gui = new GuiCharacterSelect(id);
                         gui.openInventory(player);
-                    } else {
+                    });
+                } else {
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
                         GuiTutorialSkip gui = new GuiTutorialSkip(id);
                         gui.openInventory(player);
-                    }
+                    });
                 }
-            }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
+            });
         } else {
             if (GuardianDataManager.hasGuardianData(player)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(player);
