@@ -34,10 +34,10 @@ public class TeleportGuiConfiguration {
 
             String name = current.getString("name");
             int cost = current.getInt("cost");
-            int requiredQuestNoTurnedIn = current.getInt("requiredQuestNoTurnedIn");
+            int levelReq = current.getInt("levelReq");
 
-            InstantTeleportGuiItem instantTeleportGuiItem = new InstantTeleportGuiItem(name, location, cost);
-            InstantTeleportManager.addTeleport(requiredQuestNoTurnedIn, instantTeleportGuiItem);
+            InstantTeleportGuiItem instantTeleportGuiItem = new InstantTeleportGuiItem(name, location, cost, levelReq);
+            InstantTeleportManager.addTeleport(i, instantTeleportGuiItem);
         }
     }
 }

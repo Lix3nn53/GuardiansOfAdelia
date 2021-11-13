@@ -60,7 +60,7 @@ public class ArmorSelectOneOfAction implements Action {
                 slotsToUse.add(34);
 
                 List<ItemStack> items = armorReferenceData.getItems(rpgCharacter.getRpgClassStr());
-                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guiSize, questNo, 0, taskIndex, items);
+                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guardianData, guiSize, questNo, 0, taskIndex, items);
                 gui.openInventory(player);
             }
         }

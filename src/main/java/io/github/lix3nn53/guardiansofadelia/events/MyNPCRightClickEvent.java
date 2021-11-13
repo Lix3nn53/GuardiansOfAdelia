@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -18,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
@@ -51,13 +53,19 @@ public class MyNPCRightClickEvent implements Listener {
                 }
             }
 
-            if (DatabaseQueries.characterExists(player.getUniqueId(), id)) {
-                GuiCharacterSelect gui = new GuiCharacterSelect(id);
-                gui.openInventory(player);
-            } else {
-                GuiTutorialSkip gui = new GuiTutorialSkip(id);
-                gui.openInventory(player);
-            }
+            new BukkitRunnable() {
+
+                @Override
+                public void run() {
+                    if (DatabaseQueries.characterExists(player.getUniqueId(), id)) {
+                        GuiCharacterSelect gui = new GuiCharacterSelect(id);
+                        gui.openInventory(player);
+                    } else {
+                        GuiTutorialSkip gui = new GuiTutorialSkip(id);
+                        gui.openInventory(player);
+                    }
+                }
+            }.runTaskAsynchronously(GuardiansOfAdelia.getInstance());
         } else {
             if (GuardianDataManager.hasGuardianData(player)) {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(player);
@@ -78,7 +86,9 @@ public class MyNPCRightClickEvent implements Listener {
                 MerchantMenu merchantMenu = MerchantManager.getMerchantMenu(id);
                 merchantMenu.openInventory(player);
             } else {
-                GuiQuestList gui = new GuiQuestList(npc, player);
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+
+                GuiQuestList gui = new GuiQuestList(npc, player, guardianData);
                 gui.openInventory(player);
             }
         }

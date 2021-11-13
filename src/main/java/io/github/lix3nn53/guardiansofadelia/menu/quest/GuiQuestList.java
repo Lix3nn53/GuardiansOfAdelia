@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
@@ -26,8 +27,8 @@ public class GuiQuestList extends GuiGeneric {
 
     NPC npc;
 
-    public GuiQuestList(NPC npc, Player player) {
-        super(27, ChatPalette.GRAY_DARK + "Quest List of " + npc.getName(), npc.getId());
+    public GuiQuestList(NPC npc, Player player, GuardianData guardianData) {
+        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "quest.list_of") + " " + npc.getName(), npc.getId());
         this.npc = npc;
 
         int npcId = npc.getId();
@@ -105,7 +106,7 @@ public class GuiQuestList extends GuiGeneric {
                         //turnin quest
                         boolean didTurnIn = rpgCharacter.turnInQuest(questNo, player, false);
                         if (didTurnIn) {
-                            GuiQuestList questGui = new GuiQuestList(this.npc, player);
+                            GuiQuestList questGui = new GuiQuestList(this.npc, player, guardianData);
                             questGui.openInventory(player);
                         } else {
                             player.sendMessage(ChatPalette.RED + "Couldn't turn in the quest ERROR report pls");
@@ -131,14 +132,15 @@ public class GuiQuestList extends GuiGeneric {
                         }
 
                         // CREATE GUI
-                        GuiQuestPrizeSelect gui = new GuiQuestPrizeSelect(guiSize, questNo, resourceNPC, itemPrizesSelectOneOf, weaponPrizesSelectOneOf, armorPrizesSelectOneOf, rpgCharacter);
+                        GuiQuestPrizeSelect gui = new GuiQuestPrizeSelect(guiSize, questNo, resourceNPC, itemPrizesSelectOneOf,
+                                weaponPrizesSelectOneOf, armorPrizesSelectOneOf, rpgCharacter, guardianData);
 
                         gui.openInventory(player);
                     }
                 } else {
                     NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
                     NPC byId = npcRegistry.getById(whoCanCompleteThisQuest);
-                    player.sendMessage(ChatPalette.RED + "You can't turn in this quest from this NPC. You need to talk with " + ChatPalette.WHITE + byId.getName());
+                    player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "quest.error.wrong_turn_in") + " " + ChatPalette.WHITE + byId.getName());
                 }
             } else if (type.equals(Material.LIME_WOOL)) {
                 String[] split = currentName.split("#");
@@ -150,15 +152,15 @@ public class GuiQuestList extends GuiGeneric {
 
                     boolean questListIsNotFull = rpgCharacter.acceptQuest(questCopyById, player);
                     if (questListIsNotFull) {
-                        GuiQuestList questGui = new GuiQuestList(this.npc, player);
+                        GuiQuestList questGui = new GuiQuestList(this.npc, player, guardianData);
                         questGui.openInventory(player);
                     } else {
-                        player.sendMessage(ChatPalette.RED + "Your quest list is full");
+                        player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "quest.error.full"));
                     }
                 } else {
                     NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
                     NPC byId = npcRegistry.getById(whoCanGiveThisQuest);
-                    player.sendMessage(ChatPalette.RED + "You can't take this quest from this NPC. You need to talk with " + ChatPalette.WHITE + byId.getName());
+                    player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "quest.error.wrong_take") + " " + ChatPalette.WHITE + byId.getName());
                 }
             }
         }

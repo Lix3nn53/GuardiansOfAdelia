@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -29,8 +30,8 @@ public class GuiQuestPrizeSelect extends GuiGeneric {
 
     public GuiQuestPrizeSelect(int guiSize, int questNo, int resourceNPC, List<ItemStack> itemPrizesSelectOneOf,
                                WeaponReferenceData weaponPrizesSelectOneOf, ArmorReferenceData armorPrizesSelectOneOf,
-                               RPGCharacter rpgCharacter) {
-        super(guiSize, ChatPalette.BLACK + "Quest Item Prize Selection #" + questNo, resourceNPC);
+                               RPGCharacter rpgCharacter, GuardianData guardianData) {
+        super(guiSize, ChatPalette.BLACK + Translation.t(guardianData, "quest.prize.selection") + " #" + questNo, resourceNPC);
         this.questNo = questNo;
 
         // ITEM SLOTS
@@ -119,7 +120,7 @@ public class GuiQuestPrizeSelect extends GuiGeneric {
         if (didTurnIn) {
             NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
             NPC byId = npcRegistry.getById(this.getResourceNPC());
-            GuiQuestList questGui = new GuiQuestList(byId, player);
+            GuiQuestList questGui = new GuiQuestList(byId, player, guardianData);
             questGui.openInventory(player);
         } else {
             player.sendMessage(ChatPalette.RED + "Couldn't turn in the quest ERROR report pls");

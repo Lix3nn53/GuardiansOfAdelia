@@ -48,7 +48,7 @@ public enum MerchantPageType {
             case SELL:
                 return new SellGui(resourceNpc);
             case CONVERT:
-                return new GuiCoinConverter(resourceNpc);
+                return new GuiCoinConverter(guardianData, resourceNpc);
             case PERSONAL_STORAGE:
                 return guardianData.getPersonalStorageGui();
             case GUILD_STORAGE:

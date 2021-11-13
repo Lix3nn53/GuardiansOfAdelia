@@ -33,10 +33,10 @@ public class GuiCharacter extends GuiGeneric {
         itemMeta.setCustomModelData(classIconCustomModelData);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setDisplayName(ChatPalette.YELLOW + Translation.t(guardianData, "menu.character.class.name"));
+        itemMeta.setDisplayName(ChatPalette.YELLOW + Translation.t(guardianData, "character.class.name"));
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.character.class.l1"));
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.class.l1"));
         lore.add("");
         lore.add("Current Class: " + rpgClass.getClassString());
         itemMeta.setLore(lore);
@@ -46,41 +46,40 @@ public class GuiCharacter extends GuiGeneric {
         itemMeta.setCustomModelData(29);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + Translation.t(guardianData, "menu.character.skill.name"));
+        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + Translation.t(guardianData, "character.skill.name"));
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.character.skill.name"));
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.skill.l1"));
         itemMeta.setLore(lore);
         skills.setItemMeta(itemMeta);
         this.setItem(11, skills);
 
         ItemStack statpoints = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(6);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Stat Points");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "character.stat.name"));
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + "Spend stat points earned by leveling");
-        lore.add(ChatPalette.GRAY + "your character.");
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.stat.l1"));
         itemMeta.setLore(lore);
         statpoints.setItemMeta(itemMeta);
         this.setItem(13, statpoints);
 
         ItemStack job = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(21);
-        itemMeta.setDisplayName(ChatPalette.YELLOW + "Crafting");
+        itemMeta.setDisplayName(ChatPalette.YELLOW + Translation.t(guardianData, "character.crafting.name"));
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + "Manage your character's job!");
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.crafting.l1"));
         itemMeta.setLore(lore);
         job.setItemMeta(itemMeta);
         this.setItem(15, job);
 
         ItemStack chat = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(4);
-        itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + "Chat Tag");
+        itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + Translation.t(guardianData, "character.chattag.name"));
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + "Select your chat tag!");
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.chattag.l1"));
         itemMeta.setLore(lore);
         chat.setItemMeta(itemMeta);
         this.setItem(17, chat);
@@ -113,17 +112,17 @@ public class GuiCharacter extends GuiGeneric {
 
             int pointsLeft = skillBar.getSkillPointsLeftToSpend();
 
-            GuiCharacterSkills gui = new GuiCharacterSkills(player, rpgCharacter, skillBar, pointsLeft);
+            GuiCharacterSkills gui = new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
             gui.openInventory(player);
         } else if (slot == 13) {
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
             int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
 
-            GuiCharacterStatInvest gui = new GuiCharacterStatInvest(pointsLeft, rpgCharacterStats);
+            GuiCharacterStatInvest gui = new GuiCharacterStatInvest(pointsLeft, guardianData, rpgCharacterStats);
             gui.openInventory(player);
         } else if (slot == 15) {
-            GuiCharacterCrafting gui = new GuiCharacterCrafting(rpgCharacter);
+            GuiCharacterCrafting gui = new GuiCharacterCrafting(guardianData, rpgCharacter);
             gui.openInventory(player);
         } else if (slot == 17) {
             GuiCharacterChatTag gui = new GuiCharacterChatTag(player);

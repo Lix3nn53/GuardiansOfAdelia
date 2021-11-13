@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -43,7 +44,7 @@ public class GuiBazaarStorage extends GuiGeneric {
                     List<ItemStack> itemsOnSale = bazaar.getItemsOnSale();
                     if (itemsOnSale.contains(current)) {
                         player.closeInventory();
-                        player.sendMessage(ChatPalette.RED + "You can't get an item from bazaar storage which is on sale");
+                        player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "economy.storage.bazaar.onsale_error"));
                         return;
                     }
                 }

@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class GuiCharacterClassChange extends GuiGeneric {
     private final HashMap<Integer, String> slotToRpgClassStr = new HashMap<>();
 
     public GuiCharacterClassChange(Player player, GuardianData guardianData, int classTier) {
-        super(27, ChatPalette.GRAY_DARK + "Class Change", 0);
+        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "character.class.change"), 0);
 
         RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 

@@ -6,7 +6,7 @@
 
 p1:
   name: "Roumen"
-  requiredQuestNoTurnedIn: 6
+  levelReq: 6
   cost: 9
   world: world
   x: 2065.5

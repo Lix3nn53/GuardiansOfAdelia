@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main.character;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
@@ -15,7 +17,7 @@ import java.util.List;
 
 public class GuiCharacterCrafting extends GuiGeneric {
 
-    public GuiCharacterCrafting(RPGCharacter activeCharacter) {
+    public GuiCharacterCrafting(GuardianData guardianData, RPGCharacter activeCharacter) {
         super(45, ChatPalette.YELLOW + "Crafting", 0);
 
         RPGCharacterCraftingStats craftingStats = activeCharacter.getCraftingStats();
@@ -28,7 +30,7 @@ public class GuiCharacterCrafting extends GuiGeneric {
             List<String> lore = new ArrayList<>();
             lore.add("");
             int currentLevel = craftingStats.getCurrentLevel(craftingType);
-            lore.add("Level: " + currentLevel);
+            lore.add(Translation.t(guardianData, "character.class.tier") + ": " + currentLevel);
             lore.add("Experience: " + craftingStats.getTotalExperience(craftingType));
             lore.add("Required Experience: " + craftingStats.getTotalRequiredExperience(currentLevel));
 

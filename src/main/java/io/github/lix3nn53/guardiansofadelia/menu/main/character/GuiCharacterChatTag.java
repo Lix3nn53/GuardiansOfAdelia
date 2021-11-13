@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -47,7 +48,7 @@ public class GuiCharacterChatTag extends GuiGeneric {
 
                     List<String> lore = new ArrayList<>();
                     lore.add("");
-                    lore.add(questColor + "Required quest no: " + requiredQuest);
+                    lore.add(questColor + Translation.t(guardianData, "quest.required") + ": " + requiredQuest);
                     lore.add("");
                     lore.add(ChatPalette.GRAY + "Click to select this chat tag");
                     itemMeta.setLore(lore);

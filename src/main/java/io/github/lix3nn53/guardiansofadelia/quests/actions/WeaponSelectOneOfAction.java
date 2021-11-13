@@ -37,7 +37,7 @@ public class WeaponSelectOneOfAction implements Action {
                 }
 
                 List<ItemStack> items = weaponPrizesSelectOneOf.getItems(rpgCharacter.getRpgClassStr());
-                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guiSize, questNo, 0, taskIndex, items);
+                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guardianData, guiSize, questNo, 0, taskIndex, items);
                 gui.openInventory(player);
             }
         }

@@ -70,7 +70,7 @@ public class CommandAdminQuest implements CommandExecutor {
                     if (guardianData.hasActiveCharacter()) {
                         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
                         NPC byId = npcRegistry.getById(Integer.parseInt(args[1]));
-                        GuiQuestList gui = new GuiQuestList(byId, player);
+                        GuiQuestList gui = new GuiQuestList(byId, player, guardianData);
                         gui.openInventory(player);
                     }
                 }

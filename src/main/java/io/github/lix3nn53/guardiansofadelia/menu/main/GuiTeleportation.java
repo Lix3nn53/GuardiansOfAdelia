@@ -25,10 +25,10 @@ public class GuiTeleportation extends GuiBookGeneric {
 
         List<Integer> turnedInQuests = guardianData.getActiveCharacter().getTurnedInQuests();
 
-        for (int questNo : InstantTeleportManager.questNoToTeleport.keySet()) {
-            InstantTeleportGuiItem instantTeleportGuiItem = InstantTeleportManager.questNoToTeleport.get(questNo);
-            boolean contains = turnedInQuests.contains(questNo);
-            ItemStack itemStack = instantTeleportGuiItem.getItemStack(contains, questNo);
+        for (int code : InstantTeleportManager.codeToTeleport.keySet()) {
+            InstantTeleportGuiItem instantTeleportGuiItem = InstantTeleportManager.codeToTeleport.get(code);
+            boolean contains = turnedInQuests.contains(code);
+            ItemStack itemStack = instantTeleportGuiItem.getItemStack(guardianData, contains, code);
 
             this.addToFirstAvailableWord(itemStack);
         }

@@ -53,10 +53,10 @@ public class GuiMain extends GuiGeneric {
 
         ItemStack character = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(2);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "menu.character.name"));
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "character.name"));
         lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.character.l1"));
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.l1"));
         itemMeta.setLore(lore);
         character.setItemMeta(itemMeta);
         this.setItem(10, character);

@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
@@ -19,7 +20,7 @@ import java.util.List;
 public class GuiCharacterClassManager extends GuiGeneric {
 
     public GuiCharacterClassManager(GuardianData guardianData) {
-        super(27, ChatPalette.GRAY_DARK + "Class Manager", 0);
+        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "character.class.manager"), 0);
 
         RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
 
@@ -31,7 +32,7 @@ public class GuiCharacterClassManager extends GuiGeneric {
 
         itemStack = new ItemStack(Material.IRON_BLOCK);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(ChatPalette.GOLD + "Change Class Tier #1");
+        itemMeta.setDisplayName(ChatPalette.GOLD + Translation.t(guardianData, "character.class.tier") + " 1");
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("Change to a tier 1 class you have unlocked");
@@ -40,7 +41,7 @@ public class GuiCharacterClassManager extends GuiGeneric {
         this.setItem(20, itemStack);
 
         itemStack = new ItemStack(Material.GOLD_BLOCK);
-        itemMeta.setDisplayName(ChatPalette.GOLD + "Change Class Tier #2");
+        itemMeta.setDisplayName(ChatPalette.GOLD + Translation.t(guardianData, "character.class.tier") + " 2");
         lore.clear();
         lore.add("");
         lore.add("Change to a tier 2 class you have unlocked");
@@ -49,7 +50,7 @@ public class GuiCharacterClassManager extends GuiGeneric {
         this.setItem(22, itemStack);
 
         itemStack = new ItemStack(Material.DIAMOND_BLOCK);
-        itemMeta.setDisplayName(ChatPalette.GOLD + "Change Class Tier #3");
+        itemMeta.setDisplayName(ChatPalette.GOLD + Translation.t(guardianData, "character.class.tier") + " 3");
         lore.clear();
         lore.add("");
         lore.add("Change to a tier 3 class you have unlocked");

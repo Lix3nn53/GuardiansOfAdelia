@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.entity.Player;
@@ -18,8 +19,9 @@ public class GuiCharacterSkills extends GuiGeneric {
 
     private final HashMap<Integer, String> slotToRpgClassStr = new HashMap<>();
 
-    public GuiCharacterSkills(Player player, RPGCharacter rpgCharacter, SkillBar skillBar, int pointsLeft) {
-        super(27, ChatPalette.GRAY_DARK + "Skills (Points: " + pointsLeft + ")", 0);
+    public GuiCharacterSkills(Player player, GuardianData guardianData, RPGCharacter rpgCharacter, SkillBar skillBar, int pointsLeft) {
+        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "skill.subject") +
+                " (" + Translation.t(guardianData, "skill.points") + ": " + pointsLeft + ")", 0);
 
         HashMap<Integer, Skill> skillSet = rpgCharacter.getSkillBar().getSkillSet();
 
@@ -29,7 +31,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             ItemStack icon = skillOne.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
-            itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+            itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
             this.setItem(1, icon);
         }
@@ -40,7 +42,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             ItemStack icon = skillTwo.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
-            itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+            itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
             this.setItem(4, icon);
         }
@@ -51,7 +53,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             ItemStack icon = skillThree.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
-            itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+            itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
             this.setItem(7, icon);
         }
@@ -62,7 +64,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             ItemStack icon = skillFour.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
-            itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+            itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
             this.setItem(20, icon);
         }
@@ -73,7 +75,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             ItemStack icon = skillFive.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
-            itemMeta.setDisplayName(displayName + " (Invested: " + investedSkillPoints + ")");
+            itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
             this.setItem(24, icon);
         }
@@ -117,13 +119,13 @@ public class GuiCharacterSkills extends GuiGeneric {
                 boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats());
                 if (upgradeSkill) {
                     int pointsLeft = skillBar.getSkillPointsLeftToSpend();
-                    new GuiCharacterSkills(player, rpgCharacter, skillBar, pointsLeft);
+                    new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
                 }
             } else if (event.isRightClick()) {
                 boolean downgradeSkill = skillBar.downgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats());
                 if (downgradeSkill) {
                     int pointsLeft = skillBar.getSkillPointsLeftToSpend();
-                    new GuiCharacterSkills(player, rpgCharacter, skillBar, pointsLeft);
+                    new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
                 }
             }
         }
