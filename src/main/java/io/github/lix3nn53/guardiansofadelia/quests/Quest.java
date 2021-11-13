@@ -17,7 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.quests.task.*;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
-import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
@@ -227,8 +227,8 @@ public final class Quest {
                     lore.add(ChatPalette.GRAY + armorSlot.toString() + " Level: " + minLevel + "~" + maxLevel + ChatPalette.GRAY + ", Tier: " + itemTier.getTierString());
                 }
             }
-            if (InstantTeleportGuiManager.contains(questID)) {
-                InstantTeleportGuiItem teleport = InstantTeleportGuiManager.getTeleport(questID);
+            if (InstantTeleportManager.contains(questID)) {
+                InstantTeleportGuiItem teleport = InstantTeleportManager.getTeleport(questID);
                 String name = teleport.getName();
                 lore.add(ChatPalette.PURPLE_LIGHT + "Unlock instant teleportation: " + ChatPalette.GRAY + name);
             }

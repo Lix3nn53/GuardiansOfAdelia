@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public final class RPGCharacter {
 
-    private final RPGInventory rpgInventory = new RPGInventory();
+    private final RPGInventory rpgInventory;
 
     private final HashMap<String, RPGClassStats> classToClassStats;
     private String rpgClassStr;
@@ -35,6 +35,7 @@ public final class RPGCharacter {
 
     public RPGCharacter(String rpgClassStr, Player player, int one, int two, int three, int passive, int ultimate,
                         HashMap<String, RPGClassStats> classToClassStats) {
+        this.rpgInventory = new RPGInventory(player);
         rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
         this.rpgClassStr = rpgClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
@@ -44,6 +45,7 @@ public final class RPGCharacter {
     }
 
     public RPGCharacter(String rpgClassStr, Player player) {
+        this.rpgInventory = new RPGInventory(player);
         rpgCharacterStats = new RPGCharacterStats(player, rpgClassStr);
         this.rpgClassStr = rpgClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);

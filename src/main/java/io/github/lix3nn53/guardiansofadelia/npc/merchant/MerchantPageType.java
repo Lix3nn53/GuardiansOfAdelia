@@ -52,7 +52,7 @@ public enum MerchantPageType {
             case CONVERT:
                 return new GuiCoinConverter(resourceNpc);
             case PERSONAL_STORAGE:
-                return getPersonalStorageGui(player, resourceNpc);
+                return getPersonalStorageGui(player);
             case GUILD_STORAGE:
                 if (GuildManager.inGuild(player)) {
                     Guild guild = GuildManager.getGuild(player);
@@ -60,9 +60,9 @@ public enum MerchantPageType {
                 }
                 return null;
             case BAZAAR_STORAGE:
-                return getBazaarStorageGui(player, resourceNpc);
+                return getBazaarStorageGui(player);
             case PREMIUM_STORAGE:
-                return getPremiumStorageGui(player, resourceNpc);
+                return getPremiumStorageGui(player);
             case WEAPON:
                 return getWeaponShop(shopLevel, resourceNpc);
             case ARMOR:
@@ -89,38 +89,23 @@ public enum MerchantPageType {
         return new SellGui(shopNpc);
     }
 
-    private GuiGeneric getPersonalStorageGui(Player player, int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, "Personal Storage", shopNpc);
-
-        if (GuardianDataManager.hasGuardianData(player)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            return guardianData.getPersonalStorageGui();
-        }
-        return guiGeneric;
+    private GuiGeneric getPersonalStorageGui(Player player) {
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        return guardianData.getPersonalStorageGui();
     }
 
     private GuiGeneric getGuildStorageGui(Guild guild) {
         return guild.getGuildStorageGui();
     }
 
-    private GuiGeneric getBazaarStorageGui(Player player, int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, "Bazaar Storage", shopNpc);
-
-        if (GuardianDataManager.hasGuardianData(player)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            return guardianData.getBazaarStorageGui();
-        }
-        return guiGeneric;
+    private GuiGeneric getBazaarStorageGui(Player player) {
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        return guardianData.getBazaarStorageGui();
     }
 
-    private GuiGeneric getPremiumStorageGui(Player player, int shopNpc) {
-        GuiGeneric guiGeneric = new GuiGeneric(54, "Premium Storage", shopNpc);
-
-        if (GuardianDataManager.hasGuardianData(player)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            return guardianData.getPremiumStorageGui();
-        }
-        return guiGeneric;
+    private GuiGeneric getPremiumStorageGui(Player player) {
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        return guardianData.getPremiumStorageGui();
     }
 
     private GuiGeneric getEnchantGui(Player player, int shopNpc) {

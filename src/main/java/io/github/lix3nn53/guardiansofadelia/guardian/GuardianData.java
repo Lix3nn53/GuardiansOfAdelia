@@ -6,9 +6,11 @@ import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.locale.Translation;
+import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiBazaarStorage;
+import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiPersonalStorage;
+import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiPremiumStorage;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import org.bukkit.entity.Player;
@@ -21,9 +23,9 @@ import java.util.List;
 
 public class GuardianData {
 
-    private final GuiGeneric personalStorage = new GuiGeneric(54, "Personal Storage", 0);
-    private final GuiGeneric bazaarStorage = new GuiGeneric(54, "Bazaar Storage", 0);
-    private final GuiGeneric premiumStorage = new GuiGeneric(54, "Premium Storage", 0);
+    private final GuiGeneric personalStorage = new GuiPersonalStorage();
+    private final GuiGeneric bazaarStorage = new GuiBazaarStorage();
+    private final GuiGeneric premiumStorage = new GuiPremiumStorage();
 
     private RPGCharacter activeCharacter;
     private int activeCharacterNo = 0;
@@ -35,8 +37,6 @@ public class GuardianData {
     private PremiumRank premiumRank = PremiumRank.NONE;
 
     private List<Player> friends = new ArrayList<>();
-
-    private Gui activeGui;
 
     private boolean isTeleporting;
     private boolean isGathering;
@@ -173,22 +173,6 @@ public class GuardianData {
 
     public void setGathering(boolean gathering) {
         this.isGathering = gathering;
-    }
-
-    public boolean hasActiveGui() {
-        return this.activeGui != null;
-    }
-
-    public void clearActiveGui() {
-        this.activeGui = null;
-    }
-
-    public Gui getActiveGui() {
-        return this.activeGui;
-    }
-
-    public void setActiveGui(Gui gui) {
-        this.activeGui = gui;
     }
 
     public Bazaar getBazaar() {

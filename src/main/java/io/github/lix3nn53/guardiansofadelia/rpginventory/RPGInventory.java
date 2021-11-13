@@ -21,6 +21,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Parrot;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,9 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class RPGInventory {
-
-    private final GuiGeneric rpgGui = new GuiGeneric(54, ChatPalette.GRAY_DARK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+public class RPGInventory extends GuiGeneric {
 
     private final List<Player> petSpawnCooldownList = new ArrayList<>();
 
@@ -48,85 +48,161 @@ public class RPGInventory {
     private final VanillaSlotOffhand offhandSlot = new VanillaSlotOffhand();
     private final HotBarSlotWeapon hotBarSlotWeapon = new HotBarSlotWeapon();
 
-    public GuiGeneric formRPGInventory(Player player) {
+    public RPGInventory(Player player) {
+        super(54, ChatPalette.GRAY_DARK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+
         if (parrotSlot.isEmpty()) {
-            rpgGui.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getFillItem());
+            this.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getItemOnSlot());
+            this.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getItemOnSlot());
         }
 
         if (earringSlot.isEmpty()) {
-            rpgGui.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getFillItem());
+            this.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getItemOnSlot());
+            this.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getItemOnSlot());
         }
 
         if (necklaceSlot.isEmpty()) {
-            rpgGui.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getFillItem());
+            this.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getItemOnSlot());
+            this.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getItemOnSlot());
         }
 
         if (gloveSlot.isEmpty()) {
-            rpgGui.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getFillItem());
+            this.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getItemOnSlot());
+            this.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getItemOnSlot());
         }
 
         if (ringSlot.isEmpty()) {
-            rpgGui.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getFillItem());
+            this.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getItemOnSlot());
+            this.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getItemOnSlot());
         }
 
         if (eggSlot.isEmpty()) {
-            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getFillItem());
+            this.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getItemOnSlot());
+            this.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getItemOnSlot());
         }
 
         if (helmetSlot.isEmpty(player)) {
-            rpgGui.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getFillItem());
+            this.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getItemOnSlot(player));
+            this.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getItemOnSlot(player));
         }
 
         if (chestplateSlot.isEmpty(player)) {
-            rpgGui.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getFillItem());
+            this.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getItemOnSlot(player));
+            this.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getItemOnSlot(player));
         }
 
         if (leggingsSlot.isEmpty(player)) {
-            rpgGui.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getFillItem());
+            this.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getItemOnSlot(player));
+            this.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getItemOnSlot(player));
         }
 
         if (bootsSlot.isEmpty(player)) {
-            rpgGui.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getFillItem());
+            this.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getItemOnSlot(player));
+            this.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getItemOnSlot(player));
         }
 
         if (offhandSlot.isEmpty(player)) {
-            rpgGui.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getFillItem());
+            this.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getItemOnSlot(player));
+            this.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getItemOnSlot(player));
         }
 
         if (hotBarSlotWeapon.isEmpty(player)) {
-            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getFillItem());
+            this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getFillItem());
         } else {
-            rpgGui.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
+            this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
         }
 
-        rpgGui.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+        this.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
 
-        InventoryUtils.fillEmptySlotsWithGlass(rpgGui);
-        rpgGui.setLocked(false);
+        InventoryUtils.fillEmptySlotsWithGlass(this);
+        this.setLocked(false);
+    }
 
-        return rpgGui;
+    public void update(Player player) {
+        if (parrotSlot.isEmpty()) {
+            this.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getItemOnSlot());
+        }
+
+        if (earringSlot.isEmpty()) {
+            this.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.EARRING.getSlotNo(), earringSlot.getItemOnSlot());
+        }
+
+        if (necklaceSlot.isEmpty()) {
+            this.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.NECKLACE.getSlotNo(), necklaceSlot.getItemOnSlot());
+        }
+
+        if (gloveSlot.isEmpty()) {
+            this.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.GLOVE.getSlotNo(), gloveSlot.getItemOnSlot());
+        }
+
+        if (ringSlot.isEmpty()) {
+            this.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.RING.getSlotNo(), ringSlot.getItemOnSlot());
+        }
+
+        if (eggSlot.isEmpty()) {
+            this.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.PET.getSlotNo(), eggSlot.getItemOnSlot());
+        }
+
+        if (helmetSlot.isEmpty(player)) {
+            this.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.HELMET.getSlotNo(), helmetSlot.getItemOnSlot(player));
+        }
+
+        if (chestplateSlot.isEmpty(player)) {
+            this.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.CHESTPLATE.getSlotNo(), chestplateSlot.getItemOnSlot(player));
+        }
+
+        if (leggingsSlot.isEmpty(player)) {
+            this.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.LEGGINGS.getSlotNo(), leggingsSlot.getItemOnSlot(player));
+        }
+
+        if (bootsSlot.isEmpty(player)) {
+            this.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.BOOTS.getSlotNo(), bootsSlot.getItemOnSlot(player));
+        }
+
+        if (offhandSlot.isEmpty(player)) {
+            this.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.OFFHAND.getSlotNo(), offhandSlot.getItemOnSlot(player));
+        }
+
+        if (hotBarSlotWeapon.isEmpty(player)) {
+            this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
+        }
+
+        this.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
     }
 
     public StatPassive getTotalPassiveStat() {
@@ -714,5 +790,52 @@ public class RPGInventory {
     private void startPetSpawnCooldown(Player player) {
         petSpawnCooldownList.add(player);
         Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> petSpawnCooldownList.remove(player), 20 * 8L);
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        GuardianData guardianData;
+        RPGCharacter rpgCharacter;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
+
+            if (guardianData.hasActiveCharacter()) {
+                rpgCharacter = guardianData.getActiveCharacter();
+            } else {
+                return;
+            }
+        } else {
+            return;
+        }
+
+        Inventory clickedInventory = event.getClickedInventory();
+        ItemStack current = event.getCurrentItem();
+        int slot = event.getSlot();
+
+        Inventory topInventory = event.getView().getTopInventory();
+
+        ItemStack cursor = event.getCursor();
+        Material cursorType = Material.AIR;
+        if (cursor != null) {
+            cursorType = cursor.getType();
+        }
+
+        String rpgClassStr = rpgCharacter.getRpgClassStr();
+        if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+            event.setCancelled(true);
+            if (cursorType.equals(Material.AIR)) {
+                boolean change = this.onCursorClickWithAir(player, slot, topInventory, event.isShiftClick());
+            } else {
+                boolean change = this.onCursorClickWithItem(player, slot, cursor, topInventory, rpgClassStr);
+            }
+        } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+            if (cursorType.equals(Material.AIR)) {
+                if (event.isShiftClick()) {
+                    event.setCancelled(true);
+                    boolean change = this.onShiftClick(current, player, slot, topInventory, rpgClassStr);
+                }
+            }
+        }
     }
 }

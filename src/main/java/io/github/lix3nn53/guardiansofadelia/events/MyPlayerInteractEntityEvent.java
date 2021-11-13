@@ -4,21 +4,14 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.menu.GuiPlayerInterract;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.EggSlot;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementFillCircle;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -29,7 +22,6 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 import java.util.List;
 
@@ -50,44 +42,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
         if (itemInMainHand.hasItemMeta()) {
             ItemMeta itemMeta = itemInMainHand.getItemMeta();
             if (itemMeta.hasDisplayName()) {
-                if (itemInMainHand.getType().equals(Material.BROWN_DYE)) { //right click with pet-food
-                    boolean pet_food = PersistentDataContainerUtil.hasInteger(itemInMainHand, "pet_food");
-                    if (pet_food) {
-                        int foodLevel = PersistentDataContainerUtil.getInteger(itemInMainHand, "pet_food");
-                        LivingEntity livingEntity = (LivingEntity) rightClicked;
-                        if (PetManager.isCompanionAlsoPet(livingEntity)) {
-                            AttributeInstance attribute = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-                            float maxHealth = (float) attribute.getValue();
-                            float currentHealth = (float) livingEntity.getHealth();
-                            if (currentHealth < maxHealth) {
-                                int healAmount = 100;
-                                if (foodLevel == 2) {
-                                    healAmount = 200;
-                                } else if (foodLevel == 3) {
-                                    healAmount = 400;
-                                } else if (foodLevel == 4) {
-                                    healAmount = 800;
-                                } else if (foodLevel == 5) {
-                                    healAmount = 1200;
-                                }
-                                float setHealthAmount = currentHealth + healAmount;
-                                if (setHealthAmount > maxHealth) {
-                                    setHealthAmount = maxHealth;
-                                }
-                                livingEntity.setHealth(setHealthAmount);
-                                int setHealthInt = (int) (setHealthAmount + 0.5);
-                                PetManager.onPetSetHealth(livingEntity, currentHealth, setHealthInt);
-                                int amount = itemInMainHand.getAmount();
-                                itemInMainHand.setAmount(amount - 1);
-
-                                ArrangementFillCircle particle = new ArrangementFillCircle(Particle.HEART, 1.2f, 6, null, Direction.XZ, 0, 1.2f, 0.2f);
-                                particle.play(livingEntity.getLocation().clone().add(0, 1.2, 0), new Vector());
-                            } else {
-                                player.sendMessage(ChatPalette.RED + "Pet health is already full");
-                            }
-                        }
-                    }
-                } else if (itemInMainHand.getType().equals(Material.BLACK_DYE)) { //right click with premium item
+                if (itemInMainHand.getType().equals(Material.BLACK_DYE)) { //right click with premium item
                     LivingEntity pet = (LivingEntity) rightClicked;
                     if (PetManager.isCompanionAlsoPet(pet)) {
                         if (!PersistentDataContainerUtil.hasString(itemInMainHand, "petSkinCode")) return;
@@ -147,8 +102,8 @@ public class MyPlayerInteractEntityEvent implements Listener {
                 if (npcRegistry.isNPC(rightClickedPlayer)) return;
 
                 if (!player.getGameMode().equals(GameMode.SPECTATOR) && !player.getGameMode().equals(GameMode.SPECTATOR)) {
-                    GuiGeneric guiGeneric = MenuList.onShiftRightClickPlayer(rightClickedPlayer);
-                    guiGeneric.openInventory(player);
+                    GuiPlayerInterract gui = new GuiPlayerInterract(rightClickedPlayer);
+                    gui.openInventory(player);
                 }
             }
         }

@@ -125,6 +125,7 @@ public class RequestHandler {
                 InventoryView openInventory = player.getOpenInventory();
                 String title = openInventory.getTitle();
 
+                // TODO fix string check
                 if (title.contains("Premium Storage")) {
                     new BukkitRunnable() {
                         @Override
@@ -244,6 +245,7 @@ public class RequestHandler {
             InventoryView openInventory = player.getOpenInventory();
             String title = openInventory.getTitle();
 
+            // TODO fix string check
             if (title.contains("Premium Storage")) {
                 new BukkitRunnable() {
                     @Override

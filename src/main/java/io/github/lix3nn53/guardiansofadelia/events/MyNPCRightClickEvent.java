@@ -5,14 +5,13 @@ import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
-import io.github.lix3nn53.guardiansofadelia.menu.CharacterSelectionMenuList;
 import io.github.lix3nn53.guardiansofadelia.menu.quest.GuiQuestList;
+import io.github.lix3nn53.guardiansofadelia.menu.start.GuiCharacterSelect;
 import io.github.lix3nn53.guardiansofadelia.menu.start.GuiTutorialSkip;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantManager;
 import io.github.lix3nn53.guardiansofadelia.npc.merchant.MerchantMenu;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.entity.Player;
@@ -53,8 +52,8 @@ public class MyNPCRightClickEvent implements Listener {
             }
 
             if (DatabaseQueries.characterExists(player.getUniqueId(), id)) {
-                GuiGeneric characterTeleportationMenu = CharacterSelectionMenuList.characterSelectionMenu(id);
-                characterTeleportationMenu.openInventory(player);
+                GuiCharacterSelect gui = new GuiCharacterSelect(id);
+                gui.openInventory(player);
             } else {
                 GuiTutorialSkip gui = new GuiTutorialSkip(id);
                 gui.openInventory(player);

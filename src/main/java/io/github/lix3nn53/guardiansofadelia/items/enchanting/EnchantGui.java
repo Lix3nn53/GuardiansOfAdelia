@@ -12,6 +12,9 @@ import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -217,5 +220,28 @@ public class EnchantGui extends GuiGeneric {
         fail.setItemMeta(itemMeta);
 
         InventoryUtils.fillWithItem(this, fail);
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        Inventory clickedInventory = event.getClickedInventory();
+        ItemStack current = event.getCurrentItem();
+        Material currentType = current.getType();
+
+        if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+            if (currentType.equals(Material.EMERALD_BLOCK)) {
+                Player player = (Player) event.getWhoClicked();
+
+                this.startEnchanting(player);
+            }
+        } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+            if (PersistentDataContainerUtil.hasInteger(current, "ench_stone")) {
+                this.setEnchantStone(current);
+            } else if (StatUtils.hasStatType(currentType)) {
+                if (currentType.equals(Material.SHEARS))
+                    return; //TODO enchanting passive items are disabled. Stay this way?
+                this.setItemToEnchant(current);
+            }
+        }
     }
 }

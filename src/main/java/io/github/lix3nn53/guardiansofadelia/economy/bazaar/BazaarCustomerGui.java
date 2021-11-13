@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -41,5 +42,14 @@ public class BazaarCustomerGui extends GuiGeneric {
             }
         }
         return null;
+    }
+
+    @Override
+    public void onClose(InventoryCloseEvent event) {
+        Bazaar bazaar = this.getBazaar();
+        if (bazaar != null) {
+            Player player = (Player) event.getPlayer();
+            bazaar.removeCustomer(player);
+        }
     }
 }

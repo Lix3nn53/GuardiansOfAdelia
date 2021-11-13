@@ -9,7 +9,6 @@ import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskReach;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -18,6 +17,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -95,11 +95,10 @@ public class GuiCompassActiveQuests extends GuiBookGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
-        int pageIndex = this.getPageIndex(title);
-        GuiGeneric pageInventory = this.getPageInventory(pageIndex);
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
 
-        ItemStack item = pageInventory.getItem(slot);
+        ItemStack item = event.getCurrentItem();
         ItemMeta itemMeta = item.getItemMeta();
         Material currentType = item.getType();
 

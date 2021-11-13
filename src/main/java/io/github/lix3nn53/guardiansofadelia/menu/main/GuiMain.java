@@ -1,13 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.locale.Translation;
-import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
-import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompass;
-import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
+import io.github.lix3nn53.guardiansofadelia.menu.bazaar.GuiBazaar;
+import io.github.lix3nn53.guardiansofadelia.menu.guild.GuiGuild;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -15,6 +15,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -138,13 +139,29 @@ public class GuiMain extends GuiGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        GuardianData guardianData;
+        RPGCharacter rpgCharacter;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
+
+            if (guardianData.hasActiveCharacter()) {
+                rpgCharacter = guardianData.getActiveCharacter();
+            } else {
+                return;
+            }
+        } else {
+            return;
+        }
+
+        int slot = event.getSlot();
         if (slot == 10) {
-            GuiCharacter guiCharacter = new GuiCharacter(guardianData);
-            guiCharacter.openInventory(player);
+            GuiCharacter gui = new GuiCharacter(guardianData);
+            gui.openInventory(player);
         } else if (slot == 12) {
-            GuiCompass guiCompass = new GuiCompass();
-            guiCompass.openInventory(player);
+            GuiCompass gui = new GuiCompass();
+            gui.openInventory(player);
         } else if (slot == 14) {
             player.closeInventory();
             TextComponent message = new TextComponent(" Maps ! (Click Me)");
@@ -155,20 +172,21 @@ public class GuiMain extends GuiGeneric {
             player.spigot().sendMessage(message);
         } else if (slot == 16) {
             if (GuildManager.inGuild(player)) {
-                MenuList.guild().openInventory(player);
+                GuiGuild gui = new GuiGuild();
+                gui.openInventory(player);
             }
         } else if (slot == 29) {
-            GuiGeneric bazaar = MenuList.bazaar(player);
-            bazaar.openInventory(player);
+            GuiBazaar gui = new GuiBazaar(player);
+            gui.openInventory(player);
         } else if (slot == 31) {
-            GuiGeneric minigames = MenuList.minigames();
-            minigames.openInventory(player);
+            GuiMinigames gui = new GuiMinigames();
+            gui.openInventory(player);
         } else if (slot == 33) {
-            GuiBookGeneric guiBook = InstantTeleportGuiManager.getGuiBook(guardianData);
-            guiBook.openInventory(player);
+            GuiTeleportation gui = new GuiTeleportation(guardianData);
+            gui.openInventory(player);
         } else if (slot == 47) {
-            GuiGeneric serverBoostMenu = MenuList.serverBoostMenu();
-            serverBoostMenu.openInventory(player);
+            GuiServerBoost gui = new GuiServerBoost();
+            gui.openInventory(player);
         } else if (slot == 49) {
             player.closeInventory();
             TextComponent message = new TextComponent(" Donation ♥ ! (Click Me)");
@@ -178,8 +196,8 @@ public class GuiMain extends GuiGeneric {
             message.setBold(true);
             player.spigot().sendMessage(message);
         } else if (slot == 51) {
-            GuiGeneric dailyRewardsMenu = MenuList.dailyRewardsMenu(player);
-            dailyRewardsMenu.openInventory(player);
+            GuiDailyRewardClaim gui = new GuiDailyRewardClaim(player);
+            gui.openInventory(player);
         }
     }
 }

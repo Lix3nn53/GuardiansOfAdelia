@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.menu.start;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
@@ -9,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectio
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -57,12 +57,10 @@ public class GuiCharacterSelect extends GuiGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
-        if (slot == 11) {
-            CharacterSelectionScreenManager.createCharacter(player, charNo);
-        } else if (slot == 15) {
-            CharacterSelectionScreenManager.createCharacterWithoutTutorial(player, charNo);
-        }
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+
+        int slot = event.getSlot();
 
         if (slot == 11) {
             Location charLocation = CharacterSelectionScreenManager.getCharLocation(player, charNo);
@@ -72,6 +70,7 @@ public class GuiCharacterSelect extends GuiGeneric {
                 player.sendMessage(ChatPalette.RED + "Your saved last location is not valid");
             }
         } else {
+            if (!slotNoToTownNo.containsKey(slot)) return;
             int townNo = slotNoToTownNo.get(slot);
 
             Town town = TownManager.getTown(townNo);

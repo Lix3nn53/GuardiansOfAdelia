@@ -1,8 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.commands;
 
-import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiDailyRewardClaim;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,9 +20,9 @@ public class CommandReward implements CommandExecutor {
                 player.sendMessage(ChatPalette.YELLOW + "/reward daily");
             } else if (args.length == 1) {
                 if (args[0].equals("daily")) {
-                    GuiGeneric guiGeneric = MenuList.dailyRewardsMenu(player);
+                    GuiDailyRewardClaim gui = new GuiDailyRewardClaim(player);
 
-                    guiGeneric.openInventory(player);
+                    gui.openInventory(player);
                 }
             }
             // If the player (or console) uses our command correct, we can return true

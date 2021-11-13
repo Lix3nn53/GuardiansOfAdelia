@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.menu.quest;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
@@ -12,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -60,11 +62,24 @@ public class GuiQuestTaskPrizeSelect extends GuiGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
-        ItemStack current = this.getItem(slot);
-        Material currentType = current.getType();
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        GuardianData guardianData;
+        RPGCharacter rpgCharacter;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
 
-        RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+            if (guardianData.hasActiveCharacter()) {
+                rpgCharacter = guardianData.getActiveCharacter();
+            } else {
+                return;
+            }
+        } else {
+            return;
+        }
+
+        ItemStack current = this.getItem(event.getSlot());
+        Material currentType = current.getType();
 
         //give item
         GearStatType gearStatType = StatUtils.getStatType(currentType);

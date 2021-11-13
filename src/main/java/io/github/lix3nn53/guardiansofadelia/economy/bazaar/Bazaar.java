@@ -6,9 +6,9 @@ import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.menu.bazaar.GuiBazaarEdit;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -164,53 +164,19 @@ public class Bazaar {
     }
 
     public void edit() {
-        List<Player> copy = new ArrayList<>();
-        copy.addAll(customers);
+        setOpen(false);
+
+        List<Player> copy = new ArrayList<>(customers);
         for (Player customer : copy) {
             customer.closeInventory();
         }
 
-        GuiGeneric customerGui = new GuiGeneric(27, ChatPalette.GOLD + "Edit your bazaar", 0);
+        GuiBazaarEdit gui = new GuiBazaarEdit(owner, getItemsOnSale());
 
-        ItemStack glassInfo = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
-        ItemMeta itemMeta = glassInfo.getItemMeta();
-        itemMeta.setDisplayName(ChatPalette.GOLD + "Click an item in your inventory to add");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatPalette.GOLD + "to your bazaar. Click an item in your bazaar");
-        lore.add(ChatPalette.GOLD + "to remove from your bazaar.");
-        lore.add("");
-        lore.add(ChatPalette.GREEN_DARK + "Click green wool to set up your bazaar");
-        lore.add("");
-        lore.add(ChatPalette.RED + "Click red wool to destroy your bazaar");
-        itemMeta.setLore(lore);
-        glassInfo.setItemMeta(itemMeta);
-        for (int i = 18; i <= 26; i++) {
-            customerGui.setItem(i, glassInfo);
-        }
-
-        ItemStack redWool = new ItemStack(Material.RED_WOOL);
-        ItemMeta redMeta = redWool.getItemMeta();
-        redMeta.setDisplayName(ChatPalette.RED + "Click to destroy your bazaar");
-        redWool.setItemMeta(redMeta);
-        customerGui.setItem(18, redWool);
-
-        ItemStack greenWool = new ItemStack(Material.LIME_WOOL);
-        ItemMeta greenMeta = greenWool.getItemMeta();
-        greenMeta.setDisplayName(ChatPalette.GREEN_DARK + "Click to set up your bazaar");
-        greenWool.setItemMeta(greenMeta);
-        customerGui.setItem(26, greenWool);
-
-        int i = 0;
-        for (ItemStack itemStack : getItemsOnSale()) {
-            customerGui.setItem(i, itemStack);
-            i++;
-        }
-
-        setOpen(false);
         new BukkitRunnable() {
             @Override
             public void run() {
-                customerGui.openInventory(owner);
+                gui.openInventory(owner);
             }
         }.runTask(GuardiansOfAdelia.getInstance());
     }

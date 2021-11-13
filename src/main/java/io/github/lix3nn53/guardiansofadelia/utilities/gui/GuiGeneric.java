@@ -1,10 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.gui;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.menu.ActiveGuiManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -70,11 +71,8 @@ public class GuiGeneric implements Gui {
 
     @Override
     public void openInventory(Player player) {
-        if (GuardianDataManager.hasGuardianData(player)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            player.openInventory(inventory);
-            guardianData.setActiveGui(this);
-        }
+        player.openInventory(inventory);
+        ActiveGuiManager.setActiveGui(player, this);
     }
 
     public ItemStack[] getContents() {
@@ -121,7 +119,12 @@ public class GuiGeneric implements Gui {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
+    public void onClick(InventoryClickEvent event) {
+
+    }
+
+    @Override
+    public void onClose(InventoryCloseEvent event) {
 
     }
 }

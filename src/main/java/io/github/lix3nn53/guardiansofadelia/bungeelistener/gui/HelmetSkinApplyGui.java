@@ -3,9 +3,13 @@ package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -89,5 +93,30 @@ public class HelmetSkinApplyGui extends GuiGeneric {
 
     public String getNotFitErrorMessage() {
         return ChatPalette.RED + "Item must be a helmet";
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        Inventory clickedInventory = event.getClickedInventory();
+        ItemStack current = event.getCurrentItem();
+        Material currentType = current.getType();
+        int slot = event.getSlot();
+        Player player = (Player) event.getWhoClicked();
+
+        if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+            if (currentType.equals(Material.LIME_WOOL)) {
+                boolean b = this.onConfirm(player);
+                if (b) {
+                    player.closeInventory();
+                    MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
+                    MessageUtils.sendCenteredMessage(player, "Applied Skin");
+                    MessageUtils.sendCenteredMessage(player, "to " + this.getItemOnSlot().getItemMeta().getDisplayName());
+                    MessageUtils.sendCenteredMessage(player, ChatPalette.GRAY + "------------------------");
+                }
+            }
+        } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+            boolean b = this.setHelmet(current, slot);
+            if (!b) player.sendMessage(this.getNotFitErrorMessage());
+        }
     }
 }

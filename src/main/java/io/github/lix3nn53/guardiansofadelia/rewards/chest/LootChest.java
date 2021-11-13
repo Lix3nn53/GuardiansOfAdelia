@@ -2,8 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.rewards.chest;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.Direction;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementFillCircle;
 import org.bukkit.Location;
@@ -47,7 +45,6 @@ public class LootChest {
 
         List<ItemStack> loots = lootChestTier.getLoot();
 
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.BLACK + "Loot Chest #" + lootChestTier.ordinal(), 0);
         for (int i = 0; i < 100; i++) {
             loots.add(new ItemStack(Material.AIR));
             if (loots.size() == 27) break;
@@ -55,15 +52,8 @@ public class LootChest {
 
         Collections.shuffle(loots);
 
-        for (int i = 0; i < 27; i++) {
-            ItemStack itemStack = loots.get(i);
-            if (itemStack.getType().equals(Material.AIR)) continue;
-
-            guiGeneric.setItem(i, itemStack);
-        }
-
-        guiGeneric.setLocked(false);
-        guiGeneric.openInventory(player);
+        LootChestGui gui = new LootChestGui(lootChestTier.ordinal(), loots);
+        gui.openInventory(player);
 
         isOnCooldown = true;
         stopPlayingParticles();

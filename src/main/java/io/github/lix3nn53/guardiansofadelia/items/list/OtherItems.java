@@ -1,7 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.items.list;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -43,32 +42,6 @@ public class OtherItems {
         lore.add(ChatPalette.GRAY + "Required to control mounts.");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        return itemStack;
-    }
-
-    public static ItemStack getPetFood(int tier) {
-        ItemStack itemStack = new ItemStack(Material.BROWN_DYE);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setCustomModelData(5);
-        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Pet Food Tier " + tier);
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatPalette.GRAY + "Right click on your pet while holding");
-        lore.add(ChatPalette.GRAY + "this item to feed and heal");
-        if (tier == 1) {
-            lore.add(ChatPalette.GRAY + "Restores 100 health");
-        } else if (tier == 2) {
-            lore.add(ChatPalette.GRAY + "Restores 200 health");
-        } else if (tier == 3) {
-            lore.add(ChatPalette.GRAY + "Restores 400 health");
-        } else if (tier == 4) {
-            lore.add(ChatPalette.GRAY + "Restores 800 health");
-        } else if (tier == 5) {
-            lore.add(ChatPalette.GRAY + "Restores 1200 health");
-        }
-        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
-        PersistentDataContainerUtil.putInteger("pet_food", tier, itemStack);
         return itemStack;
     }
 

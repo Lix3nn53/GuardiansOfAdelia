@@ -2,12 +2,12 @@ package io.github.lix3nn53.guardiansofadelia.menu.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -47,8 +47,10 @@ public class GuiCoinConverter extends GuiGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
-        ItemStack current = this.getItem(slot);
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+
+        ItemStack current = this.getItem(event.getSlot());
         Material currentType = current.getType();
 
         PlayerInventory playerInventory = player.getInventory();

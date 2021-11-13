@@ -11,6 +11,9 @@ import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUti
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -147,5 +150,27 @@ public class SellGui extends GuiGeneric {
         itemMeta.setDisplayName(ChatPalette.GOLD + "Click to SELL");
         yellowWool.setItemMeta(itemMeta);
         setItem(53, yellowWool);
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        Inventory clickedInventory = event.getClickedInventory();
+        ItemStack current = event.getCurrentItem();
+        Material currentType = current.getType();
+        int slot = event.getSlot();
+
+        Player player = (Player) event.getWhoClicked();
+        if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+            if (currentType.equals(Material.LIME_WOOL)) {
+                this.confirm();
+            } else if (currentType.equals(Material.YELLOW_WOOL)) {
+                this.finish(player);
+            }
+        } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+            boolean b = this.addItemToSell(current, slot);
+            if (!b) {
+                player.sendMessage(ChatPalette.RED + "You can't sell this item");
+            }
+        }
     }
 }

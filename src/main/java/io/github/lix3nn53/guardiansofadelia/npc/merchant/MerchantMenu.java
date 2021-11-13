@@ -1,9 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -193,5 +196,22 @@ public class MerchantMenu extends GuiGeneric {
 
     public MerchantPageType getButtonShop(ItemStack itemStack) {
         return this.itemToButton.get(itemStack);
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        ItemStack current = this.getItem(event.getSlot());
+
+        if (this.isButton(current)) {
+            MerchantPageType buttonShop = this.getButtonShop(current);
+            String[] split = event.getView().getTitle().split("#");
+            int shopLevel = Integer.parseInt(split[1]);
+
+            Player player = (Player) event.getWhoClicked();
+            Gui gui = buttonShop.getGui(this.getResourceNPC(), player, shopLevel);
+            if (gui != null) {
+                gui.openInventory(player);
+            }
+        }
     }
 }

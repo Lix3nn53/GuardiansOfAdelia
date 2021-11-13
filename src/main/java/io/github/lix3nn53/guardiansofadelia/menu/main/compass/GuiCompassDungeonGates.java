@@ -1,15 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main.compass;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -41,11 +40,10 @@ public class GuiCompassDungeonGates extends GuiBookGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
-        int pageIndex = this.getPageIndex(title);
-        GuiGeneric pageInventory = this.getPageInventory(pageIndex);
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
 
-        ItemStack item = pageInventory.getItem(slot);
+        ItemStack item = event.getCurrentItem();
         ItemMeta itemMeta = item.getItemMeta();
 
         String displayName = itemMeta.getDisplayName();

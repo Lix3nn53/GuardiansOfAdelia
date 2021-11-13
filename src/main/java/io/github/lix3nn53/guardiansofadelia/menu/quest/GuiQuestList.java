@@ -14,6 +14,7 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -59,11 +60,23 @@ public class GuiQuestList extends GuiGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
-        RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
-        if (rpgCharacter == null) return;
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        GuardianData guardianData;
+        RPGCharacter rpgCharacter;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
 
-        ItemStack item = this.getItem(slot);
+            if (guardianData.hasActiveCharacter()) {
+                rpgCharacter = guardianData.getActiveCharacter();
+            } else {
+                return;
+            }
+        } else {
+            return;
+        }
+
+        ItemStack item = this.getItem(event.getSlot());
         Material type = item.getType();
         ItemMeta itemMeta = item.getItemMeta();
         String currentName = itemMeta.getDisplayName();

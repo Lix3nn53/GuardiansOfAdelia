@@ -5,6 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -260,5 +264,44 @@ public class TradeGui extends GuiGeneric {
 
     public boolean isEmptyGive() {
         return this.slotNoInPlayerToGift.isEmpty();
+    }
+
+    @Override
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        ItemStack current = event.getCurrentItem();
+        if (current == null) return;
+        Material currentType = current.getType();
+
+        Inventory clickedInventory = event.getClickedInventory();
+        int slot = event.getSlot();
+        if (TradeManager.hasTrade(player)) {
+            Trade trade = TradeManager.getTrade(player);
+            if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+                if (currentType.equals(Material.LIME_WOOL)) {
+                    trade.accept(player);
+                } else if (currentType.equals(Material.YELLOW_WOOL)) {
+                    trade.lock();
+                } else if ((slot > 4 && slot < 9) || (slot > 13 && slot < 18)) {
+                    trade.removeItemFromTrade(player, slot);
+                }
+            } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
+                if (!InventoryUtils.canTradeMaterial(currentType)) {
+                    player.sendMessage(ChatPalette.RED + "You can't trade this item");
+                }
+                trade.addItem(player, slot);
+            }
+        }
+    }
+
+    @Override
+    public void onClose(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
+        if (TradeManager.hasTrade(player)) {
+            Trade trade = TradeManager.getTrade(player);
+            Player otherPlayer = trade.getOtherPlayer(player);
+            TradeManager.removeTrade(player, otherPlayer);
+            otherPlayer.closeInventory();
+        }
     }
 }

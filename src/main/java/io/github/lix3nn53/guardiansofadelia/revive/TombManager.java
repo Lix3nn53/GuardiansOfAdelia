@@ -2,18 +2,14 @@ package io.github.lix3nn53.guardiansofadelia.revive;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.menu.GuiRevive;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -46,7 +42,8 @@ public class TombManager {
 
         playerToDeathLocation.put(player, deathLocation);
         playerToSpawnTown.put(player, town);
-        openDeathGui(player);
+        GuiRevive guiRevive = new GuiRevive(player);
+        guiRevive.openInventory(player);
     }
 
     public static void onChunkLoad(String chunkKey) {
@@ -70,43 +67,6 @@ public class TombManager {
             }
         }
         playerToTomb.remove(tomb.getOwner());
-    }
-
-    private static void openDeathGui(Player player) {
-        GuiGeneric reviveGui = new GuiGeneric(9, ChatPalette.BLUE_LIGHT + "Revive Gui", 0);
-
-        ItemStack respawn = new ItemStack(Material.IRON_HOE);
-        ItemMeta itemMeta = respawn.getItemMeta();
-        itemMeta.setCustomModelData(18);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Respawn");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatPalette.GRAY + "You have respawn in nearest town");
-        lore.add(ChatPalette.GRAY + "to your death location.");
-        lore.add(ChatPalette.GRAY + "Close your inventory to continue.");
-        itemMeta.setLore(lore);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        respawn.setItemMeta(itemMeta);
-
-        reviveGui.setItem(3, respawn);
-
-        ItemStack soul = new ItemStack(Material.IRON_HOE);
-        itemMeta = soul.getItemMeta();
-        itemMeta.setCustomModelData(10);
-        itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + "Search your tomb in soul mode");
-        lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatPalette.GRAY + "Find your tomb and left");
-        lore.add(ChatPalette.GRAY + "click near it to respawn");
-        lore.add(ChatPalette.RED + "Time limit is 2 minutes after your death");
-        lore.add(ChatPalette.GRAY + "You will respawn here if you cant");
-        lore.add(ChatPalette.GRAY + "find your tomb in time");
-        itemMeta.setLore(lore);
-        soul.setItemMeta(itemMeta);
-
-        reviveGui.setItem(5, soul);
-
-        reviveGui.openInventory(player);
     }
 
     public static void onReachToTomb(Player player) {

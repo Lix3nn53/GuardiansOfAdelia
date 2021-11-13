@@ -10,15 +10,11 @@ import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.Portal;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,9 +23,9 @@ import java.util.Set;
 
 public class MiniGameManager {
 
-    private static final List<LastOneStanding> lastOneStandingList = new ArrayList<>();
-    private static final List<WinByMostKills> winByMostKillsList = new ArrayList<>();
-    private static final List<GuildWar> guildWarList = new ArrayList<>();
+    public static final List<LastOneStanding> lastOneStandingList = new ArrayList<>();
+    public static final List<WinByMostKills> winByMostKillsList = new ArrayList<>();
+    public static final List<GuildWar> guildWarList = new ArrayList<>();
 
     private static final HashMap<String, DungeonTheme> dungeonThemes = new HashMap<>();
     private static final HashMap<String, DungeonInstance> codeToDungeon = new HashMap<>();
@@ -220,98 +216,6 @@ public class MiniGameManager {
                 dungeonInstance.onMobKill(internalName, mob);
             }
         }
-    }
-
-    public static GuiGeneric getLastOneStandingJoinGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GOLD + "Join Last One Standing", 0);
-
-        int i = 9;
-        for (LastOneStanding lastOneStanding : lastOneStandingList) {
-            ItemStack room = new ItemStack(Material.LIME_WOOL);
-            ItemMeta itemMeta = room.getItemMeta();
-            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + lastOneStanding.getMinigameName() + " (" + lastOneStanding.getPlayersInGameSize() + "/" + lastOneStanding.getMaxPlayerSize() + ")");
-
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add("");
-            lore.add(ChatPalette.GREEN_DARK + "Map: " + ChatPalette.WHITE + lastOneStanding.getMapName());
-            lore.add(ChatPalette.YELLOW + "Level req: " + ChatPalette.WHITE + lastOneStanding.getLevelReq());
-            lore.add(ChatPalette.GOLD + "Team amount: " + ChatPalette.WHITE + lastOneStanding.getTeamAmount());
-            lore.add(ChatPalette.GOLD + "Team size: " + ChatPalette.WHITE + lastOneStanding.getTeamSize());
-            lore.add(ChatPalette.PURPLE_LIGHT + "Game time: " + ChatPalette.WHITE + lastOneStanding.getTimeLimitInMinutes() + " minute(s)");
-            lore.add("");
-            lore.add(ChatPalette.GRAY + "Click to join this room!");
-            itemMeta.setLore(lore);
-
-            room.setItemMeta(itemMeta);
-            if (lastOneStanding.isInGame()) {
-                room.setType(Material.RED_WOOL);
-            }
-            room.setItemMeta(itemMeta);
-            guiGeneric.setItem(i, room);
-            i += 2;
-        }
-        return guiGeneric;
-    }
-
-    public static GuiGeneric getWinByMostKillsJoinGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GOLD + "Join Win By Most Kills", 0);
-
-        int i = 9;
-        for (WinByMostKills winByMostKills : winByMostKillsList) {
-            ItemStack room = new ItemStack(Material.LIME_WOOL);
-            ItemMeta itemMeta = room.getItemMeta();
-            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + winByMostKills.getMinigameName() + " (" + winByMostKills.getPlayersInGameSize() + "/" + winByMostKills.getMaxPlayerSize() + ")");
-
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add("");
-            lore.add(ChatPalette.GREEN_DARK + "Map: " + ChatPalette.WHITE + winByMostKills.getMapName());
-            lore.add(ChatPalette.YELLOW + "Level req: " + ChatPalette.WHITE + winByMostKills.getLevelReq());
-            lore.add(ChatPalette.GOLD + "Team amount: " + ChatPalette.WHITE + winByMostKills.getTeamAmount());
-            lore.add(ChatPalette.GOLD + "Team size: " + ChatPalette.WHITE + winByMostKills.getTeamSize());
-            lore.add(ChatPalette.PURPLE_LIGHT + "Game time: " + ChatPalette.WHITE + winByMostKills.getTimeLimitInMinutes() + " minute(s)");
-            lore.add("");
-            lore.add(ChatPalette.GRAY + "Click to join this room!");
-            itemMeta.setLore(lore);
-
-            room.setItemMeta(itemMeta);
-            if (winByMostKills.isInGame()) {
-                room.setType(Material.RED_WOOL);
-            }
-            room.setItemMeta(itemMeta);
-            guiGeneric.setItem(i, room);
-            i += 2;
-        }
-        return guiGeneric;
-    }
-
-    public static GuiGeneric getGuildWarJoinGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, ChatPalette.GRAY_DARK + "Join Guild War", 0);
-
-        int i = 9;
-        for (GuildWar guildWar : guildWarList) {
-            ItemStack room = new ItemStack(Material.LIME_WOOL);
-            ItemMeta itemMeta = room.getItemMeta();
-            itemMeta.setDisplayName(ChatPalette.GREEN_DARK + guildWar.getMinigameName() + " (" + guildWar.getPlayersInGameSize() + "/" + guildWar.getMaxPlayerSize() + ")");
-
-            ArrayList<String> lore = new ArrayList<>();
-            lore.add("");
-            lore.add(ChatPalette.GREEN_DARK + "Map: " + ChatPalette.WHITE + guildWar.getMapName());
-            lore.add(ChatPalette.YELLOW + "Level req: " + ChatPalette.WHITE + guildWar.getLevelReq());
-            lore.add(ChatPalette.GOLD + "Team size: " + ChatPalette.WHITE + guildWar.getTeamSize());
-            lore.add(ChatPalette.PURPLE_LIGHT + "Game time: " + ChatPalette.WHITE + guildWar.getTimeLimitInMinutes() + " minute(s)");
-            lore.add("");
-            lore.add(ChatPalette.GRAY + "Click to join this room!");
-            itemMeta.setLore(lore);
-
-            room.setItemMeta(itemMeta);
-            if (guildWar.isInGame()) {
-                room.setType(Material.RED_WOOL);
-            }
-            room.setItemMeta(itemMeta);
-            guiGeneric.setItem(i, room);
-            i += 2;
-        }
-        return guiGeneric;
     }
 
     public static HashMap<String, DungeonTheme> getDungeonThemes() {

@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
-import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiManager;
+import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -37,7 +37,7 @@ public class TeleportGuiConfiguration {
             int requiredQuestNoTurnedIn = current.getInt("requiredQuestNoTurnedIn");
 
             InstantTeleportGuiItem instantTeleportGuiItem = new InstantTeleportGuiItem(name, location, cost);
-            InstantTeleportGuiManager.addTeleport(requiredQuestNoTurnedIn, instantTeleportGuiItem);
+            InstantTeleportManager.addTeleport(requiredQuestNoTurnedIn, instantTeleportGuiItem);
         }
     }
 }

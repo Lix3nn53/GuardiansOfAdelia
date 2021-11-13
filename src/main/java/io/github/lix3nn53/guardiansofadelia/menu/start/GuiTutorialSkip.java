@@ -1,11 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.menu.start;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -39,7 +39,10 @@ public class GuiTutorialSkip extends GuiGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+
+        int slot = event.getSlot();
         if (slot == 11) {
             CharacterSelectionScreenManager.createCharacter(player, charNo);
         } else if (slot == 15) {

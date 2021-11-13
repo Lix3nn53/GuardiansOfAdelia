@@ -1,14 +1,19 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.locale.Translation;
-import io.github.lix3nn53.guardiansofadelia.menu.MenuList;
+import io.github.lix3nn53.guardiansofadelia.menu.main.character.*;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -82,22 +87,47 @@ public class GuiCharacter extends GuiGeneric {
     }
 
     @Override
-    public void onClick(Player player, GuardianData guardianData, String title, int slot) {
+    public void onClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        GuardianData guardianData;
+        RPGCharacter rpgCharacter;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
+
+            if (guardianData.hasActiveCharacter()) {
+                rpgCharacter = guardianData.getActiveCharacter();
+            } else {
+                return;
+            }
+        } else {
+            return;
+        }
+
+
+        int slot = event.getSlot();
         if (slot == 9) {
-            GuiGeneric classManage = MenuList.classManager(player);
-            classManage.openInventory(player);
+            GuiCharacterClassManager gui = new GuiCharacterClassManager(guardianData);
+            gui.openInventory(player);
         } else if (slot == 11) {
-            GuiGeneric skill = MenuList.skill(player);
-            skill.openInventory(player);
+            SkillBar skillBar = rpgCharacter.getSkillBar();
+
+            int pointsLeft = skillBar.getSkillPointsLeftToSpend();
+
+            GuiCharacterSkills gui = new GuiCharacterSkills(player, rpgCharacter, skillBar, pointsLeft);
+            gui.openInventory(player);
         } else if (slot == 13) {
-            GuiGeneric statPoints = MenuList.statPoints(player);
-            statPoints.openInventory(player);
+            RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
+
+            int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
+
+            GuiCharacterStatInvest gui = new GuiCharacterStatInvest(pointsLeft, rpgCharacterStats);
+            gui.openInventory(player);
         } else if (slot == 15) {
-            GuiGeneric crafting = MenuList.crafting(player);
-            crafting.openInventory(player);
+            GuiCharacterCrafting gui = new GuiCharacterCrafting(rpgCharacter);
+            gui.openInventory(player);
         } else if (slot == 17) {
-            GuiGeneric chatTag = MenuList.chatTagQuests(player);
-            chatTag.openInventory(player);
+            GuiCharacterChatTag gui = new GuiCharacterChatTag(player);
+            gui.openInventory(player);
         }
     }
 }

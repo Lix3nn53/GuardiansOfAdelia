@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.PrizeChest;
 import io.github.lix3nn53.guardiansofadelia.items.PrizeChestType;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.menu.GuiDungeonJoin;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.transportation.portals.PortalColor;
@@ -165,21 +166,18 @@ public class DungeonTheme {
     }
 
     public GuiGeneric getJoinQueueGui() {
-        GuiGeneric guiGeneric = new GuiGeneric(27, "Join dungeon: " + name + " #" + code, 0);
+        List<ItemStack> instanceItems = new ArrayList<>();
 
-        int slotNo = 9;
         for (int i = 1; i < 100; i++) {
             DungeonInstance dungeonInstance = MiniGameManager.getDungeonInstance(code, i);
             if (dungeonInstance == null) {
                 break;
             }
             ItemStack itemStack = generateInstanceItem(dungeonInstance);
-            guiGeneric.setItem(slotNo, itemStack);
-
-            slotNo = slotNo + 2;
+            instanceItems.add(itemStack);
         }
 
-        return guiGeneric;
+        return new GuiDungeonJoin(name, code, instanceItems);
     }
 
 

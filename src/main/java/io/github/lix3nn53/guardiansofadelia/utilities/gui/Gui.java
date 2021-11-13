@@ -1,7 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.gui;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.List;
 
@@ -19,5 +20,7 @@ public interface Gui {
 
     int getResourceNPC();
 
-    void onClick(Player player, GuardianData guardianData, String title, int slot);
+    void onClick(InventoryClickEvent event);
+
+    void onClose(InventoryCloseEvent event);
 }
