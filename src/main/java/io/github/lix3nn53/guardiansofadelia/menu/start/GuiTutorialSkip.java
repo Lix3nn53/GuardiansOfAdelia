@@ -1,5 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.menu.start;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
@@ -16,20 +18,20 @@ public class GuiTutorialSkip extends GuiGeneric {
 
     private final int charNo;
 
-    public GuiTutorialSkip(int charNo) {
-        super(27, ChatPalette.GRAY_DARK + "Play Tutorial? #" + charNo, 0);
+    public GuiTutorialSkip(GuardianData guardianData, int charNo) {
+        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "general.tutorial.question") + " #" + charNo, 0);
         this.charNo = charNo;
 
         ItemStack yes = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = yes.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Yes, play tutorial.");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "general.tutorial.yes"));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         yes.setItemMeta(itemMeta);
         this.setItem(11, yes);
 
         ItemStack no = new ItemStack(Material.RED_WOOL);
-        itemMeta.setDisplayName(ChatPalette.RED + "No, skip tutorial");
+        itemMeta.setDisplayName(ChatPalette.RED + Translation.t(guardianData, "general.tutorial.no"));
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatPalette.YELLOW + "Required level: 1");

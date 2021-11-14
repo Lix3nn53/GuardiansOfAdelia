@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.element.Element;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -25,16 +26,16 @@ public class CharacterInfoSlot {
         this.player = player;
     }
 
-    public ItemStack getItem() {
+    public ItemStack getItem(GuardianData viewerData) {
         if (GuardianDataManager.hasGuardianData(player)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            if (guardianData.hasActiveCharacter()) {
-                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+            GuardianData targetData = GuardianDataManager.getGuardianData(player);
+            if (targetData.hasActiveCharacter()) {
+                RPGCharacter activeCharacter = targetData.getActiveCharacter();
                 RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
                 ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
                 SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-                skullMeta.setDisplayName(ChatPalette.YELLOW + "Character Info");
+                skullMeta.setDisplayName(ChatPalette.YELLOW + Translation.t(viewerData, "character.info"));
 
                 String rpgClassStr = activeCharacter.getRpgClassStr();
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
@@ -62,20 +63,20 @@ public class CharacterInfoSlot {
 
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
-                lore.add(ChatPalette.PURPLE_LIGHT + "Class: " + ChatPalette.GRAY + "" + className);
-                lore.add(ChatPalette.PINK + "Class Element: " + mainElement.getFullName());
-                lore.add(ChatPalette.PURPLE + "Class Level: " + ChatPalette.GRAY + "" + classLevel);
-                lore.add(ChatPalette.GOLD + "Level: " + ChatPalette.GRAY + "" + level);
-                lore.add(ChatPalette.YELLOW + "Experience: " + ChatPalette.GRAY + exp + "/" + expReq);
-                lore.add(ChatPalette.GREEN_DARK + "❤ Max Health: " + ChatPalette.GRAY + "" + health + "/" + maxHealth);
-                lore.add(ChatPalette.BLUE_LIGHT + "✦ Max Mana: " + ChatPalette.GRAY + "" + mana + "/" + maxMana);
+                lore.add(ChatPalette.PURPLE_LIGHT + Translation.t(viewerData, "character.class.name") + ": " + ChatPalette.GRAY + "" + className);
+                lore.add(ChatPalette.PINK + Translation.t(viewerData, "character.class.element") + ": " + mainElement.getFullName());
+                lore.add(ChatPalette.PURPLE + Translation.t(viewerData, "character.class.level") + ": " + ChatPalette.GRAY + "" + classLevel);
+                lore.add(ChatPalette.GOLD + Translation.t(viewerData, "general.level") + ": " + ChatPalette.GRAY + "" + level);
+                lore.add(ChatPalette.YELLOW + Translation.t(viewerData, "general.experience.name") + ": " + ChatPalette.GRAY + exp + "/" + expReq);
+                lore.add(ChatPalette.GREEN_DARK + "❤ " + Translation.t(viewerData, "attribute.max_health") + ": " + ChatPalette.GRAY + "" + health + "/" + maxHealth);
+                lore.add(ChatPalette.BLUE_LIGHT + "✦ " + Translation.t(viewerData, "attribute.max_mana") + ": " + ChatPalette.GRAY + "" + mana + "/" + maxMana);
                 lore.add("");
-                lore.add(ChatPalette.RED + "✦ Element Damage: " + ChatPalette.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
-                lore.add(ChatPalette.BLUE_LIGHT + "■ Element Defense: " + ChatPalette.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% reduction)");
-                lore.add(ChatPalette.GOLD + "☆ Critical Chance: " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
+                lore.add(ChatPalette.RED + "✦ " + Translation.t(viewerData, "attribute.damage") + ": " + ChatPalette.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
+                lore.add(ChatPalette.BLUE_LIGHT + "■ " + Translation.t(viewerData, "attribute.defense") + ": " + ChatPalette.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% " + Translation.t(viewerData, "attribute.reduction") + ")");
+                lore.add(ChatPalette.GOLD + "☆ " + Translation.t(viewerData, "attribute.crit_chance") + ": " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
                 lore.add("");
-                lore.add(ChatPalette.GOLD + "? Critical Damage: " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
-                lore.add(ChatPalette.BLUE_LIGHT + "? Ability Haste: " + ChatPalette.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% cooldown reduction)");
+                lore.add(ChatPalette.GOLD + "? " + Translation.t(viewerData, "attribute.crit_damage") + ": " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
+                lore.add(ChatPalette.BLUE_LIGHT + "? " + Translation.t(viewerData, "attribute.ability_haste") + ": " + ChatPalette.GRAY + abilityHaste + " (" + new DecimalFormat("##.##").format((1.0 - cooldownReduction) * 100) + "% " + Translation.t(viewerData, "attribute.reduction") + ")");
 
                 /*lore.add("");
                 lore.add(ChatPalette.GRAY + "(equipment + level + invested points)");

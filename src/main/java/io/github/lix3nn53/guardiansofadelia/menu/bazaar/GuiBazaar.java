@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
@@ -19,50 +20,46 @@ import java.util.List;
 
 public class GuiBazaar extends GuiGeneric {
 
-    public GuiBazaar(Player player) {
-        super(27, ChatPalette.GOLD + "Bazaar", 0);
+    public GuiBazaar(GuardianData guardianData) {
+        super(27, ChatPalette.GOLD + Translation.t(guardianData, "economy.bazaar.name"), 0);
 
         ItemStack info = new ItemStack(Material.YELLOW_WOOL);
         ItemMeta itemMeta = info.getItemMeta();
-        itemMeta.setDisplayName(ChatPalette.GOLD + "Your Bazaar");
+        itemMeta.setDisplayName(ChatPalette.GOLD + Translation.t(guardianData, "economy.bazaar.info"));
 
-        boolean hasBazaar = false;
-        if (GuardianDataManager.hasGuardianData(player)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            if (guardianData.hasBazaar()) {
-                Bazaar bazaar = guardianData.getBazaar();
-                if (bazaar.isOpen()) {
-                    hasBazaar = true;
-                    List<String> lore = new ArrayList<>();
-                    lore.add("");
-                    lore.add(ChatPalette.GREEN_DARK + "OPEN");
-                    lore.add("");
-                    lore.add(ChatPalette.GOLD + "Money earned: " + EconomyUtils.priceToString(bazaar.getMoneyEarned()));
-                    lore.add("");
-                    lore.add(ChatPalette.YELLOW + "Current Customers");
-                    for (Player customer : bazaar.getCustomers()) {
-                        lore.add(customer.getDisplayName());
-                    }
-                    itemMeta.setLore(lore);
+        boolean hasOpenBazaar = false;
+        if (guardianData.hasBazaar()) {
+            Bazaar bazaar = guardianData.getBazaar();
+            if (bazaar.isOpen()) {
+                hasOpenBazaar = true;
+                List<String> lore = new ArrayList<>();
+                lore.add("");
+                lore.add(ChatPalette.GREEN_DARK + Translation.t(guardianData, "general.open"));
+                lore.add("");
+                lore.add(ChatPalette.GOLD + Translation.t(guardianData, "economy.bazaar.earned") + ": " + EconomyUtils.priceToString(bazaar.getMoneyEarned()));
+                lore.add("");
+                lore.add(ChatPalette.YELLOW + Translation.t(guardianData, "economy.bazaar.customers"));
+                for (Player customer : bazaar.getCustomers()) {
+                    lore.add(customer.getDisplayName());
                 }
+                itemMeta.setLore(lore);
             }
         }
-        if (!hasBazaar) {
+        if (!hasOpenBazaar) {
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatPalette.GRAY + "CLOSED");
+            lore.add(ChatPalette.GRAY + Translation.t(guardianData, "general.closed"));
             itemMeta.setLore(lore);
         }
         info.setItemMeta(itemMeta);
         this.setItem(12, info);
 
         ItemStack open = new ItemStack(Material.LIME_WOOL);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + "Open/Edit your bazaar");
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "economy.bazaar.open.name"));
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.GRAY + "Set up a bazaar in your current location");
-        lore.add("");
-        lore.add(ChatPalette.GRAY + "Edit your bazaar if you already have one");
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "economy.bazaar.open.l1"));
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "economy.bazaar.open.l2"));
         itemMeta.setLore(lore);
         open.setItemMeta(itemMeta);
         this.setItem(14, open);

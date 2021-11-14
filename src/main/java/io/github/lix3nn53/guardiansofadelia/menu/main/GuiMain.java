@@ -176,7 +176,7 @@ public class GuiMain extends GuiGeneric {
                 gui.openInventory(player);
             }
         } else if (slot == 29) {
-            GuiBazaar gui = new GuiBazaar(player);
+            GuiBazaar gui = new GuiBazaar(guardianData);
             gui.openInventory(player);
         } else if (slot == 31) {
             GuiMinigames gui = new GuiMinigames();

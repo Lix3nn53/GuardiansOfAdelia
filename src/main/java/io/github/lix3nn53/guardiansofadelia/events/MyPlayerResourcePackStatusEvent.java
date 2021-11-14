@@ -1,6 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,14 +16,25 @@ public class MyPlayerResourcePackStatusEvent implements Listener {
     public void onPlayerResourcePackStatusEvent(PlayerResourcePackStatusEvent e) {
         Player p = e.getPlayer();
         PlayerResourcePackStatusEvent.Status status = e.getStatus();
+
+        GuardianData guardianData = GuardianDataManager.getGuardianData(p);
+
+        String lang = Translation.DEFAULT_LANG;
+        if (guardianData != null) {
+            String language = guardianData.getLanguage();
+            if (language != null) {
+                lang = language;
+            }
+        }
+
         if (status.equals(PlayerResourcePackStatusEvent.Status.ACCEPTED)) {
-            p.sendMessage(ChatPalette.GREEN_DARK + "Resource pack accepted");
+            p.sendMessage(ChatPalette.GREEN_DARK + Translation.t(lang, "general.resource.accepted"));
         } else if (status.equals(PlayerResourcePackStatusEvent.Status.DECLINED)) {
-            p.sendMessage(ChatPalette.RED + "Resource pack declined");
+            p.sendMessage(ChatPalette.RED + Translation.t(lang, "general.resource.declined"));
         } else if (status.equals(PlayerResourcePackStatusEvent.Status.FAILED_DOWNLOAD)) {
-            p.sendMessage(ChatPalette.RED + "Resource pack download failed");
+            p.sendMessage(ChatPalette.RED + Translation.t(lang, "general.resource.failed"));
         } else if (status.equals(PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED)) {
-            p.sendMessage(ChatPalette.GREEN_DARK + "Resource pack successfully loaded!");
+            p.sendMessage(ChatPalette.GREEN_DARK + Translation.t(lang, "general.resource.loaded"));
         }
     }
 }

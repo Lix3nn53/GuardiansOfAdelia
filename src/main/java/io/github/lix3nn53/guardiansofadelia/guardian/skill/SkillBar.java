@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.st
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.InitializeTrigger;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.Player;
@@ -243,7 +244,7 @@ public class SkillBar {
         remakeSkillBar();
     }
 
-    public boolean castSkill(int slot) {
+    public boolean castSkill(GuardianData guardianData, int slot) {
         if (StatusEffectManager.isSilenced(player)) {
             return false;
         }
@@ -252,7 +253,7 @@ public class SkillBar {
         if (slot == 3) skillIndex = 4; //ultimate is one off
 
         if (skillsOnCooldown.containsKey("" + skillIndex)) {
-            player.sendMessage(ChatPalette.RED + "Skill is on cooldown");
+            player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "skill.cooldown"));
             return false;
         }
 
@@ -262,34 +263,23 @@ public class SkillBar {
         int skillLevel = skill.getCurrentSkillLevel(invested);
 
         if (skillLevel <= 0) {
-            player.sendMessage(ChatPalette.RED + "You haven't learned that skill");
+            player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "skill.unlearned"));
             return false;
         }
 
-        RPGCharacterStats rpgCharacterStats = null;
         int manaCost = skill.getManaCost(skillLevel);
-        if (GuardianDataManager.hasGuardianData(player)) {
-            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
-            if (guardianData.hasActiveCharacter()) {
-                RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-                rpgCharacterStats = activeCharacter.getRpgCharacterStats();
-                int currentMana = rpgCharacterStats.getCurrentMana();
-                if (currentMana < manaCost) {
-                    player.sendMessage(ChatPalette.RED + "Not enough mana");
-                    return false;
-                }
-            }
-        }
-
-        if (rpgCharacterStats == null) {
-            player.sendMessage("rpgCharacterStats null");
+        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+        RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
+        int currentMana = rpgCharacterStats.getCurrentMana();
+        if (currentMana < manaCost) {
+            player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "skill.nomana"));
             return false;
         }
 
         boolean cast = skill.cast(player, skillLevel, new ArrayList<>(), castCounter, skillIndex);//cast ends when this returns
 
         if (!cast) {
-            player.sendMessage(ChatPalette.RED + "Failed to cast skill");
+            player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "skill.fail"));
             return false; //dont go on cooldown and consume mana if cast failed
         }
 

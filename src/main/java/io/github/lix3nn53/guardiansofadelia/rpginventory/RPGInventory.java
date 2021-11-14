@@ -123,7 +123,8 @@ public class RPGInventory extends GuiGeneric {
             this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
         }
 
-        this.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        this.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
 
         InventoryUtils.fillEmptySlotsWithGlass(this);
         this.setLocked(false);
@@ -202,7 +203,8 @@ public class RPGInventory extends GuiGeneric {
             this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
         }
 
-        this.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        this.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
     }
 
     public StatPassive getTotalPassiveStat() {
@@ -434,7 +436,8 @@ public class RPGInventory extends GuiGeneric {
                 player.getInventory().setItem(slot, new ItemStack(Material.AIR));
             }
             topInventory.setItem(rpgSlotType.getSlotNo(), itemStack);
-            topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
             if (rpgSlotType.equals(RPGSlotType.PARROT)) {
                 manageShoulderEntity(player);
             }
@@ -496,6 +499,8 @@ public class RPGInventory extends GuiGeneric {
         boolean doesCharacterMeetRequirements = StatUtils.doesCharacterMeetRequirements(cursor, player, rpgClass);
         if (!doesCharacterMeetRequirements) return false;
 
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+
         if (slot == RPGSlotType.PARROT.getSlotNo()) {
             RPGSlotParrot rpgSlot = getParrotSlot();
             if (!rpgSlot.isEmpty()) {
@@ -505,7 +510,7 @@ public class RPGInventory extends GuiGeneric {
                     removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     manageShoulderEntity(player);
                     return true;
                 }
@@ -514,7 +519,7 @@ public class RPGInventory extends GuiGeneric {
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     manageShoulderEntity(player);
                     return true;
                 }
@@ -528,7 +533,7 @@ public class RPGInventory extends GuiGeneric {
                     removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             } else {
@@ -536,7 +541,7 @@ public class RPGInventory extends GuiGeneric {
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             }
@@ -549,7 +554,7 @@ public class RPGInventory extends GuiGeneric {
                     removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             } else {
@@ -557,7 +562,7 @@ public class RPGInventory extends GuiGeneric {
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             }
@@ -570,7 +575,7 @@ public class RPGInventory extends GuiGeneric {
                     removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             } else {
@@ -578,7 +583,7 @@ public class RPGInventory extends GuiGeneric {
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             }
@@ -591,7 +596,7 @@ public class RPGInventory extends GuiGeneric {
                     removeBonusStats(player, itemOnSlot);
                     player.setItemOnCursor(itemOnSlot);
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             } else {
@@ -599,7 +604,7 @@ public class RPGInventory extends GuiGeneric {
                 if (didEquip) {
                     player.setItemOnCursor(new ItemStack(Material.AIR));
                     topInventory.setItem(slot, cursor);
-                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                    topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                     return true;
                 }
             }
@@ -634,6 +639,8 @@ public class RPGInventory extends GuiGeneric {
     }
 
     public boolean onCursorClickWithAir(Player player, int slot, Inventory topInventory, boolean isShiftClick) {
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+
         if (slot == RPGSlotType.PARROT.getSlotNo()) {
             RPGSlotParrot rpgSlot = getParrotSlot();
             if (!rpgSlot.isEmpty()) {
@@ -646,7 +653,7 @@ public class RPGInventory extends GuiGeneric {
                 rpgSlot.clearItemOnSlot();
                 topInventory.setItem(slot, parrotSlot.getFillItem());
                 removeBonusStats(player, itemOnSlot);
-                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                 manageShoulderEntity(player);
                 return true;
             }
@@ -662,7 +669,7 @@ public class RPGInventory extends GuiGeneric {
                 rpgSlot.clearItemOnSlot();
                 topInventory.setItem(slot, earringSlot.getFillItem());
                 removeBonusStats(player, itemOnSlot);
-                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                 return true;
             }
         } else if (slot == RPGSlotType.NECKLACE.getSlotNo()) {
@@ -677,7 +684,7 @@ public class RPGInventory extends GuiGeneric {
                 rpgSlot.clearItemOnSlot();
                 topInventory.setItem(slot, necklaceSlot.getFillItem());
                 removeBonusStats(player, itemOnSlot);
-                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                 return true;
             }
         } else if (slot == RPGSlotType.RING.getSlotNo()) {
@@ -692,7 +699,7 @@ public class RPGInventory extends GuiGeneric {
                 rpgSlot.clearItemOnSlot();
                 topInventory.setItem(slot, ringSlot.getFillItem());
                 removeBonusStats(player, itemOnSlot);
-                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                 return true;
             }
         } else if (slot == RPGSlotType.GLOVE.getSlotNo()) {
@@ -707,7 +714,7 @@ public class RPGInventory extends GuiGeneric {
                 rpgSlot.clearItemOnSlot();
                 topInventory.setItem(slot, gloveSlot.getFillItem());
                 removeBonusStats(player, itemOnSlot);
-                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem());
+                topInventory.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
                 return true;
             }
         } else if (slot == RPGSlotType.PET.getSlotNo()) {

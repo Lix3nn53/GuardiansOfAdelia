@@ -1,5 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.menu.start;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
@@ -21,14 +24,15 @@ public class GuiCharacterSelect extends GuiGeneric {
     private final int charNo;
     private final HashMap<Integer, Integer> slotNoToTownNo = new HashMap<>();
 
-    public GuiCharacterSelect(int charNo) {
-        super(36, ChatPalette.GRAY_DARK + "Character " + charNo + " Selection", 0);
+    public GuiCharacterSelect(GuardianData guardianData, int charNo) {
+        super(36, ChatPalette.GRAY_DARK + Translation.t(guardianData, "character.subject") + " " + charNo
+                + " " + Translation.t(guardianData, "character.selection.name"), 0);
         this.charNo = charNo;
 
         ItemStack lastLocation = new ItemStack(Material.MAGENTA_WOOL);
         ItemMeta itemMeta = lastLocation.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Teleport to your last location");
+        itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + Translation.t(guardianData, "character.selection.last_loc"));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         lastLocation.setItemMeta(itemMeta);
         this.setItem(11, lastLocation);
@@ -42,9 +46,9 @@ public class GuiCharacterSelect extends GuiGeneric {
 
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
-            lore.add(ChatPalette.GRAY + "Click to start in this location!");
+            lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.selection.l1"));
             lore.add("");
-            lore.add(ChatPalette.GRAY + "Required Level: " + town.getLevel());
+            lore.add(ChatPalette.GRAY + Translation.t(guardianData, "condition.level") + ": " + town.getLevel());
             itemMeta.setLore(lore);
 
             itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + town.getName() + " #" + key);
@@ -59,6 +63,12 @@ public class GuiCharacterSelect extends GuiGeneric {
     @Override
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
+        GuardianData guardianData;
+        if (GuardianDataManager.hasGuardianData(player)) {
+            guardianData = GuardianDataManager.getGuardianData(player);
+        } else {
+            return;
+        }
 
         int slot = event.getSlot();
 
@@ -67,7 +77,7 @@ public class GuiCharacterSelect extends GuiGeneric {
             if (charLocation != null) {
                 CharacterSelectionScreenManager.selectCharacter(player, charNo, charLocation);
             } else {
-                player.sendMessage(ChatPalette.RED + "Your saved last location is not valid");
+                player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "character.selection.error"));
             }
         } else {
             if (!slotNoToTownNo.containsKey(slot)) return;

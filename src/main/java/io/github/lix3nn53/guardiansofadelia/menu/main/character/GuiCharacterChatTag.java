@@ -48,7 +48,7 @@ public class GuiCharacterChatTag extends GuiGeneric {
 
                     List<String> lore = new ArrayList<>();
                     lore.add("");
-                    lore.add(questColor + Translation.t(guardianData, "quest.required") + ": " + requiredQuest);
+                    lore.add(questColor + Translation.t(guardianData, "condition.quest") + ": " + requiredQuest);
                     lore.add("");
                     lore.add(ChatPalette.GRAY + "Click to select this chat tag");
                     itemMeta.setLore(lore);

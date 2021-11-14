@@ -20,6 +20,11 @@ public class Translation {
         return translationStorage.t(path);
     }
 
+    public static String t(String lang, String path) {
+        TranslationStorage translationStorage = languageTranslation.get(lang);
+        return translationStorage.t(path);
+    }
+
     public static boolean exists(String language) {
         return languageTranslation.containsKey(language);
     }

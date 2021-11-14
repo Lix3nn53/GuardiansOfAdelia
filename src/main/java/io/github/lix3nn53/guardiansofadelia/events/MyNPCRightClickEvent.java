@@ -39,10 +39,10 @@ public class MyNPCRightClickEvent implements Listener {
             else if (id > 4) requiredRank = PremiumRank.LEGEND;
             else if (id > 2) requiredRank = PremiumRank.HERO;
 
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (!requiredRank.equals(PremiumRank.NONE)) {
                 int requiredOrdinal = requiredRank.ordinal();
 
-                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
                 PremiumRank premiumRank = guardianData.getPremiumRank();
 
                 int playerOrdinal = premiumRank.ordinal();
@@ -56,12 +56,12 @@ public class MyNPCRightClickEvent implements Listener {
             Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
                 if (DatabaseQueries.characterExists(player.getUniqueId(), id)) {
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        GuiCharacterSelect gui = new GuiCharacterSelect(id);
+                        GuiCharacterSelect gui = new GuiCharacterSelect(guardianData, id);
                         gui.openInventory(player);
                     });
                 } else {
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        GuiTutorialSkip gui = new GuiTutorialSkip(id);
+                        GuiTutorialSkip gui = new GuiTutorialSkip(guardianData, id);
                         gui.openInventory(player);
                     });
                 }

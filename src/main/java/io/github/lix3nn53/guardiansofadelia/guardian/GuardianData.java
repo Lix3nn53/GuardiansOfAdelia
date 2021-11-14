@@ -211,13 +211,17 @@ public class GuardianData {
     }
 
     public void setLanguage(Player player, String language) {
-        player.sendMessage(ChatPalette.YELLOW + "Changing to language: " + language);
-        if (!Translation.exists(language)) {
-            language = Translation.DEFAULT_LANG;
-            player.sendMessage(ChatPalette.RED + "This language does not exist, using default: " + language);
+        boolean exists = Translation.exists(language);
+
+        if (exists) {
+            player.sendMessage(ChatPalette.YELLOW + Translation.t(language, "general.language.changing") + ": " + language);
+            player.sendMessage(ChatPalette.GREEN_DARK + Translation.t(language, "general.language.success") + " " + language);
         } else {
-            player.sendMessage(ChatPalette.GREEN_DARK + "Successfully changed to " + language);
+            language = Translation.DEFAULT_LANG;
+            player.sendMessage(ChatPalette.YELLOW + Translation.t(Translation.DEFAULT_LANG, "general.language.changing") + ": " + language);
+            player.sendMessage(ChatPalette.RED + Translation.t(language, "general.language.error") + ": " + language);
         }
+
         this.language = language;
     }
 

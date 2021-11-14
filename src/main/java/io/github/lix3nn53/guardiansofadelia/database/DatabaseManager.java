@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
@@ -85,11 +86,11 @@ public class DatabaseManager {
                 GuardianData guardianData = DatabaseQueries.getGuardianData(uuid);
 
                 if (guardianData.getLanguage() == null) {
-                    player.sendMessage(ChatPalette.YELLOW + "Changing to client language...");
                     String locale = player.getLocale();
+                    player.sendMessage(ChatPalette.YELLOW + Translation.t(locale, "general.language.client") + "...");
                     guardianData.setLanguage(player, locale);
                 } else {
-                    player.sendMessage(ChatPalette.GREEN_DARK + "Changed to saved language: " + guardianData.getLanguage());
+                    player.sendMessage(ChatPalette.GREEN_DARK + Translation.t(guardianData, "general.language.saved") + ": " + guardianData.getLanguage());
                 }
 
                 List<Player> friendsOfPlayer = DatabaseQueries.getFriendsOfPlayer(uuid);
@@ -116,17 +117,17 @@ public class DatabaseManager {
                 }
 
                 //player.sendMessage("Loaded player data");
+                //character selection screen
+                loadCharacterSelectionAndFormHolograms(player, guardianData);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            //character selection screen
-            loadCharacterSelectionAndFormHolograms(player);
         });
     }
 
     //Not async, must run async
-    private static void loadCharacterSelectionAndFormHolograms(Player player) {
-        player.sendMessage(ChatPalette.YELLOW + "Welcome " + ChatPalette.GOLD + player.getName());
+    private static void loadCharacterSelectionAndFormHolograms(Player player, GuardianData guardianData) {
+        player.sendMessage(ChatPalette.YELLOW + Translation.t(guardianData, "general.welcome") + " " + ChatPalette.GOLD + player.getName());
         for (int charNo = 1; charNo <= 8; charNo++) {
             boolean characterExists = DatabaseQueries.characterExists(player.getUniqueId(), charNo);
             if (characterExists) {
@@ -175,13 +176,13 @@ public class DatabaseManager {
                     CharacterSelectionScreenManager.setCharLevel(uuid, charNo, level);
 
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
-                        livingWatcher1.setCustomName(ChatColor.GOLD + "Level: " + ChatColor.WHITE + level);
+                        livingWatcher1.setCustomName(ChatColor.GOLD + Translation.t(guardianData, "general.level") + ": " + ChatColor.WHITE + level);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(2), mobDisguise1, player);
 
-                        livingWatcher2.setCustomName(ChatColor.LIGHT_PURPLE + "Total Experience: " + ChatColor.WHITE + totalExp);
+                        livingWatcher2.setCustomName(ChatColor.LIGHT_PURPLE + Translation.t(guardianData, "general.experience.total") + ": " + ChatColor.WHITE + totalExp);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(1), mobDisguise2, player);
 
-                        livingWatcher3.setCustomName(ChatColor.GRAY + "Class: " + classColor + rpgClassOfCharStr);
+                        livingWatcher3.setCustomName(ChatColor.GRAY + Translation.t(guardianData, "character.class.name") + ": " + classColor + rpgClassOfCharStr);
                         DisguiseAPI.disguiseToPlayers(armorStands.get(0), mobDisguise3, player);
                     });
                 } catch (SQLException e) {
@@ -190,7 +191,7 @@ public class DatabaseManager {
             }
             //player.sendMessage("Loaded character-" + charNo);
         }
-        player.sendMessage(ChatPalette.YELLOW + "Select or create a character to start playing.");
+        player.sendMessage(ChatPalette.YELLOW + Translation.t(guardianData, "general.start"));
     }
 
     public static void writeGuardianDataWithCurrentCharacter(Player player, GuardianData guardianData) {

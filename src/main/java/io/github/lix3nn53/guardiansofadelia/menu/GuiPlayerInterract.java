@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.menu;
 
 import io.github.lix3nn53.guardiansofadelia.economy.trading.TradeInvite;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildInvite;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
@@ -23,11 +25,18 @@ public class GuiPlayerInterract extends GuiGeneric {
 
     private final Player rightClicked;
 
-    public GuiPlayerInterract(Player rightClicked) {
+    public GuiPlayerInterract(Player clicker, Player rightClicked) {
         super(27, ChatPalette.GRAY_DARK + "Interact with " + rightClicked.getName(), 0);
         this.rightClicked = rightClicked;
 
-        ItemStack infoItem = new CharacterInfoSlot(rightClicked).getItem();
+        GuardianData viewerData;
+        if (GuardianDataManager.hasGuardianData(clicker)) {
+            viewerData = GuardianDataManager.getGuardianData(clicker);
+        } else {
+            return;
+        }
+
+        ItemStack infoItem = new CharacterInfoSlot(rightClicked).getItem(viewerData);
         this.setItem(10, infoItem);
 
         ItemStack party = new ItemStack(Material.LIGHT_BLUE_WOOL);

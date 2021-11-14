@@ -102,7 +102,7 @@ public class MyPlayerInteractEntityEvent implements Listener {
                 if (npcRegistry.isNPC(rightClickedPlayer)) return;
 
                 if (!player.getGameMode().equals(GameMode.SPECTATOR) && !player.getGameMode().equals(GameMode.SPECTATOR)) {
-                    GuiPlayerInterract gui = new GuiPlayerInterract(rightClickedPlayer);
+                    GuiPlayerInterract gui = new GuiPlayerInterract(player, rightClickedPlayer);
                     gui.openInventory(player);
                 }
             }

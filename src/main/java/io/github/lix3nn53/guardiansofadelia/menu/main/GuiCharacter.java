@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class GuiCharacter extends GuiGeneric {
 
     public GuiCharacter(GuardianData guardianData) {
-        super(27, "Character", 0);
+        super(27, Translation.t(guardianData, "character.name"), 0);
 
         ItemStack skills = new ItemStack(Material.WOODEN_PICKAXE);
         String rpgClassStr = guardianData.getActiveCharacter().getRpgClassStr();
@@ -38,7 +38,7 @@ public class GuiCharacter extends GuiGeneric {
         lore.add("");
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.class.l1"));
         lore.add("");
-        lore.add("Current Class: " + rpgClass.getClassString());
+        lore.add(Translation.t(guardianData, "character.class.name") + ": " + rpgClass.getClassString());
         itemMeta.setLore(lore);
         skills.setItemMeta(itemMeta);
         this.setItem(9, skills);
