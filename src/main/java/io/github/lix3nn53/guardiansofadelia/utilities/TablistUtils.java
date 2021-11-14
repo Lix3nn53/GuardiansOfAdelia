@@ -21,6 +21,7 @@ public class TablistUtils {
         StringBuilder footer = new StringBuilder();
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            String language = guardianData.getLanguage();
 
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
@@ -34,7 +35,7 @@ public class TablistUtils {
                     for (Quest quest : questList) {
                         header.append(ChatPalette.PURPLE_LIGHT);
                         header.append(quest.getName() + ": ");
-                        header.append(ChatPalette.WHITE + quest.getObjectiveTextForTablist());
+                        header.append(ChatPalette.WHITE + quest.getObjectiveTextForTablist(language));
                         header.append("\n");
                     }
                 }

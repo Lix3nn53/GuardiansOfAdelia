@@ -30,6 +30,8 @@ public class CharacterInfoSlot {
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData targetData = GuardianDataManager.getGuardianData(player);
             if (targetData.hasActiveCharacter()) {
+                String language = viewerData.getLanguage();
+
                 RPGCharacter activeCharacter = targetData.getActiveCharacter();
                 RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 
@@ -64,15 +66,15 @@ public class CharacterInfoSlot {
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("");
                 lore.add(ChatPalette.PURPLE_LIGHT + Translation.t(viewerData, "character.class.name") + ": " + ChatPalette.GRAY + "" + className);
-                lore.add(ChatPalette.PINK + Translation.t(viewerData, "character.class.element") + ": " + mainElement.getFullName());
+                lore.add(ChatPalette.PINK + Translation.t(viewerData, "character.class.element") + ": " + mainElement.getFullName(language));
                 lore.add(ChatPalette.PURPLE + Translation.t(viewerData, "character.class.level") + ": " + ChatPalette.GRAY + "" + classLevel);
                 lore.add(ChatPalette.GOLD + Translation.t(viewerData, "general.level") + ": " + ChatPalette.GRAY + "" + level);
                 lore.add(ChatPalette.YELLOW + Translation.t(viewerData, "general.experience.name") + ": " + ChatPalette.GRAY + exp + "/" + expReq);
                 lore.add(ChatPalette.GREEN_DARK + "❤ " + Translation.t(viewerData, "attribute.max_health") + ": " + ChatPalette.GRAY + "" + health + "/" + maxHealth);
                 lore.add(ChatPalette.BLUE_LIGHT + "✦ " + Translation.t(viewerData, "attribute.max_mana") + ": " + ChatPalette.GRAY + "" + mana + "/" + maxMana);
                 lore.add("");
-                lore.add(ChatPalette.RED + "✦ " + Translation.t(viewerData, "attribute.damage") + ": " + ChatPalette.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
-                lore.add(ChatPalette.BLUE_LIGHT + "■ " + Translation.t(viewerData, "attribute.defense") + ": " + ChatPalette.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% " + Translation.t(viewerData, "attribute.reduction") + ")");
+                lore.add(ChatPalette.RED + "✦ " + Translation.t(viewerData, "attribute.element_damage") + ": " + ChatPalette.GRAY + rpgCharacterStats.getTotalElementDamage(player, rpgClassStr));
+                lore.add(ChatPalette.BLUE_LIGHT + "■ " + Translation.t(viewerData, "attribute.element_defense") + ": " + ChatPalette.GRAY + totalDefense + " (" + new DecimalFormat("##.##").format((1.0 - defenseReduction) * 100) + "% " + Translation.t(viewerData, "attribute.reduction") + ")");
                 lore.add(ChatPalette.GOLD + "☆ " + Translation.t(viewerData, "attribute.crit_chance") + ": " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalChance) + "%");
                 lore.add("");
                 lore.add(ChatPalette.GOLD + "? " + Translation.t(viewerData, "attribute.crit_damage") + ": " + ChatPalette.GRAY + new DecimalFormat("##.##").format(criticalDamage) + "%");
@@ -89,7 +91,7 @@ public class CharacterInfoSlot {
                 lore.add("");
                 for (ElementType elementType : ElementType.values()) {
                     Element element = rpgCharacterStats.getElement(elementType);
-                    lore.add(elementType.getFullName() + ": " + ChatPalette.GRAY + element.getTotal());
+                    lore.add(elementType.getFullName(language) + ": " + ChatPalette.GRAY + element.getTotal());
                 }
                 skullMeta.setLore(lore);
                 itemStack.setItemMeta(skullMeta);

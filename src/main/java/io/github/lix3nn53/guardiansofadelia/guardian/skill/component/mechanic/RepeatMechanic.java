@@ -141,8 +141,8 @@ public class RepeatMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (skillLevel == 0) {
             String repeat = "";
@@ -164,6 +164,6 @@ public class RepeatMechanic extends MechanicComponent {
             additions.add(ChatPalette.PURPLE_LIGHT + "Repeat every " + (int) (period / 20 + 0.5) + " seconds" + repeat);
         }
 
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

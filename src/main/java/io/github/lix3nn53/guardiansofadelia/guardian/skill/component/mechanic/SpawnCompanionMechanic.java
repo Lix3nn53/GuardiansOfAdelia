@@ -171,13 +171,13 @@ public class SpawnCompanionMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         String codeStr = mobCode.replaceAll("Companion", "");
         if (skillLevel == 0) {
             String lore = "Spawn " + amounts.get(skillLevel) + "x" + codeStr + " " + ((int) (elementPercents.get(skillLevel) * 100))
-                    + "% " + element.getFullName();
+                    + "% " + element.getFullName(lang);
 
             if (!DURATION.isEmpty()) {
                 lore = lore + " for " + DURATION.get(skillLevel) / 20;
@@ -186,7 +186,7 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             additions.add(lore);
         } else if (skillLevel == amounts.size()) {
             String lore = "Spawn " + amounts.get(skillLevel - 1) + "x" + codeStr + " " + ((int) (elementPercents.get(skillLevel - 1) * 100))
-                    + "% " + element.getFullName();
+                    + "% " + element.getFullName(lang);
 
             if (!DURATION.isEmpty()) {
                 lore = lore + " for " + DURATION.get(skillLevel - 1) / 20;
@@ -195,8 +195,8 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             additions.add(lore);
         } else {
             String lore1 = "Spawn " + amounts.get(skillLevel - 1) + "x" + codeStr + " " + ((int) (elementPercents.get(skillLevel - 1) * 100))
-                    + "% of " + element.getFullName();
-            String lore2 = amounts.get(skillLevel) + "x " + ((int) (elementPercents.get(skillLevel) * 100)) + "% " + element.getFullName();
+                    + "% of " + element.getFullName(lang);
+            String lore2 = amounts.get(skillLevel) + "x " + ((int) (elementPercents.get(skillLevel) * 100)) + "% " + element.getFullName(lang);
 
             if (!DURATION.isEmpty()) {
                 lore1 = lore1 + " for " + DURATION.get(skillLevel - 1) / 20;
@@ -206,6 +206,6 @@ public class SpawnCompanionMechanic extends MechanicComponent {
             additions.add(lore1 + " -> " + lore2);
         }
 
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

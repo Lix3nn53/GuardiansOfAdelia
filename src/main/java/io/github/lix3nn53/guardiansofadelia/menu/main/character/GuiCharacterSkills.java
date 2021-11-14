@@ -20,15 +20,16 @@ public class GuiCharacterSkills extends GuiGeneric {
     private final HashMap<Integer, String> slotToRpgClassStr = new HashMap<>();
 
     public GuiCharacterSkills(Player player, GuardianData guardianData, RPGCharacter rpgCharacter, SkillBar skillBar, int pointsLeft) {
-        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "skill.subject") +
+        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "skill.name") +
                 " (" + Translation.t(guardianData, "skill.points") + ": " + pointsLeft + ")", 0);
 
         HashMap<Integer, Skill> skillSet = rpgCharacter.getSkillBar().getSkillSet();
 
+        String language = guardianData.getLanguage();
         if (skillSet.containsKey(0)) {
             Skill skillOne = skillSet.get(0);
             int investedSkillPoints = skillBar.getInvestedSkillPoints(0);
-            ItemStack icon = skillOne.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+            ItemStack icon = skillOne.getIcon(language, pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
@@ -39,7 +40,7 @@ public class GuiCharacterSkills extends GuiGeneric {
         if (skillSet.containsKey(1)) {
             Skill skillTwo = skillSet.get(1);
             int investedSkillPoints = skillBar.getInvestedSkillPoints(1);
-            ItemStack icon = skillTwo.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+            ItemStack icon = skillTwo.getIcon(language, pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
@@ -50,7 +51,7 @@ public class GuiCharacterSkills extends GuiGeneric {
         if (skillSet.containsKey(2)) {
             Skill skillThree = skillSet.get(2);
             int investedSkillPoints = skillBar.getInvestedSkillPoints(2);
-            ItemStack icon = skillThree.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+            ItemStack icon = skillThree.getIcon(language, pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
@@ -61,7 +62,7 @@ public class GuiCharacterSkills extends GuiGeneric {
         if (skillSet.containsKey(3)) {
             Skill skillFour = skillSet.get(3);
             int investedSkillPoints = skillBar.getInvestedSkillPoints(3);
-            ItemStack icon = skillFour.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+            ItemStack icon = skillFour.getIcon(language, pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
@@ -72,7 +73,7 @@ public class GuiCharacterSkills extends GuiGeneric {
         if (skillSet.containsKey(4)) {
             Skill skillFive = skillSet.get(4);
             int investedSkillPoints = skillBar.getInvestedSkillPoints(4);
-            ItemStack icon = skillFive.getIcon(player.getLevel(), pointsLeft, investedSkillPoints);
+            ItemStack icon = skillFive.getIcon(language, pointsLeft, investedSkillPoints);
             ItemMeta itemMeta = icon.getItemMeta();
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
@@ -116,13 +117,13 @@ public class GuiCharacterSkills extends GuiGeneric {
         }
         if (skillIndex != -1) {
             if (event.isLeftClick()) {
-                boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats());
+                boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats(), guardianData.getLanguage());
                 if (upgradeSkill) {
                     int pointsLeft = skillBar.getSkillPointsLeftToSpend();
                     new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
                 }
             } else if (event.isRightClick()) {
-                boolean downgradeSkill = skillBar.downgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats());
+                boolean downgradeSkill = skillBar.downgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats(), guardianData.getLanguage());
                 if (downgradeSkill) {
                     int pointsLeft = skillBar.getSkillPointsLeftToSpend();
                     new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);

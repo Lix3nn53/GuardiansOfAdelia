@@ -112,8 +112,8 @@ public class HealMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (!healAmountList.isEmpty()) {
             if (skillLevel == 0) {
@@ -172,6 +172,6 @@ public class HealMechanic extends MechanicComponent {
                 additions.add(ChatPalette.GREEN_DARK + lore1 + " -> " + lore2);
             }
         }
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

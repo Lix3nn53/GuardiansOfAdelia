@@ -42,13 +42,13 @@ public abstract class SkillComponent {
         children.add(child);
     }
 
-    public abstract List<String> getSkillLoreAdditions(List<String> additions, int skillLevel);
+    public abstract List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel);
 
-    public List<String> getSkillLoreAdditionsOfChildren(List<String> additions, int skillLevel) {
+    public List<String> getSkillLoreAdditionsOfChildren(String lang, List<String> additions, int skillLevel) {
         if (children.isEmpty()) return additions;
 
         for (SkillComponent child : children) {
-            additions = child.getSkillLoreAdditions(additions, skillLevel);
+            additions = child.getSkillLoreAdditions(lang, additions, skillLevel);
         }
 
         return additions;

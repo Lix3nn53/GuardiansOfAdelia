@@ -170,8 +170,8 @@ public class CubeTarget extends TargetComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (skillLevel == 0) {
             additions.add(ChatPalette.YELLOW + "Cube Area: " + length_xList.get(skillLevel) + ", " + length_yList.get(skillLevel) + ", " + length_zList.get(skillLevel));
@@ -182,6 +182,6 @@ public class CubeTarget extends TargetComponent {
                     + " -> " + length_xList.get(skillLevel - 1) + ", " + length_yList.get(skillLevel - 1) + ", " + length_zList.get(skillLevel - 1));
         }
 
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

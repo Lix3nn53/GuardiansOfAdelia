@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -105,13 +106,13 @@ public class DamageMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (!damageList.isEmpty()) {
             if (!damageMultiplyList.isEmpty()) {
                 if (skillLevel == 0) {
-                    String lore = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel) + 0.5) + " + " +
+                    String lore = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (damageList.get(skillLevel) + 0.5) + " + " +
                             (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
@@ -120,7 +121,7 @@ public class DamageMechanic extends MechanicComponent {
 
                     additions.add(lore);
                 } else if (skillLevel == damageMultiplyList.size()) {
-                    String lore = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
+                    String lore = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
                             (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
 
                     if (multiplyWithValue != null) {
@@ -129,7 +130,7 @@ public class DamageMechanic extends MechanicComponent {
 
                     additions.add(lore);
                 } else {
-                    String lore1 = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
+                    String lore1 = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (damageList.get(skillLevel - 1) + 0.5) + " + " +
                             (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
                     String lore2 = (int) (damageList.get(skillLevel) + 0.5) + " + " +
                             (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
@@ -142,7 +143,7 @@ public class DamageMechanic extends MechanicComponent {
                 }
             } else {
                 if (skillLevel == 0) {
-                    String lore = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel) + 0.5);
+                    String lore = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (damageList.get(skillLevel) + 0.5);
 
                     if (multiplyWithValue != null) {
                         lore = lore + " x[" + multiplyWithValue + "]";
@@ -150,7 +151,7 @@ public class DamageMechanic extends MechanicComponent {
 
                     additions.add(lore);
                 } else if (skillLevel == damageList.size()) {
-                    String lore = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
+                    String lore = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
 
                     if (multiplyWithValue != null) {
                         lore = lore + " x[" + multiplyWithValue + "]";
@@ -158,7 +159,7 @@ public class DamageMechanic extends MechanicComponent {
 
                     additions.add(lore);
                 } else {
-                    String lore1 = damageType.getFullName() + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
+                    String lore1 = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (damageList.get(skillLevel - 1) + 0.5);
                     String lore2 = (int) (damageList.get(skillLevel) + 0.5) + "";
 
                     if (multiplyWithValue != null) {
@@ -170,7 +171,7 @@ public class DamageMechanic extends MechanicComponent {
             }
         } else if (!damageMultiplyList.isEmpty()) {
             if (skillLevel == 0) {
-                String lore = damageType.getFullName() + ": " + (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
+                String lore = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
                     lore = lore + " x[" + multiplyWithValue + "]";
@@ -178,7 +179,7 @@ public class DamageMechanic extends MechanicComponent {
 
                 additions.add(lore);
             } else if (skillLevel == damageMultiplyList.size()) {
-                String lore = damageType.getFullName() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
+                String lore = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
                     lore = lore + " x[" + multiplyWithValue + "]";
@@ -186,7 +187,7 @@ public class DamageMechanic extends MechanicComponent {
 
                 additions.add(lore);
             } else {
-                String lore1 = damageType.getFullName() + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
+                String lore1 = damageType.getFullName(lang) + " " + Translation.t(lang, "attribute.damage") + ": " + (int) (100 * damageMultiplyList.get(skillLevel - 1) + 0.5) + "%";
                 String lore2 = (int) (100 * damageMultiplyList.get(skillLevel) + 0.5) + "%";
 
                 if (multiplyWithValue != null) {
@@ -197,6 +198,6 @@ public class DamageMechanic extends MechanicComponent {
             }
         }
 
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

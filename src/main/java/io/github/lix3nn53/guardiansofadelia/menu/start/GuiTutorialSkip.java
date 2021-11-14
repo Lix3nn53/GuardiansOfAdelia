@@ -34,7 +34,6 @@ public class GuiTutorialSkip extends GuiGeneric {
         itemMeta.setDisplayName(ChatPalette.RED + Translation.t(guardianData, "general.tutorial.no"));
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(ChatPalette.YELLOW + "Required level: 1");
         itemMeta.setLore(lore);
         no.setItemMeta(itemMeta);
         this.setItem(15, no);

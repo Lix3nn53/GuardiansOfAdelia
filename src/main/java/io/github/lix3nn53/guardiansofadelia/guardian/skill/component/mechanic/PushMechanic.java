@@ -88,8 +88,8 @@ public class PushMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (skillLevel == 0) {
             additions.add(ChatPalette.BLUE_LIGHT + "Push speed: " + speedList.get(skillLevel));
@@ -99,7 +99,7 @@ public class PushMechanic extends MechanicComponent {
             additions.add(ChatPalette.BLUE_LIGHT + "Push speed: " + speedList.get(skillLevel - 1) + " -> " + speedList.get(skillLevel));
         }
 
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 
     public enum PushType {

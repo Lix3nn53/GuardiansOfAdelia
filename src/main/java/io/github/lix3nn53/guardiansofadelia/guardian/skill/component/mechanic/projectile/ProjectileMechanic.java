@@ -136,8 +136,8 @@ public class ProjectileMechanic extends MechanicComponent implements ProjectileC
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         List<Integer> amountList = this.base.getAmountList();
         String amountValueKey = this.base.getAmountValueKey();
@@ -167,6 +167,6 @@ public class ProjectileMechanic extends MechanicComponent implements ProjectileC
 
             additions.add(s);
         }
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

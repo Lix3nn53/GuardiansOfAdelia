@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.utilities.config;
 import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.ItemReferenceLoader;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class QuestConfigurations {
 
@@ -55,24 +57,62 @@ public class QuestConfigurations {
 
                 String name = section.getString("name");
 
-                List<String> story = section.getStringList("story");
+                int storyLineCount = 0;
+                ConfigurationSection storySection = section.getConfigurationSection("story");
+                Set<String> storyLanguages = storySection.getKeys(false);
+                for (String lang : storyLanguages) {
+                    List<String> storyOfLang = storySection.getStringList(lang);
 
-                String startMsg = "";
+                    int lineCounter = 0;
+                    for (String storyLine : storyOfLang) {
+                        lineCounter++;
+                        String key = questID + ".story.l" + lineCounter;
+                        Translation.add(lang, "quest", key, storyLine);
+                    }
+                    storyLineCount = lineCounter;
+                }
+
+                String startMsgCode = "";
                 if (section.contains("startMsg")) {
-                    startMsg = section.getString("startMsg");
+                    startMsgCode = questID + ".startMsg";
+                    ConfigurationSection sectionInner = section.getConfigurationSection("startMsg");
+                    Set<String> sectionInnerLanguages = sectionInner.getKeys(false);
+                    for (String lang : sectionInnerLanguages) {
+                        String valueOfLang = sectionInner.getString(lang);
+
+                        Translation.add(lang, "quest", startMsgCode, valueOfLang);
+                    }
                 }
                 String turnInMsg = "";
                 if (section.contains("turnInMsg")) {
-                    turnInMsg = section.getString("turnInMsg");
+                    turnInMsg = questID + ".turnInMsg";
+                    ConfigurationSection sectionInner = section.getConfigurationSection("turnInMsg");
+                    Set<String> sectionInnerLanguages = sectionInner.getKeys(false);
+                    for (String lang : sectionInnerLanguages) {
+                        String valueOfLang = sectionInner.getString(lang);
+
+                        Translation.add(lang, "quest", turnInMsg, valueOfLang);
+                    }
                 }
 
-                List<String> objectiveTextList = section.getStringList("objectiveTextList");
-                StringBuilder objectiveText = new StringBuilder(objectiveTextList.get(0));
-                if (objectiveTextList.size() > 1) {
-                    for (int lineIndex = 1; lineIndex < objectiveTextList.size(); lineIndex++) {
-                        String line = objectiveTextList.get(lineIndex);
-                        objectiveText.append("\n");
-                        objectiveText.append(line);
+                String objectiveTextKey = "";
+                if (section.contains("objectiveTextList")) {
+                    objectiveTextKey = questID + ".objectiveTextList";
+                    ConfigurationSection sectionInner = section.getConfigurationSection("objectiveTextList");
+                    Set<String> sectionInnerLanguages = sectionInner.getKeys(false);
+                    for (String lang : sectionInnerLanguages) {
+                        List<String> valueOfLang = sectionInner.getStringList(lang);
+
+                        StringBuilder objectiveText = new StringBuilder(valueOfLang.get(0));
+                        if (valueOfLang.size() > 1) {
+                            for (int lineIndex = 1; lineIndex < valueOfLang.size(); lineIndex++) {
+                                String line = valueOfLang.get(lineIndex);
+                                objectiveText.append("\n");
+                                objectiveText.append(line);
+                            }
+                        }
+
+                        Translation.add(lang, "quest", objectiveTextKey, objectiveText.toString());
                     }
                 }
 
@@ -161,8 +201,8 @@ public class QuestConfigurations {
                     armorForPlayer.add(data);
                 }
 
-                Quest quest = new Quest(questID, name, story,
-                        startMsg, objectiveText.toString(),
+                Quest quest = new Quest(questID, name, storyLineCount,
+                        startMsgCode, objectiveTextKey,
                         turnInMsg,
                         tasks, itemPrizes, moneyPrize, expPrize, requiredLevel, requiredQuests, advancementMaterial, onAcceptActions,
                         onCompleteActions, onTurnInActions, itemPrizesSelectOneOf, weaponPrizesSelectOneOf, armorPrizesSelectOneOf,

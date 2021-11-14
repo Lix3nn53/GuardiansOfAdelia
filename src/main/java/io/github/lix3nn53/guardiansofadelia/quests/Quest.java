@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.quests.task.*;
@@ -38,7 +39,7 @@ public final class Quest {
     private final int questID;
 
     private final String name;
-    private final List<String> story;
+    private final int storyLineCount;
 
     private final String startMsg;
     private final String objectiveText;
@@ -61,7 +62,7 @@ public final class Quest {
     private final List<ArmorReferenceData> armorPrizeForPlayer;
 
     public Quest(
-            final int questID, final String name, final List<String> story, final String startMsg, final String objectiveText, final String turnInMsg,
+            final int questID, final String name, final int storyLineCount, final String startMsg, final String objectiveText, final String turnInMsg,
             final List<Task> tasks, final List<ItemStack> itemPrizes, final int moneyPrize, final int expPrize,
             final int requiredLevel, final List<Integer> requiredQuests, Material advancementMaterial, List<Action> onAcceptActions,
             List<Action> onCompleteActions, List<Action> onTurnInActions, List<ItemStack> itemPrizesSelectOneOf,
@@ -69,7 +70,7 @@ public final class Quest {
             List<WeaponReferenceData> weaponPrizeForPlayer, List<ArmorReferenceData> armorPrizeForPlayer) {
         this.questID = questID;
         this.name = name;
-        this.story = story;
+        this.storyLineCount = storyLineCount;
         this.startMsg = startMsg;
         this.objectiveText = objectiveText;
         this.turnInMsg = turnInMsg;
@@ -99,7 +100,7 @@ public final class Quest {
      * Copy constructor.
      */
     public Quest(@NotNull Quest questToCopy) {
-        this(questToCopy.getQuestID(), questToCopy.getName(), questToCopy.getStory(), questToCopy.getStartMsg(), questToCopy.getObjectiveText(), questToCopy.getTurnInMsg(),
+        this(questToCopy.getQuestID(), questToCopy.getName(), questToCopy.getStoryLineCount(), questToCopy.getStartMsg(), questToCopy.getObjectiveText(), questToCopy.getTurnInMsg(),
                 questToCopy.getTasks(), questToCopy.getItemPrizes(), questToCopy.getMoneyPrize(), questToCopy.getExpPrize(),
                 questToCopy.getRequiredLevel(), questToCopy.getRequiredQuests(), questToCopy.getAdvancementMaterial(), questToCopy.getOnAcceptActions(),
                 questToCopy.getOnCompleteActions(), questToCopy.getOnTurnInActions(), questToCopy.getItemPrizesSelectOneOf(),
@@ -131,6 +132,7 @@ public final class Quest {
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
+            String lang = guardianData.getLanguage();
 
             List<Quest> playerQuests = rpgCharacter.getQuestList();
             List<Integer> turnedInQuests = rpgCharacter.getTurnedInQuests();
@@ -246,15 +248,21 @@ public final class Quest {
             lore.add("");
 
             Material type = questItem.getType();
-            if (type.equals(Material.GRAY_WOOL)) {
+            /*if (type.equals(Material.GRAY_WOOL)) {
                 //sporiler protection
                 lore.add(ChatColor.ITALIC.toString() + ChatPalette.RED + "SPOILER PROTECTION");
                 lore.add(ChatColor.ITALIC.toString() + ChatPalette.RED + "You can't see the lore of this quest before");
                 lore.add(ChatColor.ITALIC.toString() + ChatPalette.RED + "you meet the requirements.");
             } else {
                 for (String st : story) {
-                    lore.add(ChatColor.ITALIC.toString() + ChatPalette.YELLOW + st);
+                    String storyLine = Translation.t(lang, "quest", st);
+                    lore.add(ChatColor.ITALIC.toString() + ChatPalette.YELLOW + storyLine);
                 }
+            }*/
+            for (int i = 1; i <= storyLineCount; i++) {
+                String code = questID + ".story.l" + i;
+                String storyLine = Translation.t(lang, "quest", code);
+                lore.add(ChatColor.ITALIC.toString() + ChatPalette.YELLOW + storyLine);
             }
 
             itemMeta.setLore(lore);
@@ -299,8 +307,8 @@ public final class Quest {
         return questID;
     }
 
-    public List<String> getStory() {
-        return story;
+    public int getStoryLineCount() {
+        return storyLineCount;
     }
 
     public String getStartMsg() {
@@ -371,8 +379,13 @@ public final class Quest {
     public void onTurnIn(Player player) {
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Turn In");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
-        if (!getTurnInMsg().equals("")) {
-            MessageUtils.sendCenteredMessage(player, getTurnInMsg());
+
+        String turnInMsg = getTurnInMsg();
+        if (!turnInMsg.equals("")) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            String lang = guardianData.getLanguage();
+            String message = Translation.t(lang, "quest", turnInMsg);
+            MessageUtils.sendCenteredMessage(player, message);
         }
 
         Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
@@ -473,8 +486,12 @@ public final class Quest {
     public void onAccept(Player player) {
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Accept");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
-        if (!getStartMsg().equals("")) {
-            MessageUtils.sendCenteredMessage(player, getStartMsg());
+        String startMsg = getStartMsg();
+        if (!startMsg.equals("")) {
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            String lang = guardianData.getLanguage();
+            String message = Translation.t(lang, "quest", startMsg);
+            MessageUtils.sendCenteredMessage(player, message);
         }
 
         Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
@@ -491,8 +508,13 @@ public final class Quest {
         }
     }
 
-    public String getObjectiveTextForTablist() {
-        String replaceTaskValues = getObjectiveText();
+    public String getObjectiveTextForTablist(String lang) {
+        String key = getObjectiveText();
+
+        if (key.equals("")) return "EMPTY OBJECTIVE";
+
+        String replaceTaskValues = Translation.t(lang, "quest", key);
+
         int i = 1;
         for (Task task : this.getTasks()) {
             String tablistInfoString = task.getTablistInfoString();

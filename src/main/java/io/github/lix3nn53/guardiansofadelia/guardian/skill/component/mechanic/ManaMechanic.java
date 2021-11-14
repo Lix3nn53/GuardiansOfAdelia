@@ -102,8 +102,8 @@ public class ManaMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (!manaAmount.isEmpty()) {
             if (skillLevel == 0) {
@@ -123,6 +123,6 @@ public class ManaMechanic extends MechanicComponent {
                 additions.add(ChatPalette.BLUE_LIGHT + "Mana regen: " + manaPercent.get(skillLevel - 1) + "%" + " -> " + manaPercent.get(skillLevel) + "%");
             }
         }
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

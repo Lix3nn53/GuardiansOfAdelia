@@ -63,6 +63,7 @@ public class ConfigManager {
     }
 
     public static void loadConfigALL() {
+        TranslationConfigurations.loadConfigs();
         ClassConfigurations.loadConfigs();
         RewardDailyConfigurations.loadConfigs();
         JobGatheringConfigurations.loadConfigs();
@@ -86,7 +87,6 @@ public class ConfigManager {
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();
         MerchantConfiguration.loadConfigs();
-        TranslationConfigurations.loadConfigs();
     }
 
     public static void writeConfigALL() {

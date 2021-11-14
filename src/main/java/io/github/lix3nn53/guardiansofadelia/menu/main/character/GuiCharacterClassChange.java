@@ -64,7 +64,7 @@ public class GuiCharacterClassChange extends GuiGeneric {
         if (slotToRpgClassStr.containsKey(slot)) {
             String rpgClassStr = slotToRpgClassStr.get(slot);
 
-            boolean b = rpgCharacter.changeClass(player, rpgClassStr);
+            boolean b = rpgCharacter.changeClass(player, rpgClassStr, guardianData.getLanguage());
             if (b) player.closeInventory();
         }
     }

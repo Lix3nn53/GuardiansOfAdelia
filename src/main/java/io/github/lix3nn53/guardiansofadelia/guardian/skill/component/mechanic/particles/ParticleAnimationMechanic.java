@@ -136,7 +136,7 @@ public class ParticleAnimationMechanic extends ParticleMechanic {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

@@ -14,15 +14,25 @@ public class Translation {
         languageTranslation.put(language, translationStorage);
     }
 
+    public static void add(String language, String section, String path, String value) {
+        TranslationStorage translationStorage = languageTranslation.get(language);
+        translationStorage.add(section, path, value);
+    }
+
     public static String t(GuardianData guardianData, String path) {
         String lang = guardianData.getLanguage();
         TranslationStorage translationStorage = languageTranslation.get(lang);
         return translationStorage.t(path);
     }
 
-    public static String t(String lang, String path) {
+    public static String t(String lang, String fullPath) {
         TranslationStorage translationStorage = languageTranslation.get(lang);
-        return translationStorage.t(path);
+        return translationStorage.t(fullPath);
+    }
+
+    public static String t(String lang, String section, String path) {
+        TranslationStorage translationStorage = languageTranslation.get(lang);
+        return translationStorage.t(section + "." + path);
     }
 
     public static boolean exists(String language) {

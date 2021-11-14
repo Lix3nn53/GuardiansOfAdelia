@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.element;
 
 
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 
 public enum ElementType {
@@ -10,20 +11,20 @@ public enum ElementType {
     AIR,
     LIGHTNING;
 
-    private String getCustomName() {
+    private String getCustomName(String lang) {
         switch (this) {
             case FIRE:
-                return getChatPalette() + "Fire";
+                return getChatPalette() + Translation.t(lang, "element.fire");
             case WATER:
-                return getChatPalette() + "Water";
+                return getChatPalette() + Translation.t(lang, "element.water");
             case EARTH:
-                return getChatPalette() + "Earth";
+                return getChatPalette() + Translation.t(lang, "element.earth");
             case AIR:
-                return getChatPalette() + "Air";
+                return getChatPalette() + Translation.t(lang, "element.air");
             case LIGHTNING:
-                return getChatPalette() + "Lightning";
+                return getChatPalette() + Translation.t(lang, "element.lightning");
         }
-        return "elementCustomName";
+        return "elementCustomNameErr";
     }
 
     public ChatPalette getChatPalette() {
@@ -60,7 +61,7 @@ public enum ElementType {
         return null;
     }
 
-    public String getFullName() {
-        return getChatPalette() + getIcon() + " " + getCustomName();
+    public String getFullName(String lang) {
+        return getChatPalette() + getIcon() + " " + getCustomName(lang);
     }
 }

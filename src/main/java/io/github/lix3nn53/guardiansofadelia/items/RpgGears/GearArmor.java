@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.RPGItemUtils;
@@ -56,7 +57,7 @@ public class GearArmor implements RPGGear {
             }*/
             for (ElementType elementType : ElementType.values()) {
                 if (statPassive.getElementValue(elementType) != 0) {
-                    lore.add(elementType.getFullName() + ": " + ChatPalette.GRAY + "+" + statPassive.getElementValue(elementType));
+                    lore.add(elementType.getFullName(Translation.DEFAULT_LANG) + ": " + ChatPalette.GRAY + "+" + statPassive.getElementValue(elementType));
                 }
             }
         }

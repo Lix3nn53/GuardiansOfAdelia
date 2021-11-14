@@ -60,10 +60,10 @@ public class InvincibleMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
-        if (ticks.isEmpty()) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        if (ticks.isEmpty()) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (skillLevel == 0) {
             String s = ChatPalette.GOLD + "Invincible duration: " + (ticks.get(skillLevel) / 20);
@@ -90,6 +90,6 @@ public class InvincibleMechanic extends MechanicComponent {
 
             additions.add(s);
         }
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

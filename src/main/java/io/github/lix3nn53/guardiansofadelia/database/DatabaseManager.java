@@ -67,7 +67,7 @@ public class DatabaseManager {
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> player.teleport(location));
                     TablistUtils.updateTablist(player);
                     InventoryUtils.setMenuItemPlayer(player);
-                    rpgCharacter.getSkillBar().remakeSkillBar();
+                    rpgCharacter.getSkillBar().remakeSkillBar(guardianData.getLanguage());
                     player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                     int totalMaxMana = rpgCharacter.getRpgCharacterStats().getTotalMaxMana();
                     rpgCharacter.getRpgCharacterStats().setCurrentMana(totalMaxMana);

@@ -93,7 +93,7 @@ public class MyPlayerAnimationEvent implements Listener {
                     } else { //dungeon portal
                         DungeonTheme theme = MiniGameManager.getDungeonFromPortal(portal);
                         if (theme != null) {
-                            theme.getJoinQueueGui().openInventory(player);
+                            theme.getJoinQueueGui(player).openInventory(player);
                         }
                     }
                     break;

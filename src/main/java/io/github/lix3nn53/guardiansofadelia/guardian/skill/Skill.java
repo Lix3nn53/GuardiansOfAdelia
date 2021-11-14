@@ -86,7 +86,7 @@ public class Skill {
         return description;
     }
 
-    public ItemStack getIcon(int playerLevel, int playerPoints, int investedPoints) {
+    public ItemStack getIcon(String lang, int playerPoints, int investedPoints) {
         int skillLevel = getCurrentSkillLevel(investedPoints);
 
         ItemStack icon = new ItemStack(getMaterial());
@@ -120,7 +120,7 @@ public class Skill {
         lore.add("");
         //skill attributes
         for (SkillComponent trigger : triggers) {
-            lore.addAll(trigger.getSkillLoreAdditions(new ArrayList<>(), skillLevel));
+            lore.addAll(trigger.getSkillLoreAdditions(lang, new ArrayList<>(), skillLevel));
         }
 
         lore.add("");

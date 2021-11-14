@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.items.RpgGears;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
@@ -64,7 +65,7 @@ public class GearPassive implements RPGGear {
             for (ElementType elementType : ElementType.values()) {
                 int finalValue = finalValuesElem.get(elementType);
                 if (finalValue != 0) {
-                    lore.add(elementType.getFullName() + ": " + ChatPalette.GRAY + "+" + finalValue);
+                    lore.add(elementType.getFullName(Translation.DEFAULT_LANG) + ": " + ChatPalette.GRAY + "+" + finalValue);
                 }
             }
         }

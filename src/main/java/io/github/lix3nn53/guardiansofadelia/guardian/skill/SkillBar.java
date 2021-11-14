@@ -48,7 +48,8 @@ public class SkillBar {
         investedSkillPoints.put(4, ultimate);
 
         if (remake) {
-            remakeSkillBar();
+            GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+            remakeSkillBar(guardianData.getLanguage());
         }
 
         //activate init triggers
@@ -73,7 +74,7 @@ public class SkillBar {
     /**
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
-    public boolean upgradeSkill(int skillIndex, RPGClassStats rpgClassStats) {
+    public boolean upgradeSkill(int skillIndex, RPGClassStats rpgClassStats, String lang) {
         if (!this.skillSet.containsKey(skillIndex)) return false;
 
         Skill skill = this.skillSet.get(skillIndex);
@@ -95,7 +96,7 @@ public class SkillBar {
             }
             int newInvested = invested + reqSkillPoints;
             investedSkillPoints.put(skillIndex, newInvested);
-            remakeSkillBarIcon(skillIndex);
+            remakeSkillBarIcon(skillIndex, lang);
 
             rpgClassStats.setInvestedSkillPoint(skillIndex, newInvested);
             return true;
@@ -107,7 +108,7 @@ public class SkillBar {
     /**
      * @param skillIndex 0,1,2 normal skills, 3 passive, 4 ultimate
      */
-    public boolean downgradeSkill(int skillIndex, RPGClassStats rpgClassStats) {
+    public boolean downgradeSkill(int skillIndex, RPGClassStats rpgClassStats, String lang) {
         if (!this.skillSet.containsKey(skillIndex)) return false;
 
         Skill skill = this.skillSet.get(skillIndex);
@@ -126,13 +127,13 @@ public class SkillBar {
 
         int newInvested = invested - reqSkillPoints;
         investedSkillPoints.put(skillIndex, newInvested);
-        remakeSkillBarIcon(skillIndex);
+        remakeSkillBarIcon(skillIndex, lang);
 
         rpgClassStats.setInvestedSkillPoint(skillIndex, newInvested);
         return true;
     }
 
-    public boolean resetSkillPoints() {
+    public boolean resetSkillPoints(String lang) {
         investedSkillPoints.clear();
         investedSkillPoints.put(0, 0);
         investedSkillPoints.put(1, 0);
@@ -149,7 +150,7 @@ public class SkillBar {
                 castCounter++;
             }
 
-            remakeSkillBarIcon(skillIndex);
+            remakeSkillBarIcon(skillIndex, lang);
         }
         return true;
     }
@@ -179,7 +180,7 @@ public class SkillBar {
         return points;
     }
 
-    public void remakeSkillBar() {
+    public void remakeSkillBar(String lang) {
         for (int i = 0; i < investedSkillPoints.size(); i++) {
             int slot = i;
 
@@ -192,7 +193,7 @@ public class SkillBar {
             Integer invested = investedSkillPoints.get(i);
             if (invested > 0) {
                 Skill skill = this.skillSet.get(i);
-                ItemStack icon = skill.getIcon(player.getLevel(), getSkillPointsLeftToSpend(), invested);
+                ItemStack icon = skill.getIcon(lang, getSkillPointsLeftToSpend(), invested);
                 player.getInventory().setItem(slot, icon);
             } else {
                 player.getInventory().setItem(slot, OtherItems.getUnassignedSkill());
@@ -200,7 +201,7 @@ public class SkillBar {
         }
     }
 
-    public void remakeSkillBarIcon(int skillIndex) {
+    public void remakeSkillBarIcon(int skillIndex, String lang) {
         int slot = skillIndex;
 
         if (skillIndex == 3) { //don't place passive skill on hot-bar
@@ -212,7 +213,7 @@ public class SkillBar {
         Integer invested = investedSkillPoints.get(skillIndex);
         if (invested > 0) {
             Skill skill = this.skillSet.get(skillIndex);
-            ItemStack icon = skill.getIcon(player.getLevel(), getSkillPointsLeftToSpend(), invested);
+            ItemStack icon = skill.getIcon(lang, getSkillPointsLeftToSpend(), invested);
             player.getInventory().setItem(slot, icon);
         } else {
             player.getInventory().setItem(slot, OtherItems.getUnassignedSkill());
@@ -238,10 +239,10 @@ public class SkillBar {
         return skill.getCurrentSkillLevel(invested);
     }
 
-    public void reloadSkillSet(HashMap<Integer, Skill> skillSet) {
+    public void reloadSkillSet(HashMap<Integer, Skill> skillSet, String lang) {
         this.skillSet.clear();
         this.skillSet.putAll(skillSet);
-        remakeSkillBar();
+        remakeSkillBar(lang);
     }
 
     public boolean castSkill(GuardianData guardianData, int slot) {
@@ -319,7 +320,7 @@ public class SkillBar {
                     int currentAmount = item.getAmount();
                     if (currentAmount != secondsLeft) {
                         if (InventoryUtils.isAirOrNull(item)) {
-                            remakeSkillBarIcon(finalSkillIndex);
+                            remakeSkillBarIcon(finalSkillIndex, guardianData.getLanguage());
                             item = inventory.getItem(slot);
                         }
                         item.setAmount(secondsLeft);

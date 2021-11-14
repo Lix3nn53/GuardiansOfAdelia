@@ -40,10 +40,10 @@ public class TutorialEndAction implements Action {
                 rpgCharacterStats.setCurrentHealth(rpgCharacterStats.getTotalMaxHealth());
                 rpgCharacterStats.setCurrentMana(rpgCharacterStats.getTotalMaxMana());
 
-                activeCharacter.getSkillBar().resetSkillPoints();
+                activeCharacter.getSkillBar().resetSkillPoints(guardianData.getLanguage());
                 activeCharacter.clearRPGClassStats();
 
-                activeCharacter.changeClass(player, RPGClassManager.getStartingClass());
+                activeCharacter.changeClass(player, RPGClassManager.getStartingClass(), guardianData.getLanguage());
 
                 new BukkitRunnable() {
                     @Override

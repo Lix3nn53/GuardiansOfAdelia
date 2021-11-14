@@ -61,8 +61,8 @@ public class WarpMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (skillLevel == 0) {
             additions.add(ChatPalette.YELLOW + "Warp forward: " + forward.get(skillLevel));
@@ -71,6 +71,6 @@ public class WarpMechanic extends MechanicComponent {
         } else {
             additions.add(ChatPalette.YELLOW + "Warp forward: " + forward.get(skillLevel - 1) + " -> " + forward.get(skillLevel));
         }
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

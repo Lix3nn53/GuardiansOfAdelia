@@ -58,7 +58,8 @@ public class CastTimeMechanic extends MechanicComponent {
 
         for (LivingEntity target : targets) {
             if (DELAY - MIN_DELAY > 0) {
-                StatusEffectManager.addStatus(target, StatusEffectType.STUN, DELAY - 2);
+                StatusEffectManager.addStatus(target, StatusEffectType.SILENCE, DELAY - 2);
+                StatusEffectManager.addStatus(target, StatusEffectType.DISARM, DELAY - 2);
             }
 
             float height = (float) target.getHeight();
@@ -87,13 +88,13 @@ public class CastTimeMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (DELAY - MIN_DELAY > 0) {
             additions.add(ChatPalette.GOLD + "Cast time: " + ChatPalette.YELLOW + DELAY + " ticks");
         }
 
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

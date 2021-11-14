@@ -84,6 +84,8 @@ public class MyNPCRightClickEvent implements Listener {
 
             if (MerchantManager.isMerchant(id)) {
                 MerchantMenu merchantMenu = MerchantManager.getMerchantMenu(id);
+                GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+                merchantMenu.translate(guardianData);
                 merchantMenu.openInventory(player);
             } else {
                 GuardianData guardianData = GuardianDataManager.getGuardianData(player);

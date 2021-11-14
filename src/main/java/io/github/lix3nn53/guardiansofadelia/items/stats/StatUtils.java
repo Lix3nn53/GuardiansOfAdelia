@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Material;
@@ -149,7 +150,7 @@ public class StatUtils {
             if (!hasElements) {
                 for (ElementType elementType : ElementType.values()) {
                     if (statPassive.getElementValue(elementType) != 0) {
-                        lore.add(i, elementType.getFullName() + ": " + ChatPalette.GRAY + "+" + statPassive.getElementValue(elementType));
+                        lore.add(i, elementType.getFullName(Translation.DEFAULT_LANG) + ": " + ChatPalette.GRAY + "+" + statPassive.getElementValue(elementType));
                         i++;
                     }
                 }

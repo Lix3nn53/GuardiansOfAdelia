@@ -25,7 +25,7 @@ public class GuiCharacterSelect extends GuiGeneric {
     private final HashMap<Integer, Integer> slotNoToTownNo = new HashMap<>();
 
     public GuiCharacterSelect(GuardianData guardianData, int charNo) {
-        super(36, ChatPalette.GRAY_DARK + Translation.t(guardianData, "character.subject") + " " + charNo
+        super(36, ChatPalette.GRAY_DARK + Translation.t(guardianData, "character.name") + " " + charNo
                 + " " + Translation.t(guardianData, "character.selection.name"), 0);
         this.charNo = charNo;
 

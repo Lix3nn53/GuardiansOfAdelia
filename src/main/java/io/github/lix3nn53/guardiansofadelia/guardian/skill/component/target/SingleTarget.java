@@ -92,8 +92,8 @@ public class SingleTarget extends TargetComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
         if (skillLevel == 0) {
             additions.add(ChatPalette.YELLOW + "Range: " + range.get(skillLevel));
@@ -103,6 +103,6 @@ public class SingleTarget extends TargetComponent {
             additions.add(ChatPalette.YELLOW + "Range: " + range.get(skillLevel - 1) + " -> " + range.get(skillLevel));
         }
 
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 }

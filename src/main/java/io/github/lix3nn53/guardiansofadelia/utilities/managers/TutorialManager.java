@@ -29,7 +29,7 @@ public class TutorialManager {
             String startingClass = RPGClassManager.getStartingClass();
             RPGCharacter rpgCharacter = new RPGCharacter(startingClass, player);
             guardianData.setActiveCharacter(rpgCharacter, charNo);
-            rpgCharacter.getSkillBar().remakeSkillBar();
+            rpgCharacter.getSkillBar().remakeSkillBar(guardianData.getLanguage());
 
             // Character level
             int totalExpForLevel = RPGCharacterExperienceManager.getTotalRequiredExperience(90);

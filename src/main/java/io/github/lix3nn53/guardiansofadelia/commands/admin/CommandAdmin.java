@@ -130,7 +130,7 @@ public class CommandAdmin implements CommandExecutor {
                         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
 
                         SkillBar skillBar = activeCharacter.getSkillBar();
-                        skillBar.reloadSkillSet(rpgClass.getSkillSet());
+                        skillBar.reloadSkillSet(rpgClass.getSkillSet(), guardianData.getLanguage());
                     }
                     player.sendMessage(ChatPalette.GREEN_DARK + "Reloaded player skills!");
                 }

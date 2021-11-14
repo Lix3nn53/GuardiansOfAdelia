@@ -77,8 +77,8 @@ public class LaunchMechanic extends MechanicComponent {
     }
 
     @Override
-    public List<String> getSkillLoreAdditions(List<String> additions, int skillLevel) {
-        if (!this.addLore) return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+    public List<String> getSkillLoreAdditions(String lang, List<String> additions, int skillLevel) {
+        if (!this.addLore) return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
 
 
         if (skillLevel == 0) {
@@ -105,7 +105,7 @@ public class LaunchMechanic extends MechanicComponent {
             additions.add(ChatPalette.BLUE_LIGHT + "Launch[forward, upward, right]: " + forward + ", " + upward + ", " + right +
                     " -> " + forward2 + ", " + upward2 + ", " + right2);
         }
-        return getSkillLoreAdditionsOfChildren(additions, skillLevel);
+        return getSkillLoreAdditionsOfChildren(lang, additions, skillLevel);
     }
 
     public enum Relative {

@@ -1,6 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.RandomSkillOnGroundWithOffset;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
@@ -165,7 +167,9 @@ public class DungeonTheme {
         return chestItems;
     }
 
-    public GuiGeneric getJoinQueueGui() {
+    public GuiGeneric getJoinQueueGui(Player player) {
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        String language = guardianData.getLanguage();
         List<ItemStack> instanceItems = new ArrayList<>();
 
         for (int i = 1; i < 100; i++) {
@@ -173,7 +177,7 @@ public class DungeonTheme {
             if (dungeonInstance == null) {
                 break;
             }
-            ItemStack itemStack = generateInstanceItem(dungeonInstance);
+            ItemStack itemStack = generateInstanceItem(dungeonInstance, language);
             instanceItems.add(itemStack);
         }
 
@@ -181,7 +185,7 @@ public class DungeonTheme {
     }
 
 
-    private ItemStack generateInstanceItem(DungeonInstance dungeonInstance) {
+    private ItemStack generateInstanceItem(DungeonInstance dungeonInstance, String language) {
         ItemStack room = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = room.getItemMeta();
         itemMeta.setDisplayName(ChatPalette.BLUE_LIGHT + getName() + " #" + dungeonInstance.getInstanceNo() + " (" + dungeonInstance.getPlayersInGameSize() + "/" + dungeonInstance.getMaxPlayerSize() + ")");
@@ -201,11 +205,11 @@ public class DungeonTheme {
                 if (resistance < 1) {
                     int percent = (int) (100 * (-(1d - resistance)));
 
-                    lore.add(ChatPalette.BLUE_LIGHT + "Resistance: " + type.getFullName() + " - " + -percent + "%");
+                    lore.add(ChatPalette.BLUE_LIGHT + "Resistance: " + type.getFullName(language) + " - " + -percent + "%");
                 } else {
                     int percent = (int) (100 * (1d - resistance));
 
-                    weakness.add(ChatPalette.RED + "Weakness: " + type.getFullName() + " - " + -percent + "%");
+                    weakness.add(ChatPalette.RED + "Weakness: " + type.getFullName(language) + " - " + -percent + "%");
                 }
             }
         }

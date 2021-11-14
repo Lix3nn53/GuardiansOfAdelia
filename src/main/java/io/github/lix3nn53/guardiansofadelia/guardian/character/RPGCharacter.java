@@ -106,7 +106,7 @@ public final class RPGCharacter {
         return rpgClassStats;
     }
 
-    public boolean changeClass(Player player, String newClassStr) {
+    public boolean changeClass(Player player, String newClassStr, String lang) {
         String s = newClassStr.toUpperCase();
         RPGClass rpgClass = RPGClassManager.getClass(s);
 
@@ -134,7 +134,7 @@ public final class RPGCharacter {
         int ultimate = rpgClassStats.getUltimate();
 
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet(), true);
-        skillBar.remakeSkillBar();
+        skillBar.remakeSkillBar(lang);
 
         rpgCharacterStats.setRpgClassStr(s);
         rpgCharacterStats.recalculateEquipment(rpgClassStr);
