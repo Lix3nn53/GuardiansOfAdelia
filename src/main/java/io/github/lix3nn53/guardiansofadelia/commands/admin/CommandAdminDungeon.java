@@ -17,7 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoom;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomDoor;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.DungeonRoomSpawner;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.DungeonConfiguration;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.SkillOnGroundConfigurations;
 import org.bukkit.Location;

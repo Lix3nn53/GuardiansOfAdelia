@@ -7,7 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskReach;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import net.citizensnpcs.api.CitizensAPI;

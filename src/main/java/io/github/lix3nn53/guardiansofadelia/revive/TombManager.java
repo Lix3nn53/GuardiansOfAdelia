@@ -3,9 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.revive;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.menu.GuiRevive;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -95,6 +95,8 @@ public class TombManager {
     }
 
     public static void startSearch(Player player) {
+        if (!playerToDeathLocation.containsKey(player)) return;
+
         Location deathLocation = playerToDeathLocation.get(player);
         Town town = playerToSpawnTown.get(player);
 

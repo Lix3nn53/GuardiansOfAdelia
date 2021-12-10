@@ -4,10 +4,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
-import io.github.lix3nn53.guardiansofadelia.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.menu.bazaar.GuiBazaar;
 import io.github.lix3nn53.guardiansofadelia.menu.guild.GuiGuild;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class GuiMain extends GuiGeneric {
 
     public GuiMain(GuardianData guardianData) {
-        super(54, ChatPalette.GRAY_DARK + "Guardians of Adelia", 0);
+        super(54, CustomCharacter.MENU_54.toString() + CustomCharacter.LOGO, 0);
 
         ItemStack compass = new ItemStack(Material.WOODEN_PICKAXE);
         ItemMeta itemMeta = compass.getItemMeta();
@@ -39,17 +40,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.compass.l2"));
         itemMeta.setLore(lore);
         compass.setItemMeta(itemMeta);
-        this.setItem(12, compass);
-
-        ItemStack map = new ItemStack(Material.WOODEN_PICKAXE);
-        itemMeta.setCustomModelData(24);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "menu.map.name"));
-        lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.map.l1"));
-        itemMeta.setLore(lore);
-        map.setItemMeta(itemMeta);
-        this.setItem(14, map);
+        this.setItem(13, compass);
 
         ItemStack character = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(2);
@@ -79,17 +70,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.bazaar.l1"));
         itemMeta.setLore(lore);
         bazaar.setItemMeta(itemMeta);
-        this.setItem(29, bazaar);
-
-        ItemStack minigames = new ItemStack(Material.WOODEN_PICKAXE);
-        itemMeta.setCustomModelData(25);
-        itemMeta.setDisplayName(ChatPalette.PURPLE + Translation.t(guardianData, "menu.minigames.name"));
-        lore = new ArrayList<>();
-        lore.add("");
-        itemMeta.setLore(lore);
-        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.minigames.l1"));
-        minigames.setItemMeta(itemMeta);
-        this.setItem(31, minigames);
+        this.setItem(30, bazaar);
 
         ItemStack teleport = new ItemStack(Material.WOODEN_SHOVEL);
         itemMeta.setCustomModelData(6);
@@ -99,7 +80,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.teleportation.l1"));
         itemMeta.setLore(lore);
         teleport.setItemMeta(itemMeta);
-        this.setItem(33, teleport);
+        this.setItem(32, teleport);
 
         ItemStack activeBoosts = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(28);
@@ -109,7 +90,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.boost.l1"));
         itemMeta.setLore(lore);
         activeBoosts.setItemMeta(itemMeta);
-        this.setItem(47, activeBoosts);
+        this.setItem(37, activeBoosts);
 
         ItemStack donation = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(10);
@@ -125,7 +106,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.store.l5"));
         itemMeta.setLore(lore);
         donation.setItemMeta(itemMeta);
-        this.setItem(49, donation);
+        this.setItem(40, donation);
 
         ItemStack daily = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(38);
@@ -135,7 +116,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.daily.l1"));
         itemMeta.setLore(lore);
         daily.setItemMeta(itemMeta);
-        this.setItem(51, daily);
+        this.setItem(43, daily);
     }
 
     @Override
@@ -159,17 +140,9 @@ public class GuiMain extends GuiGeneric {
         if (slot == 10) {
             GuiCharacter gui = new GuiCharacter(guardianData);
             gui.openInventory(player);
-        } else if (slot == 12) {
+        } else if (slot == 13) {
             GuiCompass gui = new GuiCompass();
             gui.openInventory(player);
-        } else if (slot == 14) {
-            player.closeInventory();
-            TextComponent message = new TextComponent(" Maps ! (Click Me)");
-            message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://guardiansofadelia.com/#t5"));
-            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(ChatPalette.BLUE_LIGHT + "Click to see Maps from our website")));
-            message.setColor(ChatPalette.GREEN_DARK.toChatColor());
-            message.setBold(true);
-            player.spigot().sendMessage(message);
         } else if (slot == 16) {
             if (GuildManager.inGuild(player)) {
                 GuiGuild gui = new GuiGuild();

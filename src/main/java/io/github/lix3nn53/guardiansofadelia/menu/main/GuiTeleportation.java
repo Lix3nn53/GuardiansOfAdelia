@@ -2,10 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.menu.main;
 
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import org.bukkit.Location;
 import org.bukkit.Material;

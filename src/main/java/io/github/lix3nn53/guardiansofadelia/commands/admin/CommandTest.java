@@ -1,20 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.commands.admin;
 
-import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.condition.FlagCondition;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.DamageMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.FlagSetMechanic;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.AreaTarget;
-import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.SelfTarget;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementSingle;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,9 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CommandTest implements CommandExecutor {
 
@@ -49,50 +40,16 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatPalette.BLUE + "/test sound <code> - play custom sounds");
                 player.sendMessage(ChatPalette.BLUE + "/test damage <amount> - damage self");
             } else if (args[0].equals("test")) {
-                if (this.test) {
-                    test = false;
-                    skillOnGround.deactivate();
-                    return true;
-                }
-                test = true;
+                CustomCharacter menuContent = CustomCharacter.MENU_54;
+                CustomCharacter logo = CustomCharacter.LOGO;
+                logo.setNegativeSpacesBefore(Integer.parseInt(args[1]));
+                logo.setNegativeSpacesAfter(Integer.parseInt(args[2]));
 
-                SelfTarget selfTarget = new SelfTarget();
+                String s1 = menuContent.toString();
+                String s2 = logo.toString();
 
-                ArrangementSingle arrangementSingle = new ArrangementSingle(Particle.FLAME, null, 0.1f, 0.5f, 0.1f);
-                /* ParticleMechanic particleMechanic = new ParticleMechanic(false, arrangementSingle, new ArrayList<>(), null, 0, 0,
-                        false, true, true, true, 0, 0, 0, 0, 0);*/
-
-                ArrayList<Float> radiusList = new ArrayList<>();
-                radiusList.add(5f);
-                ArrayList<Integer> amountList = new ArrayList<>();
-                amountList.add(20);
-                AreaTarget areaTarget = new AreaTarget(false, true, true, false, 10, false, false,
-                        false, radiusList, amountList, null, null, null, 0.2f, arrangementSingle, null);
-
-
-                ArrayList<Float> damages = new ArrayList<>();
-                damages.add(1f);
-                DamageMechanic damageMechanic = new DamageMechanic(false, damages, null, ElementType.FIRE, null);
-
-                FlagCondition flagCondition = new FlagCondition("trapKey", false, false, false);
-                SelfTarget selfTargetForFlag = new SelfTarget();
-                FlagCondition flagConditionForFlag = new FlagCondition("trapKey", false, false, false);
-
-                List<Integer> ticks = new ArrayList<>();
-                ticks.add(40);
-                ticks.add(40);
-                FlagSetMechanic FlagSetMechanic = new FlagSetMechanic("trapKey", ticks, false, null);
-
-                selfTarget.addChildren(flagCondition);
-                flagCondition.addChildren(areaTarget);
-                areaTarget.addChildren(damageMechanic);
-                areaTarget.addChildren(selfTargetForFlag);
-                selfTargetForFlag.addChildren(flagConditionForFlag);
-                flagConditionForFlag.addChildren(FlagSetMechanic);
-
-                skillOnGround = new SkillOnGround("command", 20L, 1, selfTarget);
-
-                skillOnGround.activate(player.getLocation(), 40L);
+                GuiGeneric guiGeneric = new GuiGeneric(54,  s1 + s2 + args[3], 0);
+                guiGeneric.openInventory(player);
             } else if (args[0].equals("palette")) {
                 StringBuilder msg = new StringBuilder();
                 for (ChatPalette chatPalette : ChatPalette.values()) {

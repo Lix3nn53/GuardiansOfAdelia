@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.attribute;
 
 
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 
 import java.text.DecimalFormat;
 

@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.p
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleArrangementLoader;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ParticleArrangement;

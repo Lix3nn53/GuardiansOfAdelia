@@ -6,7 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.ItemReferenceLoader;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

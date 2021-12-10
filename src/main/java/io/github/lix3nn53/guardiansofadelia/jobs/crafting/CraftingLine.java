@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLine;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

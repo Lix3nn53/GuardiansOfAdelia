@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.gui;
 
 import io.github.lix3nn53.guardiansofadelia.menu.ActiveGuiManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

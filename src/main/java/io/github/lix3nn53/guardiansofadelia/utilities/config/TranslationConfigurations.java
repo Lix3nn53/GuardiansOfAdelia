@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
-import io.github.lix3nn53.guardiansofadelia.locale.Translation;
-import io.github.lix3nn53.guardiansofadelia.locale.TranslationStorage;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
+import io.github.lix3nn53.guardiansofadelia.text.locale.TranslationStorage;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

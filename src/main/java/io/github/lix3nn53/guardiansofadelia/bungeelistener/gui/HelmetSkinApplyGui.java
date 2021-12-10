@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.gui;
 
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;

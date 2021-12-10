@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bossbar;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -46,7 +46,8 @@ public class HealthBarManager {
         new BukkitRunnable() {
             @Override
             public void run() {
-                targetToHealthBar.remove(entity);
+                HealthBar remove = targetToHealthBar.remove(entity);
+                remove.destroy();
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 20L);
     }

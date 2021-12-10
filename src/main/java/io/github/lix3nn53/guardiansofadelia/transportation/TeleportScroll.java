@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.transportation;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

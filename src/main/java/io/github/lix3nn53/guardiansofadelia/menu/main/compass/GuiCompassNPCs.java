@@ -1,6 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main.compass;
 
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import net.citizensnpcs.api.CitizensAPI;

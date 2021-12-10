@@ -15,7 +15,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectMechanic;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.target.*;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.*;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
 import org.bukkit.configuration.ConfigurationSection;
 

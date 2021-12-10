@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.RequestHandler;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Material;

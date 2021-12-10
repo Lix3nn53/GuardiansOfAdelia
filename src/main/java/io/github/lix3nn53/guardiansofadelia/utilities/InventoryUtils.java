@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskCollect;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -173,6 +174,19 @@ public class InventoryUtils {
         im.setLore(lore);
         menu.setItemMeta(im);
         player.getInventory().setItem(17, menu);
+
+        ItemStack rpgInventory = new ItemStack(Material.STONE_PICKAXE);
+        im.setDisplayName(ChatPalette.YELLOW + "RPG Inventory");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatPalette.GRAY + "Click to open your RPG Inventory!");
+        rpgInventory.setItemMeta(im);
+
+        player.getInventory().setItem(0, rpgInventory);
+        player.getInventory().setItem(1, rpgInventory);
+        player.getInventory().setItem(2, rpgInventory);
+        player.getInventory().setItem(3, rpgInventory);
+        player.getInventory().setItem(4, rpgInventory);
     }
 
     public static boolean inventoryContains(Inventory inventory, Material mat, int amount) {

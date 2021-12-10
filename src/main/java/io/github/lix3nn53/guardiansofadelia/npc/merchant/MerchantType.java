@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 
 public enum MerchantType {
     WEAPONSMITH,

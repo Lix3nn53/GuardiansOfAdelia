@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.bossbar;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.boss.BarColor;
@@ -42,7 +42,7 @@ public class HealthBar {
         BarColor color = getColor(progress);
         String title = getTitle(livingTarget, damage, damageColor, damageIcon, maxHealth, currentHealth);
 
-        this.bar = Bukkit.createBossBar(title, color, BarStyle.SEGMENTED_10);
+        this.bar = Bukkit.createBossBar(title, color, BarStyle.SEGMENTED_20);
         this.bar.setProgress(progress);
         this.bar.setVisible(true);
     }

@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.economy.trading;
 
 import io.github.lix3nn53.guardiansofadelia.menu.ActiveGuiManager;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import org.bukkit.entity.Player;
 

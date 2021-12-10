@@ -3,7 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.commands.admin;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelData;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringModelState;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;

@@ -4,7 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.menu.admin.GuiAdminDailyRewards;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChest;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestManager;
 import io.github.lix3nn53.guardiansofadelia.rewards.chest.LootChestTier;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;

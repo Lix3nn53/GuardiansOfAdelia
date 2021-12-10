@@ -1,7 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.menu.admin;
 
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryCloseEvent;

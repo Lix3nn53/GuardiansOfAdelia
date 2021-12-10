@@ -2,7 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.items;
 
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonPrizeChestManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.Location;

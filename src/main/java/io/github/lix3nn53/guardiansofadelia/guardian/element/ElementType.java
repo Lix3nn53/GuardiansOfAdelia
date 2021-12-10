@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.element;
 
 
-import io.github.lix3nn53.guardiansofadelia.locale.Translation;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 
 public enum ElementType {
     FIRE,

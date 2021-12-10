@@ -21,7 +21,7 @@ import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
@@ -125,49 +125,9 @@ public class RPGCharacterStats {
 
                 String between = actionBarInfo.getActionBarBetween(player);
 
-                StringBuilder message = new StringBuilder(ChatPalette.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatPalette.BLUE_LIGHT + "✦" + currentMana + "/" + getTotalMaxMana());
+                String message = ChatPalette.RED + "❤" + ((int) (player.getHealth() + 0.5)) + "/" + getTotalMaxHealth() + between + ChatPalette.BLUE_LIGHT + "✦" + currentMana + "/" + getTotalMaxMana();
 
-                ArrayList<String> buffs = new ArrayList<>();
-                if (buffElementDamage != 1) {
-                    if (buffElementDamage > 1) {
-                        buffs.add(ChatPalette.RED + "Dmg +" + (int) ((buffElementDamage - 1) * 100 + 0.5) + "%");
-                    } else {
-                        buffs.add(ChatPalette.RED + "Dmg -" + (int) ((1 - buffElementDamage) * 100 + 0.5) + "%");
-                    }
-                }
-                if (buffElementDefense != 1) {
-                    if (buffElementDefense > 1) {
-                        buffs.add(ChatPalette.BLUE_LIGHT + "Def +" + (int) ((buffElementDefense - 1) * 100 + 0.5) + "%");
-                    } else {
-                        buffs.add(ChatPalette.BLUE_LIGHT + "Def -" + (int) ((1 - buffElementDefense) * 100 + 0.5) + "%");
-                    }
-                }
-                if (buffCriticalChance != 0) {
-                    buffs.add(ChatPalette.GOLD + "Crit +" + (int) ((buffCriticalChance * 100) + 0.5) + "%");
-                }
-                if (buffCriticalDamage != 0) {
-                    buffs.add(ChatPalette.ORANGE + "CritDmg +" + (int) ((buffCriticalDamage * 100) + 0.5) + "%");
-                }
-                if (buffLifeSteal != 0) {
-                    buffs.add(ChatPalette.RED + "LifeSteal +" + (int) ((buffLifeSteal * 100) + 0.5) + "%");
-                }
-                if (buffAbilityHaste != 0) {
-                    buffs.add(ChatPalette.BLUE + "Haste +" + buffAbilityHaste + "");
-                }
-
-                for (int i = 0; i < buffs.size(); i++) {
-                    if (i % 2 == 0) {
-                        message.insert(0, buffs.get(i) + " ");
-                    } else {
-                        message.append(" ").append(buffs.get(i));
-                    }
-                }
-
-                if (buffs.size() % 2 == 1) {
-                    message.append("          ");
-                }
-
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message.toString()));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
             }
         }.runTaskTimerAsynchronously(GuardiansOfAdelia.getInstance(), 5L, 10L);
     }

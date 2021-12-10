@@ -7,7 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompassActiveQu
 import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompassDungeonGates;
 import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompassNPCs;
 import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompassTowns;
-import io.github.lix3nn53.guardiansofadelia.utilities.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
