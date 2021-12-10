@@ -35,7 +35,6 @@ public class TranslationConfigurations {
                 Set<String> keys = configuration.getKeys(true);
 
                 for (String key : keys) {
-
                     String value = configuration.getString(key);
                     translationStorage.add(yaml, key, value);
                 }

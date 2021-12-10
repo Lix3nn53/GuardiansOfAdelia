@@ -26,5 +26,7 @@ public class TranslationStorage {
 
     public void add(String ymlName, String path, String t) {
         pathToTranslation.put(ymlName + "." + path, t);
+
+        // GuardiansOfAdelia.getInstance().getLogger().info("LOCALE: " + ymlName + "+" + path + " = " + t);
     }
 }

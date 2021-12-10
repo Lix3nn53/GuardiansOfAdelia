@@ -70,7 +70,17 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.bazaar.l1"));
         itemMeta.setLore(lore);
         bazaar.setItemMeta(itemMeta);
-        this.setItem(30, bazaar);
+        this.setItem(31, bazaar);
+
+        ItemStack settings = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(39);
+        itemMeta.setDisplayName(ChatPalette.GOLD + Translation.t(guardianData, "menu.settings.name"));
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.settings.l1"));
+        itemMeta.setLore(lore);
+        settings.setItemMeta(itemMeta);
+        this.setItem(29, settings);
 
         ItemStack teleport = new ItemStack(Material.WOODEN_SHOVEL);
         itemMeta.setCustomModelData(6);
@@ -80,7 +90,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.teleportation.l1"));
         itemMeta.setLore(lore);
         teleport.setItemMeta(itemMeta);
-        this.setItem(32, teleport);
+        this.setItem(33, teleport);
 
         ItemStack activeBoosts = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(28);
@@ -90,7 +100,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.boost.l1"));
         itemMeta.setLore(lore);
         activeBoosts.setItemMeta(itemMeta);
-        this.setItem(37, activeBoosts);
+        this.setItem(46, activeBoosts);
 
         ItemStack donation = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(10);
@@ -106,7 +116,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.store.l5"));
         itemMeta.setLore(lore);
         donation.setItemMeta(itemMeta);
-        this.setItem(40, donation);
+        this.setItem(49, donation);
 
         ItemStack daily = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(38);
@@ -116,7 +126,7 @@ public class GuiMain extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.daily.l1"));
         itemMeta.setLore(lore);
         daily.setItemMeta(itemMeta);
-        this.setItem(43, daily);
+        this.setItem(52, daily);
     }
 
     @Override

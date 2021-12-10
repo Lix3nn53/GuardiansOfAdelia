@@ -25,13 +25,13 @@ public class GuiTutorialSkip extends GuiGeneric {
         ItemStack yes = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMeta = yes.getItemMeta();
         itemMeta.setUnbreakable(true);
-        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "general.tutorial.yes"));
+        itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "general.tutorial.true"));
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         yes.setItemMeta(itemMeta);
         this.setItem(11, yes);
 
         ItemStack no = new ItemStack(Material.RED_WOOL);
-        itemMeta.setDisplayName(ChatPalette.RED + Translation.t(guardianData, "general.tutorial.no"));
+        itemMeta.setDisplayName(ChatPalette.RED + Translation.t(guardianData, "general.tutorial.false"));
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
         itemMeta.setLore(lore);

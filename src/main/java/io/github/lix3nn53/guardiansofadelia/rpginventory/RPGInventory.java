@@ -13,6 +13,7 @@ import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
@@ -49,7 +50,7 @@ public class RPGInventory extends GuiGeneric {
     private final HotBarSlotWeapon hotBarSlotWeapon = new HotBarSlotWeapon();
 
     public RPGInventory(Player player) {
-        super(54, ChatPalette.GRAY_DARK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+        super(54, CustomCharacter.MENU_54 + ChatPalette.GRAY_DARK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
 
         if (parrotSlot.isEmpty()) {
             this.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getFillItem());
@@ -126,7 +127,7 @@ public class RPGInventory extends GuiGeneric {
         GuardianData guardianData = GuardianDataManager.getGuardianData(player);
         this.setItem(RPGSlotType.CHARACTER_INFO.getSlotNo(), new CharacterInfoSlot(player).getItem(guardianData));
 
-        InventoryUtils.fillEmptySlotsWithGlass(this);
+        // InventoryUtils.fillEmptySlotsWithGlass(this);
         this.setLocked(false);
     }
 
