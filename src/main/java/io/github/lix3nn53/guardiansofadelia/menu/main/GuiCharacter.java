@@ -7,8 +7,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.menu.GuiHelper;
 import io.github.lix3nn53.guardiansofadelia.menu.main.character.*;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
@@ -23,13 +25,13 @@ import java.util.ArrayList;
 public class GuiCharacter extends GuiGeneric {
 
     public GuiCharacter(GuardianData guardianData) {
-        super(27, Translation.t(guardianData, "character.name"), 0);
+        super(54, CustomCharacterGui.MENU_54.toString() + ChatPalette.BLACK + Translation.t(guardianData, "character.name"), 0);
 
-        ItemStack skills = new ItemStack(Material.WOODEN_PICKAXE);
+        ItemStack classItem = new ItemStack(Material.WOODEN_PICKAXE);
         String rpgClassStr = guardianData.getActiveCharacter().getRpgClassStr();
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         int classIconCustomModelData = rpgClass.getClassIconCustomModelData();
-        ItemMeta itemMeta = skills.getItemMeta();
+        ItemMeta itemMeta = classItem.getItemMeta();
         itemMeta.setCustomModelData(classIconCustomModelData);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -40,9 +42,9 @@ public class GuiCharacter extends GuiGeneric {
         lore.add("");
         lore.add(Translation.t(guardianData, "character.class.name") + ": " + rpgClass.getClassString());
         itemMeta.setLore(lore);
-        skills.setItemMeta(itemMeta);
-        this.setItem(9, skills);
+        classItem.setItemMeta(itemMeta);
 
+        ItemStack skills = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(29);
         itemMeta.setUnbreakable(true);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
@@ -52,7 +54,6 @@ public class GuiCharacter extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.skill.l1"));
         itemMeta.setLore(lore);
         skills.setItemMeta(itemMeta);
-        this.setItem(11, skills);
 
         ItemStack statpoints = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(6);
@@ -62,7 +63,6 @@ public class GuiCharacter extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.stat.l1"));
         itemMeta.setLore(lore);
         statpoints.setItemMeta(itemMeta);
-        this.setItem(13, statpoints);
 
         ItemStack job = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(21);
@@ -72,7 +72,6 @@ public class GuiCharacter extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.crafting.l1"));
         itemMeta.setLore(lore);
         job.setItemMeta(itemMeta);
-        this.setItem(15, job);
 
         ItemStack chat = new ItemStack(Material.WOODEN_PICKAXE);
         itemMeta.setCustomModelData(4);
@@ -82,7 +81,8 @@ public class GuiCharacter extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "character.chattag.l1"));
         itemMeta.setLore(lore);
         chat.setItemMeta(itemMeta);
-        this.setItem(17, chat);
+
+        GuiHelper.formBig8ButtonGui(this, new ItemStack[]{classItem, skills, statpoints, job, chat}, "Main Menu");
     }
 
     @Override
@@ -104,27 +104,30 @@ public class GuiCharacter extends GuiGeneric {
 
 
         int slot = event.getSlot();
-        if (slot == 9) {
+        if (slot == 0) {
+            GuiMain gui = new GuiMain(guardianData);
+            gui.openInventory(player);
+        } else if (GuiHelper.getBig8ButtonGuiIndexes(0).contains(slot)) {
             GuiCharacterClassManager gui = new GuiCharacterClassManager(guardianData);
             gui.openInventory(player);
-        } else if (slot == 11) {
+        } else if (GuiHelper.getBig8ButtonGuiIndexes(1).contains(slot)) {
             SkillBar skillBar = rpgCharacter.getSkillBar();
 
             int pointsLeft = skillBar.getSkillPointsLeftToSpend();
 
             GuiCharacterSkills gui = new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
             gui.openInventory(player);
-        } else if (slot == 13) {
+        } else if (GuiHelper.getBig8ButtonGuiIndexes(2).contains(slot)) {
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
             int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
 
             GuiCharacterStatInvest gui = new GuiCharacterStatInvest(pointsLeft, guardianData, rpgCharacterStats);
             gui.openInventory(player);
-        } else if (slot == 15) {
+        } else if (GuiHelper.getBig8ButtonGuiIndexes(3).contains(slot)) {
             GuiCharacterCrafting gui = new GuiCharacterCrafting(guardianData, rpgCharacter);
             gui.openInventory(player);
-        } else if (slot == 17) {
+        } else if (GuiHelper.getBig8ButtonGuiIndexes(4).contains(slot)) {
             GuiCharacterChatTag gui = new GuiCharacterChatTag(player);
             gui.openInventory(player);
         }

@@ -50,7 +50,7 @@ public class RPGInventory extends GuiGeneric {
     private final HotBarSlotWeapon hotBarSlotWeapon = new HotBarSlotWeapon();
 
     public RPGInventory(Player player) {
-        super(54, CustomCharacterGui.MENU_54_FLAT + ChatPalette.GRAY_DARK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
+        super(54, CustomCharacterGui.MENU_54_FLAT + ChatPalette.BLACK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
 
         if (parrotSlot.isEmpty()) {
             this.setItem(RPGSlotType.PARROT.getSlotNo(), parrotSlot.getFillItem());

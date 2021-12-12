@@ -43,7 +43,7 @@ public class HeaderBar {
     }
 
     private String getTitle() {
-        StringBuilder stringBuilder = new StringBuilder("Lix3nn");
+        StringBuilder stringBuilder = new StringBuilder();
 
         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
         if (activeCharacter == null) return stringBuilder.toString();

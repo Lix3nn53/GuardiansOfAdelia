@@ -2,10 +2,12 @@ package io.github.lix3nn53.guardiansofadelia.items.list;
 
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OtherItems {
 
@@ -45,12 +47,23 @@ public class OtherItems {
         return itemStack;
     }
 
-    public static ItemStack getEmpty(String name, ArrayList<String> lore) {
+    public static ItemStack getEmpty(String name, List<String> lore) {
         ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setCustomModelData(40);
         itemMeta.setDisplayName(name);
         itemMeta.setLore(lore);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack getBackButton(String backTo) {
+        ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setCustomModelData(41);
+        itemMeta.setDisplayName(ChatPalette.RED + "Go back to " + backTo);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
