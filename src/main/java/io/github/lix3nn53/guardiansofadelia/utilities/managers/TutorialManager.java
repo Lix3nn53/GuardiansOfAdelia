@@ -11,7 +11,6 @@ import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -47,7 +46,7 @@ public class TutorialManager {
                 }
             }
 
-            InventoryUtils.setMenuItemPlayer(player);
+            // InventoryUtils.setMenuItemPlayer(player);
             // giveTutorialItems(player, startingClass);
             player.teleport(startLocation);
 

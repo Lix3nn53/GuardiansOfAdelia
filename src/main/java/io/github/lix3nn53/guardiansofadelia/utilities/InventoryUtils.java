@@ -164,7 +164,7 @@ public class InventoryUtils {
         return false;
     }
 
-    public static void setMenuItemPlayer(Player player) {
+    /*public static void setMenuItemPlayer(Player player) {
         ItemStack menu = new ItemStack(Material.BOOK);
         ItemMeta im = menu.getItemMeta();
         im.setDisplayName(ChatPalette.GREEN_DARK + "Menu");
@@ -175,7 +175,7 @@ public class InventoryUtils {
         menu.setItemMeta(im);
         player.getInventory().setItem(17, menu);
 
-        /*ItemStack rpgInventory = new ItemStack(Material.STONE_PICKAXE);
+        *//*ItemStack rpgInventory = new ItemStack(Material.STONE_PICKAXE);
         im.setDisplayName(ChatPalette.YELLOW + "RPG Inventory");
         lore = new ArrayList<>();
         lore.add("");
@@ -186,8 +186,8 @@ public class InventoryUtils {
         player.getInventory().setItem(1, rpgInventory);
         player.getInventory().setItem(2, rpgInventory);
         player.getInventory().setItem(3, rpgInventory);
-        player.getInventory().setItem(4, rpgInventory);*/
-    }
+        player.getInventory().setItem(4, rpgInventory);*//*
+    }*/
 
     public static boolean inventoryContains(Inventory inventory, Material mat, int amount) {
         int count = 0;

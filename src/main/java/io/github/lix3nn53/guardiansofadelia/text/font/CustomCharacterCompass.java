@@ -4,7 +4,8 @@ import net.md_5.bungee.api.ChatColor;
 
 public final class CustomCharacterCompass {
 
-    public static final CustomCharacter EMPTY = new CustomCharacter("COMPASS_00", '鄟', 1, 1, ChatColor.WHITE);
+    public static final CustomCharacter EMPTY = new CustomCharacter("COMPASS_EMPTY", '鄟', 1, 1,
+            ChatColor.WHITE, NegativeSpace.NEGATIVE_7, NegativeSpace.POSITIVE_8);
 
     public static final CustomCharacter[] ARRAY = {
             new CustomCharacter("COMPASS_00", '鄀', 1, 1, ChatColor.WHITE),

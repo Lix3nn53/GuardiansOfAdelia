@@ -1,6 +1,5 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
-import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.HelmetSkin;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -9,7 +8,6 @@ import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
 import io.github.lix3nn53.guardiansofadelia.menu.ActiveGuiManager;
 import io.github.lix3nn53.guardiansofadelia.menu.main.GuiMain;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
-import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
@@ -27,7 +25,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class MyInventoryClickEvent implements Listener {
 
@@ -82,9 +79,14 @@ public class MyInventoryClickEvent implements Listener {
         if (clickedInventory != null && clickedInventory.getType().equals(InventoryType.CRAFTING)) {
             event.setCancelled(true);
             if (cursorType.equals(Material.AIR) && rpgCharacter != null) {
-                RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
-                rpgInventory.update(player);
-                rpgInventory.openInventory(player);
+                if (slot == 0) {
+                    GuiMain mainMenu = new GuiMain(guardianData);
+                    mainMenu.openInventory(player);
+                } else {
+                    RPGInventory rpgInventory = rpgCharacter.getRpgInventory();
+                    rpgInventory.update(player);
+                    rpgInventory.openInventory(player);
+                }
             }
             return;
         }
@@ -126,22 +128,7 @@ public class MyInventoryClickEvent implements Listener {
         ItemMeta itemMeta = current.getItemMeta();
         String currentName = itemMeta.getDisplayName();
 
-        if (currentName.equals(ChatPalette.GREEN_DARK + "Menu")) {
-            event.setCancelled(true);
-            if (!cursorType.equals(Material.AIR)) {
-                return;
-            }
-
-            final GuardianData guardianDataCopy = guardianData;
-            new BukkitRunnable() {
-
-                @Override
-                public void run() {
-                    GuiMain mainMenu = new GuiMain(guardianDataCopy);
-                    mainMenu.openInventory(player);
-                }
-            }.runTaskLater(GuardiansOfAdelia.getInstance(), 1);
-        } else if (currentType.equals(Material.ARROW)) {
+        if (currentType.equals(Material.ARROW)) {
             event.setCancelled(true);
         } else if (title.equals("Crafting")) { // player inventory click listeners for helmet skins
             if (event.isShiftClick()) {

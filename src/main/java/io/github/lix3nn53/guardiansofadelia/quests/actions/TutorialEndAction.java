@@ -9,7 +9,6 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
-import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -30,7 +29,7 @@ public class TutorialEndAction implements Action {
 
                 player.getInventory().clear();
 
-                InventoryUtils.setMenuItemPlayer(player);
+                // InventoryUtils.setMenuItemPlayer(player);
 
                 RPGCharacterStats rpgCharacterStats = activeCharacter.getRpgCharacterStats();
 

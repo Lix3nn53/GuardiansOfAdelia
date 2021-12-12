@@ -5,6 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
+import io.github.lix3nn53.guardiansofadelia.text.font.NegativeSpace;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -39,17 +41,50 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatPalette.BLUE + "/test model portal<1-5>");
                 player.sendMessage(ChatPalette.BLUE + "/test sound <code> - play custom sounds");
                 player.sendMessage(ChatPalette.BLUE + "/test damage <amount> - damage self");
+                player.sendMessage(ChatPalette.BLUE + "/test custom <custom> [sBefore] [sAfter] <negative> <positive> - test custom char");
             } else if (args[0].equals("test")) {
-                CustomCharacter menuContent = CustomCharacter.MENU_54;
-                CustomCharacter logo = CustomCharacter.LOGO;
+                CustomCharacter menuContent = CustomCharacterGui.MENU_54;
+                CustomCharacter logo = CustomCharacterGui.LOGO;
                 logo.setNegativeSpacesBefore(Integer.parseInt(args[1]));
                 logo.setNegativeSpacesAfter(Integer.parseInt(args[2]));
+                logo.setNegativeSpace(NegativeSpace.valueOf(args[3]));
+                logo.setPositiveSpace(NegativeSpace.valueOf(args[4]));
 
                 String s1 = menuContent.toString();
                 String s2 = logo.toString();
 
-                GuiGeneric guiGeneric = new GuiGeneric(54,  s1 + s2 + args[3], 0);
+                GuiGeneric guiGeneric = new GuiGeneric(54, s1 + s2 + args[3], 0);
                 guiGeneric.openInventory(player);
+            } else if (args[0].equals("custom")) {
+                CustomCharacter chara = CustomCharacter.valueOf(args[1]);
+                chara.setNegativeSpacesBefore(Integer.parseInt(args[2]));
+                chara.setNegativeSpacesAfter(Integer.parseInt(args[3]));
+                chara.setNegativeSpace(NegativeSpace.valueOf(args[4]));
+                chara.setPositiveSpace(NegativeSpace.valueOf(args[5]));
+
+                player.sendMessage("BEFORE" + chara + "AFTER");
+                //test custom LOGO 1 20 NEGATIVE_8 POSITIVE_8
+                //test custom COMPASS_EMPTY 1 1 NEGATIVE_8 POSITIVE_8
+            } else if (args[0].equals("customgui")) {
+                CustomCharacter menuContent = CustomCharacter.valueOf(args[1]);
+                CustomCharacter logo = CustomCharacter.valueOf(args[2]);
+                menuContent.setNegativeSpacesBefore(Integer.parseInt(args[3]));
+                menuContent.setNegativeSpacesAfter(Integer.parseInt(args[4]));
+                menuContent.setNegativeSpace(NegativeSpace.valueOf(args[5]));
+                menuContent.setPositiveSpace(NegativeSpace.valueOf(args[6]));
+
+                logo.setNegativeSpacesBefore(Integer.parseInt(args[7]));
+                logo.setNegativeSpacesAfter(Integer.parseInt(args[8]));
+                logo.setNegativeSpace(NegativeSpace.valueOf(args[9]));
+                logo.setPositiveSpace(NegativeSpace.valueOf(args[10]));
+
+                String s1 = menuContent.toString();
+                String s2 = logo.toString();
+
+                GuiGeneric guiGeneric = new GuiGeneric(54, s1 + s2 + ChatColor.DARK_GRAY + "TEST TITLE", 0);
+                guiGeneric.openInventory(player);
+                //test customgui MENU_54 LOGO 1 20 NEGATIVE_4 POSITIVE_4 1 20 NEGATIVE_8 POSITIVE_8
+                //test customgui MENU_54 LOGO 2 41 NEGATIVE_4 POSITIVE_4 -5 37 NEGATIVE_4 POSITIVE_4
             } else if (args[0].equals("palette")) {
                 StringBuilder msg = new StringBuilder();
                 for (ChatPalette chatPalette : ChatPalette.values()) {

@@ -7,7 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.menu.guild.GuiGuild;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
-import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class GuiMain extends GuiGeneric {
 
     public GuiMain(GuardianData guardianData) {
-        super(54, CustomCharacter.MENU_54.toString() + CustomCharacter.LOGO, 0);
+        super(54, CustomCharacterGui.MENU_54.toString() + CustomCharacterGui.LOGO, 0);
 
         ItemStack compass = new ItemStack(Material.WOODEN_PICKAXE);
         ItemMeta itemMeta = compass.getItemMeta();

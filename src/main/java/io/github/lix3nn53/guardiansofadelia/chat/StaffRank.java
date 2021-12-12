@@ -40,7 +40,7 @@ public enum StaffRank {
             case OWNER:
                 return CustomCharacterChatTag.NOVICE;
             case ADMIN:
-                return CustomCharacterChatTag.NOVICE;
+                return CustomCharacterChatTag.ADMIN;
             case DEVELOPER:
                 return CustomCharacterChatTag.NOVICE;
             case BUILDER:

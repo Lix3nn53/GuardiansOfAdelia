@@ -16,7 +16,6 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
-import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.AdeliaRegionManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
@@ -68,7 +67,7 @@ public class DatabaseManager {
                     guardianData.setActiveCharacter(rpgCharacter, charNo);
                     Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> player.teleport(location));
                     TablistUtils.updateTablist(player);
-                    InventoryUtils.setMenuItemPlayer(player);
+                    // InventoryUtils.setMenuItemPlayer(player);
                     rpgCharacter.getSkillBar().remakeSkillBar(guardianData.getLanguage());
                     player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                     int totalMaxMana = rpgCharacter.getRpgCharacterStats().getTotalMaxMana();

@@ -10,19 +10,32 @@ public final class CustomCharacter {
 
     private static final Map<String, CustomCharacter> BY_NAME = new HashMap<>();
 
-    public static final CustomCharacter MENU_54 = new CustomCharacter("MENU_54", '섃', 1, 20, ChatColor.WHITE);
-    public static final CustomCharacter LOGO = new CustomCharacter("LOGO", 'ꍋ', -3, 18, ChatColor.WHITE);
-
     private final Character character;
     private int negativeSpacesBefore;
     private int negativeSpacesAfter;
     private ChatColor color;
+    private NegativeSpace negativeSpace;
+    private NegativeSpace positiveSpace;
+
+    CustomCharacter(String name, Character c, int negativeSpacesBefore, int negativeSpacesAfter, ChatColor color, NegativeSpace negativeSpace, NegativeSpace positiveSpace) {
+        this.character = c;
+        this.negativeSpacesBefore = negativeSpacesBefore;
+        this.negativeSpacesAfter = negativeSpacesAfter;
+        this.color = color;
+        this.negativeSpace = negativeSpace;
+        this.positiveSpace = positiveSpace;
+
+        BY_NAME.put(name, this);
+    }
 
     CustomCharacter(String name, Character c, int negativeSpacesBefore, int negativeSpacesAfter, ChatColor color) {
         this.character = c;
         this.negativeSpacesBefore = negativeSpacesBefore;
         this.negativeSpacesAfter = negativeSpacesAfter;
         this.color = color;
+        this.negativeSpace = NegativeSpace.NEGATIVE_8;
+        this.positiveSpace = NegativeSpace.POSITIVE_8;
+
         BY_NAME.put(name, this);
     }
 
@@ -42,7 +55,7 @@ public final class CustomCharacter {
         StringBuilder result = new StringBuilder();
 
         if (negativeSpacesBefore != 0) {
-            Character c = negativeSpacesBefore > 0 ? NegativeSpace.NEGATIVE_8.toCharacter() : ' ';
+            Character c = negativeSpacesBefore > 0 ? negativeSpace.toCharacter() : positiveSpace.toCharacter();
             for (int i = 0; i < Math.abs(negativeSpacesBefore); i++) {
                 result.append(c);
             }
@@ -51,7 +64,7 @@ public final class CustomCharacter {
         result.append(character);
 
         if (negativeSpacesAfter != 0) {
-            Character c = negativeSpacesAfter > 0 ? NegativeSpace.NEGATIVE_8.toCharacter() : ' ';
+            Character c = negativeSpacesAfter > 0 ? negativeSpace.toCharacter() : positiveSpace.toCharacter();
             for (int i = 0; i < Math.abs(negativeSpacesAfter); i++) {
                 result.append(c);
             }
@@ -70,5 +83,13 @@ public final class CustomCharacter {
 
     public void setColor(ChatColor color) {
         this.color = color;
+    }
+
+    public void setNegativeSpace(NegativeSpace negativeSpace) {
+        this.negativeSpace = negativeSpace;
+    }
+
+    public void setPositiveSpace(NegativeSpace positiveSpace) {
+        this.positiveSpace = positiveSpace;
     }
 }
