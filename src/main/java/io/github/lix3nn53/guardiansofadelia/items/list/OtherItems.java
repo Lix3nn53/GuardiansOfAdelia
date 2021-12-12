@@ -45,6 +45,16 @@ public class OtherItems {
         return itemStack;
     }
 
+    public static ItemStack getEmpty(String name, ArrayList<String> lore) {
+        ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setCustomModelData(40);
+        itemMeta.setDisplayName(name);
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
     public static ItemStack getUnassignedSkill() {
         ItemStack itemStack = new ItemStack(Material.PAPER);
         ItemMeta itemMeta = itemStack.getItemMeta();

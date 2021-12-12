@@ -5,6 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -41,10 +43,10 @@ public class HeaderBar {
     }
 
     private String getTitle() {
-        StringBuilder message = new StringBuilder(player.getDisplayName());
+        StringBuilder stringBuilder = new StringBuilder("Lix3nn");
 
         RPGCharacter activeCharacter = guardianData.getActiveCharacter();
-        if (activeCharacter == null) return message.toString();
+        if (activeCharacter == null) return stringBuilder.toString();
         RPGCharacterStats stats = activeCharacter.getRpgCharacterStats();
 
         ArrayList<String> buffs = new ArrayList<>();
@@ -83,20 +85,27 @@ public class HeaderBar {
 
         for (int i = 0; i < buffs.size(); i++) {
             if (i % 2 == 0) {
-                message.insert(0, buffs.get(i) + " ");
+                stringBuilder.insert(0, buffs.get(i) + " ");
             } else {
-                message.append(" ").append(buffs.get(i));
+                stringBuilder.append(" ").append(buffs.get(i));
             }
         }
 
-        if (buffs.size() % 2 == 1) {
-            message.append("          ");
-        }
+        String message = stringBuilder.toString();
+        if (message.length() % 2 == 1) message = " " + message;
 
-        return message.toString();
+        final int mid = message.length() / 2; //get the middle of the String
+        String[] parts = {message.substring(0, mid), message.substring(mid)};
+
+        CustomCharacter compassDirection = CompassManager.getCompassDirection(player);
+        String middle = compassDirection.toString();
+
+        return parts[0] + middle + parts[1];
     }
 
     public void update() {
+        CompassManager.update(player);
+
         String title = getTitle();
 
         this.bar.setTitle(title);

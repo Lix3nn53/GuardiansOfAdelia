@@ -9,6 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompassNPCs;
 import io.github.lix3nn53.guardiansofadelia.menu.main.compass.GuiCompassTowns;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -62,6 +63,16 @@ public class GuiCompass extends GuiGeneric {
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         this.setItem(10, itemStack);
+
+        itemStack = new ItemStack(Material.RED_WOOL);
+        itemStack.getItemMeta();
+        itemMeta.setDisplayName(ChatPalette.RED + "Clear Target");
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add("Click to clear your compass target.");
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        this.setItem(26, itemStack);
     }
 
     @Override
@@ -94,6 +105,9 @@ public class GuiCompass extends GuiGeneric {
         } else if (slot == 16) { //npcs
             GuiCompassNPCs gui = new GuiCompassNPCs();
             gui.openInventory(player);
+        } else if (slot == 26) { //npcs
+            CompassManager.clearCompassTarget(player);
+            player.closeInventory();
         }
     }
 }
