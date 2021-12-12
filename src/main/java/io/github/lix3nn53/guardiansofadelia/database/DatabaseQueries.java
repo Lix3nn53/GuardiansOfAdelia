@@ -446,7 +446,7 @@ public class DatabaseQueries {
                 String chatTagString = resultSet.getString("chat_tag");
                 if (!resultSet.wasNull()) {
                     //if NOT NULL
-                    rpgCharacter.setChatTag(ChatTag.valueOf(chatTagString));
+                    rpgCharacter.setChatTag(player, ChatTag.valueOf(chatTagString));
                 }
 
                 String activeQuestsString = resultSet.getString("activequests");

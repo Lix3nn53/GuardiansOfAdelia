@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.character;
 
+import io.github.lix3nn53.guardiansofadelia.chat.ChatManager;
 import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -202,8 +203,9 @@ public final class RPGCharacter {
         return chatTag;
     }
 
-    public void setChatTag(ChatTag chatTag) {
+    public void setChatTag(Player player, ChatTag chatTag) {
         this.chatTag = chatTag;
+        ChatManager.updatePlayerName(player);
     }
 
     public boolean hasQuest(int questId) {

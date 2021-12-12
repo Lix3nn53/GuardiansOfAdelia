@@ -38,7 +38,8 @@ public class GuiCharacterChatTag extends GuiGeneric {
                     int requiredQuest = chatTag.getRequiredQuest();
                     ItemStack itemStack = new ItemStack(Material.RED_WOOL);
                     ChatPalette questColor = ChatPalette.RED;
-                    if (turnedInQuests.contains(requiredQuest)) {
+
+                    if (requiredQuest == -1 || turnedInQuests.contains(requiredQuest)) {
                         itemStack = new ItemStack(Material.LIME_WOOL);
                         questColor = ChatPalette.GREEN_DARK;
                     }
@@ -81,7 +82,7 @@ public class GuiCharacterChatTag extends GuiGeneric {
                 ChatTag chatTag = slotToChatTag.get(slot);
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
-                rpgCharacter.setChatTag(chatTag);
+                rpgCharacter.setChatTag(player, chatTag);
 
                 MessageUtils.sendCenteredMessage(player, ChatPalette.GOLD + "You selected a new chat tag: " + chatTag.getChatPalette() + chatTag);
             }

@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.database;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.bossbar.HeaderBarManager;
+import io.github.lix3nn53.guardiansofadelia.chat.ChatManager;
 import io.github.lix3nn53.guardiansofadelia.chat.PremiumRank;
 import io.github.lix3nn53.guardiansofadelia.chat.StaffRank;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
@@ -118,6 +119,7 @@ public class DatabaseManager {
                 }
 
                 HeaderBarManager.onPlayerJoin(player, guardianData);
+                ChatManager.onPlayerJoin(player);
 
                 //player.sendMessage("Loaded player data");
                 //character selection screen

@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
@@ -121,10 +122,11 @@ public class ChatManager {
     }
 
     public static String getFormat(Player player) {
-        String format = "<group-prefix>%s<group-suffix>%s"; //first %s is player.getDisplayName(), second %s is the message
+        // String format = "<group-prefix>%s<group-suffix>%s"; //first %s is player.getDisplayName(), second %s is the message
+        String format = "%s<group-suffix>%s"; //first %s is player.getDisplayName(), second %s is the message
         //replacing your values
-        format = format.replace("<group-prefix>", getChatPrefix(player));
-        format = format.replace("<group-suffix>", getChatSuffix(player));
+        // format = format.replace("<group-prefix>", getChatPrefix(player));
+        format = format.replace("<group-suffix>", getChatSuffix());
 
         return format;
     }
@@ -135,26 +137,37 @@ public class ChatManager {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             StaffRank staffRank = guardianData.getStaffRank();
             if (!staffRank.equals(StaffRank.NONE)) {
-                String s = staffRank.toString();
-                prefix += ChatPalette.GRAY_DARK + "[" + staffRank.getChatPalette() + s + ChatPalette.GRAY_DARK + "]";
+                CustomCharacter customCharacter = staffRank.getCustomCharacter();
+                prefix += customCharacter;
             }
             PremiumRank premiumRank = guardianData.getPremiumRank();
             if (!premiumRank.equals(PremiumRank.NONE)) {
-                String s = premiumRank.toString();
-                prefix += ChatPalette.GRAY_DARK + "[" + premiumRank.getChatPalette() + s + ChatPalette.GRAY_DARK + "]";
+                CustomCharacter customCharacter = premiumRank.getCustomCharacter();
+                prefix += customCharacter;
             }
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 ChatTag chatTag = activeCharacter.getChatTag();
-                String s = chatTag.toString();
-                s = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-                prefix += ChatPalette.GRAY_DARK + "[" + chatTag.getChatPalette() + s + ChatPalette.GRAY_DARK + "]";
+                CustomCharacter customCharacter = chatTag.getCustomCharacter();
+                prefix += customCharacter;
             }
         }
-        return prefix + ChatPalette.GRAY + " ";
+        return prefix + ChatPalette.WHITE;
     }
 
-    private static String getChatSuffix(Player player) {
-        return ChatPalette.GOLD + " > " + ChatPalette.YELLOW;
+    private static String getChatSuffix() {
+        return ChatPalette.YELLOW + " > " + ChatPalette.GRAY;
+    }
+
+    public static void updatePlayerName(Player player) {
+        String chatPrefix = getChatPrefix(player);
+
+        String name = player.getName();
+        player.setDisplayName(chatPrefix + name);
+        player.setPlayerListName(chatPrefix + name);
+    }
+
+    public static void onPlayerJoin(Player player) {
+        updatePlayerName(player);
     }
 }

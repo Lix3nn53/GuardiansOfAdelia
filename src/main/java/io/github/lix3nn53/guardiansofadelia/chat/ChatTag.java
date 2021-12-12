@@ -2,6 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.chat;
 
 
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterChatTag;
 
 public enum ChatTag {
     NOVICE, //MAIN-QUEST-LINE TAGS
@@ -95,6 +97,46 @@ public enum ChatTag {
             case SHADOW:
                 return 999;
         }
-        return 1;
+
+        return -1;
+    }
+
+    public CustomCharacter getCustomCharacter() {
+        switch (this) {
+            case SENIOR:
+                return CustomCharacterChatTag.NOVICE;
+            case LORD:
+                return CustomCharacterChatTag.NOVICE;
+            case GUARDIAN:
+                return CustomCharacterChatTag.NOVICE;
+            case SUPREME:
+                return CustomCharacterChatTag.NOVICE;
+            case BRAVE:
+                return CustomCharacterChatTag.NOVICE;
+            case GLADIATOR:
+                return CustomCharacterChatTag.NOVICE;
+            case CHAMPION:
+                return CustomCharacterChatTag.NOVICE;
+            case DRAGON:
+                return CustomCharacterChatTag.NOVICE;
+            case MAGICIAN:
+                return CustomCharacterChatTag.NOVICE;
+            case SAGE:
+                return CustomCharacterChatTag.NOVICE;
+            case WIZARD:
+                return CustomCharacterChatTag.NOVICE;
+            case ETERNAL:
+                return CustomCharacterChatTag.NOVICE;
+            case THIEF:
+                return CustomCharacterChatTag.NOVICE;
+            case RINGLEADER:
+                return CustomCharacterChatTag.NOVICE;
+            case TRICKSTER:
+                return CustomCharacterChatTag.NOVICE;
+            case SHADOW:
+                return CustomCharacterChatTag.NOVICE;
+        }
+
+        return CustomCharacterChatTag.NOVICE;
     }
 }
