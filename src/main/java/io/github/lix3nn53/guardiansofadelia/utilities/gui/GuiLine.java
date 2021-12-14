@@ -12,4 +12,5 @@ public interface GuiLine {
 
     boolean isEmpty();
 
+    void setDisabled(boolean disabled);
 }

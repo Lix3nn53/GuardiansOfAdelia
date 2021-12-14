@@ -8,6 +8,7 @@ import java.util.List;
 public class GuiLineGeneric implements GuiLine {
 
     private final List<ItemStack> words = new ArrayList<>();
+    private boolean isDisabled = false;
 
     @Override
     public void addWord(ItemStack itemStack) {
@@ -23,6 +24,13 @@ public class GuiLineGeneric implements GuiLine {
 
     @Override
     public boolean isEmpty() {
+        if (isDisabled) return false;
+
         return words.size() < 9;
+    }
+
+    @Override
+    public void setDisabled(boolean disabled) {
+        this.isDisabled = disabled;
     }
 }

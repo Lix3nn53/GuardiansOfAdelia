@@ -1,6 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main.compass;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCompass;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
@@ -17,7 +22,11 @@ import java.util.HashMap;
 public class GuiCompassTowns extends GuiBookGeneric {
 
     public GuiCompassTowns() {
-        super(ChatPalette.GRAY_DARK + "Compass Towns", 0);
+        super(CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.BLACK + "Compass Towns", 0);
+
+        ItemStack backButton = OtherItems.getBackButton("Compass Menu");
+        this.addToFirstAvailableWord(backButton);
+        this.disableLine(0, 0);
 
         HashMap<Integer, Town> towns = TownManager.getTowns();
         for (int key : towns.keySet()) {
@@ -42,15 +51,27 @@ public class GuiCompassTowns extends GuiBookGeneric {
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        ItemStack item = event.getCurrentItem();
-        ItemMeta itemMeta = item.getItemMeta();
+        if (event.getSlot() == 0) {
+            GuardianData guardianData;
+            if (GuardianDataManager.hasGuardianData(player)) {
+                guardianData = GuardianDataManager.getGuardianData(player);
+            } else {
+                return;
+            }
 
-        String displayName = itemMeta.getDisplayName();
-        String[] split = displayName.split("#");
-        int i = Integer.parseInt(split[1]);
+            GuiCompass gui = new GuiCompass(guardianData);
+            gui.openInventory(player);
+        } else {
+            ItemStack item = event.getCurrentItem();
+            ItemMeta itemMeta = item.getItemMeta();
 
-        Town town = TownManager.getTown(i);
-        CompassManager.setCompassItemLocation(player, ChatPalette.BLUE_LIGHT + town.getName(), town.getLocation());
-        player.closeInventory();
+            String displayName = itemMeta.getDisplayName();
+            String[] split = displayName.split("#");
+            int i = Integer.parseInt(split[1]);
+
+            Town town = TownManager.getTown(i);
+            CompassManager.setCompassItemLocation(player, ChatPalette.BLUE_LIGHT + town.getName(), town.getLocation());
+            player.closeInventory();
+        }
     }
 }

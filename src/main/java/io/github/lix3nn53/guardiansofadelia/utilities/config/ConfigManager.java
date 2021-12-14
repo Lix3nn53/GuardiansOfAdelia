@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
 import io.github.lix3nn53.guardiansofadelia.towns.Town;
 import io.github.lix3nn53.guardiansofadelia.towns.TownManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
@@ -72,7 +73,6 @@ public class ConfigManager {
         loadTowns();
         TeleportPortalsConfiguration.loadConfig();
         TeleportGuiConfiguration.loadConfig();
-        loadHologramsConfig();
         DatabaseConfiguration.loadConfigs();
         SkillOnGroundConfigurations.loadConfigs();
         DungeonConfiguration.loadConfigs();
@@ -87,6 +87,7 @@ public class ConfigManager {
         GearSetConfiguration.loadConfig();
         MobConfigurations.loadConfigs();
         MerchantConfiguration.loadConfigs();
+        loadHologramsConfig();
     }
 
     public static void writeConfigALL() {
@@ -116,6 +117,12 @@ public class ConfigManager {
             Location location = new Location(world, x, y, z);
 
             List<String> texts = hologramsConfig.getStringList("Hologram" + i + ".texts");
+
+            if (hologramsConfig.contains("Hologram" + i + ".background")) {
+                String backgroundStr = hologramsConfig.getString("Hologram" + i + ".background");
+                CustomCharacter background = CustomCharacter.valueOf(backgroundStr);
+                texts.set(0, background + texts.get(0));
+            }
 
             for (int index = texts.size() - 1; index >= 0; index--) {
                 String text = texts.get(index);

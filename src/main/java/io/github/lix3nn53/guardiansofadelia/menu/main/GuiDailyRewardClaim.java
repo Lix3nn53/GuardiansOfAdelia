@@ -2,9 +2,11 @@ package io.github.lix3nn53.guardiansofadelia.menu.main;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardHandler;
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +23,10 @@ import java.util.List;
 public class GuiDailyRewardClaim extends GuiGeneric {
 
     public GuiDailyRewardClaim(Player player) {
-        super(27, ChatPalette.GRAY_DARK + "Daily Reward Claim", 0);
+        super(54, CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.BLACK + "Daily Reward Claim", 0);
+
+        ItemStack backButton = OtherItems.getBackButton("Main Menu");
+        this.setItem(0, backButton);
 
         if (!GuardianDataManager.hasGuardianData(player)) return;
 
@@ -59,19 +64,20 @@ public class GuiDailyRewardClaim extends GuiGeneric {
         itemMeta.setLore(lore);
         notAvailableToday.setItemMeta(itemMeta);
 
-        ItemStack notAvailable = new ItemStack(Material.GRAY_WOOL);
+        ItemStack notAvailableYet = new ItemStack(Material.GRAY_WOOL);
         itemMeta.setDisplayName(ChatPalette.GRAY + "Not available yet");
         lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatPalette.GRAY + "");
         itemMeta.setLore(lore);
-        notAvailable.setItemMeta(itemMeta);
+        notAvailableYet.setItemMeta(itemMeta);
 
         DailyRewardInfo dailyRewardInfo = guardianData.getDailyRewardInfo();
         LocalDate lastObtainDate = dailyRewardInfo.getLastObtainDate();
 
-        int playerIndex = DailyRewardHandler.getIndexOfDate(lastObtainDate);
-        int currentIndex = DailyRewardHandler.getCurrentIndex();
+        int offset = 18;
+        int playerIndex = DailyRewardHandler.getIndexOfDate(lastObtainDate) + offset;
+        int currentIndex = DailyRewardHandler.getCurrentIndex() + offset;
 
         //today
         if (currentIndex - 1 == playerIndex) {
@@ -83,7 +89,7 @@ public class GuiDailyRewardClaim extends GuiGeneric {
         }
 
         //past success
-        for (int i = 1; i <= playerIndex; i++) {
+        for (int i = 1 + offset; i <= playerIndex; i++) {
             this.setItem(i, pastSuccess);
             this.setItem(i + 18, pastSuccess);
         }
@@ -97,9 +103,9 @@ public class GuiDailyRewardClaim extends GuiGeneric {
         }
 
         //future non-available
-        for (int i = currentIndex + 1; i < 8; i++) {
-            this.setItem(i, notAvailable);
-            this.setItem(i + 18, notAvailable);
+        for (int i = currentIndex + 1; i < 8 + offset; i++) {
+            this.setItem(i, notAvailableYet);
+            this.setItem(i + 18, notAvailableYet);
         }
 
         ItemStack filler = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
@@ -111,17 +117,17 @@ public class GuiDailyRewardClaim extends GuiGeneric {
         filler.setItemMeta(itemMeta);
 
         int fillerIndex = 0;
-        this.setItem(fillerIndex, filler);
-        this.setItem(fillerIndex + 9, filler);
-        this.setItem(fillerIndex + 18, filler);
+        this.setItem(fillerIndex + offset, filler);
+        this.setItem(fillerIndex + offset + 9, filler);
+        this.setItem(fillerIndex + offset + 18, filler);
 
         fillerIndex = 8;
-        this.setItem(fillerIndex, filler);
-        this.setItem(fillerIndex + 9, filler);
-        this.setItem(fillerIndex + 18, filler);
+        this.setItem(fillerIndex + offset, filler);
+        this.setItem(fillerIndex + offset + 9, filler);
+        this.setItem(fillerIndex + offset + 18, filler);
 
         ItemStack[] rewards = DailyRewardHandler.getRewards();
-        int i = 10;
+        int i = 10 + offset;
         for (ItemStack itemStack : rewards) {
             if (itemStack == null) continue;
 
@@ -140,13 +146,25 @@ public class GuiDailyRewardClaim extends GuiGeneric {
         Inventory clickedInventory = event.getClickedInventory();
 
         if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-            Material currentType = event.getCurrentItem().getType();
+            if (event.getSlot() == 0) {
+                GuardianData guardianData;
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    guardianData = GuardianDataManager.getGuardianData(player);
+                } else {
+                    return;
+                }
 
-            if (currentType.equals(Material.LIME_WOOL)) {
-                DailyRewardHandler.giveReward(player);
-
-                GuiDailyRewardClaim gui = new GuiDailyRewardClaim(player);
+                GuiMain gui = new GuiMain(guardianData);
                 gui.openInventory(player);
+            } else {
+                Material currentType = event.getCurrentItem().getType();
+
+                if (currentType.equals(Material.LIME_WOOL)) {
+                    DailyRewardHandler.giveReward(player);
+
+                    GuiDailyRewardClaim gui = new GuiDailyRewardClaim(player);
+                    gui.openInventory(player);
+                }
             }
         }
     }

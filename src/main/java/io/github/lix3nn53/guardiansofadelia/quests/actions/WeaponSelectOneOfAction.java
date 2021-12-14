@@ -31,13 +31,13 @@ public class WeaponSelectOneOfAction implements Action {
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
                 // GUISIZE
-                int guiSize = 18;
+                /*int guiSize = 18;
                 if (weaponPrizesSelectOneOf != null) {
                     guiSize += 9;
-                }
+                }*/
 
                 List<ItemStack> items = weaponPrizesSelectOneOf.getItems(rpgCharacter.getRpgClassStr());
-                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guardianData, guiSize, questNo, 0, taskIndex, items);
+                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guardianData, questNo, 0, taskIndex, items);
                 gui.openInventory(player);
             }
         }

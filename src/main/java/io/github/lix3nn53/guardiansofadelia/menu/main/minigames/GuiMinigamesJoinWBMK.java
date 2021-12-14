@@ -1,8 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main.minigames;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiMinigames;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.arenas.WinByMostKills;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -20,7 +25,10 @@ public class GuiMinigamesJoinWBMK extends GuiGeneric {
     private final HashMap<Integer, Integer> slotToWarInstance = new HashMap<>();
 
     public GuiMinigamesJoinWBMK() {
-        super(27, ChatPalette.GOLD + "Join Win By Most Kills", 0);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK + "Join Win By Most Kills", 0);
+
+        ItemStack backButton = OtherItems.getBackButton("Minigames Menu");
+        this.setItem(0, backButton);
 
         int i = 9;
         for (WinByMostKills winByMostKills : MiniGameManager.winByMostKillsList) {
@@ -57,10 +65,23 @@ public class GuiMinigamesJoinWBMK extends GuiGeneric {
         Inventory clickedInventory = event.getClickedInventory();
 
         if (clickedInventory.getType().equals(InventoryType.CHEST)) {
-            int instanceNo = slotToWarInstance.get(event.getSlot());
-            boolean joined = MiniGameManager.getWinByMostKills(instanceNo).joinQueue(player);
-            if (joined) {
-                player.closeInventory();
+            int slot = event.getSlot();
+            if (slot == 0) {
+                GuardianData guardianData;
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    guardianData = GuardianDataManager.getGuardianData(player);
+                } else {
+                    return;
+                }
+
+                GuiMinigames gui = new GuiMinigames(guardianData);
+                gui.openInventory(player);
+            } else {
+                int instanceNo = slotToWarInstance.get(slot);
+                boolean joined = MiniGameManager.getWinByMostKills(instanceNo).joinQueue(player);
+                if (joined) {
+                    player.closeInventory();
+                }
             }
         }
     }

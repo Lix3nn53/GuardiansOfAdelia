@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.text.font.NegativeSpace;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
@@ -152,7 +153,7 @@ public class ChatManager {
                 prefix += customCharacter;
             }
         }
-        return prefix + ChatPalette.WHITE;
+        return prefix + ChatPalette.WHITE + NegativeSpace.POSITIVE_2;
     }
 
     private static String getChatSuffix() {

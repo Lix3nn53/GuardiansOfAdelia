@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
@@ -21,7 +22,8 @@ import java.util.List;
 public class GuiBazaar extends GuiGeneric {
 
     public GuiBazaar(GuardianData guardianData) {
-        super(27, ChatPalette.GOLD + Translation.t(guardianData, "economy.bazaar.name"), 0);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK +
+                Translation.t(guardianData, "economy.bazaar.name"), 0);
 
         ItemStack info = new ItemStack(Material.YELLOW_WOOL);
         ItemMeta itemMeta = info.getItemMeta();

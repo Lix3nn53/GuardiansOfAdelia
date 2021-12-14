@@ -1,6 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main.compass;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCompass;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import net.citizensnpcs.api.CitizensAPI;
@@ -17,7 +22,11 @@ import java.util.ArrayList;
 public class GuiCompassNPCs extends GuiBookGeneric {
 
     public GuiCompassNPCs() {
-        super(ChatPalette.GRAY_DARK + "Compass NPCs", 0);
+        super(CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.BLACK + "Compass NPCs", 0);
+
+        ItemStack backButton = OtherItems.getBackButton("Compass Menu");
+        this.addToFirstAvailableWord(backButton);
+        this.disableLine(0, 0);
 
         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
         for (int i = 120; i < 1000; i++) {
@@ -45,13 +54,25 @@ public class GuiCompassNPCs extends GuiBookGeneric {
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        ItemStack item = event.getCurrentItem();
-        ItemMeta itemMeta = item.getItemMeta();
+        if (event.getSlot() == 0) {
+            GuardianData guardianData;
+            if (GuardianDataManager.hasGuardianData(player)) {
+                guardianData = GuardianDataManager.getGuardianData(player);
+            } else {
+                return;
+            }
 
-        String displayName = itemMeta.getDisplayName();
-        String[] split = displayName.split("#");
-        int i = Integer.parseInt(split[1]);
-        CompassManager.setCompassItemNPC(player, i);
-        player.closeInventory();
+            GuiCompass gui = new GuiCompass(guardianData);
+            gui.openInventory(player);
+        } else {
+            ItemStack item = event.getCurrentItem();
+            ItemMeta itemMeta = item.getItemMeta();
+
+            String displayName = itemMeta.getDisplayName();
+            String[] split = displayName.split("#");
+            int i = Integer.parseInt(split[1]);
+            CompassManager.setCompassItemNPC(player, i);
+            player.closeInventory();
+        }
     }
 }

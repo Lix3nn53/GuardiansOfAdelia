@@ -4,6 +4,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class GuiCoinConverter extends GuiGeneric {
 
     public GuiCoinConverter(GuardianData guardianData, int shopNpc) {
-        super(27, ChatPalette.GOLD + Translation.t(guardianData, "economy.coin.convert"), shopNpc);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK + Translation.t(guardianData, "economy.coin.convert"), shopNpc);
 
         ItemStack silverToBronze = new ItemStack(Material.IRON_INGOT, 64);
         ItemMeta itemMeta = silverToBronze.getItemMeta();

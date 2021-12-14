@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.jobs.crafting;
 
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLine;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -49,5 +50,10 @@ public class CraftingLine implements GuiLine {
     @Override
     public boolean isEmpty() {
         return ingredients.size() < 7;
+    }
+
+    @Override
+    public void setDisabled(boolean disabled) {
+        throw new NotImplementedException("CraftingLine#setDisabled not implemented");
     }
 }

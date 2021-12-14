@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
@@ -25,9 +26,10 @@ public class GuiQuestTaskPrizeSelect extends GuiGeneric {
     private final int questNo;
     private final int taskIndex;
 
-    public GuiQuestTaskPrizeSelect(GuardianData guardianData, int guiSize, int questNo, int resourceNPC,
+    public GuiQuestTaskPrizeSelect(GuardianData guardianData, int questNo, int resourceNPC,
                                    int taskIndex, List<ItemStack> items) {
-        super(guiSize, ChatPalette.BLACK + Translation.t(guardianData, "quest.task.prize.selection") + " #" + questNo + "&" + taskIndex, resourceNPC);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK +
+                Translation.t(guardianData, "quest.task.prize.selection") + " #" + questNo + "&" + taskIndex, resourceNPC);
         this.questNo = questNo;
         this.taskIndex = taskIndex;
 

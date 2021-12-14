@@ -83,8 +83,8 @@ public class CommandTest implements CommandExecutor {
 
                 GuiGeneric guiGeneric = new GuiGeneric(54, s1 + s2 + ChatColor.DARK_GRAY + "TEST TITLE", 0);
                 guiGeneric.openInventory(player);
-                //test customgui MENU_54 LOGO 1 20 NEGATIVE_4 POSITIVE_4 1 20 NEGATIVE_8 POSITIVE_8
-                //test customgui MENU_54 LOGO 2 41 NEGATIVE_4 POSITIVE_4 -5 37 NEGATIVE_4 POSITIVE_4
+                //test customgui MENU_54 LOGO 1 41 NEGATIVE_4 POSITIVE_4 -5 37 NEGATIVE_4 POSITIVE_4
+                //test customgui MENU_54_FLAT LOGO 5 41 NEGATIVE_4 POSITIVE_4 -5 37 NEGATIVE_4 POSITIVE_4
             } else if (args[0].equals("palette")) {
                 StringBuilder msg = new StringBuilder();
                 for (ChatPalette chatPalette : ChatPalette.values()) {

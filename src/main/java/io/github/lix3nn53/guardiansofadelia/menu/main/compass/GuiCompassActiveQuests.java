@@ -1,13 +1,17 @@
 package io.github.lix3nn53.guardiansofadelia.menu.main.compass;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCompass;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
 import io.github.lix3nn53.guardiansofadelia.quests.task.TaskReach;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiBookGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import net.citizensnpcs.api.CitizensAPI;
@@ -27,11 +31,14 @@ import java.util.List;
 public class GuiCompassActiveQuests extends GuiBookGeneric {
 
     public GuiCompassActiveQuests(GuardianData guardianData) {
-        super(ChatPalette.GRAY_DARK + "Compass Active Quests", 0);
+        super(CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.BLACK + "Compass Active Quests", 0);
+
+        ItemStack backButton = OtherItems.getBackButton("Compass Menu");
+        this.addToFirstAvailableWord(backButton);
+        this.disableLine(0, 0);
 
         RPGCharacter character = guardianData.getActiveCharacter();
         List<Quest> questList = character.getQuestList();
-
 
         for (Quest quest : questList) {
             int questID = quest.getQuestID();
@@ -102,7 +109,17 @@ public class GuiCompassActiveQuests extends GuiBookGeneric {
         ItemMeta itemMeta = item.getItemMeta();
         Material currentType = item.getType();
 
-        if (currentType.equals(Material.LIME_WOOL)) {
+        if (event.getSlot() == 0) {
+            GuardianData guardianData;
+            if (GuardianDataManager.hasGuardianData(player)) {
+                guardianData = GuardianDataManager.getGuardianData(player);
+            } else {
+                return;
+            }
+
+            GuiCompass gui = new GuiCompass(guardianData);
+            gui.openInventory(player);
+        } else if (currentType.equals(Material.LIME_WOOL)) {
             String displayName = itemMeta.getDisplayName();
             String[] split = displayName.split("#");
             int i = Integer.parseInt(split[1]);

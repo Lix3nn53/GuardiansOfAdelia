@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.Gui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -29,7 +30,7 @@ public class MerchantMenu extends GuiGeneric {
     private String currentLang = Translation.DEFAULT_LANG;
 
     public MerchantMenu(MerchantType merchantType, int merchantLevel, int npcNo) {
-        super(27, merchantType.getName() + " #" + merchantLevel, npcNo);
+        super(27, CustomCharacterGui.MENU_27_FLAT + merchantType.getName() + " #" + merchantLevel, npcNo);
         this.merchantType = merchantType;
         this.merchantLevel = merchantLevel;
 

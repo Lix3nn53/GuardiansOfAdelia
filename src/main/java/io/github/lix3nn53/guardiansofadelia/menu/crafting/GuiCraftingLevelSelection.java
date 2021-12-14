@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingManager;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,7 +26,7 @@ public class GuiCraftingLevelSelection extends GuiGeneric {
     CraftingType craftingType;
 
     public GuiCraftingLevelSelection(CraftingType craftingType) {
-        super(27, craftingType.toString() + " Crafting Level Selection", 0);
+        super(27, CustomCharacterGui.MENU_27_FLAT + craftingType.toString() + " Crafting Level Selection", 0);
         this.craftingType = craftingType;
 
         ItemStack itemStack = new ItemStack(Material.WOODEN_PICKAXE);

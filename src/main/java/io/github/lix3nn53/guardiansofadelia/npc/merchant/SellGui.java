@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.items.enchanting.EnchantManager;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -26,7 +27,7 @@ public class SellGui extends GuiGeneric {
     private int totalValue = 0;
 
     public SellGui(int shopNpc) {
-        super(54, ChatPalette.GOLD + "Sell Items", shopNpc);
+        super(54, CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.GOLD + "Sell Items", shopNpc);
 
         ItemStack fillItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta itemMeta = fillItem.getItemMeta();

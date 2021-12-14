@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class GuiCompass extends GuiGeneric {
 
     public GuiCompass(GuardianData guardianData) {
-        super(54, CustomCharacterGui.MENU_54.toString() + ChatPalette.BLACK + Translation.t(guardianData, "menu.compass.name"), 0);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK + Translation.t(guardianData, "menu.compass.name"), 0);
 
         ItemStack towns = new ItemStack(Material.LIGHT_BLUE_WOOL);
         ItemMeta itemMeta = towns.getItemMeta();
@@ -72,7 +72,7 @@ public class GuiCompass extends GuiGeneric {
         itemMeta.setLore(lore);
         clear.setItemMeta(itemMeta);
 
-        GuiHelper.formBig8ButtonGui(this, new ItemStack[]{quests, towns, dungeons, npcs, clear}, "Main Menu");
+        GuiHelper.form27Small(this, new ItemStack[]{quests, towns, dungeons, npcs, clear}, "Main Menu");
     }
 
     @Override
@@ -96,19 +96,19 @@ public class GuiCompass extends GuiGeneric {
         if (slot == 0) {
             GuiMain gui = new GuiMain(guardianData);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(0).contains(slot)) {
+        } else if (GuiHelper.get27SmallButtonIndex(0) == slot) {
             GuiCompassActiveQuests gui = new GuiCompassActiveQuests(guardianData);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(1).contains(slot)) {
+        } else if (GuiHelper.get27SmallButtonIndex(1) == slot) {
             GuiCompassTowns gui = new GuiCompassTowns();
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(2).contains(slot)) {
+        } else if (GuiHelper.get27SmallButtonIndex(2) == slot) {
             GuiCompassDungeonGates gui = new GuiCompassDungeonGates();
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(3).contains(slot)) {
+        } else if (GuiHelper.get27SmallButtonIndex(3) == slot) {
             GuiCompassNPCs gui = new GuiCompassNPCs();
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(4).contains(slot)) {
+        } else if (GuiHelper.get27SmallButtonIndex(4) == slot) {
             CompassManager.clearCompassTarget(player);
             player.closeInventory();
         }

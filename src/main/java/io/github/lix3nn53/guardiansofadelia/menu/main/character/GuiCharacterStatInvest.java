@@ -6,7 +6,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCharacter;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.Material;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
 public class GuiCharacterStatInvest extends GuiGeneric {
 
     public GuiCharacterStatInvest(int pointsLeft, GuardianData guardianData, RPGCharacterStats rpgCharacterStats) {
-        super(27, ChatPalette.GRAY_DARK + "Stat Points (Points: " + pointsLeft + ")", 0);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK + "Stat Points (Points: " + pointsLeft + ")", 0);
 
         Attribute bonusElementDamage = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE);
         ItemStack itemStack = new ItemStack(Material.PAPER);
@@ -36,21 +39,21 @@ public class GuiCharacterStatInvest extends GuiGeneric {
         lore.add(ChatPalette.GRAY + "Shift + " + Translation.t(guardianData, "general.click.left") + ": -5");
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        this.setItem(1, itemStack);
+        this.setItem(10, itemStack);
 
         Attribute bonusElementDefense = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE);
         itemMeta.setDisplayName(AttributeType.BONUS_ELEMENT_DEFENSE.getCustomName() + " (Invested: " + bonusElementDefense.getInvested() + ")");
         lore.set(1, ChatPalette.YELLOW + bonusElementDefense.getAttributeType().getDescription());
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        this.setItem(4, itemStack);
+        this.setItem(13, itemStack);
 
         Attribute bonusMaxHealth = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH);
         itemMeta.setDisplayName(AttributeType.BONUS_MAX_HEALTH.getCustomName() + " (Invested: " + bonusMaxHealth.getInvested() + ")");
         lore.set(1, ChatPalette.YELLOW + bonusMaxHealth.getAttributeType().getDescription());
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
-        this.setItem(7, itemStack);
+        this.setItem(16, itemStack);
 
         Attribute bonusMaxMana = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA);
         itemMeta.setDisplayName(AttributeType.BONUS_MAX_MANA.getCustomName() + " (Invested: " + bonusMaxMana.getInvested() + ")");
@@ -65,6 +68,9 @@ public class GuiCharacterStatInvest extends GuiGeneric {
         itemMeta.setLore(lore);
         itemStack.setItemMeta(itemMeta);
         this.setItem(24, itemStack);
+
+        ItemStack backButton = OtherItems.getBackButton("Character Menu");
+        this.setItem(0, backButton);
     }
 
     @Override
@@ -89,11 +95,15 @@ public class GuiCharacterStatInvest extends GuiGeneric {
         if (rpgCharacter != null) {
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
             Attribute attr = null;
-            if (slot == 1) {
+            if (slot == 0) {
+                GuiCharacter gui = new GuiCharacter(guardianData);
+                gui.openInventory(player);
+                return;
+            } else if (slot == 10) {
                 attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DAMAGE);
-            } else if (slot == 4) {
+            } else if (slot == 13) {
                 attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_ELEMENT_DEFENSE);
-            } else if (slot == 7) {
+            } else if (slot == 16) {
                 attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_HEALTH);
             } else if (slot == 20) {
                 attr = rpgCharacterStats.getAttribute(AttributeType.BONUS_MAX_MANA);

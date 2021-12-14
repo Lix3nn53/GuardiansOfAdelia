@@ -32,10 +32,10 @@ public class ArmorSelectOneOfAction implements Action {
             if (guardianData.hasActiveCharacter()) {
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
                 // GUISIZE
-                int guiSize = 18;
+                /*int guiSize = 18;
                 if (armorReferenceData != null) {
                     guiSize += 9;
-                }
+                }*/
 
                 // ITEM SLOTS
                 List<Integer> slotsToUse = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ArmorSelectOneOfAction implements Action {
                 slotsToUse.add(34);
 
                 List<ItemStack> items = armorReferenceData.getItems(rpgCharacter.getRpgClassStr());
-                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guardianData, guiSize, questNo, 0, taskIndex, items);
+                GuiQuestTaskPrizeSelect gui = new GuiQuestTaskPrizeSelect(guardianData, questNo, 0, taskIndex, items);
                 gui.openInventory(player);
             }
         }

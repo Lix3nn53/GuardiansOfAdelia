@@ -5,7 +5,10 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCharacter;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import org.bukkit.entity.Player;
@@ -20,7 +23,7 @@ public class GuiCharacterSkills extends GuiGeneric {
     private final HashMap<Integer, String> slotToRpgClassStr = new HashMap<>();
 
     public GuiCharacterSkills(Player player, GuardianData guardianData, RPGCharacter rpgCharacter, SkillBar skillBar, int pointsLeft) {
-        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "skill.name") +
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK + Translation.t(guardianData, "skill.name") +
                 " (" + Translation.t(guardianData, "skill.points") + ": " + pointsLeft + ")", 0);
 
         HashMap<Integer, Skill> skillSet = rpgCharacter.getSkillBar().getSkillSet();
@@ -34,7 +37,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
-            this.setItem(1, icon);
+            this.setItem(10, icon);
         }
 
         if (skillSet.containsKey(1)) {
@@ -45,7 +48,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
-            this.setItem(4, icon);
+            this.setItem(13, icon);
         }
 
         if (skillSet.containsKey(2)) {
@@ -56,7 +59,7 @@ public class GuiCharacterSkills extends GuiGeneric {
             String displayName = itemMeta.getDisplayName();
             itemMeta.setDisplayName(displayName + " (" + Translation.t(guardianData, "skill.invested") + ": " + investedSkillPoints + ")");
             icon.setItemMeta(itemMeta);
-            this.setItem(7, icon);
+            this.setItem(16, icon);
         }
 
         if (skillSet.containsKey(3)) {
@@ -80,6 +83,9 @@ public class GuiCharacterSkills extends GuiGeneric {
             icon.setItemMeta(itemMeta);
             this.setItem(24, icon);
         }
+
+        ItemStack backButton = OtherItems.getBackButton("Character Menu");
+        this.setItem(0, backButton);
     }
 
     @Override
@@ -104,17 +110,23 @@ public class GuiCharacterSkills extends GuiGeneric {
         int skillIndex = -1;
 
         int slot = event.getSlot();
-        if (slot == 1) {
+
+        if (slot == 0) {
+            GuiCharacter gui = new GuiCharacter(guardianData);
+            gui.openInventory(player);
+            return;
+        } else if (slot == 10) {
             skillIndex = 0;
-        } else if (slot == 4) {
+        } else if (slot == 13) {
             skillIndex = 1;
-        } else if (slot == 7) {
+        } else if (slot == 16) {
             skillIndex = 2;
         } else if (slot == 20) {
             skillIndex = 3;
         } else if (slot == 24) {
             skillIndex = 4;
         }
+
         if (skillIndex != -1) {
             if (event.isLeftClick()) {
                 boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats(), guardianData.getLanguage());

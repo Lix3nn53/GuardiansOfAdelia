@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -28,10 +29,11 @@ public class GuiQuestPrizeSelect extends GuiGeneric {
 
     private final int questNo;
 
-    public GuiQuestPrizeSelect(int guiSize, int questNo, int resourceNPC, List<ItemStack> itemPrizesSelectOneOf,
+    public GuiQuestPrizeSelect(int guiSize, CustomCharacter customCharacter, int questNo, int resourceNPC, List<ItemStack> itemPrizesSelectOneOf,
                                WeaponReferenceData weaponPrizesSelectOneOf, ArmorReferenceData armorPrizesSelectOneOf,
                                RPGCharacter rpgCharacter, GuardianData guardianData) {
-        super(guiSize, ChatPalette.BLACK + Translation.t(guardianData, "quest.prize.selection") + " #" + questNo, resourceNPC);
+        super(guiSize, customCharacter.toString() + ChatPalette.BLACK +
+                Translation.t(guardianData, "quest.prize.selection") + " #" + questNo, resourceNPC);
         this.questNo = questNo;
 
         // ITEM SLOTS

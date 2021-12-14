@@ -4,7 +4,10 @@ import io.github.lix3nn53.guardiansofadelia.chat.ChatTag;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCharacter;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -25,7 +28,10 @@ public class GuiCharacterChatTag extends GuiGeneric {
     private final HashMap<Integer, ChatTag> slotToChatTag = new HashMap<>();
 
     public GuiCharacterChatTag(Player player) {
-        super(27, ChatPalette.GRAY_DARK + "Chat Tag", 0);
+        super(54, CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.BLACK + "Chat Tag", 0);
+
+        ItemStack backButton = OtherItems.getBackButton("Character Menu");
+        this.setItem(0, backButton);
 
         if (GuardianDataManager.hasGuardianData(player)) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
@@ -33,7 +39,7 @@ public class GuiCharacterChatTag extends GuiGeneric {
                 RPGCharacter activeCharacter = guardianData.getActiveCharacter();
                 List<Integer> turnedInQuests = activeCharacter.getTurnedInQuests();
 
-                int i = 0;
+                int slot = 9;
                 for (ChatTag chatTag : ChatTag.values()) {
                     int requiredQuest = chatTag.getRequiredQuest();
                     ItemStack itemStack = new ItemStack(Material.RED_WOOL);
@@ -56,9 +62,9 @@ public class GuiCharacterChatTag extends GuiGeneric {
 
                     itemStack.setItemMeta(itemMeta);
 
-                    this.setItem(i, itemStack);
-                    slotToChatTag.put(i, chatTag);
-                    i++;
+                    this.setItem(slot, itemStack);
+                    slotToChatTag.put(slot, chatTag);
+                    slot++;
                 }
             }
         }
@@ -78,8 +84,17 @@ public class GuiCharacterChatTag extends GuiGeneric {
 
         if (clickedInventory.getType().equals(InventoryType.CHEST)) {
             int slot = event.getSlot();
+            if (slot == 0) {
+                GuiCharacter gui = new GuiCharacter(guardianData);
+                gui.openInventory(player);
+            }
+
             if (slotToChatTag.containsKey(slot)) {
                 ChatTag chatTag = slotToChatTag.get(slot);
+
+                if (event.getCurrentItem().getType().equals(Material.RED_WOOL)) {
+                    return;
+                }
 
                 RPGCharacter rpgCharacter = guardianData.getActiveCharacter();
                 rpgCharacter.setChatTag(player, chatTag);

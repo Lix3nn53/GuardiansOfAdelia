@@ -105,6 +105,11 @@ public class GuiBookGeneric implements GuiBook {
         currentLine.addWord(itemStack);
     }
 
+    @Override
+    public void disableLine(int page, int line) {
+        pageList.get(page).getGuiLines().get(line).setDisabled(true);
+    }
+
     public void setPages(List<GuiPage> guiPageList) {
         this.pageList = guiPageList;
     }

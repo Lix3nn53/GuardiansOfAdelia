@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.npc.merchant;
 
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiLine;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -31,5 +32,10 @@ public class MerchantGuiLine implements GuiLine {
     @Override
     public boolean isEmpty() {
         return words.size() < 9;
+    }
+
+    @Override
+    public void setDisabled(boolean disabled) {
+        throw new NotImplementedException("MerchantGuiLine#setDisabled not implemented");
     }
 }

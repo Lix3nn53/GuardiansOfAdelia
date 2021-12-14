@@ -120,7 +120,7 @@ public class GuiMain extends GuiGeneric {
         itemMeta.setLore(lore);
         daily.setItemMeta(itemMeta);
 
-        GuiHelper.formBig8ButtonGui(this, new ItemStack[]{character, compass, guild, minigames, activeBoosts, donation, daily, teleport}, null);
+        GuiHelper.form54Big(this, new ItemStack[]{character, compass, guild, minigames, activeBoosts, donation, daily, teleport}, null);
     }
 
     @Override
@@ -142,27 +142,24 @@ public class GuiMain extends GuiGeneric {
 
 
         int slot = event.getSlot();
-        if (GuiHelper.getBig8ButtonGuiIndexes(0).contains(slot)) {
+        if (GuiHelper.get54BigButtonIndexes(0).contains(slot)) {
             GuiCharacter gui = new GuiCharacter(guardianData);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(1).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(1).contains(slot)) {
             GuiCompass gui = new GuiCompass(guardianData);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(2).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(2).contains(slot)) {
             if (GuildManager.inGuild(player)) {
                 GuiGuild gui = new GuiGuild();
                 gui.openInventory(player);
             }
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(3).contains(slot)) {
-            GuiMinigames gui = new GuiMinigames();
+        } else if (GuiHelper.get54BigButtonIndexes(3).contains(slot)) {
+            GuiMinigames gui = new GuiMinigames(guardianData);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(4).contains(slot)) {
-            GuiTeleportation gui = new GuiTeleportation(guardianData);
-            gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(5).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(4).contains(slot)) {
             GuiServerBoost gui = new GuiServerBoost();
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(6).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(5).contains(slot)) {
             player.closeInventory();
             TextComponent message = new TextComponent(" Donation ♥ ! (Click Me)");
             message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://guardiansofadelia.com/store"));
@@ -170,8 +167,11 @@ public class GuiMain extends GuiGeneric {
             message.setColor(ChatPalette.PURPLE_LIGHT.toChatColor());
             message.setBold(true);
             player.spigot().sendMessage(message);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(7).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(6).contains(slot)) {
             GuiDailyRewardClaim gui = new GuiDailyRewardClaim(player);
+            gui.openInventory(player);
+        } else if (GuiHelper.get54BigButtonIndexes(7).contains(slot)) {
+            GuiTeleportation gui = new GuiTeleportation(guardianData);
             gui.openInventory(player);
         }
     }

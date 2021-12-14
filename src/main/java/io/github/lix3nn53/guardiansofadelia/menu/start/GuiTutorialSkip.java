@@ -2,6 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.menu.start;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
@@ -19,7 +20,8 @@ public class GuiTutorialSkip extends GuiGeneric {
     private final int charNo;
 
     public GuiTutorialSkip(GuardianData guardianData, int charNo) {
-        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "general.tutorial.question") + " #" + charNo, 0);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK +
+                Translation.t(guardianData, "general.tutorial.question") + " #" + charNo, 0);
         this.charNo = charNo;
 
         ItemStack yes = new ItemStack(Material.LIME_WOOL);

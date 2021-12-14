@@ -11,4 +11,6 @@ public interface GuiBook extends Gui {
     GuiPage getFirstAvailablePage();
 
     void addToFirstAvailableWord(ItemStack itemStack);
+
+    void disableLine(int page, int line);
 }

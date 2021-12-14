@@ -5,9 +5,13 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
+import io.github.lix3nn53.guardiansofadelia.npc.NPCAvatar;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.citizensnpcs.api.CitizensAPI;
@@ -28,10 +32,12 @@ public class GuiQuestList extends GuiGeneric {
     NPC npc;
 
     public GuiQuestList(NPC npc, Player player, GuardianData guardianData) {
-        super(27, ChatPalette.GRAY_DARK + Translation.t(guardianData, "quest.list_of") + " " + npc.getName(), npc.getId());
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK +
+                Translation.t(guardianData, "quest.list_of") + " " + npc.getName(), npc.getId());
         this.npc = npc;
 
         int npcId = npc.getId();
+        formAvatar(npcId);
 
         if (GuardianDataManager.hasGuardianData(player)) {
             List<Quest> npcQuestList = new ArrayList<>();
@@ -131,9 +137,17 @@ public class GuiQuestList extends GuiGeneric {
                             guiSize += 9;
                         }
 
+                        CustomCharacter customCharacter = CustomCharacterGui.MENU_27_FLAT;
+                        if (guiSize < 27) {
+                            guiSize = 27;
+                        } else {
+                            guiSize = 54;
+                            customCharacter = CustomCharacterGui.MENU_54_FLAT;
+                        }
+
                         // CREATE GUI
-                        GuiQuestPrizeSelect gui = new GuiQuestPrizeSelect(guiSize, questNo, resourceNPC, itemPrizesSelectOneOf,
-                                weaponPrizesSelectOneOf, armorPrizesSelectOneOf, rpgCharacter, guardianData);
+                        GuiQuestPrizeSelect gui = new GuiQuestPrizeSelect(guiSize, customCharacter, questNo, resourceNPC,
+                                itemPrizesSelectOneOf, weaponPrizesSelectOneOf, armorPrizesSelectOneOf, rpgCharacter, guardianData);
 
                         gui.openInventory(player);
                     }
@@ -164,5 +178,23 @@ public class GuiQuestList extends GuiGeneric {
                 }
             }
         }
+    }
+
+    public void formAvatar(int npcId) {
+        ItemStack avatar = NPCAvatar.getAvatar(npcId);
+
+        this.setItem(18, avatar);
+
+        ItemMeta itemMeta = avatar.getItemMeta();
+        ItemStack empty = OtherItems.getEmpty(itemMeta.getDisplayName(), itemMeta.getLore());
+
+        this.setItem(0, empty);
+        this.setItem(1, empty);
+        this.setItem(2, empty);
+        this.setItem(9, empty);
+        this.setItem(10, empty);
+        this.setItem(11, empty);
+        this.setItem(19, empty);
+        this.setItem(20, empty);
     }
 }

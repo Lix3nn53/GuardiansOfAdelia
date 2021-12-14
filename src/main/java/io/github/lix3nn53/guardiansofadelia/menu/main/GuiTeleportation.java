@@ -2,7 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.menu.main;
 
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportGuiItem;
 import io.github.lix3nn53.guardiansofadelia.transportation.InstantTeleportManager;
 import io.github.lix3nn53.guardiansofadelia.transportation.TeleportationUtils;
@@ -21,7 +24,11 @@ import java.util.List;
 public class GuiTeleportation extends GuiBookGeneric {
 
     public GuiTeleportation(GuardianData guardianData) {
-        super(ChatPalette.PURPLE_LIGHT + "Instant Teleportation", 0);
+        super(CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.BLACK + "Instant Teleportation", 0);
+
+        ItemStack backButton = OtherItems.getBackButton("Compass Menu");
+        this.addToFirstAvailableWord(backButton);
+        this.disableLine(0, 0);
 
         List<Integer> turnedInQuests = guardianData.getActiveCharacter().getTurnedInQuests();
 
@@ -41,6 +48,19 @@ public class GuiTeleportation extends GuiBookGeneric {
         Inventory clickedInventory = event.getClickedInventory();
 
         if (clickedInventory.getType().equals(InventoryType.CHEST)) {
+            if (event.getSlot() == 0) {
+                GuardianData guardianData;
+                if (GuardianDataManager.hasGuardianData(player)) {
+                    guardianData = GuardianDataManager.getGuardianData(player);
+                } else {
+                    return;
+                }
+
+                GuiCompass gui = new GuiCompass(guardianData);
+                gui.openInventory(player);
+                return;
+            }
+
             ItemStack currentItem = event.getCurrentItem();
             Material currentType = currentItem.getType();
 

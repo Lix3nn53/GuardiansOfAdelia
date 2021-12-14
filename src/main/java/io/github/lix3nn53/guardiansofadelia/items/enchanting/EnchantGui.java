@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class EnchantGui extends GuiGeneric {
 
     public EnchantGui(Player player) {
-        super(27, ChatPalette.BLUE_LIGHT + "Item Enchanting", 0);
+        super(27, CustomCharacterGui.MENU_27_FLAT.toString() + ChatPalette.BLACK + "Item Enchanting", 0);
 
         ItemStack itemGlass = new ItemStack(Material.RED_STAINED_GLASS_PANE, 1);
         ItemStack finalGlass = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE, 1);

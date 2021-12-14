@@ -82,7 +82,7 @@ public class GuiCharacter extends GuiGeneric {
         itemMeta.setLore(lore);
         chat.setItemMeta(itemMeta);
 
-        GuiHelper.formBig8ButtonGui(this, new ItemStack[]{classItem, skills, statpoints, job, chat}, "Main Menu");
+        GuiHelper.form54Big(this, new ItemStack[]{classItem, skills, statpoints, job, chat}, "Main Menu");
     }
 
     @Override
@@ -107,27 +107,27 @@ public class GuiCharacter extends GuiGeneric {
         if (slot == 0) {
             GuiMain gui = new GuiMain(guardianData);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(0).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(0).contains(slot)) {
             GuiCharacterClassManager gui = new GuiCharacterClassManager(guardianData);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(1).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(1).contains(slot)) {
             SkillBar skillBar = rpgCharacter.getSkillBar();
 
             int pointsLeft = skillBar.getSkillPointsLeftToSpend();
 
             GuiCharacterSkills gui = new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(2).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(2).contains(slot)) {
             RPGCharacterStats rpgCharacterStats = rpgCharacter.getRpgCharacterStats();
 
             int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
 
             GuiCharacterStatInvest gui = new GuiCharacterStatInvest(pointsLeft, guardianData, rpgCharacterStats);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(3).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(3).contains(slot)) {
             GuiCharacterCrafting gui = new GuiCharacterCrafting(guardianData, rpgCharacter);
             gui.openInventory(player);
-        } else if (GuiHelper.getBig8ButtonGuiIndexes(4).contains(slot)) {
+        } else if (GuiHelper.get54BigButtonIndexes(4).contains(slot)) {
             GuiCharacterChatTag gui = new GuiCharacterChatTag(player);
             gui.openInventory(player);
         }
