@@ -3,9 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.events.MyChunkEvents;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
+import io.lumine.mythic.api.exceptions.InvalidMobTypeException;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
@@ -31,7 +31,7 @@ public class DungeonRoomSpawner {
         Location add = dungeonStart.clone().add(offset);
 
         List<Entity> spawned = new ArrayList<>();
-        BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+        BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
         try {
             for (int i = 0; i < amount; i++) {
                 Entity entity = apiHelper.spawnMythicMob(mobCode, add, mobLevel);
@@ -67,7 +67,7 @@ public class DungeonRoomSpawner {
 
         if (mobsLeftToKill <= 0) return spawned;
 
-        BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+        BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
 
         try {
             Location add = dungeonStart.clone().add(offset);

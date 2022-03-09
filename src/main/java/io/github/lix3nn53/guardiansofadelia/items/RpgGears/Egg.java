@@ -6,8 +6,8 @@ import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetSkillManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
@@ -23,7 +23,7 @@ public class Egg implements RPGGear {
     private final ItemStack itemStack;
 
     public Egg(String petKey, ItemTier tier, Material material, int customModelData, int reqLevel, int petLevel, String gearSetStr) {
-        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(petKey);
+        MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(petKey);
 
         String name = mythicMob.getDisplayName().get();
         if (gearSetStr != null && !gearSetStr.equals("")) {

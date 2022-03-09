@@ -5,14 +5,16 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.pr
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.projectile.SpreadType;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ArrangementDrawCylinder;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.arrangement.ParticleArrangement;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.adapters.AbstractLocation;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
-import io.lumine.xikage.mythicmobs.skills.ITargetedEntitySkill;
-import io.lumine.xikage.mythicmobs.skills.Skill;
-import io.lumine.xikage.mythicmobs.skills.SkillMechanic;
-import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
+import io.lumine.mythic.api.adapters.AbstractEntity;
+import io.lumine.mythic.api.adapters.AbstractLocation;
+import io.lumine.mythic.api.config.MythicLineConfig;
+import io.lumine.mythic.api.skills.ITargetedEntitySkill;
+import io.lumine.mythic.api.skills.SkillMetadata;
+import io.lumine.mythic.api.skills.SkillResult;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.core.skills.Skill;
+import io.lumine.mythic.core.skills.SkillManager;
+import io.lumine.mythic.core.skills.SkillMechanic;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -31,8 +33,8 @@ public class MMMechanicProjectile extends SkillMechanic implements ITargetedEnti
     private final ProjectileMechanicBase base;
     private SkillMetadata data;
 
-    public MMMechanicProjectile(MythicLineConfig config) {
-        super(config.getLine(), config);
+    public MMMechanicProjectile(SkillManager skillManager, MythicLineConfig config) {
+        super(skillManager, config.getLine(), config);
         this.setAsyncSafe(false);
         this.setTargetsCreativePlayers(false);
 
@@ -105,14 +107,20 @@ public class MMMechanicProjectile extends SkillMechanic implements ITargetedEnti
     }
 
     @Override
-    public boolean castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
+    public SkillResult castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
         this.data = data;
 
         LivingEntity caster = (LivingEntity) data.getCaster().getEntity().getBukkitEntity();
         ArrayList<LivingEntity> targets = new ArrayList<>();
         targets.add(caster);
 
-        return this.base.execute(caster, 1, targets, base.getSkillIndex(), this);
+        boolean res = this.base.execute(caster, 1, targets, base.getSkillIndex(), this);
+
+        if (res) {
+            return SkillResult.SUCCESS;
+        }
+
+        return SkillResult.CONDITION_FAILED;
     }
 
     @Override

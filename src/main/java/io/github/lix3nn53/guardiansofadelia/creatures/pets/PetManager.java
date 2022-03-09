@@ -12,12 +12,12 @@ import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
-import io.lumine.xikage.mythicmobs.io.MythicConfig;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.mythic.api.config.MythicConfig;
+import io.lumine.mythic.api.exceptions.InvalidMobTypeException;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import me.libraryaddict.disguise.disguisetypes.FlagWatcher;
@@ -96,7 +96,7 @@ public class PetManager {
 
         if (livingEntities.isEmpty()) return companions;
 
-        BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+        BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
         for (LivingEntity entity : livingEntities) {
             boolean mythicMob = apiHelper.isMythicMob(entity);
             if (mythicMob) {
@@ -116,7 +116,7 @@ public class PetManager {
 
         GuardiansOfAdelia.getInstance().getLogger().info("petLevel: " + petLevel);
 
-        BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+        BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
         Entity entity = null;
         try {
             entity = apiHelper.spawnMythicMob(petCode, spawnLoc, petLevel);
@@ -173,7 +173,7 @@ public class PetManager {
 
         GuardiansOfAdelia.getInstance().getLogger().info("petLevel: " + petLevel);
 
-        BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+        BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
         Entity entity = null;
         try {
             entity = apiHelper.spawnMythicMob(petCode, spawnLoc, petLevel);
@@ -562,7 +562,7 @@ public class PetManager {
     }
 
     public static int getDamage(String key, int petLevel) {
-        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+        MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(key);
 
         float base = (float) mythicMob.getDamage().get();
         float perLevel = (float) mythicMob.getPerLevelDamage();
@@ -574,7 +574,7 @@ public class PetManager {
     }
 
     public static int getHealth(String key, int petLevel) {
-        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+        MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(key);
 
         float base = (float) mythicMob.getHealth().get();
         float perLevel = (float) mythicMob.getPerLevelHealth();
@@ -586,7 +586,7 @@ public class PetManager {
     }
 
     public static float getMovementSpeed(String key, int petLevel) {
-        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+        MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(key);
 
         MythicConfig config = mythicMob.getConfig();
 
@@ -600,7 +600,7 @@ public class PetManager {
     }
 
     public static String getName(String key) {
-        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+        MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(key);
 
         return mythicMob.getDisplayName().get();
     }

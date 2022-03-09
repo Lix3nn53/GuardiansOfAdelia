@@ -2,8 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.bungeelistener.products;
 
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +22,7 @@ public enum PetSkin {
 
     public ItemStack getItemStack() {
         String skinName = name();
-        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(skinName);
+        MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(skinName);
 
         String displayName = mythicMob.getDisplayName().get();
         String itemName = displayName + ChatPalette.PURPLE_LIGHT + " Pet Skin";

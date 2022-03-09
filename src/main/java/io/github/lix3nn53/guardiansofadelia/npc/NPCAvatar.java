@@ -16,6 +16,11 @@ public class NPCAvatar {
     private final static HashMap<Integer, Integer> npcNoToCustomModelData = new HashMap<>();
     private final static HashMap<Integer, List<String>> npcNoToDescription = new HashMap<>();
 
+    public static void setAvatar(int npcId, int customModelData, List<String> description) {
+        npcNoToCustomModelData.put(npcId, customModelData);
+        npcNoToDescription.put(npcId, description);
+    }
+
     public static ItemStack getAvatar(int npcId) {
         int customModelData = 1;
         if (npcNoToCustomModelData.containsKey(npcId)) customModelData = npcNoToCustomModelData.get(npcId);

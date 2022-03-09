@@ -1,9 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.TriggerComponent;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -68,7 +68,7 @@ public class CompanionSpawnTrigger extends TriggerComponent {
         boolean cast = false;
         if (mobCode.isPresent()) { // Compare mob code if mobCode is present
             String mobCodeGet = mobCode.get();
-            BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+            BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
             boolean mythicMob = apiHelper.isMythicMob(spawned);
             if (mythicMob) {
                 ActiveMob mythicMobInstance = apiHelper.getMythicMobInstance(spawned);

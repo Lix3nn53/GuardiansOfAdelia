@@ -9,8 +9,8 @@ import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.ActionLoader;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigurationUtils;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -37,7 +37,7 @@ public class TaskLoader {
 
             List<String> nameOfMobsItemDropsFrom = new ArrayList<>();
             for (String internalName : keyOfMobsItemDropsFrom) {
-                MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
+                MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(internalName);
                 if (mythicMob == null) {
                     GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskCollect mythicMob null: " + internalName);
 
@@ -69,7 +69,7 @@ public class TaskLoader {
         } else if (componentType.equals(TaskDealDamage.class.getSimpleName())) {
             String internalName = configurationSection.getString("mobKey");
 
-            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
+            MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
                 GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskDealDamage mythicMob null: " + internalName);
 
@@ -91,7 +91,7 @@ public class TaskLoader {
         } else if (componentType.equals(TaskGift.class.getSimpleName())) {
             String internalName = configurationSection.getString("mobKey");
 
-            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
+            MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
                 GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskGift mythicMob null: " + internalName);
 
@@ -112,7 +112,7 @@ public class TaskLoader {
         } else if (componentType.equals(TaskKill.class.getSimpleName())) {
             String internalName = configurationSection.getString("mobKey");
 
-            MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(internalName);
+            MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(internalName);
             if (mythicMob == null) {
                 GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "TaskKill mythicMob null: " + internalName);
 

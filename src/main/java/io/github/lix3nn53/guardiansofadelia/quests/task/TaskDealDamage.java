@@ -2,9 +2,9 @@ package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.MobManager;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.MobManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -21,7 +21,7 @@ public final class TaskDealDamage implements Task {
 
 
     public TaskDealDamage(final String internalName, final int damageNeeded) {
-        MobManager mobManager = MythicMobs.inst().getMobManager();
+        MobManager mobManager = MythicBukkit.inst().getMobManager();
         MythicMob mythicMob = mobManager.getMythicMob(internalName);
 
         this.mobName = mythicMob.getDisplayName().get();

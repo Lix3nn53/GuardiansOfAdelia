@@ -19,8 +19,8 @@ import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayer
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.HologramManager;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -539,7 +539,7 @@ public class DungeonInstance extends Minigame {
 
     @Override
     public boolean onPlayerDealDamageToEntity(Player attacker, LivingEntity defender) {
-        ActiveMob mythicMobInstance = MythicMobs.inst().getMobManager().getMythicMobInstance(defender);
+        ActiveMob mythicMobInstance = MythicBukkit.inst().getMobManager().getMythicMobInstance(defender);
 
         if (mythicMobInstance != null) {
             String internalName = mythicMobInstance.getType().getInternalName();

@@ -3,12 +3,14 @@ package io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.mechanics;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
-import io.lumine.xikage.mythicmobs.skills.ITargetedEntitySkill;
-import io.lumine.xikage.mythicmobs.skills.SkillMechanic;
-import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
+import io.lumine.mythic.api.adapters.AbstractEntity;
+import io.lumine.mythic.api.config.MythicLineConfig;
+import io.lumine.mythic.api.skills.ITargetedEntitySkill;
+import io.lumine.mythic.api.skills.SkillMetadata;
+import io.lumine.mythic.api.skills.SkillResult;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.core.skills.SkillManager;
+import io.lumine.mythic.core.skills.SkillMechanic;
 import org.bukkit.entity.LivingEntity;
 
 public class MMMechanicElementResistance extends SkillMechanic implements ITargetedEntitySkill {
@@ -17,8 +19,8 @@ public class MMMechanicElementResistance extends SkillMechanic implements ITarge
     protected final ElementType elementType;
     protected final float resistance;
 
-    public MMMechanicElementResistance(MythicLineConfig config) {
-        super(config.getLine(), config);
+    public MMMechanicElementResistance(SkillManager skillManager, MythicLineConfig config) {
+        super(skillManager, config.getLine(), config);
 
         internalName = config.getKey();
 
@@ -30,7 +32,7 @@ public class MMMechanicElementResistance extends SkillMechanic implements ITarge
     }
 
     @Override
-    public boolean castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
+    public SkillResult castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
         LivingEntity target = (LivingEntity) BukkitAdapter.adapt(abstractEntity);
 
         String name = abstractEntity.getName();
@@ -39,6 +41,6 @@ public class MMMechanicElementResistance extends SkillMechanic implements ITarge
 
         MMManager.addElementResistance(internalName, elementType, resistance);
 
-        return true;
+        return SkillResult.SUCCESS;
     }
 }

@@ -6,9 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.im
 import io.github.lix3nn53.guardiansofadelia.party.Party;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
-import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -29,10 +27,7 @@ public class MyEntityDamageEvent implements Listener {
         if (entity instanceof Player) {
             Player player = (Player) entity;
 
-            CraftPlayer craftPlayer = (CraftPlayer) player;
-            EntityPlayer entityPlayer = craftPlayer.getHandle();
-
-            float absorptionHearts = entityPlayer.getAbsorptionHearts();
+            float absorptionHearts = (float) player.getAbsorptionAmount();
 
             if (absorptionHearts > 0) {
                 event.setCancelled(true);
@@ -40,7 +35,7 @@ public class MyEntityDamageEvent implements Listener {
                 if (absorptionHearts < 0) {
                     absorptionHearts = 0;
                 }
-                entityPlayer.setAbsorptionHearts(absorptionHearts);
+                player.setAbsorptionAmount(absorptionHearts);
                 return;
             }
         }

@@ -779,6 +779,12 @@ public class TemporaryEntity implements LivingEntity {
         return null;
     }
 
+    @NotNull
+    @Override
+    public SpawnCategory getSpawnCategory() {
+        return null;
+    }
+
     @Override
     public Spigot spigot() {
         return null;

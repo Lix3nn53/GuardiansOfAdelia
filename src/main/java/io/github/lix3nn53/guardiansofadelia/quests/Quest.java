@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
+import eu.endercentral.crazy_advancements.advancement.ToastNotification;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
@@ -20,7 +21,6 @@ import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
-import io.github.lix3nn53.guardiansofadelia.utilities.advancements.Advancement;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -388,8 +388,8 @@ public final class Quest {
             MessageUtils.sendCenteredMessage(player, message);
         }
 
-        Advancement onTurnInAdvancement = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
-        onTurnInAdvancement.displayToast(player);
+        ToastNotification toastNotification = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
+        toastNotification.send(player);
 
         for (Task task : this.tasks) {
             if (task instanceof TaskCollect) {
@@ -472,8 +472,8 @@ public final class Quest {
     public void onComplete(Player player) {
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Complete");
         MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
-        Advancement onCompleteAdvancement = QuestAdvancements.getOnCompleteAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
-        onCompleteAdvancement.displayToast(player);
+        ToastNotification toastNotification = QuestAdvancements.getOnCompleteAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
+        toastNotification.send(player);
 
         int whoCanCompleteThisQuest = QuestNPCManager.getWhoCanCompleteThisQuest(getQuestID());
         QuestNPCManager.setNpcHologramForPlayer(player, whoCanCompleteThisQuest);
@@ -494,8 +494,8 @@ public final class Quest {
             MessageUtils.sendCenteredMessage(player, message);
         }
 
-        Advancement onAcceptAdvancement = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
-        onAcceptAdvancement.displayToast(player);
+        ToastNotification toastNotification = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
+        toastNotification.send(player);
         TablistUtils.updateTablist(player);
 
         int whoCanGiveThisQuest = QuestNPCManager.getWhoCanGiveThisQuest(getQuestID());

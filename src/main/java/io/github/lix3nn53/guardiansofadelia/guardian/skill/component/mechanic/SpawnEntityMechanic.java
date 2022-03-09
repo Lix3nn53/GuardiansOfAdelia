@@ -4,9 +4,9 @@ import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.utilities.LocationUtils;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
+import io.lumine.mythic.api.exceptions.InvalidMobTypeException;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
@@ -73,7 +73,7 @@ public class SpawnEntityMechanic extends MechanicComponent {
 
                 Location spawnLoc = LocationUtils.getRandomSafeLocationNearPoint(owner.getLocation(), 4);
 
-                BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+                BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
                 Entity entity = null;
                 try {
                     entity = apiHelper.spawnMythicMob(mobCode, spawnLoc, level);

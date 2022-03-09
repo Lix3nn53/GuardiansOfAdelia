@@ -9,9 +9,7 @@ import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -65,13 +63,15 @@ public class CastTimeMechanic extends MechanicComponent {
             float height = (float) target.getHeight();
             Location location = target.getLocation().add(new Vector(0, height + 0.2, 0));
 
-            List<Entity> nearbyEntities = target.getNearbyEntities(24, 24, 24);
+            DamageIndicator.spawnNonPacket(TEXT, location, holoTime);
+            /*List<Entity> nearbyEntities = target.getNearbyEntities(24, 24, 24);
             if (target instanceof Player) nearbyEntities.add(target);
             for (Entity nearby : nearbyEntities) {
                 if (!(nearby instanceof Player)) continue;
 
-                DamageIndicator.showPlayer((Player) nearby, TEXT, location, holoTime);
-            }
+                // DamageIndicator.showPlayer((Player) nearby, TEXT, location, holoTime);
+                DamageIndicator.spawnNonPacket(TEXT, location, holoTime);
+            }*/
         }
 
         new BukkitRunnable() {

@@ -3,13 +3,15 @@ package io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.mechanics;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
-import io.lumine.xikage.mythicmobs.skills.ITargetedEntitySkill;
-import io.lumine.xikage.mythicmobs.skills.SkillMechanic;
-import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
-import io.lumine.xikage.mythicmobs.skills.placeholders.parsers.PlaceholderString;
+import io.lumine.mythic.api.adapters.AbstractEntity;
+import io.lumine.mythic.api.config.MythicLineConfig;
+import io.lumine.mythic.api.skills.ITargetedEntitySkill;
+import io.lumine.mythic.api.skills.SkillMetadata;
+import io.lumine.mythic.api.skills.SkillResult;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.core.skills.SkillManager;
+import io.lumine.mythic.core.skills.SkillMechanic;
+import io.lumine.mythic.core.skills.placeholders.parsers.PlaceholderString;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.LivingEntity;
@@ -19,8 +21,8 @@ public class MMMechanicHologram extends SkillMechanic implements ITargetedEntity
 
     protected final PlaceholderString message;
 
-    public MMMechanicHologram(MythicLineConfig config) {
-        super(config.getLine(), config);
+    public MMMechanicHologram(SkillManager skillManager, MythicLineConfig config) {
+        super(skillManager, config.getLine(), config);
         this.setAsyncSafe(false);
         this.setTargetsCreativePlayers(false);
 
@@ -55,11 +57,11 @@ public class MMMechanicHologram extends SkillMechanic implements ITargetedEntity
     }
 
     @Override
-    public boolean castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
+    public SkillResult castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
         LivingEntity target = (LivingEntity) BukkitAdapter.adapt(abstractEntity);
 
         chatHologram(target, message.get(data, abstractEntity));
 
-        return true;
+        return SkillResult.SUCCESS;
     }
 }

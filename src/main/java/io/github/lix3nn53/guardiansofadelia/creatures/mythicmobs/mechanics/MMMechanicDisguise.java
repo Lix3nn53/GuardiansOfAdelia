@@ -1,12 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.mechanics;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
-import io.lumine.xikage.mythicmobs.skills.ITargetedEntitySkill;
-import io.lumine.xikage.mythicmobs.skills.SkillMechanic;
-import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
+import io.lumine.mythic.api.adapters.AbstractEntity;
+import io.lumine.mythic.api.config.MythicLineConfig;
+import io.lumine.mythic.api.skills.ITargetedEntitySkill;
+import io.lumine.mythic.api.skills.SkillMetadata;
+import io.lumine.mythic.api.skills.SkillResult;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.core.skills.SkillManager;
+import io.lumine.mythic.core.skills.SkillMechanic;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
@@ -37,8 +39,8 @@ public class MMMechanicDisguise extends SkillMechanic implements ITargetedEntity
     private final Material material;
     private final int customModelData;
 
-    public MMMechanicDisguise(MythicLineConfig config) {
-        super(config.getLine(), config);
+    public MMMechanicDisguise(SkillManager skillManager, MythicLineConfig config) {
+        super(skillManager, config.getLine(), config);
         this.setAsyncSafe(false);
         this.setTargetsCreativePlayers(false);
 
@@ -62,7 +64,7 @@ public class MMMechanicDisguise extends SkillMechanic implements ITargetedEntity
     }
 
     @Override
-    public boolean castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
+    public SkillResult castAtEntity(SkillMetadata data, AbstractEntity abstractEntity) {
         LivingEntity target = (LivingEntity) BukkitAdapter.adapt(abstractEntity);
 
         MobDisguise disguise = new MobDisguise(disguiseType, isAdult);
@@ -103,7 +105,7 @@ public class MMMechanicDisguise extends SkillMechanic implements ITargetedEntity
 
         DisguiseAPI.disguiseToAll(target, disguise);
 
-        if (duration == 0) return true;
+        if (duration == 0) return SkillResult.SUCCESS;
 
         new BukkitRunnable() {
 
@@ -113,6 +115,6 @@ public class MMMechanicDisguise extends SkillMechanic implements ITargetedEntity
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), duration);
 
-        return true;
+        return SkillResult.SUCCESS;
     }
 }

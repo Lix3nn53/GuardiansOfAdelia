@@ -2,9 +2,7 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.MechanicComponent;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
-import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -49,10 +47,7 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
             if (!(ent instanceof Player)) continue;
             Player player = (Player) ent;
 
-            CraftPlayer craftPlayer = (CraftPlayer) player;
-            EntityPlayer entityPlayer = craftPlayer.getHandle();
-
-            float currentHearts = entityPlayer.getAbsorptionHearts();
+            float currentHearts = (float) player.getAbsorptionAmount();
 
             int maxHearts = 0;
             if (!maxHeartList.isEmpty()) {
@@ -76,7 +71,7 @@ public class AbsorptionHeartMechanic extends MechanicComponent {
                 nextHeart = maxHearts;
             }
 
-            entityPlayer.setAbsorptionHearts(nextHeart);
+            player.setAbsorptionAmount(nextHeart);
             healed = true;
         }
 

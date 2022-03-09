@@ -8,7 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class DamageIndicator {
 
-    public static void spawnNonPacket(String text, Location baseLocation) {
+    public static void spawnNonPacket(String text, Location baseLocation, long duration) {
         Location indicatorLocation = LocationUtils.randomPointNoY(baseLocation, 1.2f);
 
         Hologram hologram = new Hologram(indicatorLocation, text);
@@ -20,26 +20,32 @@ public class DamageIndicator {
                 hologram.getArmorStand().remove();
                 cancel();
             }
-        }.runTaskLater(GuardiansOfAdelia.getInstance(), 18L);
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), duration);
     }
 
-    public static void showPlayer(Player player, String text, Location location, long duration) {
-        FakeHologram fakeHologram = new FakeHologram(location, text);
+//    public static void showPlayer(Player player, String text, Location location, long duration) {
+//        FakeHologram fakeHologram = new FakeHologram(location, text);
+//
+//        fakeHologram.showToPlayer(player);
+//        new BukkitRunnable() {
+//
+//            @Override
+//            public void run() {
+//                fakeHologram.destroy(player);
+//                cancel();
+//            }
+//        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), duration);
+//    }
 
-        fakeHologram.showToPlayer(player);
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                fakeHologram.destroy(player);
-                cancel();
-            }
-        }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), duration);
-    }
+//    public static void showPlayerRandomLocation(Player player, String text, Location baseLocation, long duration) {
+//        Location location = LocationUtils.randomPointNoY(baseLocation, 1.2f);
+//
+//        showPlayer(player, text, location, duration);
+//    }
 
     public static void showPlayerRandomLocation(Player player, String text, Location baseLocation, long duration) {
         Location location = LocationUtils.randomPointNoY(baseLocation, 1.2f);
 
-        showPlayer(player, text, location, duration);
+        spawnNonPacket(text, location, duration);
     }
 }

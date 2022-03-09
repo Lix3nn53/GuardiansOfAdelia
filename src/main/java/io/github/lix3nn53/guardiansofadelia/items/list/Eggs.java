@@ -5,8 +5,8 @@ import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.Egg;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -33,7 +33,7 @@ public class Eggs {
     }
 
     public static boolean isMythicMob(String key) {
-        MythicMob mythicMob = MythicMobs.inst().getMobManager().getMythicMob(key);
+        MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(key);
         if (mythicMob == null) {
             GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "Eggs mythicMob null: " + key);
 

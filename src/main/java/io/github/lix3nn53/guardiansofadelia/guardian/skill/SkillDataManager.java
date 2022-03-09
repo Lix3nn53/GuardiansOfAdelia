@@ -3,9 +3,9 @@ package io.github.lix3nn53.guardiansofadelia.guardian.skill;
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -212,7 +212,7 @@ public class SkillDataManager {
                 return;
             }
 
-            BukkitAPIHelper apiHelper = MythicMobs.inst().getAPIHelper();
+            BukkitAPIHelper apiHelper = MythicBukkit.inst().getAPIHelper();
             for (LivingEntity entity : entities) {
                 if (removed == amount) break;
                 boolean mythicMob = apiHelper.isMythicMob(entity);

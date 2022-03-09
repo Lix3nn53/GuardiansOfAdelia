@@ -2,6 +2,7 @@
 /target
 src/main/resources/database.yml
 src/main/modules
+src/main/resources/modules
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

@@ -30,9 +30,9 @@ import io.github.lix3nn53.guardiansofadelia.utilities.EntityUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.DamageIndicator;
 import io.github.lix3nn53.guardiansofadelia.utilities.particle.ParticleShapes;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -193,7 +193,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         if (GuardianDataManager.hasGuardianData(playerTarget)) {
                             GuardianData guardianData = GuardianDataManager.getGuardianData(playerTarget);
                             if (guardianData.hasActiveCharacter()) {
-                                ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(damageSource);
+                                ActiveMob activeMob = MythicBukkit.inst().getMobManager().getMythicMobInstance(damageSource);
 
                                 if (activeMob != null) {
                                     String internalName = activeMob.getType().getInternalName();
@@ -327,7 +327,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         player.playSound(player.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 0.6F, 2.0F);
                     }
                 } else {
-                    ActiveMob activeMob = MythicMobs.inst().getMobManager().getMythicMobInstance(pet);
+                    ActiveMob activeMob = MythicBukkit.inst().getMobManager().getMythicMobInstance(pet);
 
                     if (activeMob != null) {
                         String internalName = activeMob.getType().getInternalName();
@@ -376,7 +376,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                         }
                     }
                 } else { // mob element resistance
-                    ActiveMob mythicMobInstance = MythicMobs.inst().getMobManager().getMythicMobInstance(livingTarget);
+                    ActiveMob mythicMobInstance = MythicBukkit.inst().getMobManager().getMythicMobInstance(livingTarget);
 
                     if (mythicMobInstance != null) {
                         String internalName = mythicMobInstance.getType().getInternalName();
@@ -415,7 +415,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
 
                 //progress deal damage tasks
                 List<Quest> questList = activeCharacter.getQuestList();
-                ActiveMob mythicMobInstance = MythicMobs.inst().getMobManager().getMythicMobInstance(livingTarget);
+                ActiveMob mythicMobInstance = MythicBukkit.inst().getMobManager().getMythicMobInstance(livingTarget);
                 if (mythicMobInstance != null) {
                     MythicMob type = mythicMobInstance.getType();
                     String internalName = type.getInternalName();
