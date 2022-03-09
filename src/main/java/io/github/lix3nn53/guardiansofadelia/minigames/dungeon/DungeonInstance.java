@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.Minigame;
 import io.github.lix3nn53.guardiansofadelia.minigames.checkpoint.Checkpoint;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.room.*;
 import io.github.lix3nn53.guardiansofadelia.party.Party;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.Scoreboard.BoardWithPlayers;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
@@ -180,6 +181,17 @@ public class DungeonInstance extends Minigame {
                 MessageUtils.sendCenteredMessage(member, darknessConditionMessage);
                 MessageUtils.sendCenteredMessage(member, roomConditionMessage);
                 MessageUtils.sendCenteredMessage(member, ChatPalette.GOLD + "You got " + this.unlockedChests + "/3 keys! Use them to loot prize chests!");
+
+                if (GuardianDataManager.hasGuardianData(member)) {
+                    GuardianData guardianData = GuardianDataManager.getGuardianData(member);
+                    if (guardianData.hasActiveCharacter()) {
+                        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                        List<Quest> questList = activeCharacter.getQuestList();
+                        for (Quest quest : questList) {
+                            quest.progressDungeonTasks(member, this.theme.getCode(), this.darkness);
+                        }
+                    }
+                }
             }
         }
 

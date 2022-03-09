@@ -16,6 +16,7 @@ depend:
   - WorldGuard
   - MythicMobs
   - NoteBlockAPI
+  - CrazyAdvancementsAPI
 commands:
   admin:
     description: Admin command

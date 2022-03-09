@@ -136,6 +136,11 @@ public class TaskLoader {
             Material blockMaterial = Material.valueOf(configurationSection.getString("blockMaterial"));
 
             task = new TaskReach(location, blockMaterial);
+        } else if (componentType.equals(TaskDungeon.class.getSimpleName())) {
+            String dungeonTheme = configurationSection.getString("dungeonTheme");
+            int minDarkness = configurationSection.getInt("minDarkness");
+
+            task = new TaskDungeon(dungeonTheme, minDarkness);
         }
 
         if (task == null) {

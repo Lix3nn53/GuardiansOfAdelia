@@ -654,6 +654,29 @@ public final class Quest {
         return false;
     }
 
+    public boolean progressDungeonTasks(Player questOwner, String dungeonTheme, int darkness) {
+        int taskIndex = 0;
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
+            if (task instanceof TaskDungeon) {
+                TaskDungeon taskDungeon = (TaskDungeon) task;
+                boolean didProgress = taskDungeon.progress(questOwner, dungeonTheme, darkness, questID, taskIndex, false);
+                if (didProgress) {
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+            taskIndex++;
+        }
+        return false;
+    }
+
     public ItemStack triggerQuestItemDrop(String internalName) {
         for (Task task : this.tasks) {
             if (task.isCompleted()) continue;
