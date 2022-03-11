@@ -113,7 +113,7 @@ public class GuiBazaarEdit extends GuiGeneric {
             ItemMeta itemMeta = current.getItemMeta();
             String currentName = itemMeta.getDisplayName();
 
-            SignMenuFactory.Menu menu = signMenuFactory.newMenu(Arrays.asList("Set price of:", currentName, "▼ Enter below ▼"))
+            SignMenuFactory.Menu menu = signMenuFactory.newMenu(Arrays.asList("", "▲ Enter above ▲", "Set price of:", currentName))
                     .reopenIfFail(true)
                     .response((signPlayer, strings) -> {
                         if (GuardianDataManager.hasGuardianData(player)) {
@@ -123,9 +123,9 @@ public class GuiBazaarEdit extends GuiGeneric {
 
                                 int price;
                                 try {
-                                    price = Integer.parseInt(strings[3]);
+                                    price = Integer.parseInt(strings[0]);
                                 } catch (NumberFormatException e) {
-                                    player.sendMessage(ChatPalette.RED + "Enter a number between 1-266239 to last line.");
+                                    player.sendMessage(ChatPalette.RED + "Enter a number between 1-266239 to first line.");
                                     return false;
                                 }
 

@@ -1,11 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.commands.admin;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.statuseffect.StatusEffectType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.onground.SkillOnGround;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.sounds.GoaSound;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
-import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.font.NegativeSpace;
 import io.github.lix3nn53.guardiansofadelia.utilities.gui.GuiGeneric;
 import net.md_5.bungee.api.ChatColor;
@@ -43,7 +44,7 @@ public class CommandTest implements CommandExecutor {
                 player.sendMessage(ChatPalette.BLUE + "/test damage <amount> - damage self");
                 player.sendMessage(ChatPalette.BLUE + "/test custom <custom> [sBefore] [sAfter] <negative> <positive> - test custom char");
             } else if (args[0].equals("test")) {
-                CustomCharacter menuContent = CustomCharacterGui.MENU_54;
+                /*CustomCharacter menuContent = CustomCharacterGui.MENU_54;
                 CustomCharacter logo = CustomCharacterGui.LOGO;
                 logo.setNegativeSpacesBefore(Integer.parseInt(args[1]));
                 logo.setNegativeSpacesAfter(Integer.parseInt(args[2]));
@@ -54,7 +55,9 @@ public class CommandTest implements CommandExecutor {
                 String s2 = logo.toString();
 
                 GuiGeneric guiGeneric = new GuiGeneric(54, s1 + s2 + args[3], 0);
-                guiGeneric.openInventory(player);
+                guiGeneric.openInventory(player);*/
+
+                StatusEffectManager.addStatus(player, StatusEffectType.ROOT, 100);
             } else if (args[0].equals("custom")) {
                 CustomCharacter chara = CustomCharacter.valueOf(args[1]);
                 chara.setNegativeSpacesBefore(Integer.parseInt(args[2]));

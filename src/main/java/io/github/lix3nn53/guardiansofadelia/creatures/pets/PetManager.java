@@ -493,7 +493,7 @@ public class PetManager {
         }
     }
 
-    public static void onPlayerMove(Player player) {
+    public static void onPlayerMove(Player player, Location to) {
         List<LivingEntity> companions;
 
         if (hasCompanion(player)) {
@@ -508,18 +508,16 @@ public class PetManager {
         }*/
 
         if (!companions.isEmpty()) {
-            Location playerLocation = player.getLocation();
-
-            String name = playerLocation.getWorld().getName();
+            String name = to.getWorld().getName();
             for (LivingEntity companion : companions) {
                 String name1 = companion.getLocation().getWorld().getName();
                 if (!name.equals(name1)) {
                     return;
                 }
 
-                final float distance = (float) playerLocation.distanceSquared(companion.getLocation());
+                final float distance = (float) to.distanceSquared(companion.getLocation());
                 if (distance > 400) {
-                    PetManager.teleportPet(player, companion, playerLocation);
+                    PetManager.teleportPet(player, companion, to);
 
                     if (companion instanceof Mob) { //clear pet target
                         Mob mob = (Mob) companion;

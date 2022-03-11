@@ -42,6 +42,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
@@ -82,6 +83,8 @@ public class RPGCharacterStats {
     private ArmorGearType sameTypeArmorSet = null;
     private List<GearSet> gearSets = new ArrayList<>();
 
+    private final BukkitTask actionBarTask;
+
     public RPGCharacterStats(Player player, String startClass) {
         this.player = player;
         this.rpgClassStr = startClass;
@@ -112,13 +115,15 @@ public class RPGCharacterStats {
         onMaxHealthChange();
 
         //start action bar scheduler
-        new BukkitRunnable() {
+        actionBarTask = new BukkitRunnable() {
             @Override
             public void run() {
+                /*
+                #onQuit replaces this code
                 if (!player.isOnline()) {
                     cancel();
                     return;
-                }
+                }*/
 
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 ActionBarInfo actionBarInfo = rpgClass.getActionBarInfo();
@@ -1029,5 +1034,9 @@ public class RPGCharacterStats {
 
         // Apply changes to data
         this.gearSets = currentGearSets;
+    }
+
+    public void onQuit() {
+        actionBarTask.cancel();
     }
 }

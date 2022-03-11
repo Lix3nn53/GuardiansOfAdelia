@@ -12,7 +12,7 @@ public class AutomaticShutdown {
         Timer timer = new Timer();
         timer.schedule(new ShutdownTask(), getNextRestartTime());
 
-        GuardiansOfAdelia.getInstance().getLogger().info("Scheduled restart on " + getNextRestartTime().toString());
+        GuardiansOfAdelia.getInstance().getLogger().info("Scheduled restart on " + getNextRestartTime());
     }
 
     private static Date getNextRestartTime() {
@@ -33,7 +33,7 @@ public class AutomaticShutdown {
 
         midnight.add(Calendar.DATE, 1); //tomorrow
         midnight.set(Calendar.HOUR_OF_DAY, 1); //one hour before + 59 minutes
-        midnight.set(Calendar.MINUTE, 59); //because delay of restart is 1 minute
+        midnight.set(Calendar.MINUTE, 50); //because delay of restart is 10 minutes
         midnight.set(Calendar.SECOND, 0);
 
         return midnight;

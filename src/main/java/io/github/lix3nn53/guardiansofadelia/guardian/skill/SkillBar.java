@@ -326,6 +326,8 @@ public class SkillBar {
                         item.setAmount(secondsLeft);
                     }
                 }
+
+                player.sendMessage("Skill cooldown tick");
                 ticksPassed++;
             }
         }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 1L);

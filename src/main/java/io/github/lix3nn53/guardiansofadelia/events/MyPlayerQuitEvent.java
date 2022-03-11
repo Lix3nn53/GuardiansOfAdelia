@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.events;
 
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
@@ -18,7 +19,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class MyPlayerQuitEvent implements Listener {
 
     public static void onPlayerQuit(Player player) {
-        GuardianDataManager.onPlayerQuit(player);
+        GuardianData guardianData = GuardianDataManager.onPlayerQuit(player);
+        if (guardianData != null) {
+            guardianData.getActiveCharacter().getRpgCharacterStats().onQuit();
+        }
 
         GuildManager.onPlayerQuit(player);
         CharacterSelectionScreenManager.clear(player);
@@ -35,7 +39,10 @@ public class MyPlayerQuitEvent implements Listener {
             return;
         }
 
-        GuardianDataManager.onPlayerQuit(player);
+        GuardianData guardianData = GuardianDataManager.onPlayerQuit(player);
+        if (guardianData != null) {
+            guardianData.getActiveCharacter().getRpgCharacterStats().onQuit();
+        }
 
         // GuildManager.onPlayerQuit(player);
         CharacterSelectionScreenManager.clear(player);

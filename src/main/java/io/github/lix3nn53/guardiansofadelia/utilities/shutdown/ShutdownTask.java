@@ -43,17 +43,22 @@ public class ShutdownTask extends TimerTask {
     }
 
     enum Stage {
-        SECONDS_60("Server restarting in 60 seconds!", 0, DatabaseOperation.CLEAR_EXPIRED_PREMIUM_RANKS),
-        SECONDS_30("Server restarting in 30 seconds!", 30),
-        SECONDS_20("Server restarting in 20 seconds!", 40),
-        SECONDS_15("Server restarting in 15 seconds!", 45),
-        SECONDS_10("Server restarting in 10 seconds!", 50),
-        SECONDS_5("Server restarting in 5 seconds!", 55),
-        STOP("Stopping the server!", "stop", 60);
+        MINUTE_10("Server restarting in 5 minutes!", 0, DatabaseOperation.CLEAR_EXPIRED_PREMIUM_RANKS),
+        MINUTE_5("Server restarting in 5 minutes!", 5 * 60),
+        MINUTE_4("Server restarting in 5 minutes!", 6 * 60),
+        MINUTE_3("Server restarting in 5 minutes!", 7 * 60),
+        MINUTE_2("Server restarting in 5 minutes!", 8 * 60),
+        MINUTE_1("Server restarting in 60 seconds!", 9 * 60),
+        SECONDS_30("Server restarting in 30 seconds!", 9 * 60 + 30),
+        SECONDS_20("Server restarting in 20 seconds!", 9 * 60 + 40),
+        SECONDS_15("Server restarting in 15 seconds!", 9 * 60 + 45),
+        SECONDS_10("Server restarting in 10 seconds!", 9 * 60 + 50),
+        SECONDS_5("Server restarting in 5 seconds!", 9 * 60 + 55),
+        STOP("Stopping the server!", "stop", 9 * 60 + 60);
 
-        private String message;
-        private String command;
-        private int delay;
+        private final String message;
+        private final String command;
+        private final int delay;
         private DatabaseOperation databaseOperation;
 
         Stage() {
@@ -117,7 +122,7 @@ public class ShutdownTask extends TimerTask {
     }
 
     static class ShutdownRunnable implements Runnable {
-        private Stage stage;
+        private final Stage stage;
 
         ShutdownRunnable(Stage stage) {
             this.stage = stage;

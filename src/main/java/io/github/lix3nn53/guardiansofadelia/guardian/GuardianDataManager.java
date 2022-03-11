@@ -23,7 +23,7 @@ public class GuardianDataManager {
         onlineGuardians.put(player, guardianData);
     }
 
-    public static void onPlayerQuit(Player player) {
+    public static GuardianData onPlayerQuit(Player player) {
         if (hasGuardianData(player)) {
             GuardianData guardianData = getGuardianData(player);
             DatabaseManager.writeGuardianDataWithCurrentCharacter(player, guardianData);
@@ -32,7 +32,8 @@ public class GuardianDataManager {
                 bazaar.remove();
             }
         }
-        onlineGuardians.remove(player);
+
+        return onlineGuardians.remove(player);
     }
 
     public static Set<Player> getOnlinePlayers() {
