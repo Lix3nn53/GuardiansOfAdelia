@@ -12,10 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class MyPlayerJoinEvent implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onEvent(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-
+    public static void onPlayerJoin(Player player) {
         player.setGameMode(GameMode.ADVENTURE);
         player.getInventory().clear();
 
@@ -23,10 +20,29 @@ public class MyPlayerJoinEvent implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                CharacterSelectionScreenManager.startCharacterSelection(player);
+                CharacterSelectionScreenManager.startCharacterSelection(player, true);
                 // CustomSoundtrack.addPlayer(player);
                 player.setResourcePack(GuardiansOfAdelia.ResourcePackURL);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
+    }
+
+    public static void onPlayerBackToCharacterSelection(Player player) {
+        player.getInventory().clear();
+
+        //character selection handles loading data too
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                CharacterSelectionScreenManager.startCharacterSelection(player, false);
+            }
+        }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onEvent(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        onPlayerJoin(player);
     }
 }

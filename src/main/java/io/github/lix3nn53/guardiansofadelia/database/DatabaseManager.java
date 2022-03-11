@@ -79,7 +79,7 @@ public class DatabaseManager {
         });
     }
 
-    public static void loadPlayerDataAndCharacterSelection(Player player) {
+    public static void loadPlayerDataAndCharacterSelection(Player player, boolean isJoin) {
         //player.sendMessage("Loading your player data..");
         UUID uuid = player.getUniqueId();
         Bukkit.getScheduler().runTaskAsynchronously(GuardiansOfAdelia.getInstance(), () -> {
@@ -117,8 +117,10 @@ public class DatabaseManager {
                     }
                 }
 
-                HeaderBarManager.onPlayerJoin(player, guardianData);
-                ChatManager.onPlayerJoin(player);
+                if (isJoin) { // Do not do these if player goes to character selection from ingame
+                    HeaderBarManager.onPlayerJoin(player, guardianData);
+                    ChatManager.onPlayerJoin(player);
+                }
 
                 //player.sendMessage("Loaded player data");
                 //character selection screen

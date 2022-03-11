@@ -68,12 +68,12 @@ public class TeleportationUtils {
         }
     }
 
-    private static boolean isTeleportCanceled(float differenceX, float differenceY, float differenceZ) {
+    public static boolean isTeleportCanceled(float differenceX, float differenceY, float differenceZ) {
         return differenceX > 1 || differenceY > 1 || differenceZ > 1;
     }
 
-    private static void cancelTeleportation(BukkitRunnable runnable, GuardianData guardianData,
-                                            ArmorStand hologramTop, ArmorStand hologramBottom, Player player) {
+    public static void cancelTeleportation(BukkitRunnable runnable, GuardianData guardianData,
+                                           ArmorStand hologramTop, ArmorStand hologramBottom, Player player) {
         runnable.cancel();
         guardianData.setTeleporting(false);
         hologramTop.remove();
@@ -81,15 +81,15 @@ public class TeleportationUtils {
         player.sendMessage(ChatPalette.RED + "Teleportation has been canceled because you moved.");
     }
 
-    private static void nextStep(Player player, ArmorStand hologramTop, ArmorStand hologramBottom, String destination, int countDown) {
+    public static void nextStep(Player player, ArmorStand hologramTop, ArmorStand hologramBottom, String destination, int countDown) {
         player.sendTitle(ChatPalette.BLUE + "Teleporting..", ChatPalette.BLUE_LIGHT.toString() + countDown, 5, 20, 5);
         hologramTop.setCustomName(ChatPalette.BLUE + "< " + ChatPalette.YELLOW + destination + ChatPalette.BLUE + " >");
         hologramBottom.setCustomName(ChatPalette.BLUE_LIGHT + "Teleporting.. " + countDown);
     }
 
-    private static void finishTeleportation(BukkitRunnable runnable, GuardianData guardianData,
-                                            ArmorStand hologramTop, ArmorStand hologramBottom, Player player,
-                                            Location location, String destination, ItemStack itemCost, int cost) {
+    public static void finishTeleportation(BukkitRunnable runnable, GuardianData guardianData,
+                                           ArmorStand hologramTop, ArmorStand hologramBottom, Player player,
+                                           Location location, String destination, ItemStack itemCost, int cost) {
         if (itemCost != null) {
             boolean b = InventoryUtils.removeItemFromInventory(player.getInventory(), itemCost, 1);
 

@@ -31,7 +31,7 @@ public class CharacterSelectionScreenManager {
     private static final List<Player> players = new ArrayList<>();
     private static List<Location> armorStandLocationBases;
     private static Location tutorialStart;
-    private static Location characterSelectionCenter;
+    public static Location characterSelectionCenter;
     private static final HashMap<Integer, List<ArmorStand>> characterNoToArmorStands = new HashMap<>();
 
     private static final List<Player> playersInLoading = new ArrayList<>(); // Player clicked something and waiting for result
@@ -64,13 +64,15 @@ public class CharacterSelectionScreenManager {
         }
     }
 
-    public static void startCharacterSelection(Player player) {
+    public static void startCharacterSelection(Player player, boolean isJoin) {
         if (players.isEmpty()) {
             createHolograms();
         }
         players.add(player);
-        DatabaseManager.loadPlayerDataAndCharacterSelection(player);
-        player.teleport(characterSelectionCenter);
+        DatabaseManager.loadPlayerDataAndCharacterSelection(player, isJoin);
+        if (isJoin) {
+            player.teleport(characterSelectionCenter);
+        }
     }
 
     private static void removeDisguisesFromPlayer(Player player) {
