@@ -22,6 +22,8 @@ import java.util.Random;
 public class MobDropGenerator {
 
     private static final float DROP_RATE = 0.05f;
+    private static final Random itemTypeRandom = new Random();
+    private static final Random rand = new Random();
 
     public static List<ItemStack> getDrops(int entityLevel, boolean isDungeon) {
         List<ItemStack> drops = new ArrayList<>();
@@ -54,8 +56,7 @@ public class MobDropGenerator {
             }
 
             // Obtain a number to select between weapon, <armor or shield> and passive
-            Random rand = new Random();
-            int dropType = rand.nextInt(3);
+            int dropType = itemTypeRandom.nextInt(3);
 
             if (dropType == 0) {
                 WeaponGearType[] values = WeaponGearType.values();

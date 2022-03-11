@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
@@ -48,6 +49,11 @@ public class RPGInventory extends GuiGeneric {
     private final VanillaSlotBoots bootsSlot = new VanillaSlotBoots();
     private final VanillaSlotOffhand offhandSlot = new VanillaSlotOffhand();
     private final HotBarSlotWeapon hotBarSlotWeapon = new HotBarSlotWeapon();
+
+    private final ToolSlotAxe toolSlotAxe = new ToolSlotAxe();
+    private final ToolSlotBottle toolSlotBottle = new ToolSlotBottle();
+    private final ToolSlotHoe toolSlotHoe = new ToolSlotHoe();
+    private final ToolSlotPickaxe toolSlotPickaxe = new ToolSlotPickaxe();
 
     public RPGInventory(Player player) {
         super(54, CustomCharacterGui.MENU_54_FLAT + ChatPalette.BLACK.toString() + ChatColor.BOLD + "RPG Inventory", 0);
@@ -122,6 +128,30 @@ public class RPGInventory extends GuiGeneric {
             this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getFillItem());
         } else {
             this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
+        }
+
+        if (toolSlotAxe.isEmpty()) {
+            this.setItem(RPGSlotType.AXE.getSlotNo(), toolSlotAxe.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.AXE.getSlotNo(), toolSlotAxe.getItemOnSlot());
+        }
+
+        if (toolSlotBottle.isEmpty()) {
+            this.setItem(RPGSlotType.BOTTLE.getSlotNo(), toolSlotBottle.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.BOTTLE.getSlotNo(), toolSlotBottle.getItemOnSlot());
+        }
+
+        if (toolSlotHoe.isEmpty()) {
+            this.setItem(RPGSlotType.HOE.getSlotNo(), toolSlotHoe.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.HOE.getSlotNo(), toolSlotHoe.getItemOnSlot());
+        }
+
+        if (toolSlotPickaxe.isEmpty()) {
+            this.setItem(RPGSlotType.PICKAXE.getSlotNo(), toolSlotPickaxe.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.PICKAXE.getSlotNo(), toolSlotPickaxe.getItemOnSlot());
         }
 
         GuardianData guardianData = GuardianDataManager.getGuardianData(player);
@@ -202,6 +232,30 @@ public class RPGInventory extends GuiGeneric {
             this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getFillItem());
         } else {
             this.setItem(RPGSlotType.MAINHAND.getSlotNo(), hotBarSlotWeapon.getItemOnSlot(player));
+        }
+
+        if (toolSlotAxe.isEmpty()) {
+            this.setItem(RPGSlotType.AXE.getSlotNo(), toolSlotAxe.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.AXE.getSlotNo(), toolSlotAxe.getItemOnSlot());
+        }
+
+        if (toolSlotBottle.isEmpty()) {
+            this.setItem(RPGSlotType.BOTTLE.getSlotNo(), toolSlotBottle.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.BOTTLE.getSlotNo(), toolSlotBottle.getItemOnSlot());
+        }
+
+        if (toolSlotHoe.isEmpty()) {
+            this.setItem(RPGSlotType.HOE.getSlotNo(), toolSlotHoe.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.HOE.getSlotNo(), toolSlotHoe.getItemOnSlot());
+        }
+
+        if (toolSlotPickaxe.isEmpty()) {
+            this.setItem(RPGSlotType.PICKAXE.getSlotNo(), toolSlotPickaxe.getFillItem());
+        } else {
+            this.setItem(RPGSlotType.PICKAXE.getSlotNo(), toolSlotPickaxe.getItemOnSlot());
         }
 
         GuardianData guardianData = GuardianDataManager.getGuardianData(player);
@@ -332,6 +386,37 @@ public class RPGInventory extends GuiGeneric {
         return false;
     }
 
+    public boolean setTool(GatheringToolType type, ItemStack itemStack) {
+        switch (type) {
+            case HOE:
+                if (this.toolSlotHoe.doesFit(itemStack)) {
+                    this.toolSlotHoe.setItemOnSlot(itemStack);
+                    return true;
+                }
+                break;
+            case PICKAXE:
+                if (this.toolSlotPickaxe.doesFit(itemStack)) {
+                    this.toolSlotPickaxe.setItemOnSlot(itemStack);
+                    return true;
+                }
+                break;
+            case AXE:
+                if (this.toolSlotAxe.doesFit(itemStack)) {
+                    this.toolSlotAxe.setItemOnSlot(itemStack);
+                    return true;
+                }
+                break;
+            case BOTTLE:
+                if (this.toolSlotBottle.doesFit(itemStack)) {
+                    this.toolSlotBottle.setItemOnSlot(itemStack);
+                    return true;
+                }
+                break;
+        }
+
+        return false;
+    }
+
     public RPGSlotParrot getParrotSlot() {
         return parrotSlot;
     }
@@ -380,6 +465,21 @@ public class RPGInventory extends GuiGeneric {
         return hotBarSlotWeapon;
     }
 
+    public ToolSlot getToolSlot(GatheringToolType toolType) {
+        switch (toolType) {
+            case HOE:
+                return toolSlotHoe;
+            case PICKAXE:
+                return toolSlotPickaxe;
+            case AXE:
+                return toolSlotAxe;
+            case BOTTLE:
+                return toolSlotBottle;
+        }
+
+        return null;
+    }
+
     public boolean onShiftClick(ItemStack itemStack, Player player, int slot, Inventory topInventory, String rpgClass) {
         boolean doesCharacterMeetRequirements = StatUtils.doesCharacterMeetRequirements(itemStack, player, rpgClass);
         if (!doesCharacterMeetRequirements) return false;
@@ -426,6 +526,30 @@ public class RPGInventory extends GuiGeneric {
             }
             change = setEgg(itemStack, player);
             rpgSlotType = RPGSlotType.PET;
+        } else if (toolSlotAxe.doesFit(itemStack)) {
+            if (!toolSlotAxe.isEmpty()) {
+                oldItemOnSlot = toolSlotAxe.getItemOnSlot();
+            }
+            change = setTool(GatheringToolType.AXE, itemStack);
+            rpgSlotType = RPGSlotType.AXE;
+        } else if (toolSlotBottle.doesFit(itemStack)) {
+            if (!toolSlotBottle.isEmpty()) {
+                oldItemOnSlot = toolSlotBottle.getItemOnSlot();
+            }
+            change = setTool(GatheringToolType.BOTTLE, itemStack);
+            rpgSlotType = RPGSlotType.BOTTLE;
+        } else if (toolSlotHoe.doesFit(itemStack)) {
+            if (!toolSlotHoe.isEmpty()) {
+                oldItemOnSlot = toolSlotHoe.getItemOnSlot();
+            }
+            change = setTool(GatheringToolType.HOE, itemStack);
+            rpgSlotType = RPGSlotType.HOE;
+        } else if (toolSlotPickaxe.doesFit(itemStack)) {
+            if (!toolSlotPickaxe.isEmpty()) {
+                oldItemOnSlot = toolSlotPickaxe.getItemOnSlot();
+            }
+            change = setTool(GatheringToolType.PICKAXE, itemStack);
+            rpgSlotType = RPGSlotType.PICKAXE;
         }
         if (change) {
             if (oldItemOnSlot != null) {
@@ -635,6 +759,78 @@ public class RPGInventory extends GuiGeneric {
                     return true;
                 }
             }
+        } else if (slot == RPGSlotType.AXE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.AXE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                boolean didEquip = setTool(GatheringToolType.AXE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            } else {
+                boolean didEquip = setTool(GatheringToolType.AXE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            }
+        } else if (slot == RPGSlotType.BOTTLE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.BOTTLE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                boolean didEquip = setTool(GatheringToolType.BOTTLE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            } else {
+                boolean didEquip = setTool(GatheringToolType.BOTTLE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            }
+        } else if (slot == RPGSlotType.HOE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.HOE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                boolean didEquip = setTool(GatheringToolType.HOE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            } else {
+                boolean didEquip = setTool(GatheringToolType.HOE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            }
+        } else if (slot == RPGSlotType.PICKAXE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.PICKAXE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                boolean didEquip = setTool(GatheringToolType.PICKAXE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(itemOnSlot);
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            } else {
+                boolean didEquip = setTool(GatheringToolType.PICKAXE, cursor);
+                if (didEquip) {
+                    player.setItemOnCursor(new ItemStack(Material.AIR));
+                    topInventory.setItem(slot, cursor);
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -735,6 +931,58 @@ public class RPGInventory extends GuiGeneric {
                 PetManager.onEggUnequip(player);
                 return true;
             }
+        } else if (slot == RPGSlotType.AXE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.AXE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
+                rpgSlot.clearItemOnSlot();
+                topInventory.setItem(slot, toolSlotHoe.getFillItem());
+                return true;
+            }
+        } else if (slot == RPGSlotType.BOTTLE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.BOTTLE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
+                rpgSlot.clearItemOnSlot();
+                topInventory.setItem(slot, toolSlotHoe.getFillItem());
+                return true;
+            }
+        } else if (slot == RPGSlotType.HOE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.HOE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
+                rpgSlot.clearItemOnSlot();
+                topInventory.setItem(slot, toolSlotHoe.getFillItem());
+                return true;
+            }
+        } else if (slot == RPGSlotType.PICKAXE.getSlotNo()) {
+            ToolSlot rpgSlot = getToolSlot(GatheringToolType.PICKAXE);
+            if (!rpgSlot.isEmpty()) {
+                ItemStack itemOnSlot = rpgSlot.getItemOnSlot();
+                if (isShiftClick) {
+                    InventoryUtils.giveItemToPlayer(player, itemOnSlot);
+                } else {
+                    player.setItemOnCursor(itemOnSlot);
+                }
+                rpgSlot.clearItemOnSlot();
+                topInventory.setItem(slot, toolSlotHoe.getFillItem());
+                return true;
+            }
         }
         return false;
     }
@@ -769,6 +1017,9 @@ public class RPGInventory extends GuiGeneric {
         if (!eggSlot.isEmpty()) {
             eggSlot.clearItemOnSlot();
             PetManager.onEggUnequip(player);
+        }
+        if (!toolSlotHoe.isEmpty()) {
+            toolSlotHoe.clearItemOnSlot();
         }
     }
 

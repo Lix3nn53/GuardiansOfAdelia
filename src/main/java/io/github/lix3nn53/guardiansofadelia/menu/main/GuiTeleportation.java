@@ -19,23 +19,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.List;
-
 public class GuiTeleportation extends GuiBookGeneric {
 
-    public GuiTeleportation(GuardianData guardianData) {
+    public GuiTeleportation(GuardianData guardianData, int playerLevel) {
         super(CustomCharacterGui.MENU_54_FLAT.toString() + ChatPalette.BLACK + "Instant Teleportation", 0);
 
         ItemStack backButton = OtherItems.getBackButton("Compass Menu");
         this.addToFirstAvailableWord(backButton);
         this.disableLine(0, 0);
 
-        List<Integer> turnedInQuests = guardianData.getActiveCharacter().getTurnedInQuests();
-
         for (int code : InstantTeleportManager.codeToTeleport.keySet()) {
             InstantTeleportGuiItem instantTeleportGuiItem = InstantTeleportManager.codeToTeleport.get(code);
-            boolean contains = turnedInQuests.contains(code);
-            ItemStack itemStack = instantTeleportGuiItem.getItemStack(guardianData, contains, code);
+            ItemStack itemStack = instantTeleportGuiItem.getItemStack(guardianData, playerLevel, code);
 
             this.addToFirstAvailableWord(itemStack);
         }

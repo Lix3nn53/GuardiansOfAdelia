@@ -26,15 +26,15 @@ public enum GatheringToolTier {
     public int getDurability() {
         switch (this) {
             case WOODEN:
-                return 10;
+                return 25;
             case STONE:
-                return 15;
+                return 35;
             case IRON:
-                return 20;
-            case GOLDEN:
-                return 30;
-            case DIAMOND:
                 return 50;
+            case GOLDEN:
+                return 80;
+            case DIAMOND:
+                return 120;
         }
         return 8;
     }

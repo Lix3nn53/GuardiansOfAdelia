@@ -63,7 +63,7 @@ public class CastTimeMechanic extends MechanicComponent {
             float height = (float) target.getHeight();
             Location location = target.getLocation().add(new Vector(0, height + 0.2, 0));
 
-            DamageIndicator.spawnNonPacket(TEXT, location, holoTime);
+            DamageIndicator.showPlayerNearby(TEXT, location, holoTime, 40);
             /*List<Entity> nearbyEntities = target.getNearbyEntities(24, 24, 24);
             if (target instanceof Player) nearbyEntities.add(target);
             for (Entity nearby : nearbyEntities) {

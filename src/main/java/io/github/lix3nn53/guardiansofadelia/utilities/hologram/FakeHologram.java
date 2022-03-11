@@ -1,43 +1,38 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.hologram;
 
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.packets.EntityDestroyPacket;
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.packets.EntityMetadataPacket;
+import io.github.lix3nn53.guardiansofadelia.utilities.hologram.packets.SpawnEntityLivingPacket;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
 public class FakeHologram {
 
-//    private final EntityArmorStand entityArmorStand;
-//
-//    public FakeHologram(Location loc, String displayName) {
-//        EntityArmorStand entity = new EntityArmorStand(((CraftWorld) loc.getWorld()).getHandle(), loc.getX(), loc.getY(), loc.getZ());
-//        entity.setCustomName(new ChatComponentText(displayName));
-//        entity.setCustomNameVisible(true);
-//        entity.setInvisible(true);
-//        entity.setNoGravity(true);
-//        entity.setMarker(true);
-//
-//        this.entityArmorStand = entity;
-//    }
-//
-//    public void showToPlayer(Player p) {
-//        PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving(this.entityArmorStand);
-//
-//        PacketPlayOutEntityMetadata entityMetaPacket = new PacketPlayOutEntityMetadata(this.entityArmorStand.getId(),
-//                this.entityArmorStand.getDataWatcher(), true);
-//
-//        ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
-//
-//        try {
-//            protocolManager.sendServerPacket(p, PacketContainer.fromPacket(packet));
-//            protocolManager.sendServerPacket(p, PacketContainer.fromPacket(entityMetaPacket));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void destroy(Player p) {
-//        PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(this.entityArmorStand.getId());
-//
-//        try {
-//            ProtocolLibrary.getProtocolManager().sendServerPacket(p, PacketContainer.fromPacket(packet));
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    protected final int entityID;
+    protected final String text;
+    private final Location location;
+    private final EntityDestroyPacket entityDestroyPacket;
+
+    public FakeHologram(int entityID, Location location, String text) {
+        this.entityID = entityID;
+        this.location = location;
+        this.text = text;
+        entityDestroyPacket = new EntityDestroyPacket(entityID);
+        entityDestroyPacket.load();
+    }
+
+    public void hide(@NotNull Player player) {
+        entityDestroyPacket.send(player);
+    }
+
+    public void show(@NotNull Player player) {
+        new SpawnEntityLivingPacket(entityID, location)
+                .load()
+                .send(player);
+        new EntityMetadataPacket(entityID, text, true)
+                .load()
+                .send(player);
+    }
+
 }

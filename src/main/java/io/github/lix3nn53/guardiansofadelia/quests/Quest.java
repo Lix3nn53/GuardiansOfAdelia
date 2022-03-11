@@ -163,7 +163,7 @@ public final class Quest {
                 lore.add("");
                 lore.add(ChatPalette.PURPLE_LIGHT + "Objectives");
                 for (Task t : tasks) {
-                    lore.add(t.getItemLoreString());
+                    lore.add(t.getItemLoreString(guardianData));
                 }
             }
 
@@ -517,7 +517,7 @@ public final class Quest {
 
         int i = 1;
         for (Task task : this.getTasks()) {
-            String tablistInfoString = task.getTablistInfoString();
+            String tablistInfoString = task.getTablistInfoString(lang);
             replaceTaskValues = replaceTaskValues.replace("TASK_PROGRESS_" + i, tablistInfoString + ChatPalette.WHITE);
             i++;
         }

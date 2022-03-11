@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -30,18 +32,18 @@ public final class TaskCrafting implements Task {
         return taskCopy;
     }
 
-    public String getTablistInfoString() {
+    public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        String text1 = "Anything";
+        String text1 = Translation.t(language, "crafting.task.craft.l3");
         if (itemNameContains != null && !itemNameContains.equals("")) {
             text1 = itemNameContains;
         }
 
-        return chatPalette + "Craft " + getProgress() + "/" + getRequiredProgress() + " " + text1 + " from " + craftingType.getName();
+        return chatPalette + Translation.t(language, "crafting.task.craft.l1") + getProgress() + "/" + getRequiredProgress() + " " + text1 + Translation.t(language, "crafting.task.craft.l2") + craftingType.getName();
     }
 
-    public String getItemLoreString() {
+    public String getItemLoreString(GuardianData guardianData) {
         ChatPalette color;
         if (isCompleted()) {
             color = ChatPalette.GREEN_DARK;
@@ -49,12 +51,12 @@ public final class TaskCrafting implements Task {
             color = ChatPalette.YELLOW;
         }
 
-        String text1 = "Anything";
+        String text1 = Translation.t(guardianData, "crafting.task.craft.l3");
         if (itemNameContains != null && !itemNameContains.equals("")) {
             text1 = itemNameContains;
         }
 
-        return color + "Craft " + getRequiredProgress() + " " + text1 + " from " + craftingType.getName();
+        return color + Translation.t(guardianData, "crafting.task.craft.l1") + getRequiredProgress() + " " + text1 + Translation.t(guardianData, "crafting.task.craft.l2") + craftingType.getName();
     }
 
     @Override

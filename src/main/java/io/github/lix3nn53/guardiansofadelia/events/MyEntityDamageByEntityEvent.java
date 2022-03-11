@@ -438,7 +438,7 @@ public class MyEntityDamageByEntityEvent implements Listener {
                 }*/
 
                 // DamageIndicator.spawnNonPacket(text, targetLocation.clone().add(0, targetHeight + 0.5, 0));
-                DamageIndicator.showPlayerRandomLocation(player, text, targetLocation.clone().add(0, targetHeight + 0.5, 0), 18);
+                DamageIndicator.showPlayerRandomLocation(player, text, targetLocation.clone().add(0, targetHeight / 1.75, 0), 18);
 
                 //show bossbar
                 HealthBarManager.onPlayerDamageEntity(player, livingTarget, (int) (finalDamage + 0.5), indicatorColor, indicatorIcon);

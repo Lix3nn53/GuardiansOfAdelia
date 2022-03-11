@@ -18,6 +18,8 @@ public class RandomSkillOnGroundWithOffset {
         this.offset = offset;
     }
 
+    private static final Random rand = new Random();
+
     public ArmorStand activate(Location location, long delay) {
         Location add = location.clone().add(offset);
 
@@ -29,7 +31,7 @@ public class RandomSkillOnGroundWithOffset {
         }
         if (size == 1) return skillOnGroundList.get(0).activate(add, delay);
 
-        int i = new Random().nextInt(size);
+        int i = rand.nextInt(size);
 
         return skillOnGroundList.get(i).activate(add, delay);
     }

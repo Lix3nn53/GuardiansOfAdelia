@@ -58,6 +58,10 @@ public class StatPassive implements Stat {
         return total < 1;
     }
 
+    private static final Random randForSatisfy = new Random();
+    private static final Random randForSatisfyOne = new Random();
+    private static final Random randForValue = new Random();
+
     /**
      * @param minValue    min possible value of a field
      * @param maxValue    max possible value of a field
@@ -82,7 +86,7 @@ public class StatPassive implements Stat {
             int bound = 50;
             int multiplier = bound / 5;
             int bonus = 5;
-            amountOfStats = new Random().nextInt(bound - (minAmount * multiplier) + bonus) + (minAmount * multiplier);
+            amountOfStats = randForSatisfy.nextInt(bound - (minAmount * multiplier) + bonus) + (minAmount * multiplier);
             amountOfStats = (int) ((amountOfStats / (multiplier)) + 0.5);
         } else {
             amountOfStats = 5;
@@ -131,17 +135,17 @@ public class StatPassive implements Stat {
         ElementType statToSatisfyElement = null;
         AttributeType statToSatisfyAttribute = null;
         if (isElement) {
-            random = new Random().nextInt(unusedElements.size());
+            random = randForSatisfyOne.nextInt(unusedElements.size());
             statToSatisfyElement = unusedElements.get(random);
 
-            int i = new Random().nextInt(unsatisfiedRanksElements.size());
+            int i = randForSatisfyOne.nextInt(unsatisfiedRanksElements.size());
             percent = unsatisfiedRanksElements.get(i);
             unsatisfiedRanksElements.remove(i);
         } else {
-            random = new Random().nextInt(unusedAttributes.size());
+            random = randForSatisfyOne.nextInt(unusedAttributes.size());
             statToSatisfyAttribute = unusedAttributes.get(random);
 
-            int i = new Random().nextInt(unsatisfiedRanksAttributes.size());
+            int i = randForSatisfyOne.nextInt(unsatisfiedRanksAttributes.size());
             percent = unsatisfiedRanksAttributes.get(i);
             unsatisfiedRanksAttributes.remove(i);
         }
@@ -178,7 +182,7 @@ public class StatPassive implements Stat {
         if (minStatValue >= maxStatValue) {
             return maxStatValue;
         } else {
-            return new Random().nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
+            return randForValue.nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
         }
     }
 }

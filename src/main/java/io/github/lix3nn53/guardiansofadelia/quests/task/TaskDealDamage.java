@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.MobManager;
@@ -35,13 +37,13 @@ public final class TaskDealDamage implements Task {
         return taskCopy;
     }
 
-    public String getTablistInfoString() {
+    public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + "Deal " + getProgress() + "/" + getRequiredProgress() + " damage to " + ChatColor.stripColor(mobName);
+        return chatPalette + Translation.t(language, "crafting.task.dealDamage.l1") + getProgress() + "/" + getRequiredProgress() + Translation.t(language, "crafting.task.dealDamage.l2") + ChatColor.stripColor(mobName);
     }
 
-    public String getItemLoreString() {
+    public String getItemLoreString(GuardianData guardianData) {
         ChatPalette color;
         if (isCompleted()) {
             color = ChatPalette.GREEN_DARK;
@@ -49,7 +51,7 @@ public final class TaskDealDamage implements Task {
             color = ChatPalette.YELLOW;
         }
 
-        return color + "Deal " + damageNeeded + " damage to " + ChatColor.stripColor(mobName);
+        return color + Translation.t(guardianData, "crafting.task.dealDamage.l1") + damageNeeded + Translation.t(guardianData, "crafting.task.dealDamage.l2") + ChatColor.stripColor(mobName);
     }
 
     @Override

@@ -121,6 +121,17 @@ public class GuiMain extends GuiGeneric {
         daily.setItemMeta(itemMeta);
 
         GuiHelper.form54Big(this, new ItemStack[]{character, compass, guild, minigames, activeBoosts, donation, daily, teleport}, null);
+
+        ItemStack settings = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(39);
+        itemMeta.setDisplayName(ChatPalette.GOLD + Translation.t(guardianData, "menu.settings.name"));
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.settings.l1"));
+        itemMeta.setLore(lore);
+        settings.setItemMeta(itemMeta);
+
+        this.setItem(22, settings);
     }
 
     @Override
@@ -171,7 +182,10 @@ public class GuiMain extends GuiGeneric {
             GuiDailyRewardClaim gui = new GuiDailyRewardClaim(player);
             gui.openInventory(player);
         } else if (GuiHelper.get54BigButtonIndexes(7).contains(slot)) {
-            GuiTeleportation gui = new GuiTeleportation(guardianData);
+            GuiTeleportation gui = new GuiTeleportation(guardianData, player.getLevel());
+            gui.openInventory(player);
+        } else if (slot == 22) {
+            GuiSettings gui = new GuiSettings(guardianData);
             gui.openInventory(player);
         }
     }

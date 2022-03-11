@@ -13,7 +13,11 @@ public enum RPGSlotType {
     LEGGINGS,
     BOOTS,
     OFFHAND,
-    MAINHAND;
+    MAINHAND,
+    HOE,
+    PICKAXE,
+    AXE,
+    BOTTLE;
 
     public int getSlotNo() {
         if (this == RPGSlotType.PARROT) {
@@ -40,7 +44,16 @@ public enum RPGSlotType {
             return 40;
         } else if (this == RPGSlotType.OFFHAND) {
             return 21;
+        } else if (this == RPGSlotType.HOE) {
+            return 50;
+        } else if (this == RPGSlotType.PICKAXE) {
+            return 51;
+        } else if (this == RPGSlotType.AXE) {
+            return 52;
+        } else if (this == RPGSlotType.BOTTLE) {
+            return 53;
         }
+
         return 30;
     }
 
@@ -69,6 +82,14 @@ public enum RPGSlotType {
             return "Boots";
         } else if (this == RPGSlotType.OFFHAND) {
             return "Offhand";
+        } else if (this == RPGSlotType.HOE) {
+            return "Hoe";
+        } else if (this == RPGSlotType.PICKAXE) {
+            return "Pickaxe";
+        } else if (this == RPGSlotType.AXE) {
+            return "Axe";
+        } else if (this == RPGSlotType.BOTTLE) {
+            return "Bottle";
         }
 
         return "Mainhand";

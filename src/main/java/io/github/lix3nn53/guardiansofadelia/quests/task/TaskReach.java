@@ -1,8 +1,10 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.commands.admin.CommandAdmin;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -29,22 +31,24 @@ public final class TaskReach implements Task {
         return taskCopy;
     }
 
-    public String getTablistInfoString() {
+    public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + "Go to x: " + blockLoc.getBlockX() + " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + " in "
-                + blockLoc.getWorld().getName() + " and click " + blockMat.toString();
+        return chatPalette + Translation.t(language, "crafting.task.reach.l1") + " x: " + blockLoc.getBlockX() +
+                " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + Translation.t(language, "crafting.task.reach.l2")
+                + blockLoc.getWorld().getName() + Translation.t(language, "crafting.task.reach.l3") + blockMat.toString();
     }
 
-    public String getItemLoreString() {
+    public String getItemLoreString(GuardianData guardianData) {
         ChatPalette color;
         if (isCompleted()) {
             color = ChatPalette.GREEN_DARK;
         } else {
             color = ChatPalette.YELLOW;
         }
-        return color + "Go to x: " + blockLoc.getBlockX() + " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + " in "
-                + blockLoc.getWorld().getName() + " and click " + blockMat.toString();
+        return color + Translation.t(guardianData, "crafting.task.reach.l1") + " x: " + blockLoc.getBlockX() +
+                " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + Translation.t(guardianData, "crafting.task.reach.l2")
+                + blockLoc.getWorld().getName() + Translation.t(guardianData, "crafting.task.reach.l3") + blockMat.toString();
     }
 
     @Override

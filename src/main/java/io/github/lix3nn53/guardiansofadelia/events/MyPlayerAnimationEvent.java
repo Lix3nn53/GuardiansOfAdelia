@@ -82,7 +82,7 @@ public class MyPlayerAnimationEvent implements Listener {
                     if (!InventoryUtils.isAirOrNull(itemInMainHand) && itemInMainHand.getType().equals(Material.FISHING_ROD))
                         return;
 
-                    GatheringManager.startGathering(player, itemInMainHand, gatheringModelState);
+                    GatheringManager.startGathering(player, gatheringModelState);
                     break;
                 } else if (portal != null) { //portal model
                     if (PortalManager.isInstantTeleportPortal(portal)) {

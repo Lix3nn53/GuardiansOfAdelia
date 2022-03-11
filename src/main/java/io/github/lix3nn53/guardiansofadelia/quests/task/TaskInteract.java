@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -28,16 +30,16 @@ public final class TaskInteract implements Task {
         return taskCopy;
     }
 
-    public String getTablistInfoString() {
+    public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         NPC npc = registry.getById(npcId);
 
-        return chatPalette + "Talk to " + ChatColor.stripColor(npc.getName());
+        return chatPalette + Translation.t(language, "crafting.task.interact.l1") + ChatColor.stripColor(npc.getName());
     }
 
-    public String getItemLoreString() {
+    public String getItemLoreString(GuardianData guardianData) {
         NPCRegistry registry = CitizensAPI.getNPCRegistry();
         NPC npc = registry.getById(npcId);
         ChatPalette color;
@@ -46,7 +48,7 @@ public final class TaskInteract implements Task {
         } else {
             color = ChatPalette.YELLOW;
         }
-        return color + "Talk to " + ChatColor.stripColor(npc.getName());
+        return color + Translation.t(guardianData, "crafting.task.interact.l1") + ChatColor.stripColor(npc.getName());
     }
 
     @Override

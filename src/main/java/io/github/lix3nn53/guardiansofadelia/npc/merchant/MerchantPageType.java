@@ -294,7 +294,7 @@ public enum MerchantPageType {
         ItemStack pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.WOODEN);
         ItemStack fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.WOODEN);
         ItemStack bottle = GatheringToolType.BOTTLE.getItemStack(GatheringToolTier.WOODEN);
-        int price = 10;
+        int price = GatheringToolTier.WOODEN.getDurability();
 
         if (shopLevel == 2) {
             axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.STONE);
@@ -302,28 +302,28 @@ public enum MerchantPageType {
             pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.STONE);
             fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.STONE);
             bottle = GatheringToolType.BOTTLE.getItemStack(GatheringToolTier.STONE);
-            price = 15;
+            price = GatheringToolTier.STONE.getDurability();
         } else if (shopLevel == 3) {
             axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.IRON);
             hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.IRON);
             pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.IRON);
             fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.IRON);
             bottle = GatheringToolType.BOTTLE.getItemStack(GatheringToolTier.IRON);
-            price = 20;
+            price = GatheringToolTier.IRON.getDurability();
         } else if (shopLevel == 4) {
             axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.GOLDEN);
             hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.GOLDEN);
             pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.GOLDEN);
             fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.GOLDEN);
             bottle = GatheringToolType.BOTTLE.getItemStack(GatheringToolTier.GOLDEN);
-            price = 30;
+            price = GatheringToolTier.GOLDEN.getDurability();
         } else if (shopLevel == 5) {
             axe = GatheringToolType.AXE.getItemStack(GatheringToolTier.DIAMOND);
             hoe = GatheringToolType.HOE.getItemStack(GatheringToolTier.DIAMOND);
             pickaxe = GatheringToolType.PICKAXE.getItemStack(GatheringToolTier.DIAMOND);
             fishingRod = GatheringToolType.FISHING_ROD.getItemStack(GatheringToolTier.DIAMOND);
             bottle = GatheringToolType.BOTTLE.getItemStack(GatheringToolTier.DIAMOND);
-            price = 50;
+            price = GatheringToolTier.DIAMOND.getDurability();
         }
 
         line1.addWord(axe, price);

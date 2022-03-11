@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -38,13 +40,13 @@ public final class TaskCollect implements Task {
         return taskCopy;
     }
 
-    public String getTablistInfoString() {
+    public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + "Collect " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
+        return chatPalette + Translation.t(language, "crafting.task.collect.l1") + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
     }
 
-    public String getItemLoreString() {
+    public String getItemLoreString(GuardianData guardianData) {
         ChatPalette color;
         if (isCompleted()) {
             color = ChatPalette.GREEN_DARK;
@@ -52,7 +54,7 @@ public final class TaskCollect implements Task {
             color = ChatPalette.GOLD;
         }
 
-        return color + "Collect " + amountNeeded + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
+        return color + Translation.t(guardianData, "crafting.task.collect.l1") + amountNeeded + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
     }
 
     @Override

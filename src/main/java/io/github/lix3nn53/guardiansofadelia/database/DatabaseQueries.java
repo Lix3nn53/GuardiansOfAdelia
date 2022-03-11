@@ -14,6 +14,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.guild.Guild;
 import io.github.lix3nn53.guardiansofadelia.guild.PlayerRankInGuild;
 import io.github.lix3nn53.guardiansofadelia.jobs.RPGCharacterCraftingStats;
+import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
@@ -65,6 +66,10 @@ public class DatabaseQueries {
                     "     `slot_earring`         text NULL ,\n" +
                     "     `slot_glove`           text NULL ,\n" +
                     "     `slot_pet`             text NULL ,\n" +
+                    "     `slot_tool_axe`        text NULL ,\n" +
+                    "     `slot_tool_bottle`     text NULL ,\n" +
+                    "     `slot_tool_hoe`        text NULL ,\n" +
+                    "     `slot_tool_pickaxe`    text NULL ,\n" +
                     "     `chat_tag`             varchar(45) NULL ,\n" +
                     "     `crafting_experiences` text NOT NULL ,\n" +
                     "     `inventory`            mediumtext NOT NULL ,\n" +
@@ -436,6 +441,54 @@ public class DatabaseQueries {
                         }
                     });
                     Bukkit.getScheduler().runTaskLater(GuardiansOfAdelia.getInstance(), () -> PetManager.onEggEquip(player), 40L);
+                }
+
+                String toolAxe = resultSet.getString("slot_tool_axe");
+                if (!resultSet.wasNull()) {
+                    //if NOT NULL
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setTool(GatheringToolType.AXE, ItemSerializer.itemStackFromBase64(toolAxe));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+
+                String toolBottle = resultSet.getString("slot_tool_bottle");
+                if (!resultSet.wasNull()) {
+                    //if NOT NULL
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setTool(GatheringToolType.BOTTLE, ItemSerializer.itemStackFromBase64(toolBottle));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+
+                String toolHoe = resultSet.getString("slot_tool_hoe");
+                if (!resultSet.wasNull()) {
+                    //if NOT NULL
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setTool(GatheringToolType.HOE, ItemSerializer.itemStackFromBase64(toolHoe));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+
+                String toolPickaxe = resultSet.getString("slot_tool_pickaxe");
+                if (!resultSet.wasNull()) {
+                    //if NOT NULL
+                    Bukkit.getScheduler().runTask(GuardiansOfAdelia.getInstance(), () -> {
+                        try {
+                            rpgInventory.setTool(GatheringToolType.PICKAXE, ItemSerializer.itemStackFromBase64(toolPickaxe));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
 
                 String craftingExperiencesString = resultSet.getString("crafting_experiences");
@@ -863,9 +916,10 @@ public class DatabaseQueries {
         String SQL_QUERY = "INSERT INTO goa_player_character \n" +
                 "\t(uuid, character_no, off_hand, slot_parrot, slot_necklace, slot_ring, slot_earring, slot_glove, " +
                 "slot_pet, chat_tag, crafting_experiences, inventory, activequests, turnedinquests, location, armor_content, " +
-                "rpg_class, class_skills, totalexp, attr_one, attr_two, attr_three, attr_four, attr_five, skill_one, skill_two, skill_three, skill_passive, skill_ultimate) \n" +
+                "rpg_class, class_skills, totalexp, attr_one, attr_two, attr_three, attr_four, attr_five, skill_one, skill_two, skill_three, skill_passive, skill_ultimate, " +
+                "slot_tool_axe, slot_tool_bottle, slot_tool_hoe, slot_tool_pickaxe) \n" +
                 "VALUES \n" +
-                "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
+                "\t(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n" +
                 "ON DUPLICATE KEY UPDATE\n" +
                 "\tuuid = VALUES(uuid),\n" +
                 "\tcharacter_no = VALUES(character_no),\n" +
@@ -895,7 +949,11 @@ public class DatabaseQueries {
                 "\tskill_two = VALUES(skill_two),\n" +
                 "\tskill_three = VALUES(skill_three),\n" +
                 "\tskill_passive = VALUES(skill_passive),\n" +
-                "\tskill_ultimate = VALUES(skill_ultimate);";
+                "\tskill_ultimate = VALUES(skill_ultimate),\n" +
+                "\tslot_tool_axe = VALUES(slot_tool_axe),\n" +
+                "\tslot_tool_bottle = VALUES(slot_tool_bottle),\n" +
+                "\tslot_tool_hoe = VALUES(slot_tool_hoe),\n" +
+                "\tslot_tool_pickaxe = VALUES(slot_tool_pickaxe);";
         try (Connection con = ConnectionPool.getConnection()) {
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
 
@@ -1068,6 +1126,34 @@ public class DatabaseQueries {
             pst.setInt(28, skill_passive);
             int skill_ultimate = skillBar.getInvestedSkillPoints(4);
             pst.setInt(29, skill_ultimate);
+
+            if (!rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.AXE).isEmpty()) {
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.AXE).getItemOnSlot());
+                pst.setString(30, itemString);
+            } else {
+                pst.setNull(30, Types.BLOB);
+            }
+
+            if (!rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.BOTTLE).isEmpty()) {
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.BOTTLE).getItemOnSlot());
+                pst.setString(31, itemString);
+            } else {
+                pst.setNull(31, Types.BLOB);
+            }
+
+            if (!rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.HOE).isEmpty()) {
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.HOE).getItemOnSlot());
+                pst.setString(32, itemString);
+            } else {
+                pst.setNull(32, Types.BLOB);
+            }
+
+            if (!rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.PICKAXE).isEmpty()) {
+                String itemString = ItemSerializer.itemStackToBase64(rpgCharacter.getRpgInventory().getToolSlot(GatheringToolType.PICKAXE).getItemOnSlot());
+                pst.setString(33, itemString);
+            } else {
+                pst.setNull(33, Types.BLOB);
+            }
 
             //2 = replaced, 1 = new row added
             int returnValue = pst.executeUpdate();

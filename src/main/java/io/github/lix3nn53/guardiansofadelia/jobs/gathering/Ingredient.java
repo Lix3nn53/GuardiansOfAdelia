@@ -82,6 +82,9 @@ public class Ingredient {
         return itemStack;
     }
 
+    private final Random gatherAmountRandom = new Random();
+    private final Random gatherChanceRandom = new Random();
+
     /**
      * @param isDungeon Dungeons has 20% more drop rate
      * @return amount dropped
@@ -89,17 +92,13 @@ public class Ingredient {
     public int gather(boolean isDungeon) {
         float dropRateFinal = isDungeon ? dropRate * 1.2f : dropRate;
         if (dropRateFinal < 1) {
-            float dropRandom = (float) Math.random();
+            float dropRandom = (float) gatherChanceRandom.nextDouble();
 
             if (dropRandom <= dropRateFinal) {
-                Random random = new Random();
-
-                return random.nextInt(maxAmountPerGather) + 1;
+                return gatherAmountRandom.nextInt(maxAmountPerGather) + 1;
             }
         } else {
-            Random random = new Random();
-
-            return random.nextInt(maxAmountPerGather) + 1;
+            return gatherAmountRandom.nextInt(maxAmountPerGather) + 1;
         }
 
         return 0;

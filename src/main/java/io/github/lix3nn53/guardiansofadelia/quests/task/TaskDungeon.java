@@ -1,10 +1,13 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -37,13 +40,15 @@ public final class TaskDungeon implements Task {
         return taskCopy;
     }
 
-    public String getTablistInfoString() {
+    public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + "Complete " + dungeonTheme.getName() + " dungeon with less than " + this.minDarkness + " darkness";
+        return chatPalette + Translation.t(language, "crafting.task.dungeon.l1") +
+                ChatColor.stripColor(dungeonTheme.getName()) + Translation.t(language, "crafting.task.dungeon.l2") +
+                this.minDarkness + Translation.t(language, "crafting.task.dungeon.l3");
     }
 
-    public String getItemLoreString() {
+    public String getItemLoreString(GuardianData guardianData) {
         ChatPalette color;
         if (isCompleted()) {
             color = ChatPalette.GREEN_DARK;
@@ -51,7 +56,9 @@ public final class TaskDungeon implements Task {
             color = ChatPalette.YELLOW;
         }
 
-        return color + "Complete " + dungeonTheme.getName() + " dungeon with less than " + this.minDarkness + " darkness";
+        return color + Translation.t(guardianData, "crafting.task.dungeon.l1") +
+                dungeonTheme.getName() + Translation.t(guardianData, "crafting.task.dungeon.l2") +
+                this.minDarkness + Translation.t(guardianData, "crafting.task.dungeon.l3");
     }
 
     @Override

@@ -25,7 +25,8 @@ public class InstantTeleportGuiItem {
         this.levelReq = levelReq;
     }
 
-    public ItemStack getItemStack(GuardianData guardianData, boolean isUnlocked, int code) {
+    public ItemStack getItemStack(GuardianData guardianData, int playerLevel, int code) {
+        boolean isUnlocked = playerLevel >= this.levelReq;
         Material material = isUnlocked ? Material.LIME_WOOL : Material.RED_WOOL;
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();

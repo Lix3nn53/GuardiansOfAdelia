@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.quests.task;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.MobManager;
@@ -36,20 +38,21 @@ public final class TaskKill implements Task {
         return taskCopy;
     }
 
-    public String getTablistInfoString() {
+    public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + "Kill " + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(mobName);
+        return chatPalette + Translation.t(language, "crafting.task.kill.l1") + getProgress() + "/" +
+                getRequiredProgress() + " " + ChatColor.stripColor(mobName);
     }
 
-    public String getItemLoreString() {
+    public String getItemLoreString(GuardianData guardianData) {
         ChatPalette color;
         if (isCompleted()) {
             color = ChatPalette.GREEN_DARK;
         } else {
             color = ChatPalette.YELLOW;
         }
-        return color + "Kill " + amountNeeded + " " + ChatColor.stripColor(mobName);
+        return color + Translation.t(guardianData, "crafting.task.kill.l2") + amountNeeded + " " + ChatColor.stripColor(mobName);
     }
 
     @Override

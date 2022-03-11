@@ -33,7 +33,7 @@ public class MyPlayerFishEvent implements Listener {
                     GatheringModelState gatheringModelState = GatheringManager.getGatheringModelFromArmorStand(armorStand);
                     if (gatheringModelState == null) continue;
 
-                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModelState);
+                    b = GatheringManager.canStartFishing(player, itemInMainHand, gatheringModelState);
 
                     if (b) {
                         break;
@@ -61,7 +61,7 @@ public class MyPlayerFishEvent implements Listener {
                     gatheringModelState = GatheringManager.getGatheringModelFromArmorStand(armorStand);
                     if (gatheringModelState == null) continue;
 
-                    b = GatheringManager.canStartGathering(player, itemInMainHand, gatheringModelState);
+                    b = GatheringManager.canStartFishing(player, itemInMainHand, gatheringModelState);
 
                     if (b) {
                         break;

@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public enum GatheringToolType {
     FISHING_ROD,
@@ -33,6 +34,41 @@ public enum GatheringToolType {
         }
 
         return null;
+    }
+
+    public static List<Material> toolTypeToMaterials(GatheringToolType type) {
+        List<Material> result = new ArrayList<>();
+        switch (type) {
+            case FISHING_ROD:
+                result.add(Material.FISHING_ROD);
+                break;
+            case HOE:
+                result.add(Material.WOODEN_HOE);
+                result.add(Material.STONE_HOE);
+                result.add(Material.IRON_HOE);
+                result.add(Material.GOLDEN_HOE);
+                result.add(Material.DIAMOND_HOE);
+                break;
+            case PICKAXE:
+                result.add(Material.WOODEN_PICKAXE);
+                result.add(Material.STONE_PICKAXE);
+                result.add(Material.IRON_PICKAXE);
+                result.add(Material.GOLDEN_PICKAXE);
+                result.add(Material.DIAMOND_PICKAXE);
+                break;
+            case AXE:
+                result.add(Material.WOODEN_AXE);
+                result.add(Material.STONE_AXE);
+                result.add(Material.IRON_AXE);
+                result.add(Material.GOLDEN_AXE);
+                result.add(Material.DIAMOND_AXE);
+                break;
+            case BOTTLE:
+                result.add(Material.GLASS_BOTTLE);
+                break;
+        }
+
+        return result;
     }
 
     public ItemStack getItemStack(GatheringToolTier gatheringToolTier) {

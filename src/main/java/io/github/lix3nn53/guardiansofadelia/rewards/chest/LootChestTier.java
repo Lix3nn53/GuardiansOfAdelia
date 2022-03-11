@@ -14,11 +14,17 @@ public enum LootChestTier {
     TIER_THREE,
     TIER_FOUR;
 
+    private static final Random chanceRand = new Random();
+    private static final Random amountRand = new Random();
+    private static final Random enumRand = new Random();
+    private static final Random skillLevelRand = new Random();
+    private static final Random usesRand = new Random();
+    private static final Random tierRand = new Random();
+
     public List<ItemStack> getLoot() {
         List<ItemStack> list = new ArrayList<>();
 
-        Random rand = new Random();
-        float random = (float) Math.random();
+        float random = (float) chanceRand.nextDouble();
 
         //CONSUMABLES
         float consumableChance = 0.7f;
@@ -28,14 +34,14 @@ public enum LootChestTier {
             int minUses = 4;
             int maxUses = 10;
 
-            int amountRandom = rand.nextInt(3);
+            int amountRandom = amountRand.nextInt(3);
 
             Consumable[] values = Consumable.values();
             for (int i = 0; i < amountRandom; i++) {
-                int enumRandom = rand.nextInt(values.length);
-                int skillLevelRandom = rand.nextInt(maxSkillLevel - minSkillLevel) + minSkillLevel;
+                int enumRandom = enumRand.nextInt(values.length);
+                int skillLevelRandom = skillLevelRand.nextInt(maxSkillLevel - minSkillLevel) + minSkillLevel;
 
-                int usesRandom = rand.nextInt(maxUses - minUses) + minUses;
+                int usesRandom = usesRand.nextInt(maxUses - minUses) + minUses;
                 ItemStack itemStack = values[enumRandom].getItemStack(skillLevelRandom, usesRandom);
                 list.add(itemStack);
             }
@@ -50,16 +56,16 @@ public enum LootChestTier {
             int minUses = 1;
             int maxUses = 3;
 
-            int amountRandom = rand.nextInt(3);
+            int amountRandom = amountRand.nextInt(3);
 
             EnchantStone[] values = EnchantStone.values();
             for (int i = 0; i < amountRandom; i++) {
                 int tierRandom = 0;
                 if (maxTierIndex != 0) {
-                    tierRandom = rand.nextInt(maxTierIndex - minTierIndex) + minTierIndex;
+                    tierRandom = tierRand.nextInt(maxTierIndex - minTierIndex) + minTierIndex;
                 }
 
-                int usesRandom = rand.nextInt(maxUses - minUses) + minUses;
+                int usesRandom = usesRand.nextInt(maxUses - minUses) + minUses;
                 ItemStack itemStack = values[tierRandom].getItemStack(usesRandom);
                 list.add(itemStack);
             }

@@ -7,6 +7,8 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.RPGInventory;
+import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.ToolSlot;
 import io.github.lix3nn53.guardiansofadelia.sounds.CustomSound;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
@@ -64,12 +66,12 @@ public class GatheringManager {
         }
     }
 
-    public static void startGathering(Player player, ItemStack itemInHand, GatheringModelState gatheringModelState) {
-        if (!canStartGathering(player, itemInHand, gatheringModelState)) return;
+    public static void startGathering(Player player, GatheringModelState gatheringModelState) {
+        if (!canStartGathering(player, gatheringModelState)) return;
 
         List<Ingredient> ingredients = getIngredients(gatheringModelState);
 
-        startGatheringAnimation(player, itemInHand, gatheringModelState, ingredients);
+        startGatheringAnimation(player, gatheringModelState, ingredients);
     }
 
     public static List<Ingredient> getIngredients(GatheringModelState gatheringModelState) {
@@ -85,7 +87,65 @@ public class GatheringManager {
         return ingredients;
     }
 
-    public static boolean canStartGathering(Player player, ItemStack itemInHand, GatheringModelState gatheringModelState) {
+    public static boolean canStartGathering(Player player, GatheringModelState gatheringModelState) {
+        if (gatheringModelState.isBeingGathered()) {
+            // player.sendMessage(ChatPalette.RED + "Resource is being gathered by another player");
+            return false;
+        }
+        if (gatheringModelState.isOnCooldown()) {
+            player.sendMessage(ChatPalette.RED + "Resource is on cooldown");
+            return false;
+        }
+
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        if (guardianData == null) {
+            return false;
+        }
+        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+        RPGInventory rpgInventory = activeCharacter.getRpgInventory();
+
+
+        int id = gatheringModelState.getId();
+        GatheringModelData gatheringModelData = modelIdToModelData.get(id);
+        GatheringToolTier modelToolTier = gatheringModelData.getMinGatheringToolTier();
+        GatheringToolType modelToolType = gatheringModelData.getGatheringToolType();
+
+        ToolSlot toolSlot = rpgInventory.getToolSlot(modelToolType);
+        ItemStack itemOnSlot = toolSlot.getItemOnSlot();
+
+        GatheringToolType gatheringToolType = null;
+        if (!InventoryUtils.isAirOrNull(itemOnSlot)) {
+            gatheringToolType = GatheringToolType.materialToGatheringTool(itemOnSlot.getType());
+        }
+
+        final String wrongToolError = ChatPalette.RED + "Required gathering tool: " + modelToolTier.toString() + " " + modelToolType;
+        if (gatheringToolType == null) {
+            player.sendMessage(wrongToolError);
+            return false;
+        }
+
+        if (!gatheringToolType.equals(modelToolType)) {
+            player.sendMessage(wrongToolError);
+            return false;
+        }
+
+        if (!PersistentDataContainerUtil.hasString(itemOnSlot, "toolTier")) {
+            player.sendMessage(ChatPalette.RED + "toolTier error report to admin");
+            return false;
+        }
+
+        String toolTierStr = PersistentDataContainerUtil.getString(itemOnSlot, "toolTier");
+        GatheringToolTier gatheringToolTier = GatheringToolTier.valueOf(toolTierStr);
+
+        if (gatheringToolTier.compareTo(modelToolTier) < 0) {
+            player.sendMessage(wrongToolError);
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean canStartFishing(Player player, ItemStack itemInHand, GatheringModelState gatheringModelState) {
         if (gatheringModelState.isBeingGathered()) {
             // player.sendMessage(ChatPalette.RED + "Resource is being gathered by another player");
             return false;
@@ -185,7 +245,7 @@ public class GatheringManager {
         return ingredientHashMap.get(i);
     }
 
-    private static void startGatheringAnimation(final Player player, ItemStack itemStackTool, GatheringModelState gatheringModelState, List<Ingredient> ingredients) {
+    private static void startGatheringAnimation(final Player player, GatheringModelState gatheringModelState, List<Ingredient> ingredients) {
         if (GuardianDataManager.hasGuardianData(player)) {
             final GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             if (guardianData.isFreeToAct()) {
@@ -289,7 +349,14 @@ public class GatheringManager {
                             }
                         } else if (secsRun == 5) {
                             cancel();
-                            ItemStack ingredient = finishGathering(player, itemStackTool, ingredients);
+                            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+                            RPGInventory rpgInventory = activeCharacter.getRpgInventory();
+                            int id = gatheringModelState.getId();
+                            GatheringModelData gatheringModelData = modelIdToModelData.get(id);
+                            ToolSlot toolSlot = rpgInventory.getToolSlot(gatheringModelData.getGatheringToolType());
+                            ItemStack itemOnSlot = toolSlot.getItemOnSlot();
+
+                            ItemStack ingredient = finishGathering(player, itemOnSlot, ingredients);
                             if (ingredient != null) {
                                 InventoryUtils.giveItemToPlayer(player, ingredient);
                             }
