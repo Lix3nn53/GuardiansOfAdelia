@@ -134,6 +134,7 @@ public final class RPGCharacter {
         int passive = rpgClassStats.getPassive();
         int ultimate = rpgClassStats.getUltimate();
 
+        this.skillBar.onQuit();
         this.skillBar = new SkillBar(player, one, two, three, passive, ultimate, rpgClass.getSkillSet(), true);
         skillBar.remakeSkillBar(lang);
 

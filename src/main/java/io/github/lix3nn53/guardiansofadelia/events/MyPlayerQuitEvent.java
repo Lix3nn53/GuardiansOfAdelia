@@ -19,18 +19,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class MyPlayerQuitEvent implements Listener {
 
     public static void onPlayerQuit(Player player) {
-        GuardianData guardianData = GuardianDataManager.onPlayerQuit(player);
-        if (guardianData != null) {
-            guardianData.getActiveCharacter().getRpgCharacterStats().onQuit();
-        }
+        onPlayerBackToCharacterSelection(player);
 
         GuildManager.onPlayerQuit(player);
-        CharacterSelectionScreenManager.clear(player);
         MiniGameManager.onQuit(player);
-        PartyManager.onPlayerQuit(player);
-        PetManager.onPlayerQuit(player);
-        SkillDataManager.onPlayerQuit(player);
-        TriggerListener.onPlayerQuit(player);
     }
 
     public static void onPlayerBackToCharacterSelection(Player player) {
@@ -42,11 +34,10 @@ public class MyPlayerQuitEvent implements Listener {
         GuardianData guardianData = GuardianDataManager.onPlayerQuit(player);
         if (guardianData != null) {
             guardianData.getActiveCharacter().getRpgCharacterStats().onQuit();
+            guardianData.getActiveCharacter().getSkillBar().onQuit();
         }
 
-        // GuildManager.onPlayerQuit(player);
         CharacterSelectionScreenManager.clear(player);
-        // MiniGameManager.onQuit(player);
         PartyManager.onPlayerQuit(player);
         PetManager.onPlayerQuit(player);
         SkillDataManager.onPlayerQuit(player);

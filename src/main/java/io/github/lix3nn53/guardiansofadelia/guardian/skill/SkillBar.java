@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 public class SkillBar {
 
-    private final HashMap<String, Boolean> skillsOnCooldown = new HashMap<>();
+    private final HashMap<Integer, BukkitTask> skillsOnCooldown = new HashMap<>();
     private final Player player;
     private final HashMap<Integer, Integer> investedSkillPoints = new HashMap<>();
     private final HashMap<Integer, Skill> skillSet;
@@ -253,7 +254,7 @@ public class SkillBar {
         int skillIndex = slot;
         if (slot == 3) skillIndex = 4; //ultimate is one off
 
-        if (skillsOnCooldown.containsKey("" + skillIndex)) {
+        if (skillsOnCooldown.containsKey(skillIndex)) {
             player.sendMessage(ChatPalette.RED + Translation.t(guardianData, "skill.cooldown"));
             return false;
         }
@@ -295,10 +296,8 @@ public class SkillBar {
         int cooldownInTicks = (int) (((skill.getCooldown(skillLevel) * 20) * abilityHasteToMultiplier(abilityHaste)) + 0.5); // Ability haste formula from League of Legends
         PlayerInventory inventory = player.getInventory();
 
-        skillsOnCooldown.put("" + skillIndex, true);
-
         final int finalSkillIndex = skillIndex;
-        new BukkitRunnable() {
+        BukkitTask cooldownTask = new BukkitRunnable() {
 
             int ticksPassed = 0;
 
@@ -306,10 +305,12 @@ public class SkillBar {
             public void run() {
                 if (ticksPassed >= cooldownInTicks) {
                     cancel();
-                    skillsOnCooldown.remove("" + finalSkillIndex);
+                    skillsOnCooldown.remove(finalSkillIndex);
                 } else {
                     int cooldownLeft = cooldownInTicks - ticksPassed;
+                    player.sendMessage("cooldownLeft: " + cooldownLeft);
                     int secondsLeft = cooldownLeft / 20;
+                    player.sendMessage("secondsLeft: " + secondsLeft);
                     float modulus = cooldownLeft % 20;
 
                     if (modulus > 0) {
@@ -318,20 +319,30 @@ public class SkillBar {
 
                     ItemStack item = inventory.getItem(slot);
                     int currentAmount = item.getAmount();
+                    player.sendMessage("currentAmount: " + currentAmount);
                     if (currentAmount != secondsLeft) {
                         if (InventoryUtils.isAirOrNull(item)) {
                             remakeSkillBarIcon(finalSkillIndex, guardianData.getLanguage());
                             item = inventory.getItem(slot);
                         }
                         item.setAmount(secondsLeft);
+                        player.updateInventory();
                     }
                 }
 
-                player.sendMessage("Skill cooldown tick");
-                ticksPassed++;
+                ticksPassed += 5;
             }
-        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 1L);
+        }.runTaskTimer(GuardiansOfAdelia.getInstance(), 0L, 5L);
+        skillsOnCooldown.put(skillIndex, cooldownTask);
 
         return true;
+    }
+
+    public void onQuit() {
+        for (BukkitTask task : skillsOnCooldown.values()) {
+            task.cancel();
+        }
+
+        skillsOnCooldown.clear();
     }
 }

@@ -13,28 +13,26 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class MyPlayerJoinEvent implements Listener {
 
     public static void onPlayerJoin(Player player) {
-        player.setGameMode(GameMode.ADVENTURE);
-        player.getInventory().clear();
+        onPlayerBackToCharacterSelection(player, true);
 
-        //character selection handles loading data too
+        player.setGameMode(GameMode.ADVENTURE);
+
         new BukkitRunnable() {
             @Override
             public void run() {
-                CharacterSelectionScreenManager.startCharacterSelection(player, true);
-                // CustomSoundtrack.addPlayer(player);
                 player.setResourcePack(GuardiansOfAdelia.ResourcePackURL);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
     }
 
-    public static void onPlayerBackToCharacterSelection(Player player) {
+    public static void onPlayerBackToCharacterSelection(Player player, boolean isJoin) {
         player.getInventory().clear();
 
         //character selection handles loading data too
         new BukkitRunnable() {
             @Override
             public void run() {
-                CharacterSelectionScreenManager.startCharacterSelection(player, false);
+                CharacterSelectionScreenManager.startCharacterSelection(player, isJoin);
             }
         }.runTaskLater(GuardiansOfAdelia.getInstance(), 40L);
     }

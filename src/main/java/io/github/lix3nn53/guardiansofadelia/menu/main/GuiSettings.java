@@ -127,7 +127,7 @@ public class GuiSettings extends GuiGeneric {
                                             player, CharacterSelectionScreenManager.characterSelectionCenter, destination, null, 0);
 
                                     MyPlayerQuitEvent.onPlayerBackToCharacterSelection(player);
-                                    MyPlayerJoinEvent.onPlayerBackToCharacterSelection(player);
+                                    MyPlayerJoinEvent.onPlayerBackToCharacterSelection(player, false);
                                 }
                             }
                         }
