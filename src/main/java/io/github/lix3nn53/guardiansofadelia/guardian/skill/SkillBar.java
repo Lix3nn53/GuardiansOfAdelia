@@ -308,9 +308,7 @@ public class SkillBar {
                     skillsOnCooldown.remove(finalSkillIndex);
                 } else {
                     int cooldownLeft = cooldownInTicks - ticksPassed;
-                    player.sendMessage("cooldownLeft: " + cooldownLeft);
                     int secondsLeft = cooldownLeft / 20;
-                    player.sendMessage("secondsLeft: " + secondsLeft);
                     float modulus = cooldownLeft % 20;
 
                     if (modulus > 0) {
@@ -319,7 +317,6 @@ public class SkillBar {
 
                     ItemStack item = inventory.getItem(slot);
                     int currentAmount = item.getAmount();
-                    player.sendMessage("currentAmount: " + currentAmount);
                     if (currentAmount != secondsLeft) {
                         if (InventoryUtils.isAirOrNull(item)) {
                             remakeSkillBarIcon(finalSkillIndex, guardianData.getLanguage());

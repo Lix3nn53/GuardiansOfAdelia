@@ -33,6 +33,8 @@ public class DistanceCondition extends ConditionComponent {
 
         boolean success = false;
         for (LivingEntity target : targets) {
+            if (!caster.getWorld().equals(target.getWorld())) continue;
+
             float currentDistance = (float) caster.getLocation().distanceSquared(target.getLocation());
 
             float v = distance * distance;

@@ -34,4 +34,8 @@ public class DoNotGetAwayManager {
             }
         }
     }
+
+    public static void onQuit(Player player) {
+        removePlayer(player);
+    }
 }

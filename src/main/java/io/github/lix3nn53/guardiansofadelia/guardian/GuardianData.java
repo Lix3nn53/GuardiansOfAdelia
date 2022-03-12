@@ -11,6 +11,7 @@ import io.github.lix3nn53.guardiansofadelia.menu.merchant.storage.GuiPremiumStor
 import io.github.lix3nn53.guardiansofadelia.rewards.daily.DailyRewardInfo;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
+import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.invite.Invite;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -222,6 +223,7 @@ public class GuardianData {
             player.sendMessage(ChatPalette.RED + Translation.t(language, "general.language.error") + ": " + language);
         }
 
+        TablistUtils.updateTablist(player);
         this.language = language;
     }
 

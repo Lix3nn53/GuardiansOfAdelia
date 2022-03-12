@@ -378,15 +378,15 @@ public final class Quest {
     }
 
     public void onTurnIn(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Turn In");
-        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
+        // MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Turn In");
+        // MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
 
         String turnInMsg = getTurnInMsg();
         if (!turnInMsg.equals("")) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             String lang = guardianData.getLanguage();
             String message = Translation.t(lang, "quest", turnInMsg);
-            MessageUtils.sendCenteredMessage(player, message);
+            MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + message);
         }
 
         ToastNotification toastNotification = QuestAdvancements.getOnTurnInAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
@@ -471,8 +471,8 @@ public final class Quest {
     }
 
     public void onComplete(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Complete");
-        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
+        // MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Complete");
+        // MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
         ToastNotification toastNotification = QuestAdvancements.getOnCompleteAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());
         toastNotification.send(player);
 
@@ -485,14 +485,14 @@ public final class Quest {
     }
 
     public void onAccept(Player player) {
-        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Accept");
-        MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
+        // MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE + "Quest Accept");
+        // MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + getName());
         String startMsg = getStartMsg();
         if (!startMsg.equals("")) {
             GuardianData guardianData = GuardianDataManager.getGuardianData(player);
             String lang = guardianData.getLanguage();
             String message = Translation.t(lang, "quest", startMsg);
-            MessageUtils.sendCenteredMessage(player, message);
+            MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + message);
         }
 
         ToastNotification toastNotification = QuestAdvancements.getOnAcceptAdvancement(getQuestID(), this.getName(), getAdvancementMaterial());

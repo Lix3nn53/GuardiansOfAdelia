@@ -10,6 +10,7 @@ import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.party.PartyManager;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.managers.CharacterSelectionScreenManager;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.DoNotGetAwayManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,6 +43,7 @@ public class MyPlayerQuitEvent implements Listener {
         PetManager.onPlayerQuit(player);
         SkillDataManager.onPlayerQuit(player);
         TriggerListener.onPlayerQuit(player);
+        DoNotGetAwayManager.onQuit(player);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

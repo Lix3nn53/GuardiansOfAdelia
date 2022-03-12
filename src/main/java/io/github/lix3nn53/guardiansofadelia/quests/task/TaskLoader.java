@@ -147,6 +147,8 @@ public class TaskLoader {
             task = new TaskUpgradeSkill();
         } else if (componentType.equals(TaskUpgradeStat.class.getSimpleName())) {
             task = new TaskUpgradeStat();
+        } else if (componentType.equals(TaskEquipPassive.class.getSimpleName())) {
+            task = new TaskEquipPassive();
         }
 
         if (task == null) {
