@@ -8,6 +8,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
 import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCharacter;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
@@ -19,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GuiCharacterStatInvest extends GuiGeneric {
 
@@ -127,6 +129,11 @@ public class GuiCharacterStatInvest extends GuiGeneric {
                         int pointsLeft = rpgCharacterStats.getAttributePointsLeftToSpend();
                         GuiCharacterStatInvest gui = new GuiCharacterStatInvest(pointsLeft, guardianData, rpgCharacterStats);
                         gui.openInventory(player);
+
+                        List<Quest> questList = rpgCharacter.getQuestList();
+                        for (Quest quest : questList) {
+                            quest.progressUpgradeStatTasks(player, attr);
+                        }
                     }
                 } else if (event.isRightClick()) {
                     int invested = attr.getInvested();

@@ -143,6 +143,10 @@ public class TaskLoader {
             task = new TaskDungeon(dungeonTheme, minDarkness);
         } else if (componentType.equals(TaskChangeClass.class.getSimpleName())) {
             task = new TaskChangeClass();
+        } else if (componentType.equals(TaskUpgradeSkill.class.getSimpleName())) {
+            task = new TaskUpgradeSkill();
+        } else if (componentType.equals(TaskUpgradeStat.class.getSimpleName())) {
+            task = new TaskUpgradeStat();
         }
 
         if (task == null) {

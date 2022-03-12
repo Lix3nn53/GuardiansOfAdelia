@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.skill.Skill;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillBar;
 import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.menu.main.GuiCharacter;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class GuiCharacterSkills extends GuiGeneric {
 
@@ -134,6 +136,11 @@ public class GuiCharacterSkills extends GuiGeneric {
                     int pointsLeft = skillBar.getSkillPointsLeftToSpend();
                     GuiCharacterSkills guiCharacterSkills = new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
                     guiCharacterSkills.openInventory(player);
+
+                    List<Quest> questList = rpgCharacter.getQuestList();
+                    for (Quest quest : questList) {
+                        quest.progressUpgradeSkillTasks(player, skillIndex);
+                    }
                 }
             } else if (event.isRightClick()) {
                 boolean downgradeSkill = skillBar.downgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats(), guardianData.getLanguage());

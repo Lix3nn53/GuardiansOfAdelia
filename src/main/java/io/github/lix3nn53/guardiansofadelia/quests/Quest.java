@@ -6,6 +6,7 @@ import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
@@ -687,6 +688,75 @@ public final class Quest {
             if (task instanceof TaskChangeClass) {
                 TaskChangeClass taskChangeClass = (TaskChangeClass) task;
                 boolean didProgress = taskChangeClass.progress(questOwner, newClass, questID, taskIndex, false);
+                if (didProgress) {
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+            taskIndex++;
+        }
+        return false;
+    }
+
+    public boolean progressUpgradeSkillTasks(Player questOwner, int skillIndex) {
+        int taskIndex = 0;
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
+            if (task instanceof TaskUpgradeSkill) {
+                TaskUpgradeSkill taskUpgradeSkill = (TaskUpgradeSkill) task;
+                boolean didProgress = taskUpgradeSkill.progress(questOwner, skillIndex, questID, taskIndex, false);
+                if (didProgress) {
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+            taskIndex++;
+        }
+        return false;
+    }
+
+    public boolean progressUpgradeStatTasks(Player questOwner, Attribute attr) {
+        int taskIndex = 0;
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
+            if (task instanceof TaskUpgradeStat) {
+                TaskUpgradeStat taskUpgradeStat = (TaskUpgradeStat) task;
+                boolean didProgress = taskUpgradeStat.progress(questOwner, attr, questID, taskIndex, false);
+                if (didProgress) {
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+            taskIndex++;
+        }
+        return false;
+    }
+
+    public boolean progressEquipPassiveTasks(Player questOwner) {
+        int taskIndex = 0;
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
+            if (task instanceof TaskEquipPassive) {
+                TaskEquipPassive taskEquipPassive = (TaskEquipPassive) task;
+                boolean didProgress = taskEquipPassive.progress(questOwner, questID, taskIndex, false);
                 if (didProgress) {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {

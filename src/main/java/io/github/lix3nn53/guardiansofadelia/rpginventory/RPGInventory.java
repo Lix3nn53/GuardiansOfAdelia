@@ -12,6 +12,7 @@ import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.GatheringToolType;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.*;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
@@ -1085,14 +1086,35 @@ public class RPGInventory extends GuiGeneric {
             event.setCancelled(true);
             if (cursorType.equals(Material.AIR)) {
                 boolean change = this.onCursorClickWithAir(player, slot, topInventory, event.isShiftClick());
+
+                if (change) {
+                    List<Quest> questList = rpgCharacter.getQuestList();
+                    for (Quest quest : questList) {
+                        quest.progressEquipPassiveTasks(player);
+                    }
+                }
             } else {
                 boolean change = this.onCursorClickWithItem(player, slot, cursor, topInventory, rpgClassStr);
+
+                if (change) {
+                    List<Quest> questList = rpgCharacter.getQuestList();
+                    for (Quest quest : questList) {
+                        quest.progressEquipPassiveTasks(player);
+                    }
+                }
             }
         } else if (clickedInventory.getType().equals(InventoryType.PLAYER)) {
             if (cursorType.equals(Material.AIR)) {
                 if (event.isShiftClick()) {
                     event.setCancelled(true);
                     boolean change = this.onShiftClick(current, player, slot, topInventory, rpgClassStr);
+
+                    if (change) {
+                        List<Quest> questList = rpgCharacter.getQuestList();
+                        for (Quest quest : questList) {
+                            quest.progressEquipPassiveTasks(player);
+                        }
+                    }
                 }
             }
         }
