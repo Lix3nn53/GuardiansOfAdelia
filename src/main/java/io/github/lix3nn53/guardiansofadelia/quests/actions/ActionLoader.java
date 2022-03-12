@@ -114,6 +114,8 @@ public class ActionLoader {
             return new DoNotGetAway(center, distance, onLeave);
         } else if (actionType.equals(DoNotGetAwayClear.class.getSimpleName())) {
             return new DoNotGetAwayClear();
+        } else if (actionType.equals(StartAutoTrack.class.getSimpleName())) {
+            return new StartAutoTrack();
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH ACTION IN LOADER: " + configurationSection.getCurrentPath());

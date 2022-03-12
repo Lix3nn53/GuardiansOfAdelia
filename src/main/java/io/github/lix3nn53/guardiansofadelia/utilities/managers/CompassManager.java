@@ -1,5 +1,16 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.managers;
 
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
+import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
+import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
+import io.github.lix3nn53.guardiansofadelia.minigames.dungeon.DungeonTheme;
+import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
+import io.github.lix3nn53.guardiansofadelia.quests.task.Task;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskDungeon;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskInteract;
+import io.github.lix3nn53.guardiansofadelia.quests.task.TaskReach;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacter;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterCompass;
@@ -11,10 +22,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CompassManager {
 
     private static final HashMap<Player, CustomCharacter> playerToCompassDirection = new HashMap<>();
+    private static final HashMap<Player, Integer> playerToAutoTrackQuest = new HashMap<>();
 
     public static void setCompassItemNPC(Player player, int npcNo) {
         NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
@@ -58,10 +71,18 @@ public class CompassManager {
     }
 
     private static CustomCharacter getDirection(Player player) {
+        Location compassTarget = player.getCompassTarget();
+
+        if (player.getWorld() != compassTarget.getWorld()) {
+            clearCompassTarget(player);
+
+            return CustomCharacterCompass.EMPTY;
+        }
+
         Location eyeLocation = player.getEyeLocation();
 
         Vector eyeVector = eyeLocation.toVector().setY(0);
-        Vector target = player.getCompassTarget().toVector().setY(0);
+        Vector target = compassTarget.toVector().setY(0);
 
         Vector subtract = target.subtract(eyeVector).normalize();
 
@@ -122,5 +143,71 @@ public class CompassManager {
 
     public static void clearCompassTarget(Player player) {
         playerToCompassDirection.remove(player);
+    }
+
+    public static void startAutoTrackQuest(Player player, int questID) {
+        player.sendMessage(ChatPalette.BLUE + "Compass auto tracking quest: " + ChatPalette.WHITE + questID);
+        playerToAutoTrackQuest.put(player, questID);
+        autoSelectQuestTarget(player, questID);
+    }
+
+    public static void onQuestProgress(Player player, int questID) {
+        if (playerToAutoTrackQuest.containsKey(player)) {
+            int questIDTracking = playerToAutoTrackQuest.get(player);
+            if (questIDTracking == questID) {
+                autoSelectQuestTarget(player, questID);
+            }
+        }
+    }
+
+    private static void autoSelectQuestTarget(Player player, int questID) {
+        GuardianData guardianData = GuardianDataManager.getGuardianData(player);
+        if (guardianData == null) return;
+
+        RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+        List<Quest> questList = activeCharacter.getQuestList();
+
+        for (Quest quest : questList) {
+            if (quest.getQuestID() == questID) {
+                if (quest.isCompleted()) {
+                    int npc = QuestNPCManager.getWhoCanCompleteThisQuest(questID);
+
+                    CompassManager.setCompassItemNPC(player, npc);
+
+                    return;
+                } else {
+                    List<Task> tasks = quest.getTasks();
+                    for (Task task : tasks) {
+                        if (!task.isCompleted()) {
+                            if (task instanceof TaskDungeon) {
+                                TaskDungeon taskDungeon = (TaskDungeon) task;
+                                DungeonTheme dungeonTheme = taskDungeon.getDungeonTheme();
+                                Location portalLocationOfDungeonTheme = MiniGameManager.getPortalLocationOfDungeonTheme(dungeonTheme.getCode());
+
+                                CompassManager.setCompassItemLocation(player, quest.getName() + "-TaskDungeon", portalLocationOfDungeonTheme);
+
+                                return;
+                            } else if (task instanceof TaskInteract) {
+                                TaskInteract taskInteract = (TaskInteract) task;
+                                int npc = taskInteract.getNpcId();
+                                CompassManager.setCompassItemNPC(player, npc);
+
+                                return;
+                            } else if (task instanceof TaskReach) {
+                                TaskReach taskReach = (TaskReach) task;
+                                Location blockLoc = taskReach.getBlockLoc();
+
+                                CompassManager.setCompassItemLocation(player, quest.getName() + "-TaskReact", blockLoc);
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                break;
+            }
+        }
+
+        CompassManager.clearCompassTarget(player);
     }
 }

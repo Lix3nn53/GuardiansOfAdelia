@@ -58,8 +58,17 @@ public class GuiCompass extends GuiGeneric {
         itemMeta.setDisplayName(ChatPalette.PURPLE_LIGHT + "Active Quests");
         lore = new ArrayList<>();
         lore.add("");
-        lore.add("Click to select a npc relevant to your...");
-        lore.add("...active quests your compass target.");
+        lore.add("Click to auto track a quest.");
+        lore.add("Tracking a quest changes the compass target");
+        lore.add("automatically as the quest progresses.");
+        lore.add("");
+        lore.add("What can be tracked?");
+        lore.add("- Task to complete dungeon");
+        lore.add("- NPC to turn in the quest");
+        lore.add("- Task to interact with a NPC");
+        lore.add("- Task to reach a location");
+        lore.add("");
+        lore.add("Other tasks can't be tracked.");
         itemMeta.setLore(lore);
         quests.setItemMeta(itemMeta);
 

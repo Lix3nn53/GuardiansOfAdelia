@@ -1,6 +1,7 @@
 package io.github.lix3nn53.guardiansofadelia.quests;
 
 import eu.endercentral.crazy_advancements.advancement.ToastNotification;
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.economy.Coin;
 import io.github.lix3nn53.guardiansofadelia.economy.CoinType;
 import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
@@ -23,12 +24,14 @@ import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.TablistUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
+import io.github.lix3nn53.guardiansofadelia.utilities.managers.CompassManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -468,6 +471,8 @@ public final class Quest {
         for (Action action : getOnTurnInActions()) {
             action.perform(player, questID, -1);
         }
+
+        CompassManager.onQuestProgress(player, questID);
     }
 
     public void onComplete(Player player) {
@@ -482,6 +487,8 @@ public final class Quest {
         for (Action action : getOnCompleteActions()) {
             action.perform(player, questID, -1);
         }
+
+        CompassManager.onQuestProgress(player, this.questID);
     }
 
     public void onAccept(Player player) {
@@ -669,6 +676,13 @@ public final class Quest {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
                         this.onComplete(questOwner);
+                    } else {
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                CompassManager.onQuestProgress(questOwner, questID);
+                            }
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), 10L);
                     }
                     return true;
                 }
@@ -804,7 +818,15 @@ public final class Quest {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
                         this.onComplete(questOwner);
+                    } else {
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                CompassManager.onQuestProgress(questOwner, questID);
+                            }
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), 10L);
                     }
+
                     return true;
                 }
             }
@@ -827,7 +849,15 @@ public final class Quest {
                     TablistUtils.updateTablist(questOwner);
                     if (this.isCompleted()) {
                         this.onComplete(questOwner);
+                    } else {
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                CompassManager.onQuestProgress(questOwner, questID);
+                            }
+                        }.runTaskLater(GuardiansOfAdelia.getInstance(), 10L);
                     }
+
                     return true;
                 }
             }

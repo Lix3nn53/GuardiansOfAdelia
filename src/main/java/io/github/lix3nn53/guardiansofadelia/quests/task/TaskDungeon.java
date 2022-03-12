@@ -135,4 +135,8 @@ public final class TaskDungeon implements Task {
 
         return ChatPalette.RED;
     }
+
+    public DungeonTheme getDungeonTheme() {
+        return dungeonTheme;
+    }
 }
