@@ -41,7 +41,7 @@ public final class TaskKill implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + Translation.t(language, "crafting.task.kill.l1") + getProgress() + "/" +
+        return chatPalette + Translation.t(language, "quest.task.kill.l1") + getProgress() + "/" +
                 getRequiredProgress() + " " + ChatColor.stripColor(mobName);
     }
 
@@ -52,7 +52,7 @@ public final class TaskKill implements Task {
         } else {
             color = ChatPalette.YELLOW;
         }
-        return color + Translation.t(guardianData, "crafting.task.kill.l2") + amountNeeded + " " + ChatColor.stripColor(mobName);
+        return color + Translation.t(guardianData, "quest.task.kill.l2") + amountNeeded + " " + ChatColor.stripColor(mobName);
     }
 
     @Override

@@ -98,6 +98,22 @@ public class ActionLoader {
         } else if (actionType.equals(ArmorSelectOneOfAction.class.getSimpleName())) {
             ArmorReferenceData armorReferenceData = new ArmorReferenceData(configurationSection);
             return new ArmorSelectOneOfAction(armorReferenceData);
+        } else if (actionType.equals(DoNotGetAway.class.getSimpleName())) {
+            World world = Bukkit.getWorld(configurationSection.getString("world"));
+
+            float x = (float) configurationSection.getDouble(".x");
+            float y = (float) configurationSection.getDouble(".y");
+            float z = (float) configurationSection.getDouble(".z");
+            float yaw = (float) configurationSection.getDouble(".yaw");
+            float pitch = (float) configurationSection.getDouble(".pitch");
+
+            Location center = new Location(world, x, y, z, yaw, pitch);
+
+            float distance = (float) configurationSection.getDouble(".distance");
+            String onLeave = configurationSection.getString(".onLeave");
+            return new DoNotGetAway(center, distance, onLeave);
+        } else if (actionType.equals(DoNotGetAwayClear.class.getSimpleName())) {
+            return new DoNotGetAwayClear();
         }
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatPalette.RED + "NO SUCH ACTION IN LOADER: " + configurationSection.getCurrentPath());

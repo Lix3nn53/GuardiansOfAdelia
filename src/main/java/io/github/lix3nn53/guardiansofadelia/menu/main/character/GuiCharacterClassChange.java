@@ -7,6 +7,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClass;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGClassManager;
 import io.github.lix3nn53.guardiansofadelia.items.list.OtherItems;
 import io.github.lix3nn53.guardiansofadelia.menu.GuiHelper;
+import io.github.lix3nn53.guardiansofadelia.quests.Quest;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
@@ -96,7 +97,15 @@ public class GuiCharacterClassChange extends GuiGeneric {
             if (rpgClassStr == null) return;
 
             boolean b = rpgCharacter.changeClass(player, rpgClassStr, guardianData.getLanguage());
-            if (b) player.closeInventory();
+            if (b) {
+                player.closeInventory();
+
+                // progressChangeClassTasks
+                List<Quest> questList = rpgCharacter.getQuestList();
+                for (Quest quest : questList) {
+                    quest.progressChangeClassTasks(player, rpgClassStr);
+                }
+            }
         }
     }
 }

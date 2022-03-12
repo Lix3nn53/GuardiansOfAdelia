@@ -21,7 +21,7 @@ public class TranslationStorage {
 
         GuardiansOfAdelia.getInstance().getLogger().info(ChatColor.RED + "ERR TranslationStorage: " + language + " - " + path);
 
-        return "";
+        return path;
     }
 
     public void add(String ymlName, String path, String t) {

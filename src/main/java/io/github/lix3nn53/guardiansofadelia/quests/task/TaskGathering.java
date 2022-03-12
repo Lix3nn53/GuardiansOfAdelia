@@ -33,7 +33,7 @@ public final class TaskGathering implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + Translation.t(language, "crafting.task.gathering.l1") + getProgress() + "/" +
+        return chatPalette + Translation.t(language, "quest.task.gathering.l1") + getProgress() + "/" +
                 getRequiredProgress() + " " + ChatColor.stripColor(ingredient.getItemStack(1).getItemMeta().getDisplayName());
     }
 
@@ -44,7 +44,7 @@ public final class TaskGathering implements Task {
         } else {
             color = ChatPalette.YELLOW;
         }
-        return color + Translation.t(guardianData, "crafting.task.gathering.l1") + amountNeeded +
+        return color + Translation.t(guardianData, "quest.task.gathering.l1") + amountNeeded +
                 " " + ChatColor.stripColor(ingredient.getItemStack(1).getItemMeta().getDisplayName());
     }
 

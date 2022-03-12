@@ -4,28 +4,18 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.quests.actions.Action;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
-import io.github.lix3nn53.guardiansofadelia.utilities.centermessage.MessageUtils;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.npc.NPCRegistry;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class TaskInteract implements Task {
+public final class TaskChangeClass implements Task {
 
-    private final int npcId;
     private List<Action> onCompleteActions = new ArrayList<>();
     private int completed = 0;
 
-    public TaskInteract(final int npcId) {
-        this.npcId = npcId;
-    }
-
-    public TaskInteract freshCopy() {
-        TaskInteract taskCopy = new TaskInteract(this.npcId);
+    public TaskChangeClass freshCopy() {
+        TaskChangeClass taskCopy = new TaskChangeClass();
         taskCopy.setOnCompleteActions(this.onCompleteActions);
         return taskCopy;
     }
@@ -33,22 +23,17 @@ public final class TaskInteract implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        NPCRegistry registry = CitizensAPI.getNPCRegistry();
-        NPC npc = registry.getById(npcId);
-
-        return chatPalette + Translation.t(language, "quest.task.interact.l1") + ChatColor.stripColor(npc.getName());
+        return chatPalette + Translation.t(language, "quest.task.changeClass.l1");
     }
 
     public String getItemLoreString(GuardianData guardianData) {
-        NPCRegistry registry = CitizensAPI.getNPCRegistry();
-        NPC npc = registry.getById(npcId);
         ChatPalette color;
         if (isCompleted()) {
             color = ChatPalette.GREEN_DARK;
         } else {
             color = ChatPalette.YELLOW;
         }
-        return color + Translation.t(guardianData, "quest.task.interact.l1") + ChatColor.stripColor(npc.getName());
+        return color + Translation.t(guardianData, "quest.task.changeClass.l1");
     }
 
     @Override
@@ -87,15 +72,9 @@ public final class TaskInteract implements Task {
         return false;
     }
 
-    public boolean progress(int npcId, Player player, int questID, int taskIndex, boolean ignorePrevent) {
-        if (npcId == this.npcId) {
-            if (progress(player, questID, taskIndex, ignorePrevent)) {
-                NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
-                MessageUtils.sendCenteredMessage(player, ChatPalette.PURPLE_LIGHT + "Quest Interact" + ChatPalette.GRAY + " with " + npcRegistry.getById(npcId).getName());
-                return true;
-            }
-        }
-        return false;
+    public boolean progress(Player player, String newClass, int questID, int taskIndex, boolean ignorePrevent) {
+        // TODO improve task to require specific class
+        return progress(player, questID, taskIndex, ignorePrevent);
     }
 
     @Override
@@ -127,9 +106,5 @@ public final class TaskInteract implements Task {
         if (isCompleted()) return ChatPalette.GREEN_DARK;
 
         return ChatPalette.RED;
-    }
-
-    public int getNpcId() {
-        return npcId;
     }
 }

@@ -43,7 +43,7 @@ public final class TaskCollect implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + Translation.t(language, "crafting.task.collect.l1") + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
+        return chatPalette + Translation.t(language, "quest.task.collect.l1") + getProgress() + "/" + getRequiredProgress() + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
     }
 
     public String getItemLoreString(GuardianData guardianData) {
@@ -54,7 +54,7 @@ public final class TaskCollect implements Task {
             color = ChatPalette.GOLD;
         }
 
-        return color + Translation.t(guardianData, "crafting.task.collect.l1") + amountNeeded + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
+        return color + Translation.t(guardianData, "quest.task.collect.l1") + amountNeeded + " " + ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
     }
 
     @Override

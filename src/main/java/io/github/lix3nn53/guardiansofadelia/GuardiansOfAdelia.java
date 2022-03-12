@@ -17,6 +17,7 @@ import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.minigames.MiniGameManager;
 import io.github.lix3nn53.guardiansofadelia.sounds.MySongLoopEvent;
 import io.github.lix3nn53.guardiansofadelia.sounds.MySongNextEvent;
+import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterLoader;
 import io.github.lix3nn53.guardiansofadelia.utilities.MyPacketListeners;
 import io.github.lix3nn53.guardiansofadelia.utilities.config.ConfigManager;
 import io.github.lix3nn53.guardiansofadelia.utilities.shutdown.AutomaticShutdown;
@@ -122,6 +123,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
     public void onEnable() {
         instance = this;
         getLogger().info("Starting GuardiansOfAdelia...");
+
+        CustomCharacterLoader.load();
 
         //register events
         Bukkit.getPluginManager().registerEvents(new MyAsyncPlayerChatEvent(), this);

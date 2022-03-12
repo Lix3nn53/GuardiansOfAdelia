@@ -141,6 +141,8 @@ public class TaskLoader {
             int minDarkness = configurationSection.getInt("minDarkness");
 
             task = new TaskDungeon(dungeonTheme, minDarkness);
+        } else if (componentType.equals(TaskChangeClass.class.getSimpleName())) {
+            task = new TaskChangeClass();
         }
 
         if (task == null) {

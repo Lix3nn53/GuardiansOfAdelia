@@ -120,12 +120,6 @@ public class ConfigManager {
 
             List<String> texts = hologramsConfig.getStringList("Hologram" + i + ".texts");
 
-            if (hologramsConfig.contains("Hologram" + i + ".background")) {
-                String backgroundStr = hologramsConfig.getString("Hologram" + i + ".background");
-                CustomCharacter background = CustomCharacter.valueOf(backgroundStr);
-                texts.set(0, background + texts.get(0));
-            }
-
             for (int index = texts.size() - 1; index >= 0; index--) {
                 String text = texts.get(index);
 
@@ -133,6 +127,13 @@ public class ConfigManager {
                 Hologram hologram = new Hologram(location.clone(), s);
                 location.add(0, 0.4, 0);
 
+                HologramManager.addHologram(hologram);
+            }
+
+            if (hologramsConfig.contains("Hologram" + i + ".background")) {
+                String backgroundStr = hologramsConfig.getString("Hologram" + i + ".background");
+                CustomCharacter background = CustomCharacter.valueOf(backgroundStr);
+                Hologram hologram = new Hologram(location.clone(), background.toString());
                 HologramManager.addHologram(hologram);
             }
         }

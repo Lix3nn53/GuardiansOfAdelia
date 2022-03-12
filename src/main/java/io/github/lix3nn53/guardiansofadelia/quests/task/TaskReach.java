@@ -34,9 +34,9 @@ public final class TaskReach implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + Translation.t(language, "crafting.task.reach.l1") + " x: " + blockLoc.getBlockX() +
-                " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + Translation.t(language, "crafting.task.reach.l2")
-                + blockLoc.getWorld().getName() + Translation.t(language, "crafting.task.reach.l3") + blockMat.toString();
+        return chatPalette + Translation.t(language, "quest.task.reach.l1") + " x: " + blockLoc.getBlockX() +
+                " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + Translation.t(language, "quest.task.reach.l2")
+                + blockLoc.getWorld().getName() + Translation.t(language, "quest.task.reach.l3") + blockMat.toString();
     }
 
     public String getItemLoreString(GuardianData guardianData) {
@@ -46,9 +46,9 @@ public final class TaskReach implements Task {
         } else {
             color = ChatPalette.YELLOW;
         }
-        return color + Translation.t(guardianData, "crafting.task.reach.l1") + " x: " + blockLoc.getBlockX() +
-                " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + Translation.t(guardianData, "crafting.task.reach.l2")
-                + blockLoc.getWorld().getName() + Translation.t(guardianData, "crafting.task.reach.l3") + blockMat.toString();
+        return color + Translation.t(guardianData, "quest.task.reach.l1") + " x: " + blockLoc.getBlockX() +
+                " y: " + blockLoc.getBlockY() + " z: " + blockLoc.getBlockZ() + Translation.t(guardianData, "quest.task.reach.l2")
+                + blockLoc.getWorld().getName() + Translation.t(guardianData, "quest.task.reach.l3") + blockMat.toString();
     }
 
     @Override

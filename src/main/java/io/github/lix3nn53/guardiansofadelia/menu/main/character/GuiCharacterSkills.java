@@ -132,13 +132,15 @@ public class GuiCharacterSkills extends GuiGeneric {
                 boolean upgradeSkill = skillBar.upgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats(), guardianData.getLanguage());
                 if (upgradeSkill) {
                     int pointsLeft = skillBar.getSkillPointsLeftToSpend();
-                    new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
+                    GuiCharacterSkills guiCharacterSkills = new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
+                    guiCharacterSkills.openInventory(player);
                 }
             } else if (event.isRightClick()) {
                 boolean downgradeSkill = skillBar.downgradeSkill(skillIndex, rpgCharacter.getCurrentRPGClassStats(), guardianData.getLanguage());
                 if (downgradeSkill) {
                     int pointsLeft = skillBar.getSkillPointsLeftToSpend();
-                    new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
+                    GuiCharacterSkills guiCharacterSkills = new GuiCharacterSkills(player, guardianData, rpgCharacter, skillBar, pointsLeft);
+                    guiCharacterSkills.openInventory(player);
                 }
             }
         }

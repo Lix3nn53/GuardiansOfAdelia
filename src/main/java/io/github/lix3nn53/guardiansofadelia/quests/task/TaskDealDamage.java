@@ -40,7 +40,7 @@ public final class TaskDealDamage implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + Translation.t(language, "crafting.task.dealDamage.l1") + getProgress() + "/" + getRequiredProgress() + Translation.t(language, "crafting.task.dealDamage.l2") + ChatColor.stripColor(mobName);
+        return chatPalette + Translation.t(language, "quest.task.dealDamage.l1") + getProgress() + "/" + getRequiredProgress() + Translation.t(language, "quest.task.dealDamage.l2") + ChatColor.stripColor(mobName);
     }
 
     public String getItemLoreString(GuardianData guardianData) {
@@ -51,7 +51,7 @@ public final class TaskDealDamage implements Task {
             color = ChatPalette.YELLOW;
         }
 
-        return color + Translation.t(guardianData, "crafting.task.dealDamage.l1") + damageNeeded + Translation.t(guardianData, "crafting.task.dealDamage.l2") + ChatColor.stripColor(mobName);
+        return color + Translation.t(guardianData, "quest.task.dealDamage.l1") + damageNeeded + Translation.t(guardianData, "quest.task.dealDamage.l2") + ChatColor.stripColor(mobName);
     }
 
     @Override

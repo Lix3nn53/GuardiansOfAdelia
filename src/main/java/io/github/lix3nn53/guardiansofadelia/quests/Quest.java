@@ -677,6 +677,29 @@ public final class Quest {
         return false;
     }
 
+    public boolean progressChangeClassTasks(Player questOwner, String newClass) {
+        int taskIndex = 0;
+        for (Task task : this.tasks) {
+            if (task.isCompleted()) {
+                taskIndex++;
+                continue;
+            }
+            if (task instanceof TaskChangeClass) {
+                TaskChangeClass taskChangeClass = (TaskChangeClass) task;
+                boolean didProgress = taskChangeClass.progress(questOwner, newClass, questID, taskIndex, false);
+                if (didProgress) {
+                    TablistUtils.updateTablist(questOwner);
+                    if (this.isCompleted()) {
+                        this.onComplete(questOwner);
+                    }
+                    return true;
+                }
+            }
+            taskIndex++;
+        }
+        return false;
+    }
+
     public ItemStack triggerQuestItemDrop(String internalName) {
         for (Task task : this.tasks) {
             if (task.isCompleted()) continue;

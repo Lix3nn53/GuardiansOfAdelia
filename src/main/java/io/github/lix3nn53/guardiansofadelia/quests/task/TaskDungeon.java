@@ -43,9 +43,9 @@ public final class TaskDungeon implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        return chatPalette + Translation.t(language, "crafting.task.dungeon.l1") +
-                ChatColor.stripColor(dungeonTheme.getName()) + Translation.t(language, "crafting.task.dungeon.l2") +
-                this.minDarkness + Translation.t(language, "crafting.task.dungeon.l3");
+        return chatPalette + Translation.t(language, "quest.task.dungeon.l1") +
+                ChatColor.stripColor(dungeonTheme.getName()) + Translation.t(language, "quest.task.dungeon.l2") +
+                this.minDarkness + Translation.t(language, "quest.task.dungeon.l3");
     }
 
     public String getItemLoreString(GuardianData guardianData) {
@@ -56,9 +56,9 @@ public final class TaskDungeon implements Task {
             color = ChatPalette.YELLOW;
         }
 
-        return color + Translation.t(guardianData, "crafting.task.dungeon.l1") +
-                dungeonTheme.getName() + Translation.t(guardianData, "crafting.task.dungeon.l2") +
-                this.minDarkness + Translation.t(guardianData, "crafting.task.dungeon.l3");
+        return color + Translation.t(guardianData, "quest.task.dungeon.l1") +
+                dungeonTheme.getName() + Translation.t(guardianData, "quest.task.dungeon.l2") +
+                this.minDarkness + Translation.t(guardianData, "quest.task.dungeon.l3");
     }
 
     @Override

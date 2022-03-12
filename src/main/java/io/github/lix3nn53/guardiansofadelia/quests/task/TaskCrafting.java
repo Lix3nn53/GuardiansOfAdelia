@@ -35,12 +35,12 @@ public final class TaskCrafting implements Task {
     public String getTablistInfoString(String language) {
         ChatPalette chatPalette = getChatPalette();
 
-        String text1 = Translation.t(language, "crafting.task.craft.l3");
+        String text1 = Translation.t(language, "quest.task.craft.l3");
         if (itemNameContains != null && !itemNameContains.equals("")) {
             text1 = itemNameContains;
         }
 
-        return chatPalette + Translation.t(language, "crafting.task.craft.l1") + getProgress() + "/" + getRequiredProgress() + " " + text1 + Translation.t(language, "crafting.task.craft.l2") + craftingType.getName();
+        return chatPalette + Translation.t(language, "quest.task.craft.l1") + getProgress() + "/" + getRequiredProgress() + " " + text1 + Translation.t(language, "quest.task.craft.l2") + craftingType.getName();
     }
 
     public String getItemLoreString(GuardianData guardianData) {
@@ -51,12 +51,12 @@ public final class TaskCrafting implements Task {
             color = ChatPalette.YELLOW;
         }
 
-        String text1 = Translation.t(guardianData, "crafting.task.craft.l3");
+        String text1 = Translation.t(guardianData, "quest.task.craft.l3");
         if (itemNameContains != null && !itemNameContains.equals("")) {
             text1 = itemNameContains;
         }
 
-        return color + Translation.t(guardianData, "crafting.task.craft.l1") + getRequiredProgress() + " " + text1 + Translation.t(guardianData, "crafting.task.craft.l2") + craftingType.getName();
+        return color + Translation.t(guardianData, "quest.task.craft.l1") + getRequiredProgress() + " " + text1 + Translation.t(guardianData, "quest.task.craft.l2") + craftingType.getName();
     }
 
     @Override

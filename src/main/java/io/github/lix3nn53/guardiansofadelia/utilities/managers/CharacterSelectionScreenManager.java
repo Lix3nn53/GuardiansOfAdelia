@@ -165,7 +165,8 @@ public class CharacterSelectionScreenManager {
         RPGCharacter rpgCharacter = new RPGCharacter(startingClass, player);
         guardianData.setActiveCharacter(rpgCharacter, charNo);
 
-        Quest questCopyById = QuestNPCManager.getQuestCopyById(4);
+        // last quest of tutorial
+        Quest questCopyById = QuestNPCManager.getQuestCopyById(8);
 
         boolean accept = rpgCharacter.acceptQuest(questCopyById, player);
         questCopyById.onComplete(player);
