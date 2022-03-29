@@ -3,6 +3,7 @@ package io.github.lix3nn53.guardiansofadelia.events;
 import io.github.lix3nn53.guardiansofadelia.creatures.pets.PetManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.SkillDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.trigger.TriggerListener;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
@@ -34,8 +35,11 @@ public class MyPlayerQuitEvent implements Listener {
 
         GuardianData guardianData = GuardianDataManager.onPlayerQuit(player);
         if (guardianData != null) {
-            guardianData.getActiveCharacter().getRpgCharacterStats().onQuit();
-            guardianData.getActiveCharacter().getSkillBar().onQuit();
+            RPGCharacter activeCharacter = guardianData.getActiveCharacter();
+            if (activeCharacter != null) {
+                activeCharacter.getRpgCharacterStats().onQuit();
+                activeCharacter.getSkillBar().onQuit();
+            }
         }
 
         CharacterSelectionScreenManager.clear(player);

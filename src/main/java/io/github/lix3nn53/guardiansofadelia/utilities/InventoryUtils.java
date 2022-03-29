@@ -164,6 +164,45 @@ public class InventoryUtils {
         return false;
     }
 
+    public static boolean removeMaterialFromInventoryWithModel(Inventory inventory, Material material, int amount, int customModelData) {
+        ItemStack[] inventoryContents = inventory.getContents();
+
+        int removedAmount = 0;
+
+        for (int i = 0; i < inventoryContents.length; i++) {
+            if (inventoryContents[i] != null) {
+                if (inventoryContents[i].getType().equals(material)) {
+                    if (!inventoryContents[i].hasItemMeta()) continue;
+                    ItemMeta itemMeta = inventoryContents[i].getItemMeta();
+                    if (!itemMeta.hasCustomModelData()) continue;
+                    int customModelData1 = itemMeta.getCustomModelData();
+                    if (customModelData != customModelData1) continue;
+
+                    if (inventoryContents[i].getAmount() > amount) {
+                        inventoryContents[i].setAmount(inventoryContents[i].getAmount() - amount);
+                        removedAmount = amount;
+                        break;
+                    } else if (inventoryContents[i].getAmount() == amount) {
+                        inventoryContents[i] = null;
+                        removedAmount = amount;
+                        break;
+                    } else {
+                        amount -= inventoryContents[i].getAmount();
+                        inventoryContents[i] = null;
+                        removedAmount += amount;
+                    }
+                }
+            }
+        }
+
+        if (removedAmount == amount) {
+            inventory.setContents(inventoryContents);
+            return true;
+        }
+
+        return false;
+    }
+
     /*public static void setMenuItemPlayer(Player player) {
         ItemStack menu = new ItemStack(Material.BOOK);
         ItemMeta im = menu.getItemMeta();

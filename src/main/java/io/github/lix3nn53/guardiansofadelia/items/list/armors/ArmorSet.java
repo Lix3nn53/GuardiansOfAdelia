@@ -26,8 +26,7 @@ public class ArmorSet {
         return (int) (health * armorSlot.getAttributeReduction() * gearType.getHealthReduction() + 0.5);
     }
 
-    public int getDefense(ArmorSlot armorSlot, ArmorGearType gearType) {
-        int defense = StatUtils.getDefenseItem(baseRequiredLevel);
+    public static int getDefense(ArmorSlot armorSlot, ArmorGearType gearType, int defense) {
         return (int) (defense * armorSlot.getAttributeReduction() * gearType.getElementDefenseReduction() + 0.5);
     }
 
@@ -37,5 +36,10 @@ public class ArmorSet {
 
     public int getBaseRequiredLevel() {
         return baseRequiredLevel;
+    }
+
+    public int getDefense(ArmorSlot armorSlot, ArmorGearType gearType) {
+        int defense = StatUtils.getDefenseItem(baseRequiredLevel);
+        return getDefense(armorSlot, gearType, defense);
     }
 }

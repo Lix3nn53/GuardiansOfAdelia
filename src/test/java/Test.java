@@ -1,9 +1,8 @@
 import io.github.lix3nn53.guardiansofadelia.database.DatabaseQueries;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Test {
 
@@ -46,7 +45,32 @@ public class Test {
 
     public static void main(String[] args) throws InterruptedException, SQLException {
 
-        int darkness = 40;
+        final HashMap<ElementType, Integer> elementTypeToValue = new HashMap<>();
+
+        elementTypeToValue.put(ElementType.AIR, 100);
+        elementTypeToValue.put(ElementType.EARTH, 300);
+        elementTypeToValue.put(ElementType.LIGHTNING, 90);
+        elementTypeToValue.put(ElementType.FIRE, 200);
+        elementTypeToValue.put(ElementType.WATER, 150);
+
+        // Create a list from elements of HashMap
+        List<Map.Entry<ElementType, Integer>> list = new LinkedList<>(elementTypeToValue.entrySet());
+
+        // Sort the list
+        Collections.sort(list, Comparator.comparing(Map.Entry::getValue));
+
+        // put data from sorted list to hashmap
+        HashMap<ElementType, Integer> temp = new LinkedHashMap<>();
+        for (Map.Entry<ElementType, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+
+        for (Map.Entry<ElementType, Integer> en : temp.entrySet()) {
+            System.out.println("element: " + en.getKey() + " value: " + en.getValue());
+        }
+
+
+        /*int darkness = 40;
 
         ArrayList<String> monsterPool = new ArrayList<>();
         monsterPool.add("1");
@@ -60,7 +84,7 @@ public class Test {
         monsterPool.add("9");
         monsterPool.add("10");
 
-        getRandomMonsterToSpawn(darkness, monsterPool);
+        getRandomMonsterToSpawn(darkness, monsterPool);*/
 
         /*for (int levelD = 1; levelD <= 90; levelD++) {
             // Use i as normal here

@@ -27,7 +27,7 @@ public class ToolSlotAxe extends ToolSlot {
         lore.add("Used for wood cutting");
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(1);
+        itemMeta.setCustomModelData(18);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

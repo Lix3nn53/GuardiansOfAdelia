@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.guild.GuildManager;
 import io.github.lix3nn53.guardiansofadelia.menu.GuiHelper;
+import io.github.lix3nn53.guardiansofadelia.menu.bazaar.GuiBazaar;
 import io.github.lix3nn53.guardiansofadelia.menu.guild.GuiGuild;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
@@ -131,7 +132,18 @@ public class GuiMain extends GuiGeneric {
         itemMeta.setLore(lore);
         settings.setItemMeta(itemMeta);
 
-        this.setItem(22, settings);
+        this.setItem(30, settings);
+
+        ItemStack bazaar = new ItemStack(Material.WOODEN_PICKAXE);
+        itemMeta.setCustomModelData(3);
+        itemMeta.setDisplayName(ChatPalette.GOLD + Translation.t(guardianData, "menu.bazaar.name"));
+        lore = new ArrayList<>();
+        lore.add("");
+        lore.add(ChatPalette.GRAY + Translation.t(guardianData, "menu.bazaar.l1"));
+        itemMeta.setLore(lore);
+        bazaar.setItemMeta(itemMeta);
+
+        this.setItem(32, bazaar);
     }
 
     @Override
@@ -184,8 +196,11 @@ public class GuiMain extends GuiGeneric {
         } else if (GuiHelper.get54BigButtonIndexes(7).contains(slot)) {
             GuiTeleportation gui = new GuiTeleportation(guardianData, player.getLevel());
             gui.openInventory(player);
-        } else if (slot == 22) {
+        } else if (slot == 30) {
             GuiSettings gui = new GuiSettings(guardianData);
+            gui.openInventory(player);
+        } else if (slot == 32) {
+            GuiBazaar gui = new GuiBazaar(guardianData);
             gui.openInventory(player);
         }
     }

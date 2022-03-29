@@ -27,7 +27,7 @@ public class ToolSlotBottle extends ToolSlot {
         lore.add("Used for gathering magic source");
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(1);
+        itemMeta.setCustomModelData(19);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

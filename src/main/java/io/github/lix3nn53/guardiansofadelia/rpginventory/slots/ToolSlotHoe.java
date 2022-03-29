@@ -27,7 +27,7 @@ public class ToolSlotHoe extends ToolSlot {
         lore.add("Used for gathering flowers");
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(1);
+        itemMeta.setCustomModelData(20);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

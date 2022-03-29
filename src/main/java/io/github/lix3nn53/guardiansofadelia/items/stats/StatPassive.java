@@ -185,4 +185,70 @@ public class StatPassive implements Stat {
             return randForValue.nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
         }
     }
+
+    public float getDecreaseOfElement(ElementType elementType) {
+        List<Float> ranks = new LinkedList<>(Arrays.asList(0.2f, 0.4f, 0.6f, 0.8f, 1.0f));
+
+        HashMap<ElementType, Integer> mapSorted = sortElementMap(); // low to high
+
+        int i = 0;
+        for (Map.Entry<ElementType, Integer> en : mapSorted.entrySet()) {
+            ElementType key = en.getKey();
+            if (key.equals(elementType)) {
+                return ranks.get(i);
+            }
+            i++;
+        }
+
+        return 0f;
+    }
+
+    public float getDecreaseOfAttribute(AttributeType attributeType) {
+        List<Float> ranks = new LinkedList<>(Arrays.asList(0.2f, 0.4f, 0.6f, 0.8f, 1.0f));
+
+        HashMap<AttributeType, Integer> mapSorted = sortAttributeMap(); // low to high
+
+        int i = 0;
+        for (Map.Entry<AttributeType, Integer> en : mapSorted.entrySet()) {
+            AttributeType key = en.getKey();
+            if (key.equals(attributeType)) {
+                return ranks.get(i);
+            }
+            i++;
+        }
+
+        return 0f;
+    }
+
+    private HashMap<ElementType, Integer> sortElementMap() {
+        // Create a list from elements of HashMap
+        List<Map.Entry<ElementType, Integer>> list = new LinkedList<>(elementTypeToValue.entrySet());
+
+        // Sort the list
+        Collections.sort(list, Comparator.comparing(Map.Entry::getValue));
+
+        // put data from sorted list to hashmap
+        HashMap<ElementType, Integer> temp = new LinkedHashMap<>();
+        for (Map.Entry<ElementType, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+
+        return temp;
+    }
+
+    private HashMap<AttributeType, Integer> sortAttributeMap() {
+        // Create a list from elements of HashMap
+        List<Map.Entry<AttributeType, Integer>> list = new LinkedList<>(attributeTypeToValue.entrySet());
+
+        // Sort the list
+        Collections.sort(list, Comparator.comparing(Map.Entry::getValue));
+
+        // put data from sorted list to hashmap
+        HashMap<AttributeType, Integer> temp = new LinkedHashMap<>();
+        for (Map.Entry<AttributeType, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+
+        return temp;
+    }
 }

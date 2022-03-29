@@ -47,7 +47,10 @@ public class HealthBarManager {
             @Override
             public void run() {
                 HealthBar remove = targetToHealthBar.remove(entity);
-                remove.destroy();
+
+                if (remove != null) {
+                    remove.destroy();
+                }
             }
         }.runTaskLaterAsynchronously(GuardiansOfAdelia.getInstance(), 20 * 20L);
     }

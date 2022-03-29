@@ -22,12 +22,16 @@ public class WeaponSet {
         return customModelData;
     }
 
-    public int getElementDamage(WeaponGearType gearType) {
-        int damage = StatUtils.getDamageItem(requiredLevel);
+    public static int getElementDamage(WeaponGearType gearType, int damage) {
         return (int) (damage * gearType.getWeaponAttackDamage().getDamageReduction() + 0.5);
     }
 
     public int getRequiredLevel() {
         return requiredLevel;
+    }
+
+    public int getElementDamage(WeaponGearType gearType) {
+        int damage = StatUtils.getDamageItem(requiredLevel);
+        return getElementDamage(gearType, damage);
     }
 }

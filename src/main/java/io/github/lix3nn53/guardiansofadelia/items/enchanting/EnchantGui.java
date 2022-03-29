@@ -180,7 +180,7 @@ public class EnchantGui extends GuiGeneric {
                                             CustomSound fail = GoaSound.FAIL.getCustomSound();
                                             fail.play(loc);
                                         }
-                                        InventoryUtils.removeMaterialFromInventory(owner.getInventory(), enchantStone.getType(), 1);
+                                        InventoryUtils.removeMaterialFromInventoryWithModel(owner.getInventory(), enchantStone.getType(), 1, stoneLevel);
                                         InventoryUtils.removeItemFromInventory(owner.getInventory(), itemToEnchant, 1);
                                         InventoryUtils.giveItemToPlayer(owner, enchant.getItemStack());
                                         openInventory(owner);
@@ -239,8 +239,6 @@ public class EnchantGui extends GuiGeneric {
             if (PersistentDataContainerUtil.hasInteger(current, "ench_stone")) {
                 this.setEnchantStone(current);
             } else if (StatUtils.hasStatType(currentType)) {
-                if (currentType.equals(Material.SHEARS))
-                    return; //TODO enchanting passive items are disabled. Stay this way?
                 this.setItemToEnchant(current);
             }
         }

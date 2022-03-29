@@ -1,13 +1,168 @@
 package io.github.lix3nn53.guardiansofadelia.items.enchanting;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
+import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.WeaponGearType;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSet;
+import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.items.list.weapons.WeaponSet;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class EnchantManager {
+
+    private final static List<Float> MULTIPLIERS = new ArrayList<>();
+    private final static HashMap<GearLevel, HashMap<WeaponGearType, List<Integer>>> weaponFullMap = new HashMap<>();
+    private final static HashMap<GearLevel, HashMap<ArmorSlot, HashMap<ArmorGearType, List<Integer>>>> armorFullMap = new HashMap<>();
+    private final static HashMap<GearLevel, List<Integer>> passiveFullMap = new HashMap<>();
+
+    static {
+        MULTIPLIERS.add(.09f); // +1
+        MULTIPLIERS.add(.09f); // +2
+        MULTIPLIERS.add(.09f); // +3
+        MULTIPLIERS.add(.12f); // +4
+        MULTIPLIERS.add(.12f); // +5
+        MULTIPLIERS.add(.12f); // +6
+        MULTIPLIERS.add(.15f); // +7
+        MULTIPLIERS.add(.15f); // +8
+        MULTIPLIERS.add(.15f); // +9
+        MULTIPLIERS.add(.2f); // +10
+        MULTIPLIERS.add(.2f); // +11
+        MULTIPLIERS.add(.2f); // +12
+
+        for (GearLevel gearLevel : GearLevel.values()) {
+            int maxLevel = gearLevel.getMinLevel();
+
+            int damage = StatUtils.getDamageItem(maxLevel);
+            for (WeaponGearType weaponGearType : WeaponGearType.values()) {
+                saveEnchantValueWeapon(weaponGearType, gearLevel, damage);
+            }
+
+            int defense = StatUtils.getDefenseItem(maxLevel);
+            for (ArmorGearType armorGearType : ArmorGearType.values()) {
+                for (ArmorSlot armorSlot : ArmorSlot.values()) {
+                    saveEnchantValueArmor(armorGearType, armorSlot, gearLevel, defense);
+                }
+            }
+
+            int passive = gearLevel.getMaxStatValue(true, true);
+            saveEnchantValuePassive(gearLevel, passive);
+        }
+    }
+
+    private static void saveEnchantValueWeapon(WeaponGearType gearType, GearLevel gearLevel, int baseValue) {
+        HashMap<WeaponGearType, List<Integer>> gearTypeMap = new HashMap<>();
+        if (weaponFullMap.containsKey(gearLevel)) {
+            gearTypeMap = weaponFullMap.get(gearLevel);
+        }
+        List<Integer> values = new ArrayList<>();
+        if (gearTypeMap.containsKey(gearType)) {
+            values = gearTypeMap.get(gearType);
+        }
+
+        baseValue = WeaponSet.getElementDamage(gearType, baseValue);
+
+        for (int enchantLevel = 1; enchantLevel <= 12; enchantLevel++) {
+            int nextValue = getBonusValue(baseValue, enchantLevel);
+            if (nextValue < 1) nextValue = 1;
+            values.add(nextValue);
+        }
+
+        gearTypeMap.put(gearType, values);
+        weaponFullMap.put(gearLevel, gearTypeMap);
+    }
+
+    private static void saveEnchantValueArmor(ArmorGearType gearType, ArmorSlot armorSlot, GearLevel gearLevel, int baseValue) {
+        HashMap<ArmorSlot, HashMap<ArmorGearType, List<Integer>>> slotMap = new HashMap<>();
+        if (armorFullMap.containsKey(gearLevel)) {
+            slotMap = armorFullMap.get(gearLevel);
+        }
+        HashMap<ArmorGearType, List<Integer>> gearTypeMap = new HashMap<>();
+        if (slotMap.containsKey(armorSlot)) {
+            gearTypeMap = slotMap.get(armorSlot);
+        }
+        List<Integer> values = new ArrayList<>();
+        if (gearTypeMap.containsKey(gearType)) {
+            values = gearTypeMap.get(gearType);
+        }
+
+        baseValue = ArmorSet.getDefense(armorSlot, gearType, baseValue);
+
+        for (int enchantLevel = 1; enchantLevel <= 12; enchantLevel++) {
+            int nextValue = getBonusValue(baseValue, enchantLevel);
+            if (nextValue < 1) nextValue = 1;
+            values.add(nextValue);
+        }
+
+        gearTypeMap.put(gearType, values);
+        slotMap.put(armorSlot, gearTypeMap);
+        armorFullMap.put(gearLevel, slotMap);
+    }
+
+    private static void saveEnchantValuePassive(GearLevel gearLevel, int baseValue) {
+        List<Integer> values = new ArrayList<>();
+        if (passiveFullMap.containsKey(gearLevel)) {
+            values = passiveFullMap.get(gearLevel);
+        }
+
+        for (int enchantLevel = 1; enchantLevel <= 12; enchantLevel++) {
+            int nextValue = getBonusValue(baseValue, enchantLevel);
+            if (nextValue < 1) nextValue = 1;
+            values.add(nextValue);
+        }
+
+        passiveFullMap.put(gearLevel, values);
+    }
+
+    private static int getBonusValue(int value, int enchantLevel) {
+        return (int) ((value * MULTIPLIERS.get(enchantLevel - 1)) + 0.5);
+    }
+
+    public static int getBonusWeapon(WeaponGearType gearType, GearLevel gearLevel, int enchantLevel) {
+        if (enchantLevel < 1 || enchantLevel > 12) {
+            GuardiansOfAdelia.getInstance().getLogger().warning("ERROR ENCHANT: ENCHANT LEVEL IS NOT BETWEEN 1-12");
+            return -9999;
+        }
+
+        HashMap<WeaponGearType, List<Integer>> gearLevelMap = weaponFullMap.get(gearLevel);
+        List<Integer> values = gearLevelMap.get(gearType);
+
+        return values.get(enchantLevel - 1);
+    }
+
+    public static int getBonusArmor(ArmorGearType gearType, ArmorSlot armorSlot, GearLevel gearLevel, int enchantLevel) {
+        if (enchantLevel < 1 || enchantLevel > 12) {
+            GuardiansOfAdelia.getInstance().getLogger().warning("ERROR ENCHANT: ENCHANT LEVEL IS NOT BETWEEN 1-12");
+            return -9999;
+        }
+
+        HashMap<ArmorSlot, HashMap<ArmorGearType, List<Integer>>> gearLevelMap = armorFullMap.get(gearLevel);
+        HashMap<ArmorGearType, List<Integer>> armorSlotMap = gearLevelMap.get(armorSlot);
+        List<Integer> values = armorSlotMap.get(gearType);
+
+        return values.get(enchantLevel - 1);
+    }
+
+    public static int getBonusPassive(GearLevel gearLevel, int enchantLevel) {
+        if (enchantLevel < 1 || enchantLevel > 12) {
+            GuardiansOfAdelia.getInstance().getLogger().warning("ERROR ENCHANT: ENCHANT LEVEL IS NOT BETWEEN 1-12");
+            return -9999;
+        }
+
+        List<Integer> values = passiveFullMap.get(gearLevel);
+
+        return values.get(enchantLevel - 1);
+    }
 
     public static int getEnchantLevel(ItemStack itemStack) {
         ItemMeta im = itemStack.getItemMeta();

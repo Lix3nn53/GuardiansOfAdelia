@@ -161,11 +161,11 @@ public class DungeonInstance extends Minigame {
             this.unlockedChests = 1;
             this.playerToLootedChestCount.clear();
 
-            boolean darknessCondition = darkness < 70;
-            String darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 70: " + ChatPalette.RED + "FAIL";
+            boolean darknessCondition = darkness < 50;
+            String darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 50: " + ChatPalette.RED + "FAIL";
             if (darknessCondition) {
                 this.unlockedChests++;
-                darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 70: " + ChatPalette.GREEN_DARK + "SUCCESS";
+                darknessConditionMessage = ChatPalette.YELLOW + "Darkness is less than 50: " + ChatPalette.GREEN_DARK + "SUCCESS";
             }
 
             boolean roomCondition = isAllRoomsCleared();

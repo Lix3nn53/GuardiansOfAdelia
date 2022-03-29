@@ -27,7 +27,7 @@ public class ToolSlotPickaxe extends ToolSlot {
         lore.add("Used for mining ores");
         itemMeta.setLore(lore);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setCustomModelData(1);
+        itemMeta.setCustomModelData(21);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
