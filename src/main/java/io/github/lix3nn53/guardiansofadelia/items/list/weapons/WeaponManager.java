@@ -16,7 +16,7 @@ public class WeaponManager {
 
     private final static HashMap<GearLevel, List<WeaponSet>> gearLevelToWeapons = new HashMap<>();
 
-    public static List<ItemStack> get(WeaponGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, String gearSet) {
+    public static List<ItemStack> get(WeaponGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet) {
         List<WeaponSet> sets = gearLevelToWeapons.get(gearLevel);
 
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
@@ -33,6 +33,8 @@ public class WeaponManager {
             int customModelData = template.getCustomModelData();
             int level = template.getRequiredLevel();
             int elementDamage = template.getElementDamage(gearType);
+
+            // TODO random gear set
 
             final GearWeapon weapon = new GearWeapon(name, tier, material, customModelData, level, gearType, elementDamage,
                     weaponAttackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet);

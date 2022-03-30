@@ -10,8 +10,6 @@ import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
 
-import java.util.Random;
-
 public class ArrangementSingle implements ParticleArrangement {
     protected final Particle particle;
     protected final Particle.DustOptions dustOptions;
@@ -60,8 +58,7 @@ public class ArrangementSingle implements ParticleArrangement {
         }
 
         if (singleMaxHeight > 0) {
-            Random r = new Random();
-            float height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextFloat();
+            float height = singleMinHeight + (singleMaxHeight - singleMinHeight) * GuardiansOfAdelia.RANDOM.nextFloat();
 
             ParticleShapes.playSingleParticleWithHeight(location1, particle, dustOptions, height, singleGap);
         } else {
@@ -76,8 +73,7 @@ public class ArrangementSingle implements ParticleArrangement {
         RotationHelper.rotateYawPitch(vector, yaw, pitch);
 
         if (singleMaxHeight > 0) {
-            Random r = new Random();
-            float height = singleMinHeight + (singleMaxHeight - singleMinHeight) * r.nextFloat();
+            float height = singleMinHeight + (singleMaxHeight - singleMinHeight) * GuardiansOfAdelia.RANDOM.nextFloat();
 
             ParticleShapes.playSingleParticleWithHeight(location.getWorld(), vector, particle, dustOptions, height, singleGap);
         } else {

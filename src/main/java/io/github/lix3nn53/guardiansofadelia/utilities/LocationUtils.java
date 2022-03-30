@@ -1,16 +1,14 @@
 package io.github.lix3nn53.guardiansofadelia.utilities;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class LocationUtils {
-
-    private static final Random RANDOM = new Random();
 
     public static Location getRandomSafeLocationNearPoint(Location location, int radius) {
         Block playerBlock = location.getBlock();
@@ -35,7 +33,7 @@ public class LocationUtils {
             return getBlockCenter(playerBlock.getLocation().clone());
         }
 
-        return availableLocations.get(LocationUtils.RANDOM.nextInt(availableLocations.size()));
+        return availableLocations.get(GuardiansOfAdelia.RANDOM.nextInt(availableLocations.size()));
     }
 
     public static Location getBlockCenter(Location loc) {

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.utilities.config;
 
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetEffect;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
@@ -25,6 +26,8 @@ public class GearSetConfiguration {
             ConfigurationSection current = fileConfiguration.getConfigurationSection("set" + i);
 
             String name = current.getString("name");
+            String tierStr = current.getString("itemTier");
+            ItemTier itemTier = ItemTier.valueOf(tierStr);
 
             for (int pieceCount = 1; pieceCount < 6; pieceCount++) {
                 if (current.contains("effectsAt" + pieceCount)) {
@@ -32,7 +35,7 @@ public class GearSetConfiguration {
                     GearSet gearSet = new GearSet(name, pieceCount);
                     for (String gearSetEffectStr : effectsAt2) {
                         GearSetEffect gearSetEffect = GearSetEffect.valueOf(gearSetEffectStr);
-                        GearSetManager.addEffect(gearSet, gearSetEffect);
+                        GearSetManager.addEffect(itemTier, gearSet, gearSetEffect);
                     }
                 }
             }

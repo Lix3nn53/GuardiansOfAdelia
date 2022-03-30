@@ -45,16 +45,16 @@ public enum CraftingType {
 
         switch (this) {
             case WEAPON_MELEE:
-                itemStackList = ItemPoolGenerator.generateWeapons(tier, gearLevel, gearSet, true, true);
+                itemStackList = ItemPoolGenerator.generateWeapons(tier, gearLevel, true, true, false);
                 break;
             case WEAPON_RANGED:
-                itemStackList = ItemPoolGenerator.generateWeapons(tier, gearLevel, gearSet, false, true);
+                itemStackList = ItemPoolGenerator.generateWeapons(tier, gearLevel, false, true, false);
                 break;
             case ARMOR_HEAVY:
-                itemStackList = ItemPoolGenerator.generateArmors(tier, gearLevel, gearSet, true, true);
+                itemStackList = ItemPoolGenerator.generateArmors(tier, gearLevel, true, true, false);
                 break;
             case ARMOR_LIGHT:
-                itemStackList = ItemPoolGenerator.generateArmors(tier, gearLevel, gearSet, false, true);
+                itemStackList = ItemPoolGenerator.generateArmors(tier, gearLevel, false, true, false);
                 break;
             case POTION:
                 itemStackList = ItemPoolGenerator.generatePotions(gearLevel);
@@ -63,7 +63,7 @@ public enum CraftingType {
                 itemStackList = ItemPoolGenerator.generateFoods(gearLevel);
                 break;
             case JEWEL:
-                itemStackList = ItemPoolGenerator.generatePassives(tier, gearLevel, gearSet, true);
+                itemStackList = ItemPoolGenerator.generatePassives(tier, gearLevel, true, false);
                 break;
         }
         return itemStackList;

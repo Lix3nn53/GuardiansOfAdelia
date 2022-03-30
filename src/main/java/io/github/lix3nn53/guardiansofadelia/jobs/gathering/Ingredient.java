@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.jobs.gathering;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.ChatColor;
@@ -13,7 +14,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Ingredient {
     private final int key;
@@ -82,9 +82,6 @@ public class Ingredient {
         return itemStack;
     }
 
-    private final Random gatherAmountRandom = new Random();
-    private final Random gatherChanceRandom = new Random();
-
     /**
      * @param isDungeon Dungeons has 20% more drop rate
      * @return amount dropped
@@ -92,13 +89,13 @@ public class Ingredient {
     public int gather(boolean isDungeon) {
         float dropRateFinal = isDungeon ? dropRate * 1.2f : dropRate;
         if (dropRateFinal < 1) {
-            float dropRandom = (float) gatherChanceRandom.nextDouble();
+            float dropRandom = (float) GuardiansOfAdelia.RANDOM.nextDouble();
 
             if (dropRandom <= dropRateFinal) {
-                return gatherAmountRandom.nextInt(maxAmountPerGather) + 1;
+                return GuardiansOfAdelia.RANDOM.nextInt(maxAmountPerGather) + 1;
             }
         } else {
-            return gatherAmountRandom.nextInt(maxAmountPerGather) + 1;
+            return GuardiansOfAdelia.RANDOM.nextInt(maxAmountPerGather) + 1;
         }
 
         return 0;

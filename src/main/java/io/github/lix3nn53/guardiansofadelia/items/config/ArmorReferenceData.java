@@ -18,14 +18,12 @@ public class ArmorReferenceData {
     private final GearLevel gearLevel;
     private final int itemIndex;
     private final ItemTier itemTier;
-    private final String gearSet;
 
-    public ArmorReferenceData(ArmorSlot armorSlot, GearLevel gearLevel, int itemIndex, ItemTier itemTier, String gearSet) {
+    public ArmorReferenceData(ArmorSlot armorSlot, GearLevel gearLevel, int itemIndex, ItemTier itemTier) {
         this.armorSlot = armorSlot;
         this.gearLevel = gearLevel;
         this.itemIndex = itemIndex;
         this.itemTier = itemTier;
-        this.gearSet = gearSet;
     }
 
     public ArmorReferenceData(ConfigurationSection configurationSection) {
@@ -34,11 +32,6 @@ public class ArmorReferenceData {
         this.gearLevel = GearLevel.values()[configurationSection.getInt("gearLevel")];
         this.itemIndex = configurationSection.getInt("itemIndex");
         this.itemTier = ItemTier.valueOf(configurationSection.getString("itemTier"));
-        if (configurationSection.contains("gearSet")) {
-            this.gearSet = configurationSection.getString("gearSet");
-        } else {
-            gearSet = null;
-        }
     }
 
     public List<ItemStack> getItems(String rpgClassStr) {
@@ -47,7 +40,7 @@ public class ArmorReferenceData {
 
         ArrayList<ItemStack> items = new ArrayList<>();
         for (ArmorGearType type : weaponGearTypes) {
-            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, gearSet).get(itemIndex));
+            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, false).get(itemIndex));
         }
 
         return items;
@@ -57,7 +50,7 @@ public class ArmorReferenceData {
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         ArmorGearType type = rpgClass.getArmorGearTypes().get(0);
 
-        return ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, gearSet).get(itemIndex);
+        return ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, false).get(itemIndex);
     }
 
     public GearLevel getGearLevel() {

@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.creatures.drops;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.BoostPremiumManager;
 import io.github.lix3nn53.guardiansofadelia.bungeelistener.products.BoostPremium;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
@@ -17,13 +18,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MobDropGenerator {
 
     private static final float DROP_RATE = 0.05f;
-    private static final Random itemTypeRandom = new Random();
-    private static final Random rand = new Random();
 
     public static List<ItemStack> getDrops(int entityLevel, boolean isDungeon) {
         List<ItemStack> drops = new ArrayList<>();
@@ -56,17 +54,17 @@ public class MobDropGenerator {
             }
 
             // Obtain a number to select between weapon, <armor or shield> and passive
-            int dropType = itemTypeRandom.nextInt(3);
+            int dropType = GuardiansOfAdelia.RANDOM.nextInt(3);
 
             if (dropType == 0) {
                 WeaponGearType[] values = WeaponGearType.values();
-                int gearRandom = rand.nextInt(values.length);
+                int gearRandom = GuardiansOfAdelia.RANDOM.nextInt(values.length);
 
                 WeaponGearType gearType = values[gearRandom];
 
-                List<ItemStack> pool = WeaponManager.get(gearType, gearLevel, tier, false, null);
+                List<ItemStack> pool = WeaponManager.get(gearType, gearLevel, tier, false, true);
 
-                int i = rand.nextInt(pool.size());
+                int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                 ItemStack droppedItem = pool.get(i);
 
                 drops.add(droppedItem);
@@ -76,39 +74,39 @@ public class MobDropGenerator {
 
                 if (armorOrShieldRandom < shieldChance) { // shield
                     ShieldGearType[] values = ShieldGearType.values();
-                    int gearRandom = rand.nextInt(values.length);
+                    int gearRandom = GuardiansOfAdelia.RANDOM.nextInt(values.length);
 
                     ShieldGearType gearType = values[gearRandom];
 
-                    List<ItemStack> pool = ShieldManager.get(gearType, gearLevel, tier, false, null);
+                    List<ItemStack> pool = ShieldManager.get(gearType, gearLevel, tier, false, true);
 
-                    int i = rand.nextInt(pool.size());
+                    int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                     ItemStack droppedItem = pool.get(i);
 
                     drops.add(droppedItem);
                 } else {
                     ArmorSlot[] armorSlots = ArmorSlot.values();
-                    int armorTypeRandom = rand.nextInt(armorSlots.length);
+                    int armorTypeRandom = GuardiansOfAdelia.RANDOM.nextInt(armorSlots.length);
                     ArmorSlot armorSlot = armorSlots[armorTypeRandom];
 
                     ArmorGearType[] armorGearTypes = ArmorGearType.values();
-                    int armorGearTypeRandom = rand.nextInt(armorGearTypes.length);
+                    int armorGearTypeRandom = GuardiansOfAdelia.RANDOM.nextInt(armorGearTypes.length);
                     ArmorGearType armorGearType = armorGearTypes[armorGearTypeRandom];
 
-                    List<ItemStack> pool = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, false, null);
+                    List<ItemStack> pool = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, false, true);
 
-                    int i = rand.nextInt(pool.size());
+                    int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                     ItemStack droppedItem = pool.get(i);
 
                     drops.add(droppedItem);
                 }
             } else { // dropType == 2
-                int passiveType = rand.nextInt(4);
+                int passiveType = GuardiansOfAdelia.RANDOM.nextInt(4);
                 RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; // +1 to ignore parrot
 
-                List<ItemStack> pool = PassiveManager.get(gearLevel, rpgSlotType, tier, false, null);
+                List<ItemStack> pool = PassiveManager.get(gearLevel, rpgSlotType, tier, false, true);
 
-                int i = rand.nextInt(pool.size());
+                int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                 ItemStack droppedItem = pool.get(i);
 
                 drops.add(droppedItem);

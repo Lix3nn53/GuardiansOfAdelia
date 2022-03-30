@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.minigames.dungeon;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.creatures.mythicmobs.MMManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
@@ -33,7 +34,6 @@ import java.util.*;
 public class DungeonTheme {
     private final String code;
     private final String name;
-    private final String gearTag;
     private final GearLevel gearLevel;
     private final PortalColor portalColor;
 
@@ -56,13 +56,12 @@ public class DungeonTheme {
     // Boss Room
     private BoundingBox bossRoomBox;
 
-    public DungeonTheme(String code, String name, String gearTag, GearLevel gearLevel, PortalColor portalColor, int levelReq,
+    public DungeonTheme(String code, String name, GearLevel gearLevel, PortalColor portalColor, int levelReq,
                         int timeLimitInMinutes, List<String> monsterPool, String bossInternalName, HashMap<Integer, DungeonRoom> dungeonRooms,
                         List<Integer> startingRooms, List<Vector> checkpoints, Vector prizeChestCenterOffset,
                         List<RandomSkillOnGroundWithOffset> skillsOnGround, BoundingBox bossRoomBox) {
         this.code = code;
         this.name = ChatColor.translateAlternateColorCodes('&', name);
-        this.gearTag = gearTag;
         this.gearLevel = gearLevel;
         this.portalColor = portalColor;
         this.levelReq = levelReq;
@@ -83,10 +82,6 @@ public class DungeonTheme {
 
     public String getName() {
         return name;
-    }
-
-    public String getGearTag() {
-        return gearTag;
     }
 
     public GearLevel getGearLevel() {
@@ -126,7 +121,7 @@ public class DungeonTheme {
 
     public PrizeChest getPrizeChest() {
         PrizeChestType[] values = PrizeChestType.values();
-        int random = new Random().nextInt(values.length);
+        int random = GuardiansOfAdelia.RANDOM.nextInt(values.length);
 
         PrizeChestType chestType = values[random];
 
@@ -140,24 +135,24 @@ public class DungeonTheme {
         ArrayList<ItemStack> chestItems = new ArrayList<>();
         switch (type) {
             case WEAPON_MELEE:
-                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, gearTag, true, false));
-                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, gearTag, true, false));
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, true, false, true));
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, true, false, true));
                 break;
             case WEAPON_RANGED:
-                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, gearTag, false, false));
-                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, gearTag, false, false));
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.MYSTIC, gearLevel, false, false, true));
+                chestItems.addAll(ItemPoolGenerator.generateWeapons(ItemTier.LEGENDARY, gearLevel, false, false, true));
                 break;
             case ARMOR_HEAVY:
-                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, gearTag, true, false));
-                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, gearTag, true, false));
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, true, false, true));
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, true, false, true));
                 break;
             case ARMOR_LIGHT:
-                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, gearTag, false, false));
-                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, gearTag, false, false));
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.MYSTIC, gearLevel, false, false, true));
+                chestItems.addAll(ItemPoolGenerator.generateArmors(ItemTier.LEGENDARY, gearLevel, false, false, true));
                 break;
             case JEWELRY:
-                chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, gearLevel, gearTag, false));
-                chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, gearLevel, gearTag, false));
+                chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.MYSTIC, gearLevel, false, true));
+                chestItems.addAll(ItemPoolGenerator.generatePassives(ItemTier.LEGENDARY, gearLevel, false, true));
                 break;
             case PET:
                 chestItems.addAll(ItemPoolGenerator.generateEggs(gearLevel));

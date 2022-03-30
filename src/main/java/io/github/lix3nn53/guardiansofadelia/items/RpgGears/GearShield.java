@@ -18,17 +18,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shield implements RPGGear {
+public class GearShield implements RPGGear {
 
     private final ItemStack itemStack;
 
-    public Shield(String name, ItemTier tier, Material material, int customModelDataId, int level, ShieldGearType gearType, int health,
-                  int defense, int minElemValue, int maxElemValue, int minNumberOfElements, String gearSetStr) {
+    public GearShield(String name, ItemTier tier, Material material, int customModelDataId, int level, ShieldGearType gearType, int health,
+                      int defense, int minElemValue, int maxElemValue, int minNumberOfElements, boolean withGearSet) {
         name = tier.getTierColor() + name;
-        boolean gearSetExist = false;
-        if (gearSetStr != null && !gearSetStr.equals("")) {
-            name = tier.getTierColor() + gearSetStr + " " + name;
-            gearSetExist = true;
+
+        String gearSetStr = null;
+        if (withGearSet) {
+            GearSet random = GearSetManager.getRandom(tier);
+            gearSetStr = random != null ? random.getName() : null;
         }
 
         float bonusPercent = tier.getBonusMultiplier();
@@ -40,7 +41,7 @@ public class Shield implements RPGGear {
         StatPassive statPassive = new StatPassive(0, 0, 0, minElemValue, maxElemValue, minNumberOfElements);
 
         lore.add(ChatColor.RESET.toString() + ChatPalette.GOLD + gearType.getDisplayName());
-        if (gearSetExist) {
+        if (gearSetStr != null) {
             lore.add(ChatPalette.RED + gearSetStr);
         }
         lore.add("");
@@ -63,7 +64,7 @@ public class Shield implements RPGGear {
         }
         lore.add("");
         lore.add(tier.getTierString());
-        if (gearSetExist) {
+        if (gearSetStr != null) {
             lore.add("");
             for (int i = 2; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
@@ -94,7 +95,7 @@ public class Shield implements RPGGear {
                 PersistentDataContainerUtil.putInteger(elementType.name(), statPassive.getElementValue(elementType), this.itemStack);
             }
         }
-        if (gearSetExist) {
+        if (gearSetStr != null) {
             PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);
         }
 

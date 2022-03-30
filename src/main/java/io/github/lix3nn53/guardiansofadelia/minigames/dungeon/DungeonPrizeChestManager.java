@@ -20,7 +20,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class DungeonPrizeChestManager {
 
@@ -96,11 +95,10 @@ public class DungeonPrizeChestManager {
     public static void spawnPrizeChests(DungeonTheme theme, Location center, int amount) {
         Vector[] vectors = calculateLocations(center, amount);
 
-        Random rand = new Random();
         for (Vector vector : vectors) {
             PrizeChestType[] values = PrizeChestType.values();
             int length = values.length;
-            int chestTypeIndex = rand.nextInt(length);
+            int chestTypeIndex = GuardiansOfAdelia.RANDOM.nextInt(length);
             PrizeChestType prizeChestType = values[chestTypeIndex];
 
             PrizeChest prizeChest = new PrizeChest(theme, prizeChestType);

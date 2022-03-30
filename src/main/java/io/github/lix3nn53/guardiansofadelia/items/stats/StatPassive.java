@@ -1,5 +1,6 @@
 package io.github.lix3nn53.guardiansofadelia.items.stats;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 
@@ -58,10 +59,6 @@ public class StatPassive implements Stat {
         return total < 1;
     }
 
-    private static final Random randForSatisfy = new Random();
-    private static final Random randForSatisfyOne = new Random();
-    private static final Random randForValue = new Random();
-
     /**
      * @param minValue    min possible value of a field
      * @param maxValue    max possible value of a field
@@ -82,11 +79,11 @@ public class StatPassive implements Stat {
         int amountOfStats;
 
         if (minAmount < 5) {
-            // int amountOfStats = new Random().nextInt(max - minAmount + 1) + minAmount;
+            // int amountOfStats = GuardiansOfAdelia.RANDOM.nextInt(max - minAmount + 1) + minAmount;
             int bound = 50;
             int multiplier = bound / 5;
             int bonus = 5;
-            amountOfStats = randForSatisfy.nextInt(bound - (minAmount * multiplier) + bonus) + (minAmount * multiplier);
+            amountOfStats = GuardiansOfAdelia.RANDOM.nextInt(bound - (minAmount * multiplier) + bonus) + (minAmount * multiplier);
             amountOfStats = (int) ((amountOfStats / (multiplier)) + 0.5);
         } else {
             amountOfStats = 5;
@@ -135,17 +132,17 @@ public class StatPassive implements Stat {
         ElementType statToSatisfyElement = null;
         AttributeType statToSatisfyAttribute = null;
         if (isElement) {
-            random = randForSatisfyOne.nextInt(unusedElements.size());
+            random = GuardiansOfAdelia.RANDOM.nextInt(unusedElements.size());
             statToSatisfyElement = unusedElements.get(random);
 
-            int i = randForSatisfyOne.nextInt(unsatisfiedRanksElements.size());
+            int i = GuardiansOfAdelia.RANDOM.nextInt(unsatisfiedRanksElements.size());
             percent = unsatisfiedRanksElements.get(i);
             unsatisfiedRanksElements.remove(i);
         } else {
-            random = randForSatisfyOne.nextInt(unusedAttributes.size());
+            random = GuardiansOfAdelia.RANDOM.nextInt(unusedAttributes.size());
             statToSatisfyAttribute = unusedAttributes.get(random);
 
-            int i = randForSatisfyOne.nextInt(unsatisfiedRanksAttributes.size());
+            int i = GuardiansOfAdelia.RANDOM.nextInt(unsatisfiedRanksAttributes.size());
             percent = unsatisfiedRanksAttributes.get(i);
             unsatisfiedRanksAttributes.remove(i);
         }
@@ -182,7 +179,7 @@ public class StatPassive implements Stat {
         if (minStatValue >= maxStatValue) {
             return maxStatValue;
         } else {
-            return randForValue.nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
+            return GuardiansOfAdelia.RANDOM.nextInt((maxStatValue - minStatValue) + 1) + minStatValue;
         }
     }
 

@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ItemPoolGenerator {
 
-    public static List<ItemStack> generateWeapons(ItemTier tier, GearLevel gearLevel, String gearSet, boolean melee, boolean noStats) {
+    public static List<ItemStack> generateWeapons(ItemTier tier, GearLevel gearLevel, boolean melee, boolean noStats, boolean gearSet) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
@@ -33,7 +33,7 @@ public class ItemPoolGenerator {
         return temp;
     }
 
-    public static List<ItemStack> generatePassives(ItemTier tier, GearLevel gearLevel, String gearSet, boolean noStats) {
+    public static List<ItemStack> generatePassives(ItemTier tier, GearLevel gearLevel, boolean noStats, boolean gearSet) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (RPGSlotType rpgSlotType : RPGSlotType.values()) {
@@ -51,7 +51,7 @@ public class ItemPoolGenerator {
         return temp;
     }
 
-    public static List<ItemStack> generateArmors(ItemTier tier, GearLevel gearLevel, String gearSet, boolean heavy, boolean noStats) {
+    public static List<ItemStack> generateArmors(ItemTier tier, GearLevel gearLevel, boolean heavy, boolean noStats, boolean gearSet) {
         List<ItemStack> temp = new ArrayList<>();
 
         for (ArmorGearType armorGearType : ArmorGearType.values()) {

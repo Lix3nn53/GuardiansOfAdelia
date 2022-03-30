@@ -103,7 +103,7 @@ public class Test {
 
             int i = 0;
             if (bound > 1) {
-                i = new Random().nextInt(bound);
+                i = GuardiansOfAdelia.RANDOM.nextInt(bound);
             }
             System.out.println("i: " + i);
 
@@ -418,8 +418,6 @@ public class Test {
         System.out.println(currentDateString);
 
         for (int i = 0; i < 15; i++) {
-            Random rand = new Random();
-
             int rpgClassRandom = rand.nextInt(7);
             RPGClass rpgClass = RPGClass.values()[rpgClassRandom + 1]; //+1 to ignore NO_CLASS
 

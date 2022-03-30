@@ -1,12 +1,12 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.onground;
 
+import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.utilities.hologram.Hologram;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.util.Vector;
 
 import java.util.List;
-import java.util.Random;
 
 public class RandomSkillOnGroundWithOffset {
 
@@ -17,8 +17,6 @@ public class RandomSkillOnGroundWithOffset {
         this.skillOnGroundList = skillOnGroundList;
         this.offset = offset;
     }
-
-    private static final Random rand = new Random();
 
     public ArmorStand activate(Location location, long delay) {
         Location add = location.clone().add(offset);
@@ -31,7 +29,7 @@ public class RandomSkillOnGroundWithOffset {
         }
         if (size == 1) return skillOnGroundList.get(0).activate(add, delay);
 
-        int i = rand.nextInt(size);
+        int i = GuardiansOfAdelia.RANDOM.nextInt(size);
 
         return skillOnGroundList.get(i).activate(add, delay);
     }

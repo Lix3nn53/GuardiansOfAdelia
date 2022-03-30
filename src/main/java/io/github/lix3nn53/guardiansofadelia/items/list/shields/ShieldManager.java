@@ -1,8 +1,8 @@
 package io.github.lix3nn53.guardiansofadelia.items.list.shields;
 
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.GearShield;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
-import io.github.lix3nn53.guardiansofadelia.items.RpgGears.Shield;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ShieldGearType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +15,7 @@ public class ShieldManager {
 
     private final static HashMap<GearLevel, List<ShieldSet>> gearLevelToShields = new HashMap<>();
 
-    public static List<ItemStack> get(ShieldGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, String gearSet) {
+    public static List<ItemStack> get(ShieldGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet) {
         List<ShieldSet> sets = gearLevelToShields.get(gearLevel);
 
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
@@ -33,7 +33,7 @@ public class ShieldManager {
             int health = template.getHealth(gearType);
             int level = template.getRequiredLevel();
 
-            final Shield shield = new Shield(name, tier, material, customModelData, level,
+            final GearShield shield = new GearShield(name, tier, material, customModelData, level,
                     gearType, health,
                     defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
 

@@ -2,6 +2,8 @@ package io.github.lix3nn53.guardiansofadelia.items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSet;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
@@ -23,10 +25,13 @@ public class GearPassive implements RPGGear {
 
     public GearPassive(String name, ItemTier tier, int customModelData, RPGSlotType passiveType, int level,
                        int minAttrValue, int maxAttrValue, int minNumberOfAttr, int minElemValue, int maxElemValue,
-                       int minNumberOfElement, String GearSetStr) {
+                       int minNumberOfElement, boolean withGearSet) {
         name = tier.getTierColor() + name;
-        if (GearSetStr != null && !GearSetStr.equals("")) {
-            name = tier.getTierColor() + GearSetStr + " " + name;
+
+        String gearSetStr = null;
+        if (withGearSet) {
+            GearSet random = GearSetManager.getRandom(tier);
+            gearSetStr = random != null ? random.getName() : null;
         }
 
         float bonusPercent = tier.getBonusMultiplier();

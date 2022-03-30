@@ -17,7 +17,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class InventoryUtils {
 
@@ -40,7 +39,7 @@ public class InventoryUtils {
         glasses.add(new ItemStack(Material.RED_STAINED_GLASS_PANE));
 
         for (int i = 0; i < inventory.getSize(); i++) {
-            int glassNo = new Random().nextInt((13) + 1);
+            int glassNo = GuardiansOfAdelia.RANDOM.nextInt((13) + 1);
             inventory.setItem(i, glasses.get(glassNo));
         }
     }
@@ -340,7 +339,7 @@ public class InventoryUtils {
         chestGui.openInventory(player);
 
         int size = prizePool.size();
-        int slideCountRandom = new Random().nextInt(size / 2); //random start index
+        int slideCountRandom = GuardiansOfAdelia.RANDOM.nextInt(size / 2); //random start index
         int slideLimit = slideCountRandom + 12; //slide 12 times
 
         new BukkitRunnable() {

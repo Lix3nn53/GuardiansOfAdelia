@@ -23,12 +23,13 @@ public class GearArmor implements RPGGear {
     private final ItemStack itemStack;
 
     public GearArmor(String name, ItemTier tier, Material material, int level, ArmorGearType gearType, int health,
-                     int defense, int minElemValue, int maxElemValue, int minNumberOfElements, String gearSetStr) {
+                     int defense, int minElemValue, int maxElemValue, int minNumberOfElements, boolean withGearSet) {
         name = tier.getTierColor() + name;
-        boolean gearSetExist = false;
-        if (gearSetStr != null && !gearSetStr.equals("")) {
-            name = tier.getTierColor() + gearSetStr + " " + name;
-            gearSetExist = true;
+
+        String gearSetStr = null;
+        if (withGearSet) {
+            GearSet random = GearSetManager.getRandom(tier);
+            gearSetStr = random != null ? random.getName() : null;
         }
 
         float bonusPercent = tier.getBonusMultiplier();
@@ -40,7 +41,7 @@ public class GearArmor implements RPGGear {
         StatPassive statPassive = new StatPassive(0, 0, 0, minElemValue, maxElemValue, minNumberOfElements);
 
         lore.add(ChatColor.RESET.toString() + ChatPalette.GOLD + gearType.getDisplayName());
-        if (gearSetExist) {
+        if (gearSetStr != null) {
             lore.add(ChatPalette.RED + gearSetStr);
         }
         lore.add("");
@@ -67,7 +68,7 @@ public class GearArmor implements RPGGear {
         GearSetEffect setEffect = gearType.getSetEffect();
         lore.add(ChatPalette.GRAY + "-- " + ChatPalette.GOLD + gearType.getDisplayName() + ChatPalette.GRAY + " [4 pieces] --");
         lore.add("      " + setEffect.toString());
-        if (gearSetExist) {
+        if (gearSetStr != null) {
             for (int i = 1; i < 6; i++) {
                 GearSet gearSet = new GearSet(gearSetStr, i);
                 if (GearSetManager.hasEffect(gearSet)) {
@@ -97,7 +98,7 @@ public class GearArmor implements RPGGear {
                 PersistentDataContainerUtil.putInteger(elementType.name(), statPassive.getElementValue(elementType), this.itemStack);
             }
         }
-        if (gearSetExist) {
+        if (gearSetStr != null) {
             PersistentDataContainerUtil.putString("gearSet", gearSetStr, this.itemStack);
         }
 

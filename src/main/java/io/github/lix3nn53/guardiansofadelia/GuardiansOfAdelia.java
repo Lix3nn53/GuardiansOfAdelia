@@ -32,6 +32,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 public class GuardiansOfAdelia extends JavaPlugin {
 
@@ -49,6 +50,8 @@ public class GuardiansOfAdelia extends JavaPlugin {
     public static SignMenuFactory getSignMenuFactory() {
         return signMenuFactory;
     }
+
+    public static final Random RANDOM = new Random();
 
     @Override
     public void onDisable() {

@@ -59,7 +59,6 @@ public class DungeonConfiguration {
             YamlConfiguration section = dungeonThemesConfigs.get(code);
 
             String name = section.getString("name");
-            String gearTag = section.getString("gearTag");
             int gearLevelIndex = section.getInt("gearLevel");
             GearLevel gearLevel = GearLevel.values()[gearLevelIndex];
             String portalColorStr = section.getString("portalColor");
@@ -207,7 +206,7 @@ public class DungeonConfiguration {
 
             BoundingBox bossRoomBox = new BoundingBox(x1, y1, z1, x2, y2, z2);
 
-            DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearTag, gearLevel, portalColor, levelReq, timeLimitInMinutes,
+            DungeonTheme dungeonTheme = new DungeonTheme(code, name, gearLevel, portalColor, levelReq, timeLimitInMinutes,
                     monsterPool, bossInternalName, dungeonRooms, startingRooms, checkpoints, prizeChestCenterOffset, skillsOnGround, bossRoomBox);
 
             MiniGameManager.addDungeonTheme(code, dungeonTheme);
@@ -225,7 +224,6 @@ public class DungeonConfiguration {
             DungeonTheme theme = dungeonThemes.get(code);
 
             currentThemeConfig.set("name", theme.getName().replaceAll("§", "&"));
-            currentThemeConfig.set("gearTag", theme.getGearTag());
             currentThemeConfig.set("gearLevel", theme.getGearLevel().ordinal());
             currentThemeConfig.set("portalColor", theme.getPortalColor().name());
 

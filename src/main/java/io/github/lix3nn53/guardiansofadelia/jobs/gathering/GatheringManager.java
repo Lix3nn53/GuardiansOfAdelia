@@ -25,7 +25,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class GatheringManager {
 
@@ -199,9 +198,7 @@ public class GatheringManager {
     }
 
     private static ItemStack getGathered(Player player, List<Ingredient> ingredients) {
-        Random random = new Random();
-
-        int i = random.nextInt(ingredients.size());
+        int i = GuardiansOfAdelia.RANDOM.nextInt(ingredients.size());
         Ingredient ingredient = ingredients.get(i);
 
         int gather = ingredient.gather(false);
@@ -424,8 +421,7 @@ public class GatheringManager {
             int ingredientNo = ingredients.get(0);
 
             if (ingredients.size() > 1) {
-                Random random = new Random();
-                int i = random.nextInt(ingredients.size());
+                int i = GuardiansOfAdelia.RANDOM.nextInt(ingredients.size());
                 ingredientNo = ingredients.get(i);
             }
 

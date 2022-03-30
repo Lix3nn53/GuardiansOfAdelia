@@ -15,7 +15,7 @@ public class ArmorManager {
 
     private final static HashMap<GearLevel, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
 
-    public static List<ItemStack> get(ArmorSlot armorSlot, ArmorGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, String gearSet) {
+    public static List<ItemStack> get(ArmorSlot armorSlot, ArmorGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet) {
         List<ArmorSet> sets = gearLevelToArmorSets.get(gearLevel);
 
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);

@@ -9,11 +9,7 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
 
-import java.util.Random;
-
 public class ParticleShapes {
-
-    private static final Random random = new Random();
 
     /**
      * Plays a particle at the given location based on the string
@@ -77,13 +73,13 @@ public class ParticleShapes {
         // Play the particles
         while (index < amount) {
             if (direction == Direction.XY || direction == Direction.XZ) {
-                temp.setX(loc.getX() + random.nextFloat() * twoRadius - radius);
+                temp.setX(loc.getX() + GuardiansOfAdelia.RANDOM.nextFloat() * twoRadius - radius);
             }
             if (direction == Direction.XY || direction == Direction.YZ) {
-                temp.setY(loc.getY() + random.nextFloat() * twoRadius - radius);
+                temp.setY(loc.getY() + GuardiansOfAdelia.RANDOM.nextFloat() * twoRadius - radius);
             }
             if (direction == Direction.XZ || direction == Direction.YZ) {
-                temp.setZ(loc.getZ() + random.nextFloat() * twoRadius - radius);
+                temp.setZ(loc.getZ() + GuardiansOfAdelia.RANDOM.nextFloat() * twoRadius - radius);
             }
 
             if (temp.distanceSquared(loc) > rSquared) {
@@ -122,7 +118,7 @@ public class ParticleShapes {
                 float theta = fullRadian * percent;
                 float phi = (float) Math.acos(2 * v - 1);
 
-                float v1 = random.nextFloat();
+                float v1 = GuardiansOfAdelia.RANDOM.nextFloat();
                 phi = phi * v1;
 
                 float dx = (float) (radius * Math.sin(phi) * Math.cos(theta));
@@ -166,7 +162,7 @@ public class ParticleShapes {
                 float percent = i / amount;
                 float percenty = y / amounty;
 
-                float v = random.nextFloat();
+                float v = GuardiansOfAdelia.RANDOM.nextFloat();
                 float randPhi = phi * v;
 
                 float lengthCurrent = length * percenty;
@@ -210,9 +206,9 @@ public class ParticleShapes {
 
         // Play the particles
         for (int i = 0; i < amount; i++) {
-            temp.setX(loc.getX() + random.nextFloat() * twoRadius - radius);
-            temp.setY(loc.getY() + random.nextFloat() * radius);
-            temp.setZ(loc.getZ() + random.nextFloat() * twoRadius - radius);
+            temp.setX(loc.getX() + GuardiansOfAdelia.RANDOM.nextFloat() * twoRadius - radius);
+            temp.setY(loc.getY() + GuardiansOfAdelia.RANDOM.nextFloat() * radius);
+            temp.setZ(loc.getZ() + GuardiansOfAdelia.RANDOM.nextFloat() * twoRadius - radius);
 
             playSingleParticle(temp, particle, dustOptions);
         }

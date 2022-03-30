@@ -14,7 +14,7 @@ public class PassiveManager {
 
     private final static HashMap<GearLevel, List<PassiveSet>> gearLevelToPassives = new HashMap<>();
 
-    public static List<ItemStack> get(GearLevel gearLevel, RPGSlotType rpgSlotType, ItemTier tier, boolean noStats, String gearSetStr) {
+    public static List<ItemStack> get(GearLevel gearLevel, RPGSlotType rpgSlotType, ItemTier tier, boolean noStats, boolean gearSetStr) {
         List<PassiveSet> sets = gearLevelToPassives.get(gearLevel);
 
         int minNumberOfAttr = noStats ? 0 : tier.getMinNumberOfAttributes(true);
