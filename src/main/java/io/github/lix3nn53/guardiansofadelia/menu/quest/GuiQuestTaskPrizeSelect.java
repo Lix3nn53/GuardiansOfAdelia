@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.items.stats.GearStatType;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
@@ -91,6 +92,7 @@ public class GuiQuestTaskPrizeSelect extends GuiGeneric {
             GearLevel gearLevel = GearLevel.getGearLevel(current);
             ItemTier itemTier = ItemTier.getItemTierOfItemStack(current);
             StatUtils.addRandomPassiveStats(current, gearLevel, itemTier);
+            GearSetManager.addRandomGearEffect(current);
         }
         InventoryUtils.giveItemToPlayer(player, current);
 

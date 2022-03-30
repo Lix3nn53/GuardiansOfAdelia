@@ -5,6 +5,7 @@ import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingLine;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingManager;
@@ -115,6 +116,7 @@ public class GuiCraftingBook extends GuiBookGeneric {
                                 GearLevel gearLevel = GearLevel.values()[craftingLevel];
 
                                 StatUtils.addRandomPassiveStats(clone, gearLevel, ItemTier.MYSTIC);
+                                GearSetManager.addRandomGearEffect(current);
 
                                 for (ItemStack ingredient : ingredients) {
                                     InventoryUtils.removeItemFromInventory(player.getInventory(), ingredient, ingredient.getAmount());

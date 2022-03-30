@@ -2,7 +2,6 @@ package io.github.lix3nn53.guardiansofadelia.items.RpgGears;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.attribute.AttributeType;
 import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
-import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSet;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.items.stats.StatPassive;
 import io.github.lix3nn53.guardiansofadelia.rpginventory.slots.RPGSlotType;
@@ -30,8 +29,7 @@ public class GearPassive implements RPGGear {
 
         String gearSetStr = null;
         if (withGearSet) {
-            GearSet random = GearSetManager.getRandom(tier);
-            gearSetStr = random != null ? random.getName() : null;
+            gearSetStr = GearSetManager.getRandom(tier);
         }
 
         float bonusPercent = tier.getBonusMultiplier();

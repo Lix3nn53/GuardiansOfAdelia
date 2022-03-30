@@ -34,8 +34,6 @@ public class WeaponManager {
             int level = template.getRequiredLevel();
             int elementDamage = template.getElementDamage(gearType);
 
-            // TODO random gear set
-
             final GearWeapon weapon = new GearWeapon(name, tier, material, customModelData, level, gearType, elementDamage,
                     weaponAttackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet);
 

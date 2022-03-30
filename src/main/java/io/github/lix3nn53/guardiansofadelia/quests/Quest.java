@@ -11,9 +11,11 @@ import io.github.lix3nn53.guardiansofadelia.guardian.attribute.Attribute;
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacter;
 import io.github.lix3nn53.guardiansofadelia.items.GearLevel;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset.GearSetManager;
 import io.github.lix3nn53.guardiansofadelia.items.config.ArmorReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.config.WeaponReferenceData;
 import io.github.lix3nn53.guardiansofadelia.items.list.armors.ArmorSlot;
+import io.github.lix3nn53.guardiansofadelia.items.stats.StatUtils;
 import io.github.lix3nn53.guardiansofadelia.jobs.crafting.CraftingType;
 import io.github.lix3nn53.guardiansofadelia.jobs.gathering.Ingredient;
 import io.github.lix3nn53.guardiansofadelia.npc.QuestNPCManager;
@@ -420,6 +422,8 @@ public final class Quest {
 
                     for (WeaponReferenceData data : weaponPrizeForPlayer) {
                         ItemStack item = data.getItem(rpgClassStr);
+                        StatUtils.addRandomPassiveStats(item, data.getGearLevel(), data.getItemTier());
+                        GearSetManager.addRandomGearEffect(item);
                         InventoryUtils.giveItemToPlayer(player, item);
                     }
                 }
@@ -435,6 +439,8 @@ public final class Quest {
 
                     for (ArmorReferenceData data : armorPrizeForPlayer) {
                         ItemStack item = data.getItem(rpgClassStr);
+                        StatUtils.addRandomPassiveStats(item, data.getGearLevel(), data.getItemTier());
+                        GearSetManager.addRandomGearEffect(item);
                         InventoryUtils.giveItemToPlayer(player, item);
                     }
                 }

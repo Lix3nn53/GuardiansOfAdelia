@@ -2,6 +2,10 @@ package io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset;
 
 import io.github.lix3nn53.guardiansofadelia.GuardiansOfAdelia;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ItemTier;
+import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
@@ -91,10 +95,16 @@ public class GearSetManager {
         tierToGearSets.put(itemTier, gearSetMap);
     }
 
-    public static GearSet getRandom(ItemTier itemTier) {
+    public static String getRandom(ItemTier itemTier) {
         HashMap<GearSet, List<GearSetEffect>> gearSetMap = tierToGearSets.get(itemTier);
 
         if (gearSetMap == null) return null;
+
+        float chanceToGetSet = 0.4f;
+        float random = (float) Math.random();
+        if (random > chanceToGetSet) {
+            return null;
+        }
 
         Set<GearSet> gearSets = gearSetMap.keySet();
         int size = gearSets.size();
@@ -103,10 +113,51 @@ public class GearSetManager {
         int i = 0;
         for (GearSet obj : gearSets) {
             if (i == item)
-                return obj;
+                return obj.getName();
             i++;
         }
 
         return null;
+    }
+
+    public static void addRandomGearEffect(ItemStack itemStack) {
+        if (PersistentDataContainerUtil.hasString(itemStack, "gearSet")) {
+            return;
+        }
+
+        ItemTier itemTierOfItemStack = ItemTier.getItemTierOfItemStack(itemStack);
+
+        String gearSetStr = getRandom(itemTierOfItemStack);
+
+        if (gearSetStr == null) {
+            return;
+        }
+
+        PersistentDataContainerUtil.putString("gearSet", gearSetStr, itemStack);
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> lore = itemMeta.getLore();
+        lore.add(1, ChatPalette.RED + gearSetStr);
+
+        boolean addedSpace = false;
+
+        for (int i = 2; i < 6; i++) {
+            GearSet gearSet = new GearSet(gearSetStr, i);
+            if (GearSetManager.hasEffect(gearSet)) {
+                if (!addedSpace) {
+                    lore.add("");
+                    addedSpace = true;
+                }
+
+                lore.add(ChatPalette.GRAY + "-- " + ChatPalette.RED + gearSetStr + ChatPalette.GRAY + " [" + i + " pieces] --");
+                List<GearSetEffect> effects = GearSetManager.getEffectsWithoutLower(gearSet);
+                for (GearSetEffect gearSetEffect : effects) {
+                    lore.add("      " + gearSetEffect.toString());
+                }
+            }
+        }
+
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
     }
 }

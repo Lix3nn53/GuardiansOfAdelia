@@ -28,8 +28,7 @@ public class GearArmor implements RPGGear {
 
         String gearSetStr = null;
         if (withGearSet) {
-            GearSet random = GearSetManager.getRandom(tier);
-            gearSetStr = random != null ? random.getName() : null;
+            gearSetStr = GearSetManager.getRandom(tier);
         }
 
         float bonusPercent = tier.getBonusMultiplier();
