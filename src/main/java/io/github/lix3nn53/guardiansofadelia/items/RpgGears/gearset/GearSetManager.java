@@ -96,9 +96,28 @@ public class GearSetManager {
     }
 
     public static String getRandom(ItemTier itemTier) {
-        HashMap<GearSet, List<GearSetEffect>> gearSetMap = tierToGearSets.get(itemTier);
+        int tierOrdinal = itemTier.ordinal();
 
-        if (gearSetMap == null) return null;
+        HashMap<GearSet, List<GearSetEffect>> gearSetMap = new HashMap<>();
+
+        for (ItemTier tier : ItemTier.values()) {
+            int currentOrdinal = tier.ordinal();
+
+            if (tierOrdinal >= currentOrdinal) {
+                HashMap<GearSet, List<GearSetEffect>> map = tierToGearSets.get(tier);
+                if (map != null) {
+                    gearSetMap.putAll(map);
+                }
+            }
+        }
+
+        GuardiansOfAdelia.getInstance().getLogger().info("GearSet Pool for tier: " + itemTier);
+        for (Map.Entry<GearSet, List<GearSetEffect>> a : gearSetMap.entrySet()) {
+            GearSet key = a.getKey();
+            GuardiansOfAdelia.getInstance().getLogger().info(key.getName());
+        }
+
+        if (gearSetMap.isEmpty()) return null;
 
         float chanceToGetSet = 0.4f;
         float random = (float) Math.random();
@@ -127,6 +146,7 @@ public class GearSetManager {
 
         ItemTier itemTierOfItemStack = ItemTier.getItemTierOfItemStack(itemStack);
 
+        GuardiansOfAdelia.getInstance().getLogger().info("GearSetManager.getRandom from ADD NEW");
         String gearSetStr = getRandom(itemTierOfItemStack);
 
         if (gearSetStr == null) {
@@ -136,8 +156,12 @@ public class GearSetManager {
         PersistentDataContainerUtil.putString("gearSet", gearSetStr, itemStack);
 
         ItemMeta itemMeta = itemStack.getItemMeta();
+
+        String name = itemMeta.getDisplayName();
+        name = itemTierOfItemStack.getTierColor() + gearSetStr + " " + name;
+        itemMeta.setDisplayName(name);
+
         List<String> lore = itemMeta.getLore();
-        lore.add(1, ChatPalette.RED + gearSetStr);
 
         boolean addedSpace = false;
 

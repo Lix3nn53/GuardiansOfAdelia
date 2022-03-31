@@ -14,12 +14,15 @@ public class Element {
 
     private int bonusTotalPassive;
 
+    private float bonusTotalBuff = 1;
+
     public Element(ElementType elementType) {
         this.elementType = elementType;
     }
 
     public int getTotal() {
-        return bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand + bonusFromOffhand + bonusTotalPassive;
+        return (int) ((bonusFromHelmet + bonusFromChestplate + bonusFromLeggings + bonusFromBoots + bonusFromMainhand +
+                bonusFromOffhand + bonusTotalPassive) * bonusTotalBuff + 0.5);
     }
 
     public void clearAllEquipment() {
@@ -87,6 +90,18 @@ public class Element {
 
     public void clearTotalPassive() {
         this.bonusTotalPassive = 0;
+    }
+
+    public void addToTotalBuff(float value) {
+        this.bonusTotalBuff += value;
+    }
+
+    public void removeFromTotalBuff(float value) {
+        this.bonusTotalBuff -= value;
+    }
+
+    public void clearTotalBuff() {
+        this.bonusTotalBuff = 1;
     }
 
     public ElementType getElementType() {

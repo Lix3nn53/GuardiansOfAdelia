@@ -1,7 +1,9 @@
 package io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff;
 
 
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import org.bukkit.potion.PotionEffectType;
 
 public enum BuffType {
@@ -10,7 +12,12 @@ public enum BuffType {
     CRIT_DAMAGE,
     CRIT_CHANCE,
     ABILITY_HASTE,
-    LIFE_STEAL;
+    LIFE_STEAL,
+    ELEMENT_FIRE,
+    ELEMENT_WATER,
+    ELEMENT_EARTH,
+    ELEMENT_LIGHTNING,
+    ELEMENT_AIR;
 
     @Override
     public String toString() {
@@ -27,6 +34,16 @@ public enum BuffType {
                 return ChatPalette.PURPLE_LIGHT + "Ability Haste Buff";
             case LIFE_STEAL:
                 return ChatPalette.GOLD + "Life Steal Buff";
+            case ELEMENT_FIRE:
+                return ElementType.FIRE.getFullName(Translation.DEFAULT_LANG) + " Buff";
+            case ELEMENT_WATER:
+                return ElementType.WATER.getFullName(Translation.DEFAULT_LANG) + " Buff";
+            case ELEMENT_EARTH:
+                return ElementType.EARTH.getFullName(Translation.DEFAULT_LANG) + " Buff";
+            case ELEMENT_LIGHTNING:
+                return ElementType.LIGHTNING.getFullName(Translation.DEFAULT_LANG) + " Buff";
+            case ELEMENT_AIR:
+                return ElementType.AIR.getFullName(Translation.DEFAULT_LANG) + " Buff";
         }
         return "";
     }

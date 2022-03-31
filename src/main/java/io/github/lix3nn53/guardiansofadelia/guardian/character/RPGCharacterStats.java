@@ -78,7 +78,7 @@ public class RPGCharacterStats {
     private float buffCriticalChance = 0;
     private float buffCriticalDamage = 0;
     private float buffAbilityHaste = 0;
-    private float buffLifeSteal = 0;
+    private final float buffLifeSteal = 0;
 
     private ArmorGearType sameTypeArmorSet = null;
     private List<GearSet> gearSets = new ArrayList<>();
@@ -892,9 +892,21 @@ public class RPGCharacterStats {
         } else if (buffType.equals(BuffType.ABILITY_HASTE)) {
             this.buffAbilityHaste += addToMultiplier;
             newValue = this.buffAbilityHaste;
-        } else if (buffType.equals(BuffType.LIFE_STEAL)) {
-            this.buffLifeSteal += addToMultiplier;
-            newValue = this.buffLifeSteal;
+        } else if (buffType.equals(BuffType.ELEMENT_FIRE)) {
+            Element element = elementHashMap.get(ElementType.FIRE);
+            element.addToTotalBuff((int) addToMultiplier);
+        } else if (buffType.equals(BuffType.ELEMENT_WATER)) {
+            Element element = elementHashMap.get(ElementType.WATER);
+            element.addToTotalBuff((int) addToMultiplier);
+        } else if (buffType.equals(BuffType.ELEMENT_EARTH)) {
+            Element element = elementHashMap.get(ElementType.EARTH);
+            element.addToTotalBuff((int) addToMultiplier);
+        } else if (buffType.equals(BuffType.ELEMENT_LIGHTNING)) {
+            Element element = elementHashMap.get(ElementType.LIGHTNING);
+            element.addToTotalBuff((int) addToMultiplier);
+        } else if (buffType.equals(BuffType.ELEMENT_AIR)) {
+            Element element = elementHashMap.get(ElementType.AIR);
+            element.addToTotalBuff((int) addToMultiplier);
         }
 
         if (potionEffect == null) return;

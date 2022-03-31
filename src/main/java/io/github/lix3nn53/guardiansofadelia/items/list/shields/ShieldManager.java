@@ -15,8 +15,10 @@ public class ShieldManager {
 
     private final static HashMap<GearLevel, List<ShieldSet>> gearLevelToShields = new HashMap<>();
 
-    public static List<ItemStack> get(ShieldGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet) {
+    public static ItemStack get(ShieldGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats,
+                                boolean gearSet, int setIndex) {
         List<ShieldSet> sets = gearLevelToShields.get(gearLevel);
+        ShieldSet template = sets.get(setIndex);
 
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
         int minStatValue = noStats ? 0 : gearLevel.getMinStatValue(false, true);
@@ -24,23 +26,35 @@ public class ShieldManager {
 
         Material material = gearType.getMaterial();
 
-        ArrayList<ItemStack> itemStacks = new ArrayList<>();
+        String name = template.getName(gearType);
+        int customModelData = template.getCustomModelData();
+        int defense = template.getDefense(gearType);
+        int health = template.getHealth(gearType);
+        int level = template.getRequiredLevel();
 
-        for (ShieldSet template : sets) {
-            String name = template.getName(gearType);
-            int customModelData = template.getCustomModelData();
-            int defense = template.getDefense(gearType);
-            int health = template.getHealth(gearType);
-            int level = template.getRequiredLevel();
+        final GearShield shield = new GearShield(name, tier, material, customModelData, level,
+                gearType, health,
+                defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
 
-            final GearShield shield = new GearShield(name, tier, material, customModelData, level,
-                    gearType, health,
-                    defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
+        return shield.getItemStack();
+    }
 
-            itemStacks.add(shield.getItemStack());
+    public static List<ItemStack> getAll(ShieldGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats,
+                                         boolean gearSet) {
+        int count = countAt(gearLevel);
+
+        List<ItemStack> list = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            ItemStack itemStack = get(gearType, gearLevel, tier, noStats, gearSet, i);
+
+            list.add(itemStack);
         }
 
-        return itemStacks;
+        return list;
+    }
+
+    public static int countAt(GearLevel gearLevel) {
+        return gearLevelToShields.get(gearLevel).size();
     }
 
     public static void add(ShieldSet shieldSet) {

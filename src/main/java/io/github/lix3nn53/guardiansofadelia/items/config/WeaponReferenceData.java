@@ -42,7 +42,7 @@ public class WeaponReferenceData {
 
         ArrayList<ItemStack> items = new ArrayList<>();
         for (WeaponGearType type : weaponGearTypes) {
-            items.add(WeaponManager.get(type, gearLevel, itemTier, true, false).get(itemIndex));
+            items.add(WeaponManager.get(type, gearLevel, itemTier, true, false, itemIndex));
         }
 
         return items;
@@ -52,7 +52,7 @@ public class WeaponReferenceData {
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         WeaponGearType type = rpgClass.getWeaponGearTypes().get(0);
 
-        return WeaponManager.get(type, gearLevel, itemTier, true, false).get(itemIndex);
+        return WeaponManager.get(type, gearLevel, itemTier, true, false, itemIndex);
     }
 
     public GearLevel getGearLevel() {

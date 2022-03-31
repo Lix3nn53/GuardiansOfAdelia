@@ -92,7 +92,7 @@ public enum MerchantPageType {
             for (int i = shopLevel; i < shopLevel + 2; i++) {
                 GearLevel gearLevel = GearLevel.values()[i];
 
-                List<ItemStack> itemStacks = WeaponManager.get(weaponGearType, gearLevel, tier, true, false);
+                List<ItemStack> itemStacks = WeaponManager.getAll(weaponGearType, gearLevel, tier, true, false);
 
                 for (ItemStack itemStack : itemStacks) {
                     int sellValue = SellGui.getSellValue(itemStack);
@@ -140,7 +140,7 @@ public enum MerchantPageType {
                 GearLevel gearLevel = GearLevel.values()[i];
 
                 for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                    List<ItemStack> itemStacks = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, true, false);
+                    List<ItemStack> itemStacks = ArmorManager.getAll(armorSlot, armorGearType, gearLevel, tier, true, false);
 
                     for (ItemStack itemStack : itemStacks) {
                         int sellValue = SellGui.getSellValue(itemStack);
@@ -190,7 +190,7 @@ public enum MerchantPageType {
             for (int i = shopLevel; i < shopLevel + 2; i++) {
                 GearLevel gearLevel = GearLevel.values()[i];
 
-                List<ItemStack> itemStacks = ShieldManager.get(shieldGearType, gearLevel, tier, true, false);
+                List<ItemStack> itemStacks = ShieldManager.getAll(shieldGearType, gearLevel, tier, true, false);
 
                 for (ItemStack itemStack : itemStacks) {
                     int sellValue = SellGui.getSellValue(itemStack);

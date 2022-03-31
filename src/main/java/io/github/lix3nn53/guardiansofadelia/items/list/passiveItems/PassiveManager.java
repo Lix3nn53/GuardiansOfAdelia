@@ -14,8 +14,9 @@ public class PassiveManager {
 
     private final static HashMap<GearLevel, List<PassiveSet>> gearLevelToPassives = new HashMap<>();
 
-    public static List<ItemStack> get(GearLevel gearLevel, RPGSlotType rpgSlotType, ItemTier tier, boolean noStats, boolean gearSetStr) {
+    public static ItemStack get(GearLevel gearLevel, RPGSlotType rpgSlotType, ItemTier tier, boolean noStats, boolean gearSet, int setIndex) {
         List<PassiveSet> sets = gearLevelToPassives.get(gearLevel);
+        PassiveSet template = sets.get(setIndex);
 
         int minNumberOfAttr = noStats ? 0 : tier.getMinNumberOfAttributes(true);
         int minNumberOfElements = noStats ? 0 : tier.getMinNumberOfElements(true);
@@ -24,20 +25,31 @@ public class PassiveManager {
         int minElemValue = noStats ? 0 : gearLevel.getMinStatValue(true, true);
         int maxElemValue = noStats ? 0 : gearLevel.getMaxStatValue(true, true);
 
-        ArrayList<ItemStack> itemStacks = new ArrayList<>();
+        String name = template.getName(rpgSlotType);
+        int level = template.getLevel(rpgSlotType);
+        int customModelData = template.getCustomModelData(rpgSlotType);
 
-        for (PassiveSet template : sets) {
-            String name = template.getName(rpgSlotType);
-            int level = template.getLevel(rpgSlotType);
-            int customModelData = template.getCustomModelData(rpgSlotType);
+        final GearPassive passive = new GearPassive(name, tier, customModelData, rpgSlotType, level, minAttrValue,
+                maxAttrValue, minNumberOfAttr, minElemValue, maxElemValue, minNumberOfElements, gearSet);
 
-            final GearPassive passive = new GearPassive(name, tier, customModelData, rpgSlotType, level, minAttrValue,
-                    maxAttrValue, minNumberOfAttr, minElemValue, maxElemValue, minNumberOfElements, gearSetStr);
+        return passive.getItemStack();
+    }
 
-            itemStacks.add(passive.getItemStack());
+    public static List<ItemStack> getAll(GearLevel gearLevel, RPGSlotType rpgSlotType, ItemTier tier, boolean noStats, boolean gearSet) {
+        int count = countAt(gearLevel);
+
+        List<ItemStack> list = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            ItemStack itemStack = get(gearLevel, rpgSlotType, tier, noStats, gearSet, i);
+
+            list.add(itemStack);
         }
 
-        return itemStacks;
+        return list;
+    }
+
+    public static int countAt(GearLevel gearLevel) {
+        return gearLevelToPassives.get(gearLevel).size();
     }
 
     public static void add(PassiveSet passiveSet) {

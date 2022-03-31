@@ -47,11 +47,11 @@ public class CommandAdminItem implements CommandExecutor {
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "---- ITEMS ----");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem best");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem coin <num>");
-                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem weapon [type] <num>");
-                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem armor [slot] [type] <num>");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem weapon [type] <num> [tier]");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem armor [slot] [type] <num> [tier]");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem egg [code] <gearLevel> <petLevel>");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem stone <grade> <amount>");
-                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem passive [parrot|earring|necklace|glove|ring] <num>");
+                player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem passive [parrot|earring|necklace|glove|ring] <num> [tier]");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem premium item-id<1-24>");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem ingredient id amount");
                 player.sendMessage(ChatPalette.BLUE_LIGHT + "/adminitem helmet");
@@ -68,22 +68,22 @@ public class CommandAdminItem implements CommandExecutor {
 
                         ItemTier tier = ItemTier.LEGENDARY;
 
-                        ItemStack helmet = ArmorManager.get(ArmorSlot.HELMET, armorGearType, GearLevel.EIGHT, tier, false, true).get(0);
-                        ItemStack chest = ArmorManager.get(ArmorSlot.CHESTPLATE, armorGearType, GearLevel.EIGHT, tier, false, true).get(0);
-                        ItemStack leggings = ArmorManager.get(ArmorSlot.LEGGINGS, armorGearType, GearLevel.EIGHT, tier, false, true).get(0);
-                        ItemStack boots = ArmorManager.get(ArmorSlot.BOOTS, armorGearType, GearLevel.EIGHT, tier, false, true).get(0);
+                        ItemStack helmet = ArmorManager.get(ArmorSlot.HELMET, armorGearType, GearLevel.EIGHT, tier, false, true, 0);
+                        ItemStack chest = ArmorManager.get(ArmorSlot.CHESTPLATE, armorGearType, GearLevel.EIGHT, tier, false, true, 0);
+                        ItemStack leggings = ArmorManager.get(ArmorSlot.LEGGINGS, armorGearType, GearLevel.EIGHT, tier, false, true, 0);
+                        ItemStack boots = ArmorManager.get(ArmorSlot.BOOTS, armorGearType, GearLevel.EIGHT, tier, false, true, 0);
                         InventoryUtils.giveItemToPlayer(player, helmet);
                         InventoryUtils.giveItemToPlayer(player, chest);
                         InventoryUtils.giveItemToPlayer(player, leggings);
                         InventoryUtils.giveItemToPlayer(player, boots);
 
                         for (WeaponGearType gearType : WeaponGearType.values()) {
-                            ItemStack item = WeaponManager.get(gearType, GearLevel.NINE, tier, false, true).get(0);
+                            ItemStack item = WeaponManager.get(gearType, GearLevel.NINE, tier, false, true, 0);
                             InventoryUtils.giveItemToPlayer(player, item);
                         }
 
                         for (ShieldGearType gearType : ShieldGearType.values()) {
-                            ItemStack item = ShieldManager.get(gearType, GearLevel.NINE, tier, false, true).get(0);
+                            ItemStack item = ShieldManager.get(gearType, GearLevel.NINE, tier, false, true, 0);
                             InventoryUtils.giveItemToPlayer(player, item);
                         }
                     }
@@ -93,8 +93,12 @@ public class CommandAdminItem implements CommandExecutor {
                     WeaponGearType weaponGearType = WeaponGearType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
                     GearLevel gearLevel = GearLevel.values()[no];
+                    ItemTier itemTier = ItemTier.LEGENDARY;
+                    if (args.length > 3) {
+                        itemTier = ItemTier.valueOf(args[3]);
+                    }
 
-                    ItemStack weapon = WeaponManager.get(weaponGearType, gearLevel, ItemTier.LEGENDARY, false, true).get(0);
+                    ItemStack weapon = WeaponManager.get(weaponGearType, gearLevel, itemTier, false, true, 0);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("armor")) {
@@ -103,8 +107,12 @@ public class CommandAdminItem implements CommandExecutor {
                     ArmorGearType armorGearType = ArmorGearType.valueOf(args[2]);
                     int no = Integer.parseInt(args[3]);
                     GearLevel gearLevel = GearLevel.values()[no];
+                    ItemTier itemTier = ItemTier.LEGENDARY;
+                    if (args.length > 4) {
+                        itemTier = ItemTier.valueOf(args[3]);
+                    }
 
-                    ItemStack weapon = ArmorManager.get(armorSlot, armorGearType, gearLevel, ItemTier.LEGENDARY, false, true).get(0);
+                    ItemStack weapon = ArmorManager.get(armorSlot, armorGearType, gearLevel, itemTier, false, true, 0);
                     InventoryUtils.giveItemToPlayer(player, weapon);
                 }
             } else if (args[0].equals("egg")) {
@@ -160,11 +168,16 @@ public class CommandAdminItem implements CommandExecutor {
                     }
                 }
             } else if (args[0].equals("passive")) {
-                if (args.length == 3) {
+                if (args.length >= 3) {
                     RPGSlotType rpgSlotType = RPGSlotType.valueOf(args[1]);
                     int no = Integer.parseInt(args[2]);
                     GearLevel gearLevel = GearLevel.values()[no];
-                    ItemStack passive = PassiveManager.get(gearLevel, rpgSlotType, ItemTier.LEGENDARY, false, true).get(0);
+                    ItemTier itemTier = ItemTier.LEGENDARY;
+                    if (args.length > 3) {
+                        itemTier = ItemTier.valueOf(args[3]);
+                    }
+
+                    ItemStack passive = PassiveManager.get(gearLevel, rpgSlotType, itemTier, false, true, 0);
                     InventoryUtils.giveItemToPlayer(player, passive);
                 }
             } else if (args[0].equals("helmet")) {

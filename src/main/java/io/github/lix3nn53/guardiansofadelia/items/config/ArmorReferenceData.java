@@ -40,7 +40,7 @@ public class ArmorReferenceData {
 
         ArrayList<ItemStack> items = new ArrayList<>();
         for (ArmorGearType type : weaponGearTypes) {
-            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, false).get(itemIndex));
+            items.add(ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, false, itemIndex));
         }
 
         return items;
@@ -50,7 +50,7 @@ public class ArmorReferenceData {
         RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
         ArmorGearType type = rpgClass.getArmorGearTypes().get(0);
 
-        return ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, false).get(itemIndex);
+        return ArmorManager.get(armorSlot, type, gearLevel, itemTier, true, false, itemIndex);
     }
 
     public GearLevel getGearLevel() {

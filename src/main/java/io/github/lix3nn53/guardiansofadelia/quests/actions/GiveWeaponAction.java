@@ -35,7 +35,7 @@ public class GiveWeaponAction implements Action {
                 RPGClass rpgClass = RPGClassManager.getClass(rpgClassStr);
                 WeaponGearType defaultWeaponGearType = rpgClass.getDefaultWeaponGearType();
 
-                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, tier, false, true).get(itemIndex);
+                ItemStack weapon = WeaponManager.get(defaultWeaponGearType, gearLevel, tier, false, true, itemIndex);
                 InventoryUtils.giveItemToPlayer(player, weapon);
             }
         }

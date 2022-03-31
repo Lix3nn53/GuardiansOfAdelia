@@ -26,7 +26,7 @@ public class ItemPoolGenerator {
         for (WeaponGearType weaponGearType : WeaponGearType.values()) {
             boolean isMelee = weaponGearType.isMelee();
             if (melee != isMelee) continue;
-            List<ItemStack> itemStack = WeaponManager.get(weaponGearType, gearLevel, tier, noStats, gearSet);
+            List<ItemStack> itemStack = WeaponManager.getAll(weaponGearType, gearLevel, tier, noStats, gearSet);
             temp.addAll(itemStack);
         }
 
@@ -43,7 +43,7 @@ public class ItemPoolGenerator {
                     || rpgSlotType.equals(RPGSlotType.RING))) {
                 continue;
             }
-            List<ItemStack> itemStack = PassiveManager.get(gearLevel, rpgSlotType, tier, noStats, gearSet);
+            List<ItemStack> itemStack = PassiveManager.getAll(gearLevel, rpgSlotType, tier, noStats, gearSet);
 
             temp.addAll(itemStack);
         }
@@ -58,7 +58,7 @@ public class ItemPoolGenerator {
             boolean isHeavy = armorGearType.isHeavy();
             if (heavy != isHeavy) continue;
             for (ArmorSlot armorSlot : ArmorSlot.values()) {
-                List<ItemStack> itemStack = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, noStats, gearSet);
+                List<ItemStack> itemStack = ArmorManager.getAll(armorSlot, armorGearType, gearLevel, tier, noStats, gearSet);
 
                 temp.addAll(itemStack);
             }
@@ -66,7 +66,7 @@ public class ItemPoolGenerator {
 
         if (heavy) {
             for (ShieldGearType shieldGearType : ShieldGearType.values()) {
-                List<ItemStack> itemStack = ShieldManager.get(shieldGearType, gearLevel, tier, false, gearSet);
+                List<ItemStack> itemStack = ShieldManager.getAll(shieldGearType, gearLevel, tier, false, gearSet);
 
                 temp.addAll(itemStack);
             }

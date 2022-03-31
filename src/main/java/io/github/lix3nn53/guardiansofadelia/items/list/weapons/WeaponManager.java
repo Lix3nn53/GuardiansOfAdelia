@@ -16,8 +16,9 @@ public class WeaponManager {
 
     private final static HashMap<GearLevel, List<WeaponSet>> gearLevelToWeapons = new HashMap<>();
 
-    public static List<ItemStack> get(WeaponGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet) {
+    public static ItemStack get(WeaponGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet, int setIndex) {
         List<WeaponSet> sets = gearLevelToWeapons.get(gearLevel);
+        WeaponSet template = sets.get(setIndex);
 
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
         int minStatValue = noStats ? 0 : gearLevel.getMinStatValue(false, true);
@@ -25,22 +26,33 @@ public class WeaponManager {
 
         WeaponAttackSpeed weaponAttackSpeed = gearType.getAttackSpeed();
 
-        ArrayList<ItemStack> itemStacks = new ArrayList<>();
+        Material material = gearType.getMaterial();
+        String name = template.getName(gearType);
+        int customModelData = template.getCustomModelData();
+        int level = template.getRequiredLevel();
+        int elementDamage = template.getElementDamage(gearType);
 
-        for (WeaponSet template : sets) {
-            Material material = gearType.getMaterial();
-            String name = template.getName(gearType);
-            int customModelData = template.getCustomModelData();
-            int level = template.getRequiredLevel();
-            int elementDamage = template.getElementDamage(gearType);
+        final GearWeapon weapon = new GearWeapon(name, tier, material, customModelData, level, gearType, elementDamage,
+                weaponAttackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet);
 
-            final GearWeapon weapon = new GearWeapon(name, tier, material, customModelData, level, gearType, elementDamage,
-                    weaponAttackSpeed, minStatValue, maxStatValue, minNumberOfStats, gearSet);
+        return weapon.getItemStack();
+    }
 
-            itemStacks.add(weapon.getItemStack());
+    public static List<ItemStack> getAll(WeaponGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet) {
+        int count = countAt(gearLevel);
+
+        List<ItemStack> list = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            ItemStack itemStack = get(gearType, gearLevel, tier, noStats, gearSet, i);
+
+            list.add(itemStack);
         }
 
-        return itemStacks;
+        return list;
+    }
+
+    public static int countAt(GearLevel gearLevel) {
+        return gearLevelToWeapons.get(gearLevel).size();
     }
 
     public static void add(WeaponSet weaponSet) {

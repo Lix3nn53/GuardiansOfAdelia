@@ -62,7 +62,7 @@ public class MobDropGenerator {
 
                 WeaponGearType gearType = values[gearRandom];
 
-                List<ItemStack> pool = WeaponManager.get(gearType, gearLevel, tier, false, true);
+                List<ItemStack> pool = WeaponManager.getAll(gearType, gearLevel, tier, false, true);
 
                 int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                 ItemStack droppedItem = pool.get(i);
@@ -78,7 +78,7 @@ public class MobDropGenerator {
 
                     ShieldGearType gearType = values[gearRandom];
 
-                    List<ItemStack> pool = ShieldManager.get(gearType, gearLevel, tier, false, true);
+                    List<ItemStack> pool = ShieldManager.getAll(gearType, gearLevel, tier, false, true);
 
                     int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                     ItemStack droppedItem = pool.get(i);
@@ -93,7 +93,7 @@ public class MobDropGenerator {
                     int armorGearTypeRandom = GuardiansOfAdelia.RANDOM.nextInt(armorGearTypes.length);
                     ArmorGearType armorGearType = armorGearTypes[armorGearTypeRandom];
 
-                    List<ItemStack> pool = ArmorManager.get(armorSlot, armorGearType, gearLevel, tier, false, true);
+                    List<ItemStack> pool = ArmorManager.getAll(armorSlot, armorGearType, gearLevel, tier, false, true);
 
                     int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                     ItemStack droppedItem = pool.get(i);
@@ -104,7 +104,7 @@ public class MobDropGenerator {
                 int passiveType = GuardiansOfAdelia.RANDOM.nextInt(4);
                 RPGSlotType rpgSlotType = RPGSlotType.values()[passiveType + 1]; // +1 to ignore parrot
 
-                List<ItemStack> pool = PassiveManager.get(gearLevel, rpgSlotType, tier, false, true);
+                List<ItemStack> pool = PassiveManager.getAll(gearLevel, rpgSlotType, tier, false, true);
 
                 int i = GuardiansOfAdelia.RANDOM.nextInt(pool.size());
                 ItemStack droppedItem = pool.get(i);

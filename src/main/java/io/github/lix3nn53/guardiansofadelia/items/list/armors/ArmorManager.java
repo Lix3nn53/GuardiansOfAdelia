@@ -15,8 +15,10 @@ public class ArmorManager {
 
     private final static HashMap<GearLevel, List<ArmorSet>> gearLevelToArmorSets = new HashMap<>();
 
-    public static List<ItemStack> get(ArmorSlot armorSlot, ArmorGearType gearType, GearLevel gearLevel, ItemTier tier, boolean noStats, boolean gearSet) {
+    public static ItemStack get(ArmorSlot armorSlot, ArmorGearType gearType, GearLevel gearLevel, ItemTier tier,
+                                boolean noStats, boolean gearSet, int setIndex) {
         List<ArmorSet> sets = gearLevelToArmorSets.get(gearLevel);
+        ArmorSet template = sets.get(setIndex);
 
         int minNumberOfStats = noStats ? 0 : tier.getMinNumberOfElements(false);
         int minStatValue = noStats ? 0 : gearLevel.getMinStatValue(false, true);
@@ -24,21 +26,35 @@ public class ArmorManager {
 
         ArrayList<ItemStack> itemStacks = new ArrayList<>();
 
-        for (ArmorSet armorSet : sets) {
-            String name = armorSet.getName(armorSlot);
-            Material material = armorSet.getMaterial(armorSlot, gearType);
-            int level = armorSet.getReqLevel(armorSlot);
-            int health = armorSet.getHealth(armorSlot, gearType);
-            int defense = armorSet.getDefense(armorSlot, gearType);
+        String name = template.getName(armorSlot);
+        Material material = template.getMaterial(armorSlot, gearType);
+        int level = template.getReqLevel(armorSlot);
+        int health = template.getHealth(armorSlot, gearType);
+        int defense = template.getDefense(armorSlot, gearType);
 
-            final GearArmor gearArmor = new GearArmor(name, tier, material, level,
-                    gearType, health,
-                    defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
+        final GearArmor gearArmor = new GearArmor(name, tier, material, level,
+                gearType, health,
+                defense, minStatValue, maxStatValue, minNumberOfStats, gearSet);
 
-            itemStacks.add(gearArmor.getItemStack());
+        return gearArmor.getItemStack();
+    }
+
+    public static List<ItemStack> getAll(ArmorSlot armorSlot, ArmorGearType gearType, GearLevel gearLevel, ItemTier tier,
+                                         boolean noStats, boolean gearSet) {
+        int count = countAt(gearLevel);
+
+        List<ItemStack> list = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            ItemStack itemStack = get(armorSlot, gearType, gearLevel, tier, noStats, gearSet, i);
+
+            list.add(itemStack);
         }
 
-        return itemStacks;
+        return list;
+    }
+
+    public static int countAt(GearLevel gearLevel) {
+        return gearLevelToArmorSets.get(gearLevel).size();
     }
 
     public static void add(ArmorSet armorSet) {

@@ -1,9 +1,11 @@
 package io.github.lix3nn53.guardiansofadelia.items.RpgGears.gearset;
 
 import io.github.lix3nn53.guardiansofadelia.guardian.character.RPGCharacterStats;
+import io.github.lix3nn53.guardiansofadelia.guardian.element.ElementType;
 import io.github.lix3nn53.guardiansofadelia.guardian.skill.component.mechanic.buff.BuffType;
 import io.github.lix3nn53.guardiansofadelia.items.RpgGears.ArmorGearType;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
+import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
 import io.github.lix3nn53.guardiansofadelia.utilities.InventoryUtils;
 import io.github.lix3nn53.guardiansofadelia.utilities.PersistentDataContainerUtil;
 import org.bukkit.attribute.Attribute;
@@ -27,7 +29,12 @@ public enum GearSetEffect {
     ABILITY_HASTE,
     JUMP_BOOST,
     MOVEMENT_SPEED,
-    LIFE_STEAL;
+    LIFE_STEAL,
+    ELEMENT_FIRE,
+    ELEMENT_WATER,
+    ELEMENT_EARTH,
+    ELEMENT_LIGHTNING,
+    ELEMENT_AIR;
 
     public static boolean isWearingSameArmorType(ArmorGearType helmet, ArmorGearType chestplate, ArmorGearType leggings, ArmorGearType boots) {
         if (helmet == null || chestplate == null || leggings == null || boots == null) return false;
@@ -48,6 +55,8 @@ public enum GearSetEffect {
     public void applySetEffect(Player player, RPGCharacterStats rpgCharacterStats) {
         player.sendMessage(this.toString());
         switch (this) {
+            case EMPTY:
+                break;
             case KNOCKBACK_RESISTANCE:
                 Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE)).setBaseValue(0.7);
                 break;
@@ -87,11 +96,28 @@ public enum GearSetEffect {
             case LIFE_STEAL:
                 rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, 0.1f, null);
                 break;
+            case ELEMENT_FIRE:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_FIRE, 0.1f, null);
+                break;
+            case ELEMENT_WATER:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_WATER, 0.1f, null);
+                break;
+            case ELEMENT_EARTH:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_EARTH, 0.1f, null);
+                break;
+            case ELEMENT_LIGHTNING:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_LIGHTNING, 0.1f, null);
+                break;
+            case ELEMENT_AIR:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_AIR, 0.1f, null);
+                break;
         }
     }
 
     public void clearSetEffect(Player player, RPGCharacterStats rpgCharacterStats) {
         switch (this) {
+            case EMPTY:
+                break;
             case KNOCKBACK_RESISTANCE:
                 player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(0);
                 break;
@@ -125,6 +151,21 @@ public enum GearSetEffect {
             case LIFE_STEAL:
                 rpgCharacterStats.addToBuffMultiplier(BuffType.LIFE_STEAL, -0.1f, null);
                 break;
+            case ELEMENT_FIRE:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_FIRE, -0.1f, null);
+                break;
+            case ELEMENT_WATER:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_WATER, -0.1f, null);
+                break;
+            case ELEMENT_EARTH:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_EARTH, -0.1f, null);
+                break;
+            case ELEMENT_LIGHTNING:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_LIGHTNING, -0.1f, null);
+                break;
+            case ELEMENT_AIR:
+                rpgCharacterStats.addToBuffMultiplier(BuffType.ELEMENT_AIR, -0.1f, null);
+                break;
         }
     }
 
@@ -157,6 +198,16 @@ public enum GearSetEffect {
                 return ChatPalette.GRAY + "Movement Speed +20%";
             case LIFE_STEAL:
                 return ChatPalette.GRAY + "Lifesteal +10%";
+            case ELEMENT_FIRE:
+                return ElementType.FIRE.getFullName(Translation.DEFAULT_LANG) + " +10%";
+            case ELEMENT_WATER:
+                return ElementType.WATER.getFullName(Translation.DEFAULT_LANG) + " +10%";
+            case ELEMENT_EARTH:
+                return ElementType.EARTH.getFullName(Translation.DEFAULT_LANG) + " +10%";
+            case ELEMENT_LIGHTNING:
+                return ElementType.LIGHTNING.getFullName(Translation.DEFAULT_LANG) + " +10%";
+            case ELEMENT_AIR:
+                return ElementType.AIR.getFullName(Translation.DEFAULT_LANG) + " +10%";
         }
 
         final StringBuilder sb = new StringBuilder("GearSetEffect{");
