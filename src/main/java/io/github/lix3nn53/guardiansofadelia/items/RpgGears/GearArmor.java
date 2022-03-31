@@ -45,9 +45,6 @@ public class GearArmor implements RPGGear {
         StatPassive statPassive = new StatPassive(0, 0, 0, minElemValue, maxElemValue, minNumberOfElements);
 
         lore.add(ChatColor.RESET.toString() + ChatPalette.GOLD + gearType.getDisplayName());
-        if (gearSetStr != null) {
-            lore.add(ChatPalette.RED + gearSetStr);
-        }
         lore.add("");
         lore.add(ChatColor.RESET.toString() + ChatPalette.PURPLE + "Required Level: " + ChatPalette.GRAY + level);
         lore.add("");

@@ -4,6 +4,8 @@ import io.github.lix3nn53.guardiansofadelia.economy.EconomyUtils;
 import io.github.lix3nn53.guardiansofadelia.economy.bazaar.Bazaar;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianData;
 import io.github.lix3nn53.guardiansofadelia.guardian.GuardianDataManager;
+import io.github.lix3nn53.guardiansofadelia.menu.GuiHelper;
+import io.github.lix3nn53.guardiansofadelia.menu.main.GuiMain;
 import io.github.lix3nn53.guardiansofadelia.text.ChatPalette;
 import io.github.lix3nn53.guardiansofadelia.text.font.CustomCharacterGui;
 import io.github.lix3nn53.guardiansofadelia.text.locale.Translation;
@@ -54,7 +56,6 @@ public class GuiBazaar extends GuiGeneric {
             itemMeta.setLore(lore);
         }
         info.setItemMeta(itemMeta);
-        this.setItem(12, info);
 
         ItemStack open = new ItemStack(Material.LIME_WOOL);
         itemMeta.setDisplayName(ChatPalette.GREEN_DARK + Translation.t(guardianData, "economy.bazaar.open.name"));
@@ -64,7 +65,8 @@ public class GuiBazaar extends GuiGeneric {
         lore.add(ChatPalette.GRAY + Translation.t(guardianData, "economy.bazaar.open.l2"));
         itemMeta.setLore(lore);
         open.setItemMeta(itemMeta);
-        this.setItem(14, open);
+
+        GuiHelper.form27Small(this, new ItemStack[]{info, open}, "Main Menu");
     }
 
     @Override
@@ -83,7 +85,11 @@ public class GuiBazaar extends GuiGeneric {
             ItemStack current = event.getCurrentItem();
             Material currentType = current.getType();
 
-            if (currentType.equals(Material.LIME_WOOL)) {
+            int slot = event.getSlot();
+            if (slot == 0) {
+                GuiMain gui = new GuiMain(guardianData);
+                gui.openInventory(player);
+            } else if (currentType.equals(Material.LIME_WOOL)) {
                 if (guardianData != null) {
                     if (guardianData.hasBazaar()) {
                         Bazaar bazaar = guardianData.getBazaar();

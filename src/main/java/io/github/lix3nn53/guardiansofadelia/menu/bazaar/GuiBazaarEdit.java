@@ -25,7 +25,7 @@ import java.util.List;
 public class GuiBazaarEdit extends GuiGeneric {
 
     public GuiBazaarEdit(Player owner, List<ItemStack> itemsOnSale) {
-        super(27, ChatPalette.GOLD + "Edit your bazaar", 0);
+        super(27, ChatPalette.BLACK + "Edit your bazaar", 0);
 
         ItemStack glassInfo = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
         ItemMeta itemMeta = glassInfo.getItemMeta();
