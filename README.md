@@ -4,6 +4,8 @@ My personal plugin project to create a MMORPG minecraft server.
 
 Website: https://www.guardiansofadelia.com
 
+NOTE: I am continuing the development of this project in private as this this repo served it's purpose which is helping people get into java/minecraft plugin development.
+
 ## Dependencies
 * HikariCP
 * Spigot
