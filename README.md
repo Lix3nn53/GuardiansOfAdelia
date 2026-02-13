@@ -1,3 +1,10 @@
+# UPDATE 13/02/2026
+This one is old version of plugin.
+Open Sourced the complete server and plugin. 
+
+server: https://github.com/Lix3nn53/GuardiansOfAdeliaServer
+plugin: https://github.com/Lix3nn53/GuardiansOfAdeliaPremium
+
 # GuardiansOfAdelia
 
 My personal plugin project to create a MMORPG minecraft server.
